@@ -3,9 +3,9 @@ from worlds.celeste_modded.constants.LocationTypes import LocationType
 
 
 game_name = "Celeste Modded"
-base_id = 0x01000000
+base_id = 100000000000
 
-_group_id_mult_ = 0x01000000
+_group_id_mult_ = 100000000000
 
 _item_id_offset_basic = {
     ItemType.VICTORY: 0,
@@ -37,6 +37,9 @@ _location_id_offset_basic = {
     LocationType.ROOM: 12,
     LocationType.GEM: 13
 }
+
+level_id_multiplier = 100000000
+room_id_multiplier = 100000
 
 item_id_offset = {**{itemtype: _item_id_offset_basic[itemtype] * _group_id_mult_ for itemtype in _item_id_offset_basic}}
 location_id_offset = {**{loc_type: _location_id_offset_basic[loc_type] * _group_id_mult_ for loc_type in _location_id_offset_basic}}

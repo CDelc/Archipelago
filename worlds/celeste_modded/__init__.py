@@ -44,6 +44,8 @@ class CelesteModdedWorld(World):
         
         self.total_strawberries_generated = 0
         
+        self.required_strawberries = 0
+        
     
     game = game_name
     web = CelesteModdedWebWorld()
@@ -135,7 +137,9 @@ class CelesteModdedWorld(World):
             "strawberries_required_percentage": self.options.strawberries_required_percentage.value,
             "total_strawberries": self.options.total_strawberries.value,
             "require_moon_berry": self.options.require_moon_berry.value,
-            "lock_win_condition_behind_strawberries": self.options.lock_win_condition_behind_strawberries.value
+            "lock_win_condition_behind_strawberries": self.options.lock_win_condition_behind_strawberries.value,
+            
+            "required_strawberries": self.required_strawberries
         }
     
     def get_filler_item_name(self) -> str:

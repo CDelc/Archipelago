@@ -38,7 +38,7 @@ if __name__ == "__main__":
             level = levelList[levelName]
             assert level.level_id not in level_ids, f"Duplicate Level ID: {level.level_id} in level {levelName}"
             assert level.level_id > 0, f"Level ID must be non-zero and positive for level {levelName}"
-            assert level.level_id < 4096, f"Level Id must be less than 4096 for level {levelName}"
+            assert level.level_id < 1000, f"Level Id must be less than 1000 for level {levelName}"
             level_ids.add(level.level_id)
             for ruleList in level.access_rule:
                 assert isinstance(ruleList, list), f"Incorrectly formatted rule in level {levelName}"
@@ -48,7 +48,7 @@ if __name__ == "__main__":
                 assert not (room.start_room and startRoom), f"Second start room found in {levelName}:{roomName}"
                 assert room.room_id not in room_ids, f"Duplicate Room ID: {room.room_id} in level {levelName}:{roomName}"
                 assert room.room_id >= 0, f"Room ID must be positive for room {levelName}:{roomName}"
-                assert room.room_id < 4096, f"Room Id must be less than 4096 for room {levelName}:{roomName}"
+                assert room.room_id < 1000, f"Room Id must be less than 1000 for room {levelName}:{roomName}"
                 room_ids.add(room.room_id)
                 if room.start_room:
                     startRoom = roomName
@@ -65,17 +65,30 @@ if __name__ == "__main__":
                     for ruleList in transition.access_rule:
                         assert isinstance(ruleList, list), f"Incorrectly formatted rule in transition {levelName}:{roomName}->{transition.destination_room}"
                         
-                location_type_set: set[LocationType] = set()
+                location_type_ids: dict[LocationType, set[int]] = dict()
                 for location in room.locations:
                     assert isinstance(location, Location), f"INCORRECT LOCATION TYPE: {levelName}:{roomName}"
-                    assert location.location_type not in location_type_set, f"MULTIPLE OCCURRENCES OF LOCATION TYPE {location.location_type} IN {levelName}:{roomName}"
+                    assert isinstance(location.access_rule, list), f"INCORRECT LOCATION ACCESS RULE TYPE: {levelName}:{roomName}"
+                    assert isinstance(location.ID, int), f"INCORRECT LOCATION ID TYPE: {levelName}:{roomName}"
+                    assert location.ID < 100000 and location.ID >= 0, f"Location ID must be between 0 and 100000 ({location.ID}): {levelName}:{roomName}"
+                    assert isinstance(location.location_type, LocationType), f"INCORRECT LOCATIONTYPE TYPE: {levelName}:{roomName}"
+                    assert location.location_type not in location_type_ids or location.ID not in location_type_ids[location.location_type], f"MULTIPLE OCCURRENCES OF LOCATION TYPE {location.location_type} WITH ID {location.ID} IN {levelName}:{roomName}"
                     
                     loc_type = location.location_type
+                    
+                    if loc_type not in location_type_ids:
+                        location_type_ids.setdefault(loc_type, set())
+                    location_type_ids[loc_type].add(location.ID)
+                    
+                    if loc_type == LocationType.STRAWBERRY:
+                        assert location.ID > 0, f"Strawberry without ID assigned in {levelName}:{roomName}"
                     if loc_type == LocationType.LEVEL_CLEAR_MINI_HEART:
                         assert level.level_category in {LevelCategory.BEGINNER, LevelCategory.INTERMEDIATE, LevelCategory.ADVANCED, LevelCategory.EXPERT, LevelCategory.GRANDMASTER, LevelCategory.CRACKED_GRANDMASTER}, f"Level Clear Mini Heart should only exist in collab non-heartside levels ({levelName}:{roomName})"
                     if loc_type == LocationType.GOLDEN_BERRY:
+                        assert location.ID > 0, f"Strawberry without ID assigned in {levelName}:{roomName}"
                         assert level.level_category not in {LevelCategory.BEGINNER, LevelCategory.INTERMEDIATE, LevelCategory.ADVANCED, LevelCategory.EXPERT, LevelCategory.GRANDMASTER, LevelCategory.CRACKED_GRANDMASTER}, f"Golden Strawberries do not exist in collab non-heartside levels, use silver berry instead ({levelName}:{roomName})"
                     if loc_type == LocationType.SILVER_BERRY:
+                        assert location.ID > 0, f"Strawberry without ID assigned in {levelName}:{roomName}"
                         assert level.level_category in {LevelCategory.BEGINNER, LevelCategory.INTERMEDIATE, LevelCategory.ADVANCED, LevelCategory.EXPERT, LevelCategory.GRANDMASTER, LevelCategory.CRACKED_GRANDMASTER}, f"Silver berries should only exist in collab non-heartside levels ({levelName}:{roomName})"
                     assert not loc_type == LocationType.RAINBOW_BERRY, f"Rainbow berries should only exist in the root region, and should not be used in levels ({levelName})"
                     if loc_type == LocationType.LEVEL_CLEAR:

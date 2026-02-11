@@ -57,8 +57,7 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
     gem_items = []
     for levelName in levelList:
         level = levelList[levelName]
-        if not level.level_category == LevelCategory.ALWAYS_ON:
-            id_table[levelName.value] = level.level_id + Constants.base_id + Constants.item_id_offset[ItemType.LEVEL]
+        id_table[levelName.value] = level.level_id * Constants.level_id_multiplier + Constants.base_id + Constants.item_id_offset[ItemType.LEVEL]
         for roomName in levelList[levelName].rooms:
             room = levelList[levelName].rooms[roomName]
             if level.rooms[roomName].checkpoint:
@@ -69,23 +68,23 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
                 if location.location_type == LocationType.CRYSTAL_HEART:
                     name = getLocationName(levelName, roomName, LocationType.CRYSTAL_HEART)
                     crystal_heart_items.append(name)
-                    id_table[name] = getLocationBasedItemID(ItemType.CRYSTAL_HEART_VANILLA, level, room)
+                    id_table[name] = getLocationBasedItemID(ItemType.CRYSTAL_HEART_VANILLA, level, room, location.ID)
                 elif location.location_type == LocationType.LEVEL_CLEAR_MINI_HEART:
                     name = getLocationName(levelName, roomName, LocationType.LEVEL_CLEAR_MINI_HEART)
                     crystal_heart_clear_items.append(name)
-                    id_table[name] = getLocationBasedItemID(ItemType.CRYSTAL_HEART_SJ, level, room)
+                    id_table[name] = getLocationBasedItemID(ItemType.CRYSTAL_HEART_SJ, level, room, location.ID)
                 elif location.location_type == LocationType.SILVER_BERRY:
                     name = getLocationName(levelName, roomName, LocationType.SILVER_BERRY)
                     silver_berry_collect_items.append(name)
-                    id_table[name] = getLocationBasedItemID(ItemType.SILVER_BERRY, level, room)
+                    id_table[name] = getLocationBasedItemID(ItemType.SILVER_BERRY, level, room, location.ID)
                 elif location.location_type == LocationType.KEY:
                     name = getLocationName(levelName, roomName, LocationType.KEY)
                     key_items.append(name)
-                    id_table[name] = getLocationBasedItemID(ItemType.KEY, level, room)
+                    id_table[name] = getLocationBasedItemID(ItemType.KEY, level, room, location.ID)
                 elif location.location_type == LocationType.GEM:
                     name = getLocationName(levelName, roomName, LocationType.GEM)
                     gem_items.append(name)
-                    id_table[name] = getLocationBasedItemID(ItemType.GEM, level, room)
+                    id_table[name] = getLocationBasedItemID(ItemType.GEM, level, room, location.ID)
     
     id_table.update({name.value: id + Constants.base_id + Constants.item_id_offset[ItemType.MECHANIC] for name, id in mechanic.items()})
     id_table.update({name.value: id + Constants.base_id + Constants.item_id_offset[ItemType.MOON_BERRY] for name, id in moon_berry.items()})
@@ -97,7 +96,7 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
         **{item.value: ItemType.MECHANIC for item in mechanic},
         **{item.value: ItemType.FILLER for item in filler},
         **{item.value: ItemType.STRAWBERRY for item in strawberry},
-        **{level.value: ItemType.LEVEL for level in levelList.keys() if not levelList[level].level_category == LevelCategory.ALWAYS_ON},
+        **{level.value: ItemType.LEVEL for level in levelList.keys()},
         **{checkpoint: ItemType.CHECKPOINT for checkpoint in checkpoint_items},
         **{heart: ItemType.CRYSTAL_HEART_VANILLA for heart in crystal_heart_items},
         **{heart: ItemType.CRYSTAL_HEART_SJ for heart in crystal_heart_clear_items},
@@ -130,7 +129,7 @@ def generate_location_dict() -> tuple[dict[str, LocationType], dict[str, int]]:
             for location in levelList[levelName].rooms[roomName].locations:
                 location_name = getLocationName(levelName, roomName, location.location_type)
                 location_dict[location_name] = location.location_type
-                id_table[location_name] = getLocationBasedLocationID(location.location_type, level, room)
+                id_table[location_name] = getLocationBasedLocationID(location.location_type, level, room, location.ID)
     
     for rainbow_berry in RAINBOW_BERRIES:
         location_dict[rainbow_berry] = LocationType.RAINBOW_BERRY
@@ -240,11 +239,10 @@ def create_items(world: "CelesteModdedWorld"):
         levelCategory = level.level_category
         if levelCategory in world.levels_categories_in_play:
             #Precollect start level set access
-            if not levelCategory == LevelCategory.ALWAYS_ON:
-                if world.start_level_set == levelCategory:
-                    world.multiworld.push_precollected(world.create_item(levelName))
-                else:
-                    add_item(levelName, world)
+            if world.start_level_set == levelCategory or levelCategory == LevelCategory.ALWAYS_ON:
+                world.multiworld.push_precollected(world.create_item(levelName))
+            else:
+                add_item(levelName, world)
                 
             for roomName,room in level.rooms.items():
                 if room.checkpoint and world.options.randomize_checkpoints:
@@ -290,6 +288,7 @@ def setWinCondition(world: "CelesteModdedWorld"):
         location = world.multiworld.get_location(getLocationName(LevelName.FORSAKEN_CITY_A, "end", LocationType.LEVEL_CLEAR), world.player)
     location.place_locked_item(world.create_item(ItemName.LEVEL_VICTORY.value))
     
+    world.required_strawberries = required_strawberries
     # level = levelList[world.options.win_condition_level]
     # if world.options.lock_win_condition_behind_strawberries:
     #     level_region = world.multiworld.get_region(world.options.win_condition_level, world.player)
@@ -326,13 +325,13 @@ def findStartRoom(level: Level) -> Room:
     raise ValueError("Missing start room")
 
 def calculateIDOffset(level: Level, room: Room):
-    return level.level_id * 0x00001000 + room.room_id * 0x00000001
+    return level.level_id * Constants.level_id_multiplier + room.room_id * Constants.room_id_multiplier
 
-def getLocationBasedItemID(category: ItemType, level: Level, room: Room):
-    return Constants.base_id + Constants.item_id_offset[category] + calculateIDOffset(level, room)
+def getLocationBasedItemID(category: ItemType, level: Level, room: Room, offset: int = 0):
+    return Constants.base_id + Constants.item_id_offset[category] + calculateIDOffset(level, room) + offset
 
-def getLocationBasedLocationID(category: LocationType, level: Level, room: Room):
-    return Constants.base_id + Constants.location_id_offset[category] + calculateIDOffset(level, room)
+def getLocationBasedLocationID(category: LocationType, level: Level, room: Room, offset: int = 0):
+    return Constants.base_id + Constants.location_id_offset[category] + calculateIDOffset(level, room) + offset
 
 def getCheckpointName(levelName: LevelName, checkpointName: str):
     return f"{levelName}: {checkpointName}"
