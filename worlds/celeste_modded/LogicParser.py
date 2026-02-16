@@ -325,13 +325,19 @@ def findStartRoom(level: Level) -> Room:
     raise ValueError("Missing start room")
 
 def calculateIDOffset(level: Level, room: Room):
-    return level.level_id * Constants.level_id_multiplier + room.room_id * Constants.room_id_multiplier
+    real_room = room
+    if room.is_subregion_of:
+        real_room = level.rooms.get(room.is_subregion_of)
+    return level.level_id * Constants.level_id_multiplier + real_room.room_id * Constants.room_id_multiplier
 
 def getLocationBasedItemID(category: ItemType, level: Level, room: Room, offset: int = 0):
     return Constants.base_id + Constants.item_id_offset[category] + calculateIDOffset(level, room) + offset
 
 def getLocationBasedLocationID(category: LocationType, level: Level, room: Room, offset: int = 0):
-    return Constants.base_id + Constants.location_id_offset[category] + calculateIDOffset(level, room) + offset
+    if category in {LocationType.CRYSTAL_HEART, LocationType.GOLDEN_BERRY, LocationType.SILVER_BERRY, LocationType.LEVEL_CLEAR, LocationType.LEVEL_CLEAR_MINI_HEART, LocationType.CASSETTE}:
+        return Constants.base_id + Constants.location_id_offset[category] + level.level_id * Constants.level_id_multiplier
+    else:
+        return Constants.base_id + Constants.location_id_offset[category] + calculateIDOffset(level, room) + offset
 
 def getCheckpointName(levelName: LevelName, checkpointName: str):
     return f"{levelName}: {checkpointName}"
