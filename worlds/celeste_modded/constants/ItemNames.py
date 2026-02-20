@@ -10,7 +10,6 @@ from enum import StrEnum
 # down_left_dash = "Down-Left Dash"
 
 class ItemName(StrEnum):
-    CLIMB = "Climb"
     
     DASH_CRYSTALS = "Dash Crystals"
     TRAFFIC_BLOCKS = "Traffic Blocks"
@@ -44,10 +43,9 @@ moon_berry = {ItemName.MOON_BERRY: 0}
 level_victory = {ItemName.LEVEL_VICTORY: 0}
 
 mechanic = {
-    ItemName.CLIMB: 0,
-    ItemName.DASH_CRYSTALS: 1,
-    ItemName.TRAFFIC_BLOCKS: 2,
-    ItemName.SPRINGS: 3,
-    ItemName.BLUE_CASSETTE: 4,
-    ItemName.PINK_CASSETTE: 5
+    ItemName.DASH_CRYSTALS: 0,
+    ItemName.TRAFFIC_BLOCKS: 1,
+    ItemName.SPRINGS: 2,
+    ItemName.BLUE_CASSETTE: 3,
+    ItemName.PINK_CASSETTE: 4
 }

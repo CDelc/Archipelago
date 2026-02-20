@@ -257,12 +257,8 @@ def create_items(world: "CelesteModdedWorld"):
                     }:
                        add_item(getLocationName(levelName, roomName, location.location_type), world) 
                
-    #Add mechanics (precollect climb if option dictates it)         
     for mechanicItem in mechanic:
-        if mechanicItem == ItemName.CLIMB.value and not world.options.randomize_climb:
-            world.multiworld.push_precollected(world.create_item(ItemName.CLIMB.value))
-        else:
-            add_item(mechanicItem, world)
+        add_item(mechanicItem, world)
     
     #Add strawberries + moonberry
     world.total_strawberries_generated = min(strawberry_count - len(mechanic) - countCrystalHearts(), world.options.total_strawberries)

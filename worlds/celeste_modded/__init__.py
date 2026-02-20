@@ -116,7 +116,6 @@ class CelesteModdedWorld(World):
             "include_c_sides": self.options.include_c_sides.value,
             "include_farewell": self.options.include_farewell.value,
             
-            "randomize_climb": self.options.randomize_climb.value,
             "randomize_checkpoints": self.options.randomize_checkpoints.value,
             "room_checks": self.options.room_checks.value,
             

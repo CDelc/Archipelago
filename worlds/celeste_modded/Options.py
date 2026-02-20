@@ -254,7 +254,6 @@ class CelesteModdedOptions(PerGameCommonOptions):
     include_c_sides: IncludeCSides
     include_farewell: IncludeFarewell
     
-    randomize_climb: RandomizeClimb
     randomize_checkpoints: RandomizeCheckpoints
     room_checks: RoomChecks
     
