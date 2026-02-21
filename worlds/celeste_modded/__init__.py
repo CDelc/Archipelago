@@ -60,21 +60,56 @@ class CelesteModdedWorld(World):
     win_condition_level: LevelName
         
     def generate_early(self) -> None:
-        self.levels_categories_in_play.add(LevelCategory.ALWAYS_ON)
         self.levels_categories_in_play.add(LevelCategory.A_SIDE)
         options = self.options
         
         Options.map_options(self)
         
-        if options.include_beginner:
+        match self.options.start_level_set:
+            case 0:
+                self.start_level_set = LevelCategory.A_SIDE
+            case 1:
+                self.start_level_set = LevelCategory.BEGINNER
+            case 2:
+                self.start_level_set = LevelCategory.INTERMEDIATE
+            case 3:
+                self.start_level_set = LevelCategory.ADVANCED
+            case 4:
+                self.start_level_set = LevelCategory.EXPERT
+            case 5:
+                self.start_level_set = LevelCategory.GRANDMASTER
+            case _:
+                self.start_level_set = LevelCategory.A_SIDE
+                
+        match self.options.win_condition_level:
+            case 0:
+                self.win_condition_level = LevelName.SUMMIT_A
+            case 1:
+                self.win_condition_level = LevelName.SUMMIT_B
+            case 2:
+                self.win_condition_level = LevelName.FAREWELL
+            case 3:
+                self.win_condition_level = LevelName.BLUEBERRY_BAY
+            case 4:
+                self.win_condition_level = LevelName.RASPBERRY_ROOTS
+            case 5:
+                self.win_condition_level = LevelName.MANGO_MESA
+            case 6:
+                self.win_condition_level = LevelName.STARFRUIT_SUPERNOVA
+            case 7:
+                self.win_condition_level = LevelName.PASSIONFRUIT_PANTHEON
+            case _:
+                self.win_condition_level = LevelName.SUMMIT_A
+        
+        if options.include_beginner or options.start_level_set == LevelCategory.BEGINNER:
             self.levels_categories_in_play.add(LevelCategory.BEGINNER)
-        if options.include_intermediate:
+        if options.include_intermediate or options.start_level_set == LevelCategory.INTERMEDIATE:
             self.levels_categories_in_play.add(LevelCategory.INTERMEDIATE)
-        if options.include_advanced:
+        if options.include_advanced or options.start_level_set == LevelCategory.ADVANCED:
             self.levels_categories_in_play.add(LevelCategory.ADVANCED)
-        if options.include_expert:
+        if options.include_expert or options.start_level_set == LevelCategory.EXPERT:
             self.levels_categories_in_play.add(LevelCategory.EXPERT)
-        if options.include_grandmaster:
+        if options.include_grandmaster or options.start_level_set == LevelCategory.GRANDMASTER:
             self.levels_categories_in_play.add(LevelCategory.GRANDMASTER)
         if options.include_cracked_grandmaster:
             self.levels_categories_in_play.add(LevelCategory.CRACKED_GRANDMASTER)
@@ -86,6 +121,8 @@ class CelesteModdedWorld(World):
         if options.include_farewell:
             self.levels_categories_in_play.add(LevelCategory.FAREWELL)
             
+        LogicParser.calculate_strawberries(self)
+                 
     def create_regions(self) -> None:
         LogicParser.parse_regions(self)
     
@@ -136,7 +173,6 @@ class CelesteModdedWorld(World):
             "strawberries_required_percentage": self.options.strawberries_required_percentage.value,
             "total_strawberries": self.options.total_strawberries.value,
             "require_moon_berry": self.options.require_moon_berry.value,
-            "lock_win_condition_behind_strawberries": self.options.lock_win_condition_behind_strawberries.value,
             
             "required_strawberries": self.required_strawberries
         }

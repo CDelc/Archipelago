@@ -36,7 +36,6 @@ class LevelName(StrEnum):
     PASSIONFRUIT_PANTHEON = "Passionfruit Pantheon"
     
 class LevelCategory(StrEnum):
-    ALWAYS_ON = "Always Enabled"
     A_SIDE = "A-Side"
     B_SIDE = "B-Side"
     C_SIDE = "C-Side"

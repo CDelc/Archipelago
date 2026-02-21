@@ -69,12 +69,6 @@ class RoomChecks(Toggle):
     Make each room a check
     """
     display_name = "Room Checks"
-    
-class RandomizeClimb(Toggle):
-    """
-    Remove the ability to climb at the start and put it in the item pool
-    """
-    display_name = "Randomize Climb"
 
 class IncludeHeartSideGolden(Toggle):
     """
@@ -148,15 +142,14 @@ class WinConditionLevel(Choice):
     """
     display_name = "Win Condition Level"
     default = 0
-    option_forsaken_city_a = 0
-    option_summit_a = 1
-    option_summit_b = 2
-    option_farewell = 3
-    option_beginner_heartside = 4
-    option_intermediate_heartside = 5
-    option_advanced_heartside = 6
-    option_expert_heartside = 7
-    option_grandmaster_heartside = 8
+    option_summit_a = 0
+    option_summit_b = 1
+    option_farewell = 2
+    option_beginner_heartside = 3
+    option_intermediate_heartside = 4
+    option_advanced_heartside = 5
+    option_expert_heartside = 6
+    option_grandmaster_heartside = 7
     
 class ProtectVictoryLevelCheckpoints(DefaultOnToggle):
     """
@@ -187,12 +180,6 @@ class RequireMoonBerry(Toggle):
     Require that the moon berry be collected in addition to the required strawberries
     """
     display_name = "Require Moon Berry"
-    
-class LockWinConditionBehindStrawberries(DefaultOnToggle):
-    """
-    Do not allow access to the win condition level until enough strawberries have been collected
-    """
-    display_name = "Lock Win Condition Level Behind Strawberries"
     
 class StartLevelSet(Choice):
     """
@@ -236,9 +223,9 @@ def map_options(world):
 
 groups = [
     OptionGroup("Levels", [StartLevelSet, IncludeBeginner, IncludeIntermediate, IncludeAdvanced, IncludeExpert, IncludeGrandmaster, IncludeCrackedGrandmaster, IncludeBSides, IncludeCSides, IncludeFarewell]),
-    OptionGroup("Checks", [RandomizeClimb, RandomizeCheckpoints, RoomChecks, IncludeWingedGolden]),
+    OptionGroup("Checks", [RandomizeCheckpoints, RoomChecks, IncludeWingedGolden]),
     OptionGroup("Deathless Berries", [IncludeHeartSideGolden, IncludeBeginnerSilvers, IncludeIntermediateSilvers, IncludeAdvancedSilvers, IncludeExpertSilvers, IncludeGrandmasterSilvers, IncludeCrackedGrandmasterSilvers, IncludeASideGoldens, IncludeBSideGoldens, IncludeCSideGoldens, IncludeFarewellGolden]),
-    OptionGroup("Win Condition", [WinConditionLevel, ProtectVictoryLevelCheckpoints, StrawberriesRequiredPercentage, TotalStrawberries, RequireMoonBerry, LockWinConditionBehindStrawberries])
+    OptionGroup("Win Condition", [WinConditionLevel, ProtectVictoryLevelCheckpoints, StrawberriesRequiredPercentage, TotalStrawberries, RequireMoonBerry])
 ]
 
 @dataclass
@@ -274,4 +261,3 @@ class CelesteModdedOptions(PerGameCommonOptions):
     strawberries_required_percentage: StrawberriesRequiredPercentage
     total_strawberries: TotalStrawberries
     require_moon_berry: RequireMoonBerry
-    lock_win_condition_behind_strawberries: LockWinConditionBehindStrawberries

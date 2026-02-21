@@ -47,6 +47,12 @@ def add_location_with_rule(region: Region, name: str, world: "CelesteModdedWorld
 def add_item(name: str, world: "CelesteModdedWorld"):
     world.multiworld.itempool.append(world.create_item(name))
     
+def calculate_strawberries(world: "CelesteModdedWorld"):
+    strawberry_count = countStrawberries()
+    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - countCrystalHearts(), world.options.total_strawberries)
+    world.required_strawberries = round((world.options.strawberries_required_percentage / 100) * world.total_strawberries_generated)
+
+
 def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
     id_table: dict[str, int] = dict()
     checkpoint_items = []
@@ -148,9 +154,9 @@ def parse_regions(world: "CelesteModdedWorld"):
             continue
         
         # Create level regions and connect them to Menu
-        level_region = Region(levelName, world.player, world.multiworld)
-        if level.level_category == LevelCategory.ALWAYS_ON:
-            root_region.connect(level_region)
+        level_region = Region(levelName, world.player, world.multiworld)            
+        if world.start_level_set == level.level_category:
+            root_region.connect(level_region, rule=ruleFromList(level.access_rule))
         else:
             root_region.connect(level_region, rule=ruleFromListPlusCondition(level.access_rule, levelName, world))
         world.multiworld.regions.append(level_region)
@@ -232,21 +238,22 @@ def parse_regions(world: "CelesteModdedWorld"):
             
     
 def create_items(world: "CelesteModdedWorld"):
-    strawberry_count = countStrawberries()
-        
     #Add items based on available locations
     for levelName,level in levelList.items():
         levelCategory = level.level_category
         if levelCategory in world.levels_categories_in_play:
             #Precollect start level set access
-            if world.start_level_set == levelCategory or levelCategory == LevelCategory.ALWAYS_ON:
-                world.multiworld.push_precollected(world.create_item(levelName))
-            else:
+            if world.start_level_set != levelCategory:
                 add_item(levelName, world)
-                
+
             for roomName,room in level.rooms.items():
                 if room.checkpoint and world.options.randomize_checkpoints:
-                    add_item(getCheckpointName(levelName, room.checkpoint), world)
+                    #Win condition level checkpoint lock
+                    if levelName == world.win_condition_level and world.options.protect_victory_level_checkpoints:
+                        location = world.multiworld.get_location(getLocationName(levelName, roomName, LocationType.CHECKPOINT))
+                        location.place_locked_item(world.create_item(getCheckpointName(levelName, room.checkpoint)))
+                    else: 
+                        add_item(getCheckpointName(levelName, room.checkpoint), world)
                 for location in room.locations:
                     if location.location_type in {
                         LocationType.GEM,
@@ -261,7 +268,6 @@ def create_items(world: "CelesteModdedWorld"):
         add_item(mechanicItem, world)
     
     #Add strawberries + moonberry
-    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - countCrystalHearts(), world.options.total_strawberries)
     for i in range(world.total_strawberries_generated - 1):
         add_item(ItemName.STRAWBERRY.value, world)
     add_item(ItemName.MOON_BERRY.value, world)
@@ -277,37 +283,52 @@ def create_items(world: "CelesteModdedWorld"):
     
     
 def setWinCondition(world: "CelesteModdedWorld"):
-    required_strawberries = round((world.options.strawberries_required_percentage / 100) * world.total_strawberries_generated)
     location = world.multiworld.get_location(getLocationName(LevelName.FORSAKEN_CITY_A, "end", LocationType.LEVEL_CLEAR), world.player)
     
-    if world.win_condition_level == LevelName.FORSAKEN_CITY_A:
-        location = world.multiworld.get_location(getLocationName(LevelName.FORSAKEN_CITY_A, "end", LocationType.LEVEL_CLEAR), world.player)
+    # TODO: Update room names of win condition end rooms
+    
+    # if world.win_condition_level == LevelName.SUMMIT_A:
+    #     location = world.multiworld.get_location(getLocationName(LevelName.SUMMIT_A, "end", LocationType.LEVEL_CLEAR), world.player)
+    # elif world.win_condition_level == LevelName.SUMMIT_B:
+    #     location = world.multiworld.get_location(getLocationName(LevelName.SUMMIT_B, "end", LocationType.CRYSTAL_HEART), world.player)
+    # elif world.win_condition_level == LevelName.FAREWELL:
+    #     location = world.multiworld.get_location(getLocationName(LevelName.FAREWELL, "end", LocationType.LEVEL_CLEAR), world.player)
+    # elif world.win_condition_level == LevelName.BLUEBERRY_BAY:
+    #     location = world.multiworld.get_location(getLocationName(LevelName.BLUEBERRY_BAY, "end", LocationType.CRYSTAL_HEART), world.player)
+    # elif world.win_condition_level == LevelName.RASPBERRY_ROOTS:
+    #     location = world.multiworld.get_location(getLocationName(LevelName.RASPBERRY_ROOTS, "end", LocationType.CRYSTAL_HEART), world.player)
+    # elif world.win_condition_level == LevelName.MANGO_MESA:
+    #     location = world.multiworld.get_location(getLocationName(LevelName.MANGO_MESA, "end", LocationType.CRYSTAL_HEART), world.player)
+    # elif world.win_condition_level == LevelName.STARFRUIT_SUPERNOVA:
+    #     location = world.multiworld.get_location(getLocationName(LevelName.STARFRUIT_SUPERNOVA, "end", LocationType.CRYSTAL_HEART), world.player)
+    # elif world.win_condition_level == LevelName.PASSIONFRUIT_PANTHEON:
+    #     location = world.multiworld.get_location(getLocationName(LevelName.PASSIONFRUIT_PANTHEON, "end", LocationType.CRYSTAL_HEART), world.player)
+    
     location.place_locked_item(world.create_item(ItemName.LEVEL_VICTORY.value))
-    
-    world.required_strawberries = required_strawberries
-    # level = levelList[world.options.win_condition_level]
-    # if world.options.lock_win_condition_behind_strawberries:
-    #     level_region = world.multiworld.get_region(world.options.win_condition_level, world.player)
-    #     world.multiworld.get_entrance()
-    
-    world.multiworld.completion_condition[world.player] = lambda state, req_berries=required_strawberries: (
+        
+    world.multiworld.completion_condition[world.player] = lambda state, req_berries=world.required_strawberries: (
         state.has(ItemName.STRAWBERRY.value, world.player, req_berries) and
         (not world.options.require_moon_berry or state.has(ItemName.MOON_BERRY.value, world.player)) and
         state.has(ItemName.LEVEL_VICTORY.value, world.player)
     )
 
-def countStrawberries() -> int:
+def countStrawberries(world: "CelesteModdedWorld") -> int:
     count = 0
     for level in levelList:
+        # Skip levels in non-included categories
+        if levelList[level].level_category not in world.levels_categories_in_play:
+            continue
         for room in levelList[level].rooms:
             for location in levelList[level].rooms[room].locations:
                 if location.location_type == LocationType.STRAWBERRY:
                     count += 1
     return count
 
-def countCrystalHearts() -> int:
+def countCrystalHearts(world: "CelesteModdedWorld") -> int:
     count = 0
     for level in levelList:
+        if levelList[level].level_category not in world.levels_categories_in_play:
+            continue
         for room in levelList[level].rooms:
             for location in levelList[level].rooms[room].locations:
                 if location.location_type == LocationType.CRYSTAL_HEART:
@@ -352,15 +373,15 @@ def _getLocationNameNoAlias(levelName: LevelName, roomName: str, location_type: 
     name = ""
     if location_type == LocationType.LEVEL_CLEAR_MINI_HEART:
         name = f"{levelName} Clear Heart"
-    if location_type == LocationType.LEVEL_CLEAR:
+    elif location_type == LocationType.LEVEL_CLEAR:
         name = f"{levelName} Level Clear"
-    if location_type == LocationType.GOLDEN_BERRY:
+    elif location_type == LocationType.GOLDEN_BERRY:
         name = f"{levelName} Golden Berry"
-    if location_type == LocationType.SILVER_BERRY:
+    elif location_type == LocationType.SILVER_BERRY:
         name = f"{levelName} Silver Berry"
-    if location_type == LocationType.CASSETTE:
+    elif location_type == LocationType.CASSETTE:
         name = f"{levelName} Cassette"
-    if location_type == LocationType.CRYSTAL_HEART:
+    elif location_type == LocationType.CRYSTAL_HEART:
         name = f"{levelName} Crystal Heart"
     else:
         name = f"{getRoomName(levelName, roomName)}:{location_type.value}"
