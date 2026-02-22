@@ -3,8 +3,8 @@ from enum import StrEnum
 class LevelName(StrEnum):
     PROLOGUE = "Prologue"
     FORSAKEN_CITY_A = "Forsaken City A-Side"
-    FORSAKEN_CITY_B = "Forsaken City A-Side"
-    FORSAKEN_CITY_C = "Forsaken City A-Side"
+    FORSAKEN_CITY_B = "Forsaken City B-Side"
+    FORSAKEN_CITY_C = "Forsaken City C-Side"
     OLD_SITE_A = "Old Site A-Side"
     OLD_SITE_B = "Old Site B-Side"
     OLD_SITE_C = "Old Site C-Side"

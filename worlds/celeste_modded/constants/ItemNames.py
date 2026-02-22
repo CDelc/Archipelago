@@ -14,9 +14,23 @@ class ItemName(StrEnum):
     DASH_CRYSTALS = "Dash Crystals"
     TRAFFIC_BLOCKS = "Traffic Blocks"
     SPRINGS = "Springs"
-    
     BLUE_CASSETTE = "Blue Cassette Blocks"
     PINK_CASSETTE = "Pink Cassette Blocks"
+    CRUMBLING_PLATFORM = "Crumbling Platform",
+    TOUCH_SWITCH = "Touch Switches",
+    DREAM_BLOCK = "Dream Blocks",
+    BADELINE_ORB = "Badeline Orbs",
+    SINKING_PLATFORM = "Sinking Platforms",
+    GREEN_BUBBLES = "Green Bubbles",
+    CLOUDS = "Clouds",
+    PINK_CLOUDS = "Pink Clouds",
+    MOVING_BLOCK = "Moving Blocks",
+    RED_BUBBLES = "Red Bubbles",
+    SWAP_BLOCK = "Swap Blocks",
+    DASH_SWITCH = "Dash Switches",
+    FEATHER = "Feather",
+    MOVING_PLATFORM = "Moving Platforms",
+    WHITE_BLOCK = "White Block"
             
     STRAWBERRY = "Strawberry"
     
@@ -47,5 +61,20 @@ mechanic = {
     ItemName.TRAFFIC_BLOCKS: 1,
     ItemName.SPRINGS: 2,
     ItemName.BLUE_CASSETTE: 3,
-    ItemName.PINK_CASSETTE: 4
+    ItemName.PINK_CASSETTE: 4,
+    ItemName.CRUMBLING_PLATFORM: 5,
+    ItemName.TOUCH_SWITCH: 6,
+    ItemName.DREAM_BLOCK: 7,
+    ItemName.BADELINE_ORB: 8,
+    ItemName.SINKING_PLATFORM: 9,
+    ItemName.GREEN_BUBBLES: 10,
+    ItemName.CLOUDS: 11,
+    ItemName.PINK_CLOUDS: 12,
+    ItemName.MOVING_BLOCK: 13,
+    ItemName.RED_BUBBLES: 14,
+    ItemName.SWAP_BLOCK: 15,
+    ItemName.DASH_SWITCH: 16,
+    ItemName.FEATHER: 17,
+    ItemName.MOVING_PLATFORM: 18,
+    ItemName.WHITE_BLOCK: 19
 }

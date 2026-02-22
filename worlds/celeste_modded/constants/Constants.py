@@ -12,7 +12,7 @@ _item_id_offset_basic = {
     ItemType.MECHANIC: 1,
     ItemType.CHECKPOINT: 2,
     ItemType.LEVEL: 3,
-    ItemType.KEY: 4,
+    ItemType.KEY_DOOR: 4,
     ItemType.CRYSTAL_HEART_VANILLA: 5,
     ItemType.CRYSTAL_HEART_SJ: 6,
     ItemType.STRAWBERRY: 7,

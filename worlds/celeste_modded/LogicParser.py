@@ -3,11 +3,16 @@ from BaseClasses import CollectionState, Region
 from worlds.celeste_modded.ItemLocationClasses import ModdedCelesteLocation
 from worlds.celeste_modded.constants import Constants
 from worlds.generic.Rules import set_rule
-from .constants.LogicalLayout import levelList, Level, Room, Transition, Location
+from .LogicalLayout import levelList, Level, Room, Transition, Location
 from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_berry, level_victory
 from .constants.LevelNames import LevelName, LevelCategory
 from .constants.LocationTypes import LocationType, RAINBOW_BERRIES, BEGINNER_RAINBOW_BERRY, INTERMEDIATE_RAINBOW_BERRY, ADVANCED_RAINBOW_BERRY, EXPERT_RAINBOW_BERRY, GRANDMASTER_RAINBOW_BERRY
 from .constants.ItemTypes import ItemType
+from .Naming import getCheckpointName, getKeyDoorName, getLocationName, getRoomName
+if TYPE_CHECKING:
+    from . import CelesteModdedWorld
+
+
 if TYPE_CHECKING:
     from . import CelesteModdedWorld
 
@@ -48,8 +53,8 @@ def add_item(name: str, world: "CelesteModdedWorld"):
     world.multiworld.itempool.append(world.create_item(name))
     
 def calculate_strawberries(world: "CelesteModdedWorld"):
-    strawberry_count = countStrawberries()
-    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - countCrystalHearts(), world.options.total_strawberries)
+    strawberry_count = countStrawberries(world)
+    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - countCrystalHearts(world), world.options.total_strawberries)
     world.required_strawberries = round((world.options.strawberries_required_percentage / 100) * world.total_strawberries_generated)
 
 
@@ -59,7 +64,7 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
     crystal_heart_items = []
     crystal_heart_clear_items = []
     silver_berry_collect_items = []
-    key_items = []
+    key_door_items = []
     gem_items = []
     for levelName in levelList:
         level = levelList[levelName]
@@ -72,25 +77,27 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
                 id_table[name] = getLocationBasedItemID(ItemType.CHECKPOINT, level, room)
             for location in level.rooms[roomName].locations:
                 if location.location_type == LocationType.CRYSTAL_HEART:
-                    name = getLocationName(levelName, roomName, LocationType.CRYSTAL_HEART)
+                    name = getLocationName(levelName, roomName, LocationType.CRYSTAL_HEART, location.ID)
                     crystal_heart_items.append(name)
                     id_table[name] = getLocationBasedItemID(ItemType.CRYSTAL_HEART_VANILLA, level, room, location.ID)
                 elif location.location_type == LocationType.LEVEL_CLEAR_MINI_HEART:
-                    name = getLocationName(levelName, roomName, LocationType.LEVEL_CLEAR_MINI_HEART)
+                    name = getLocationName(levelName, roomName, LocationType.LEVEL_CLEAR_MINI_HEART, location.ID)
                     crystal_heart_clear_items.append(name)
                     id_table[name] = getLocationBasedItemID(ItemType.CRYSTAL_HEART_SJ, level, room, location.ID)
                 elif location.location_type == LocationType.SILVER_BERRY:
-                    name = getLocationName(levelName, roomName, LocationType.SILVER_BERRY)
+                    name = getLocationName(levelName, roomName, LocationType.SILVER_BERRY, location.ID)
                     silver_berry_collect_items.append(name)
                     id_table[name] = getLocationBasedItemID(ItemType.SILVER_BERRY, level, room, location.ID)
-                elif location.location_type == LocationType.KEY:
-                    name = getLocationName(levelName, roomName, LocationType.KEY)
-                    key_items.append(name)
-                    id_table[name] = getLocationBasedItemID(ItemType.KEY, level, room, location.ID)
                 elif location.location_type == LocationType.GEM:
-                    name = getLocationName(levelName, roomName, LocationType.GEM)
+                    name = getLocationName(levelName, roomName, LocationType.GEM, location.ID)
                     gem_items.append(name)
                     id_table[name] = getLocationBasedItemID(ItemType.GEM, level, room, location.ID)
+            for key_door in room.key_door_ids:
+                name = getKeyDoorName(levelName, roomName, key_door)
+                key_door_items.append(name)
+                id_table[name] = getLocationBasedItemID(ItemType.KEY_DOOR, level, room, key_door)
+                
+                
     
     id_table.update({name.value: id + Constants.base_id + Constants.item_id_offset[ItemType.MECHANIC] for name, id in mechanic.items()})
     id_table.update({name.value: id + Constants.base_id + Constants.item_id_offset[ItemType.MOON_BERRY] for name, id in moon_berry.items()})
@@ -107,7 +114,7 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
         **{heart: ItemType.CRYSTAL_HEART_VANILLA for heart in crystal_heart_items},
         **{heart: ItemType.CRYSTAL_HEART_SJ for heart in crystal_heart_clear_items},
         **{silver: ItemType.SILVER_BERRY for silver in silver_berry_collect_items},
-        **{key: ItemType.KEY for key in key_items},
+        **{key: ItemType.KEY_DOOR for key in key_door_items},
         **{item.value: ItemType.MOON_BERRY for item in moon_berry},
         **{gem: ItemType.GEM for gem in gem_items},
         **{item.value: ItemType.VICTORY for item in level_victory},
@@ -133,7 +140,7 @@ def generate_location_dict() -> tuple[dict[str, LocationType], dict[str, int]]:
                 location_dict[name] = LocationType.CHECKPOINT
                 id_table[name] = getLocationBasedLocationID(LocationType.CHECKPOINT, level, room)
             for location in levelList[levelName].rooms[roomName].locations:
-                location_name = getLocationName(levelName, roomName, location.location_type)
+                location_name = getLocationName(levelName, roomName, location.location_type, location.ID)
                 location_dict[location_name] = location.location_type
                 id_table[location_name] = getLocationBasedLocationID(location.location_type, level, room, location.ID)
     
@@ -156,7 +163,7 @@ def parse_regions(world: "CelesteModdedWorld"):
         # Create level regions and connect them to Menu
         level_region = Region(levelName, world.player, world.multiworld)            
         if world.start_level_set == level.level_category:
-            root_region.connect(level_region, rule=ruleFromList(level.access_rule))
+            root_region.connect(level_region, rule=ruleFromList(level.access_rule, world))
         else:
             root_region.connect(level_region, rule=ruleFromListPlusCondition(level.access_rule, levelName, world))
         world.multiworld.regions.append(level_region)
@@ -176,7 +183,7 @@ def parse_regions(world: "CelesteModdedWorld"):
         for roomName in level.rooms:
             room = level.rooms[roomName]
             room_region = world.multiworld.get_region(getRoomName(levelName, roomName), world.player)
-            if(world.options.room_checks and not room.is_subregion_of):
+            if(world.options.room_checks and not room.is_subregion_of and not room.excluded):
                     loc_name = getRoomName(levelName, roomName)
                     add_location(room_region, loc_name, world)
             if(world.options.randomize_checkpoints and room.checkpoint):
@@ -233,7 +240,7 @@ def parse_regions(world: "CelesteModdedWorld"):
                 if world.options.include_grandmaster_silvers and world.options.include_cracked_grandmaster_silvers:
                     add_location(root_region, GRANDMASTER_RAINBOW_BERRY, world)    
                     
-                loc_name = getLocationName(levelName, roomName, location.location_type)
+                loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
                 add_location_with_rule(room_region, loc_name, world, location.access_rule)
             
     
@@ -250,19 +257,20 @@ def create_items(world: "CelesteModdedWorld"):
                 if room.checkpoint and world.options.randomize_checkpoints:
                     #Win condition level checkpoint lock
                     if levelName == world.win_condition_level and world.options.protect_victory_level_checkpoints:
-                        location = world.multiworld.get_location(getLocationName(levelName, roomName, LocationType.CHECKPOINT))
+                        location = world.multiworld.get_location(getCheckpointName(levelName, room.checkpoint), world.player)
                         location.place_locked_item(world.create_item(getCheckpointName(levelName, room.checkpoint)))
                     else: 
                         add_item(getCheckpointName(levelName, room.checkpoint), world)
                 for location in room.locations:
                     if location.location_type in {
                         LocationType.GEM,
-                        LocationType.KEY,
                         LocationType.CRYSTAL_HEART,
                         LocationType.LEVEL_CLEAR_MINI_HEART,
                         LocationType.SILVER_BERRY
                     }:
-                       add_item(getLocationName(levelName, roomName, location.location_type), world) 
+                       add_item(getLocationName(levelName, roomName, location.location_type, location.ID), world)
+                for key_door in room.key_door_ids:
+                    add_item(getKeyDoorName(levelName, roomName, key_door), world)
                
     for mechanicItem in mechanic:
         add_item(mechanicItem, world)
@@ -287,8 +295,8 @@ def setWinCondition(world: "CelesteModdedWorld"):
     
     # TODO: Update room names of win condition end rooms
     
-    # if world.win_condition_level == LevelName.SUMMIT_A:
-    #     location = world.multiworld.get_location(getLocationName(LevelName.SUMMIT_A, "end", LocationType.LEVEL_CLEAR), world.player)
+    if world.win_condition_level == LevelName.SUMMIT_A:
+        location = world.multiworld.get_location(getLocationName(LevelName.SUMMIT_A, "g-03", LocationType.LEVEL_CLEAR), world.player)
     # elif world.win_condition_level == LevelName.SUMMIT_B:
     #     location = world.multiworld.get_location(getLocationName(LevelName.SUMMIT_B, "end", LocationType.CRYSTAL_HEART), world.player)
     # elif world.win_condition_level == LevelName.FAREWELL:
@@ -355,39 +363,6 @@ def getLocationBasedLocationID(category: LocationType, level: Level, room: Room,
         return Constants.base_id + Constants.location_id_offset[category] + level.level_id * Constants.level_id_multiplier
     else:
         return Constants.base_id + Constants.location_id_offset[category] + calculateIDOffset(level, room) + offset
-
-def getCheckpointName(levelName: LevelName, checkpointName: str):
-    return f"{levelName}: {checkpointName}"
-
-def getRoomName(levelName: LevelName, roomName: str):
-    return f"{levelName.value}:{roomName}"
-
-def getLocationName(levelName: LevelName, roomName: str, location_type: LocationType):
-    name = _getLocationNameNoAlias(levelName, roomName, location_type)
-    if name in _location_alias:
-        return _location_alias[name]
-    else:
-        return name
-
-def _getLocationNameNoAlias(levelName: LevelName, roomName: str, location_type: LocationType):
-    name = ""
-    if location_type == LocationType.LEVEL_CLEAR_MINI_HEART:
-        name = f"{levelName} Clear Heart"
-    elif location_type == LocationType.LEVEL_CLEAR:
-        name = f"{levelName} Level Clear"
-    elif location_type == LocationType.GOLDEN_BERRY:
-        name = f"{levelName} Golden Berry"
-    elif location_type == LocationType.SILVER_BERRY:
-        name = f"{levelName} Silver Berry"
-    elif location_type == LocationType.CASSETTE:
-        name = f"{levelName} Cassette"
-    elif location_type == LocationType.CRYSTAL_HEART:
-        name = f"{levelName} Crystal Heart"
-    else:
-        name = f"{getRoomName(levelName, roomName)}:{location_type.value}"
-    return name
-
-_location_alias: dict[str, str] = {}
 
 item_type_dict: dict[str, ItemType]
 location_type_dict: dict[str, LocationType]

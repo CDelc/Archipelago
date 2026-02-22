@@ -129,7 +129,7 @@ class CelesteModdedWorld(World):
     def create_item(self, name: str) -> ModdedCelesteItem:
         classification = ItemClassification.filler
         try:
-            if self.item_type_dict[name] in {ItemType.KEY, ItemType.MECHANIC, ItemType.LEVEL}:
+            if self.item_type_dict[name] in {ItemType.KEY_DOOR, ItemType.MECHANIC, ItemType.LEVEL}:
                 classification = ItemClassification.progression
             elif self.item_type_dict[name] in {ItemType.CHECKPOINT, ItemType.CRYSTAL_HEART_SJ, ItemType.CRYSTAL_HEART_VANILLA, ItemType.STRAWBERRY, ItemType.MOON_BERRY, ItemType.SILVER_BERRY, ItemType.VICTORY}:
                 classification = ItemClassification.progression_skip_balancing
