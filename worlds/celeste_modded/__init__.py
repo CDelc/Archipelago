@@ -1,6 +1,7 @@
 from BaseClasses import Item, ItemClassification, Location, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from worlds.celeste_modded.ItemLocationClasses import ModdedCelesteItem
+from worlds.celeste_modded.ValidateLayout import validate
 from .Options import CelesteModdedOptions, groups
 from .constants.ItemNames import ItemName
 from .constants.LevelNames import LevelName, LevelCategory
@@ -60,6 +61,7 @@ class CelesteModdedWorld(World):
     win_condition_level: LevelName
         
     def generate_early(self) -> None:
+        #validate()
         self.levels_categories_in_play.add(LevelCategory.A_SIDE)
         options = self.options
         

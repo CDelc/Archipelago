@@ -1,9 +1,9 @@
 from collections import defaultdict
 
-from LogicalLayout import levelList, Level, Room, Transition, Location
-from constants.ItemNames import ItemName
-from constants.LocationTypes import LocationType
-from constants.LevelNames import LevelCategory, LevelName
+from .LogicalLayout import levelList, Level, Room, Transition, Location
+from .constants.ItemNames import ItemName
+from .constants.LocationTypes import LocationType
+from .constants.LevelNames import LevelCategory, LevelName
 
 RED = "\033[31m"
 COLOR = "\033[35m"

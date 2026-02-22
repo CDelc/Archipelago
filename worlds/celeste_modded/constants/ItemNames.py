@@ -21,7 +21,7 @@ class ItemName(StrEnum):
     DREAM_BLOCK = "Dream Blocks",
     BADELINE_ORB = "Badeline Orbs",
     SINKING_PLATFORM = "Sinking Platforms",
-    GREEN_BUBBLES = "Green Bubbles",
+    GREEN_BUBBLES = "Blue Bubbles",
     CLOUDS = "Clouds",
     PINK_CLOUDS = "Pink Clouds",
     MOVING_BLOCK = "Moving Blocks",

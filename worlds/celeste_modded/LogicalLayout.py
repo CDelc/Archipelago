@@ -181,11 +181,11 @@ levelList: dict[LevelName, Level] = {
             "f-02": Room(66, [Transition("f-04")]),
             "f-02b": Room(67, [Transition("f-02"), Transition("f-07", [[ItemName.DASH_CRYSTALS, ItemName.SWAP_BLOCK, ItemName.DASH_SWITCH]])], [Location(LocationType.GEM, 679, access_rule=[[ItemName.DASH_CRYSTALS, ItemName.SWAP_BLOCK, ItemName.DASH_SWITCH]])]),
             "f-04": Room(68, [Transition("f-03"), Transition("f-02")]),
-            "f-03": Room(69, [Transition("f-05", [[ItemName.DASH_CRYSTALS]])]),
-            "f-05": Room(70, [Transition("f-08", [[getKeyDoorName(LevelName.SUMMIT_A, "f-05", 700)]]), Transition("f-07"), Transition("f-06")], key_door_ids=[700]),
+            "f-03": Room(69, [Transition("f-05")]),
+            "f-05": Room(70, [Transition("f-08", [[getKeyDoorName(LevelName.SUMMIT_A, "f-05", 700)]]), Transition("f-07", [[ItemName.RED_BUBBLES]]), Transition("f-06")], key_door_ids=[700]),
             "f-07": Room(71, [Transition("f-05")], [Location(LocationType.STRAWBERRY, 711), Location(LocationType.KEY, 712)]),
             "f-06": Room(72, [Transition("f-05")]),
-            "f-08": Room(73, [Transition("f-09"), Transition("f-05"), Transition("f-08b")]),
+            "f-08": Room(73, [Transition("f-09"), Transition("f-05"), Transition("f-08b", [[ItemName.RED_BUBBLES]])]),
             "f-08b": Room(74, [Transition("f-08"), Transition("f-08d")], [Location(LocationType.STRAWBERRY, 856)]),
             "f-09": Room(75, [Transition("f-10")]),
             "f-10": Room(76, [Transition("f-10b")]),
@@ -206,7 +206,7 @@ levelList: dict[LevelName, Level] = {
             "e-11": Room(92, [Transition("e-12"), Transition("e-10"), Transition("e-09")], [Location(LocationType.STRAWBERRY, 425)]),
             "e-12": Room(93, [Transition("e-11")], [Location(LocationType.STRAWBERRY, 504)]),
             "f-08d": Room(94, [Transition("f-08c", [[ItemName.DASH_SWITCH]])]),
-            "f-08c": Room(95, [Transition("f-10")], [Location(LocationType.STRAWBERRY, 759)])
+            "f-08c": Room(95, [Transition("f-10", [[ItemName.SWAP_BLOCK, ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 759)])
         }, LevelCategory.A_SIDE, 19
     )
 }
