@@ -131,7 +131,7 @@ class CelesteModdedWorld(World):
         try:
             if self.item_type_dict[name] in {ItemType.KEY_DOOR, ItemType.MECHANIC, ItemType.LEVEL}:
                 classification = ItemClassification.progression
-            elif self.item_type_dict[name] in {ItemType.CHECKPOINT, ItemType.CRYSTAL_HEART_SJ, ItemType.CRYSTAL_HEART_VANILLA, ItemType.STRAWBERRY, ItemType.MOON_BERRY, ItemType.SILVER_BERRY, ItemType.VICTORY}:
+            elif self.item_type_dict[name] in {ItemType.CHECKPOINT, ItemType.CRYSTAL_HEART_SJ, ItemType.CRYSTAL_HEART_VANILLA, ItemType.STRAWBERRY, ItemType.MOON_BERRY, ItemType.SILVER_BERRY, ItemType.VICTORY, ItemType.GEM}:
                 classification = ItemClassification.progression_skip_balancing
         except KeyError:
             raise KeyError(f"Tried to create item that does not exist in item table: {name}")
