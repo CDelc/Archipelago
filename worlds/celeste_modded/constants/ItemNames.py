@@ -1,5 +1,7 @@
 from enum import StrEnum
 
+from worlds.celeste_modded.constants.LevelNames import LevelCategory
+
 # up_dash = "Up Dash"
 # right_dash = "Right Dash"
 # down_dash = "Down Dash"
@@ -106,4 +108,41 @@ mechanic = {
     ItemName.DOUBLE_DASH_CRYSTALS: 31,
     ItemName.YELLOW_CASSETTE: 32,
     ItemName.GREEN_CASSETTE: 33
+}
+
+mechanic_categories = {
+    ItemName.DASH_CRYSTALS: [],
+    ItemName.TRAFFIC_BLOCKS: [],
+    ItemName.SPRINGS: [],
+    ItemName.BLUE_CASSETTE: [],
+    ItemName.PINK_CASSETTE: [],
+    ItemName.CRUMBLING_PLATFORM: [],
+    ItemName.TOUCH_SWITCH: [],
+    ItemName.DREAM_BLOCK: [],
+    ItemName.BADELINE_ORB: [],
+    ItemName.SINKING_PLATFORM: [],
+    ItemName.GREEN_BUBBLES: [],
+    ItemName.CLOUDS: [],
+    ItemName.PINK_CLOUDS: [],
+    ItemName.MOVING_BLOCK: [],
+    ItemName.RED_BUBBLES: [],
+    ItemName.SWAP_BLOCK: [],
+    ItemName.DASH_SWITCH: [],
+    ItemName.FEATHER: [],
+    ItemName.MOVING_PLATFORM: [],
+    ItemName.WHITE_BLOCK: [],
+    ItemName.SEEKERS: [],
+    ItemName.THEO_CRYSTAL: [],
+    ItemName.KEVIN: [],
+    ItemName.BUMPER: [],
+    ItemName.CORE_BLOCK: [],
+    ItemName.CORE_SWITCH: [],
+    ItemName.LAVA_ICE_BALLS: [],
+    ItemName.BREAKER_BOX: [LevelCategory.FAREWELL],
+    ItemName.BIRD: [LevelCategory.FAREWELL],
+    ItemName.JELLYFISH: [LevelCategory.FAREWELL],
+    ItemName.PUFFER_FISH: [LevelCategory.FAREWELL],
+    ItemName.DOUBLE_DASH_CRYSTALS: [LevelCategory.FAREWELL],
+    ItemName.YELLOW_CASSETTE: [LevelCategory.FAREWELL],
+    ItemName.GREEN_CASSETTE: [LevelCategory.FAREWELL]
 }

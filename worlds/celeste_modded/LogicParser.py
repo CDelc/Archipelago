@@ -5,7 +5,7 @@ from worlds.celeste_modded.constants import Constants
 from worlds.generic.Rules import set_rule
 from .level_logic.LogicalLayout import levelList
 from .level_logic.LogicalObjects import Level, Room
-from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_berry, level_victory
+from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_berry, level_victory, mechanic_categories
 from .constants.LevelNames import LevelName, LevelCategory
 from .constants.LocationTypes import LocationType, RAINBOW_BERRIES, BEGINNER_RAINBOW_BERRY, INTERMEDIATE_RAINBOW_BERRY, ADVANCED_RAINBOW_BERRY, EXPERT_RAINBOW_BERRY, GRANDMASTER_RAINBOW_BERRY
 from .constants.ItemTypes import ItemType
@@ -287,7 +287,13 @@ def create_items(world: "CelesteModdedWorld"):
                     add_item(getKeyDoorName(levelName, roomName, key_door), world)
                
     for mechanicItem in mechanic:
-        add_item(mechanicItem, world)
+        if not mechanic_categories[mechanicItem]:
+            add_item(mechanicItem, world)
+        else:
+            for levelCategory in mechanic_categories[mechanicItem]:
+                if(levelCategory in world.levels_categories_in_play):
+                    add_item(mechanicItem, world)
+                    break
     
     #Add strawberries + moonberry
     for i in range(world.total_strawberries_generated - 1):

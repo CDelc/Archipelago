@@ -209,7 +209,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "0b": Room(2, [Transition("01")]),
             "1": Room(3, [Transition("2"), Transition("01")]),
             "2": Room(4, [Transition("3"), Transition("1")]),
-            "3": Room(5, [Transition("2"), [Location(LocationType.LEVEL_CLEAR)]])
+            "3": Room(5, [Transition("2")], [Location(LocationType.LEVEL_CLEAR)])
         }, LevelCategory.A_SIDE, 26
     )
 }
