@@ -1,6 +1,7 @@
 from collections import defaultdict
 
-from .LogicalLayout import levelList, Level, Room, Transition, Location
+from .level_logic.LogicalObjects import Level, Room, Transition, Location
+from .level_logic.LogicalLayout import levelList
 from .constants.ItemNames import ItemName
 from .constants.LocationTypes import LocationType
 from .constants.LevelNames import LevelCategory, LevelName
@@ -107,6 +108,3 @@ def validate():
             print(f"{itemName.name} : {locationTracker[itemName]}")
         print("---------------------------------------")
     print(f"{RED}No issues{RESET}")
-
-
-validate()

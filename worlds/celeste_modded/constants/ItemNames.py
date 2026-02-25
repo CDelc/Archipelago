@@ -30,7 +30,22 @@ class ItemName(StrEnum):
     DASH_SWITCH = "Dash Switches",
     FEATHER = "Feather",
     MOVING_PLATFORM = "Moving Platforms",
-    WHITE_BLOCK = "White Block"
+    WHITE_BLOCK = "White Block",
+    SEEKERS = "Seekers",
+    THEO_CRYSTAL = "Theo Crystal",
+    KEVIN = "Kevins",
+    BUMPER = "Bumpers",
+    CORE_BLOCK = "Core Blocks",
+    CORE_SWITCH = "Core Switches",
+    LAVA_ICE_BALLS = "Fire/Ice Balls",
+    BREAKER_BOX = "Breaker Boxes",
+    BIRD = "Bird",
+    JELLYFISH = "Jellyfish",
+    PUFFER_FISH = "Puffer fish",
+    DOUBLE_DASH_CRYSTALS = "Double Dash Crystals",
+    YELLOW_CASSETTE = "Yellow Cassette Blocks",
+    GREEN_CASSETTE = "Green Cassette Blocks"
+    
             
     STRAWBERRY = "Strawberry"
     
@@ -76,5 +91,19 @@ mechanic = {
     ItemName.DASH_SWITCH: 16,
     ItemName.FEATHER: 17,
     ItemName.MOVING_PLATFORM: 18,
-    ItemName.WHITE_BLOCK: 19
+    ItemName.WHITE_BLOCK: 19,
+    ItemName.SEEKERS: 20,
+    ItemName.THEO_CRYSTAL: 21,
+    ItemName.KEVIN: 22,
+    ItemName.BUMPER: 23,
+    ItemName.CORE_BLOCK: 24,
+    ItemName.CORE_SWITCH: 25,
+    ItemName.LAVA_ICE_BALLS: 26,
+    ItemName.BREAKER_BOX: 27,
+    ItemName.BIRD: 28,
+    ItemName.JELLYFISH: 29,
+    ItemName.PUFFER_FISH: 30,
+    ItemName.DOUBLE_DASH_CRYSTALS: 31,
+    ItemName.YELLOW_CASSETTE: 32,
+    ItemName.GREEN_CASSETTE: 33
 }

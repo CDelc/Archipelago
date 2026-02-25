@@ -61,7 +61,7 @@ class CelesteModdedWorld(World):
     win_condition_level: LevelName
         
     def generate_early(self) -> None:
-        #validate()
+        validate()
         self.levels_categories_in_play.add(LevelCategory.A_SIDE)
         options = self.options
         

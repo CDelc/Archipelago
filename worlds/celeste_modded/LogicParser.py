@@ -3,7 +3,8 @@ from BaseClasses import CollectionState, Region
 from worlds.celeste_modded.ItemLocationClasses import ModdedCelesteLocation
 from worlds.celeste_modded.constants import Constants
 from worlds.generic.Rules import set_rule
-from .LogicalLayout import levelList, Level, Room, Transition, Location
+from .level_logic.LogicalLayout import levelList
+from .level_logic.LogicalObjects import Level, Room
 from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_berry, level_victory
 from .constants.LevelNames import LevelName, LevelCategory
 from .constants.LocationTypes import LocationType, RAINBOW_BERRIES, BEGINNER_RAINBOW_BERRY, INTERMEDIATE_RAINBOW_BERRY, ADVANCED_RAINBOW_BERRY, EXPERT_RAINBOW_BERRY, GRANDMASTER_RAINBOW_BERRY
@@ -18,15 +19,28 @@ if TYPE_CHECKING:
 
 levelList: dict[str, Level]
 
+def hasNCrystalHearts(n: int, state: CollectionState, world: "CelesteModdedWorld"):
+    count = 0
+    for itemName in state.prog_items[world.player]:
+        if item_type_dict[itemName] == ItemType.CRYSTAL_HEART_VANILLA:
+            count += 1
+    return count >= n
+
 def ruleFromList(items: list[list[str]], world):
     # Capture 'items' in the local scope using a default argument
-    def returnRule(state: CollectionState, items=items):
+    def returnRule(state: CollectionState, items=items, world=world):
         if not items:
             return True
         for andItems in items:
-            if state.has_all(andItems, world.player):
-                return True
-        return False
+            for item in andItems:
+                item: str
+                if item.startswith("#"):
+                    req_hearts = int(item.replace("#", ""))
+                    if not hasNCrystalHearts(req_hearts, state, world):
+                        return False
+                elif not state.has(item, world.player):
+                    return False
+        return True
     return returnRule
 
 def ruleFromListPlusCondition(items: list[list[str]], extraItem: str, world):
