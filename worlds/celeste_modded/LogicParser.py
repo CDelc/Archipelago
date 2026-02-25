@@ -317,10 +317,10 @@ def setWinCondition(world: "CelesteModdedWorld"):
     
     if world.win_condition_level == LevelName.SUMMIT_A:
         location = world.multiworld.get_location(getLocationName(LevelName.SUMMIT_A, "g-03", LocationType.LEVEL_CLEAR), world.player)
-    # elif world.win_condition_level == LevelName.SUMMIT_B:
-    #     location = world.multiworld.get_location(getLocationName(LevelName.SUMMIT_B, "end", LocationType.CRYSTAL_HEART), world.player)
-    # elif world.win_condition_level == LevelName.FAREWELL:
-    #     location = world.multiworld.get_location(getLocationName(LevelName.FAREWELL, "end", LocationType.LEVEL_CLEAR), world.player)
+    elif world.win_condition_level == LevelName.SUMMIT_B:
+        location = world.multiworld.get_location(getLocationName(LevelName.SUMMIT_B, "g-03", LocationType.CRYSTAL_HEART), world.player)
+    elif world.win_condition_level == LevelName.FAREWELL:
+        location = world.multiworld.get_location(getLocationName(LevelName.FAREWELL, "j-16", LocationType.LEVEL_CLEAR), world.player)
     # elif world.win_condition_level == LevelName.BLUEBERRY_BAY:
     #     location = world.multiworld.get_location(getLocationName(LevelName.BLUEBERRY_BAY, "end", LocationType.CRYSTAL_HEART), world.player)
     # elif world.win_condition_level == LevelName.RASPBERRY_ROOTS:
