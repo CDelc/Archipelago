@@ -73,8 +73,9 @@ farewell: str = ("intro-01-future, >intro-02-launch, ?intro-03-space, >a-00*Chec
                  "@,#c-alt-00, &>#c-alt-01, #e-00yb, h-04b")
 
 
+prologue: str = "01, &-1, &0b, 1, 2, 3"
 
-levelSummary: str = farewell
+levelSummary: str = prologue
 
 
 def extractRoomName(name: str):

@@ -95,7 +95,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "intro-01-future": Room(0, [Transition("intro-02-launch", [[ItemName.BADELINE_ORB]])], start_room=True),
             "intro-02-launch": Room(1, [Transition("intro-03-space", [[ItemName.CLOUDS]])]),
             "intro-03-space": Room(2, [Transition("a-00"), Transition("intro-02-launch")]),
-            "a-00": Room(3, [Transition("a-01", [[ItemName.DOUBLE_DASH_CRYSTALS]])], [Location(LocationType.GOLDEN_BERRY, 449)], checkpoint="CheckpointOne"),
+            "a-00": Room(3, [Transition("a-01", [[ItemName.DOUBLE_DASH_CRYSTALS]])], [Location(LocationType.GOLDEN_BERRY, 449, [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.GREEN_CASSETTE, ItemName.KEVIN, getKeyDoorName(LevelName.FAREWELL, "d-00", 471), getKeyDoorName(LevelName.FAREWELL, "d-00", 145), getKeyDoorName(LevelName.FAREWELL, "d-00", 144), getKeyDoorName(LevelName.FAREWELL, "d-00", 142), getKeyDoorName(LevelName.FAREWELL, "d-00", 197), ItemName.CLOUDS, ItemName.DASH_SWITCH, ItemName.MOVING_BLOCK, ItemName.CORE_BLOCK, ItemName.LAVA_ICE_BALLS, ItemName.RED_BUBBLES, ItemName.GREEN_BUBBLES, ItemName.SWAP_BLOCK, ItemName.DREAM_BLOCK, ItemName.CRUMBLING_PLATFORM, ItemName.PUFFER_FISH, ItemName.JELLYFISH, ItemName.BADELINE_ORB, ItemName.BIRD, ItemName.SPRINGS, ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.FEATHER, ItemName.BREAKER_BOX]])], checkpoint="Singular"),
             "a-01": Room(4, [Transition("a-02", [[ItemName.DASH_CRYSTALS]])]),
             "a-02": Room(5, [Transition("a-03")]),
             "a-03": Room(6, [Transition("a-04", [[ItemName.SWAP_BLOCK]])]),
@@ -109,7 +109,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "b-05": Room(14, [Transition("b-06")]),
             "b-06": Room(15, [Transition("b-07")]),
             "b-07": Room(16, [Transition("c-00")]),
-            "c-00": Room(17, [Transition("c-00b", [[ItemName.JELLYFISH]]), Transition("c-alt-00", [[ItemName.JELLYFISH, ItemName.DASH_CRYSTALS]])], checkpoint="CheckpointTwo"),
+            "c-00": Room(17, [Transition("c-00b", [[ItemName.JELLYFISH]]), Transition("c-alt-00", [[ItemName.JELLYFISH, ItemName.DASH_CRYSTALS]])], checkpoint="Power Source"),
             "c-00b": Room(18, [Transition("c-01")]),
             "c-01": Room(19, [Transition("c-02")]),
             "c-02": Room(20, [Transition("c-03")]),
@@ -121,7 +121,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "d-04": Room(26, [Transition("d-00")], [Location(LocationType.KEY, 444)]),
             "d-05": Room(27, [Transition("d-00")], [Location(LocationType.KEY, 593, [[ItemName.TOUCH_SWITCH]])]),
             "e-00y": Room(28, [Transition("e-00z"), Transition("e-00yb")]),
-            "e-00z": Room(29, [Transition("e-00")], checkpoint="CheckpointThree"),
+            "e-00z": Room(29, [Transition("e-00")], checkpoint="Remembered"),
             "e-00": Room(30, [Transition("e-00b", [[ItemName.CLOUDS, ItemName.PUFFER_FISH, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS]])]),
             "e-00b": Room(31, [Transition("e-01", [[ItemName.SPRINGS, ItemName.JELLYFISH]])]),
             "e-01": Room(32, [Transition("e-02", [[ItemName.DASH_CRYSTALS]])]),
@@ -134,7 +134,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "e-06": Room(39, [Transition("e-07")]),
             "e-07": Room(40, [Transition("e-08", [[ItemName.MOVING_BLOCK]])]),
             "e-08": Room(41, [Transition("f-door")]),
-            "f-door": Room(42, [Transition("f-00", [[CHearts(15)]])], checkpoint="CheckpointFour"),
+            "f-door": Room(42, [Transition("f-00", [[CHearts(15)]])], checkpoint="Event Horizon"),
             "f-00": Room(43, [Transition("f-01", [[ItemName.DREAM_BLOCK]])]),
             "f-01": Room(44, [Transition("f-02")]),
             "f-02": Room(45, [Transition("f-03")]),
@@ -152,7 +152,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "g-04": Room(57, [Transition("g-05", [[ItemName.SPRINGS]])]),
             "g-05": Room(58, [Transition("g-06")]),
             "g-06": Room(59, [Transition("h-00b", [[ItemName.FEATHER]])]),
-            "h-00b": Room(60, [Transition("h-00", [[ItemName.FEATHER, ItemName.DOUBLE_DASH_CRYSTALS]])], checkpoint="CheckpointFive"),
+            "h-00b": Room(60, [Transition("h-00", [[ItemName.FEATHER, ItemName.DOUBLE_DASH_CRYSTALS]])], checkpoint="Determination"),
             "h-00": Room(61, [Transition("h-01", [[ItemName.SWAP_BLOCK, ItemName.DASH_CRYSTALS]])]),
             "h-01": Room(62, [Transition("h-02", [[ItemName.MOVING_BLOCK, ItemName.SPRINGS]])]),
             "h-02": Room(63, [Transition("h-03", [[ItemName.RED_BUBBLES]])]),
@@ -166,14 +166,14 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "h-08": Room(71, [Transition("h-09")]),
             "h-09": Room(72, [Transition("h-10", [[ItemName.KEVIN]])]),
             "h-10": Room(73, [Transition("i-00", [[ItemName.BADELINE_ORB]])]),
-            "i-00": Room(74, [Transition("i-00b", [[ItemName.PINK_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.GREEN_CASSETTE], [ItemName.PINK_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.BLUE_CASSETTE]])], checkpoint="CheckpointSix"),
+            "i-00": Room(74, [Transition("i-00b", [[ItemName.PINK_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.GREEN_CASSETTE], [ItemName.PINK_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.BLUE_CASSETTE]])], checkpoint="Stubbornness"),
             "i-00b": Room(75, [Transition("i-01", [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.GREEN_CASSETTE, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.SPRINGS]])]),
             "i-01": Room(76, [Transition("i-02", [[ItemName.TOUCH_SWITCH]])]),
             "i-02": Room(77, [Transition("i-03")]),
             "i-03": Room(78, [Transition("i-04")]),
             "i-04": Room(79, [Transition("i-05", [[ItemName.RED_BUBBLES]])]),
             "i-05": Room(80, [Transition("j-00")]),
-            "j-00": Room(81, [Transition("j-00b", [[ItemName.BREAKER_BOX]])], checkpoint="CheckpointSeven"),
+            "j-00": Room(81, [Transition("j-00b", [[ItemName.BREAKER_BOX]])], checkpoint="Reconciliation"),
             "j-00b": Room(82, [Transition("j-01", [[ItemName.BADELINE_ORB, ItemName.JELLYFISH, ItemName.BIRD, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.SPRINGS]])]),
             "j-01": Room(83, [Transition("j-02", [[ItemName.DASH_CRYSTALS]])]),
             "j-02": Room(84, [Transition("j-03")]),
@@ -191,7 +191,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "j-14": Room(96, [Transition("j-14b", [[ItemName.TRAFFIC_BLOCKS]])]),
             "j-14b": Room(97, [Transition("j-15")]),
             "j-15": Room(98, [Transition("j-16", [[ItemName.KEVIN]])]),
-            "j-16": Room(99, [Transition("j-17", farewell_final_room_reqs)], [Location(LocationType.LEVEL_CLEAR, access_rule=farewell_final_room_reqs)], checkpoint="CheckpointEight"),
+            "j-16": Room(99, [Transition("j-17", farewell_final_room_reqs)], [Location(LocationType.LEVEL_CLEAR, access_rule=farewell_final_room_reqs)], checkpoint="Farewell"),
             "j-17": Room(100, [Transition("j-18")]),
             "j-18": Room(101, [Transition("j-19"), Transition("j-17")]),
             "j-19": Room(102, [], [Location(LocationType.STRAWBERRY, 9)]),
@@ -200,5 +200,16 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "e-00yb": Room(106, [Transition("e-00y", [[ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.RED_BUBBLES]])], excluded=True),
             "h-04b": Room(107, [Transition("h-05")])
         }, LevelCategory.FAREWELL, 25
+    ),
+    LevelName.PROLOGUE:
+    Level(
+        {
+            "01": Room(0, [Transition("1"), Transition("-1"), Transition("0b")], start_room=True),
+            "-1": Room(1, [Transition("01")]),
+            "0b": Room(2, [Transition("01")]),
+            "1": Room(3, [Transition("2"), Transition("01")]),
+            "2": Room(4, [Transition("3"), Transition("1")]),
+            "3": Room(5, [Transition("2"), [Location(LocationType.LEVEL_CLEAR)]])
+        }, LevelCategory.A_SIDE, 26
     )
 }
