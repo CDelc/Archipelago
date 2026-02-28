@@ -35,6 +35,18 @@ class LevelName(StrEnum):
     STARFRUIT_SUPERNOVA = "Starfruit Supernova"
     PASSIONFRUIT_PANTHEON = "Passionfruit Pantheon"
     
+    LOOPY_LAGOON = "Loopy Lagoon"
+    FOREST_PATH = "Forest Path"
+    DRIVEWAY_DID_YOU_IN = "If my 'driveway' almost did you in..."
+    AZURE_CAVERNS = "Azure Caverns"
+    CASSETTE_CLIFFS = "Cassette Cliffs"
+    SOAP = "Soap"
+    OVER_THE_CITY = "Over the City"
+    TROPHOSPHERE = "Troposphere"
+    CORESAKEN_CITY = "Coresaken City",
+    THE_SQUEEZE = "The Squeeze"
+    SEEING_IS_BELIEVING = "Seeing is Believing"
+    
 class LevelCategory(StrEnum):
     A_SIDE = "A-Side"
     B_SIDE = "B-Side"

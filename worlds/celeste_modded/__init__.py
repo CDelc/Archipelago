@@ -61,7 +61,7 @@ class CelesteModdedWorld(World):
     win_condition_level: LevelName
         
     def generate_early(self) -> None:
-        # validate()
+        validate()
         self.levels_categories_in_play.add(LevelCategory.A_SIDE)
         options = self.options
         
@@ -133,7 +133,7 @@ class CelesteModdedWorld(World):
         try:
             if self.item_type_dict[name] in {ItemType.KEY_DOOR, ItemType.MECHANIC, ItemType.LEVEL}:
                 classification = ItemClassification.progression
-            elif self.item_type_dict[name] in {ItemType.CHECKPOINT, ItemType.CRYSTAL_HEART_SJ, ItemType.CRYSTAL_HEART_VANILLA, ItemType.STRAWBERRY, ItemType.MOON_BERRY, ItemType.SILVER_BERRY, ItemType.VICTORY, ItemType.GEM}:
+            elif self.item_type_dict[name] in {ItemType.CHECKPOINT, ItemType.CRYSTAL_HEART_SJ, ItemType.CRYSTAL_HEART_VANILLA, ItemType.STRAWBERRY, ItemType.MOON_BERRY, ItemType.VICTORY, ItemType.GEM}:
                 classification = ItemClassification.progression_skip_balancing
         except KeyError:
             raise KeyError(f"Tried to create item that does not exist in item table: {name}")

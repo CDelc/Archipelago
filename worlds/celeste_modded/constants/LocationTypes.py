@@ -11,15 +11,6 @@ class LocationType(StrEnum):
     KEY = "key"
     GOLDEN_BERRY = "golden_berry"
     SILVER_BERRY = "silver_berry"
-    RAINBOW_BERRY = "rainbow_berry"
     WINGED_GOLDEN = "winged_golden_berry"
     ROOM = "room"
     GEM = "gem"
-
-BEGINNER_RAINBOW_BERRY = "Beginner Rainbow Berry"
-INTERMEDIATE_RAINBOW_BERRY = "Intermediate Rainbow Berry"
-ADVANCED_RAINBOW_BERRY = "Advanced Rainbow Berry"
-EXPERT_RAINBOW_BERRY = "Expert Rainbow Berry"
-GRANDMASTER_RAINBOW_BERRY = "Grandmaster Rainbow Berry"
-
-RAINBOW_BERRIES = [BEGINNER_RAINBOW_BERRY, INTERMEDIATE_RAINBOW_BERRY, ADVANCED_RAINBOW_BERRY, EXPERT_RAINBOW_BERRY, GRANDMASTER_RAINBOW_BERRY]

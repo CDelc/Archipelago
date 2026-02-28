@@ -10,7 +10,6 @@ class ItemType(StrEnum):
     CRYSTAL_HEART_SJ = "Strawberry Jam Level Clear"
     STRAWBERRY = "Strawberry"
     MOON_BERRY = "Moon Berry"
-    SILVER_BERRY = "Silver Berry"
     FILLER = "Filler"
     GEM = "Gem"
     

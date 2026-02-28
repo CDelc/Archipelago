@@ -17,7 +17,6 @@ _item_id_offset_basic = {
     ItemType.CRYSTAL_HEART_SJ: 6,
     ItemType.STRAWBERRY: 7,
     ItemType.MOON_BERRY: 8,
-    ItemType.SILVER_BERRY: 9,
     ItemType.GEM: 10,
     ItemType.FILLER: 11
 }
@@ -32,7 +31,6 @@ _location_id_offset_basic = {
     LocationType.KEY: 7,
     LocationType.GOLDEN_BERRY: 8,
     LocationType.SILVER_BERRY: 9,
-    LocationType.RAINBOW_BERRY: 10,
     LocationType.WINGED_GOLDEN: 11,
     LocationType.ROOM: 12,
     LocationType.GEM: 13

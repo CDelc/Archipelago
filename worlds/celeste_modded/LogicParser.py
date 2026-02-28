@@ -7,7 +7,7 @@ from .level_logic.LogicalLayout import levelList
 from .level_logic.LogicalObjects import Level, Room
 from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_berry, level_victory, mechanic_categories
 from .constants.LevelNames import LevelName, LevelCategory
-from .constants.LocationTypes import LocationType, RAINBOW_BERRIES, BEGINNER_RAINBOW_BERRY, INTERMEDIATE_RAINBOW_BERRY, ADVANCED_RAINBOW_BERRY, EXPERT_RAINBOW_BERRY, GRANDMASTER_RAINBOW_BERRY
+from .constants.LocationTypes import LocationType
 from .constants.ItemTypes import ItemType
 from .Naming import getCheckpointName, getKeyDoorName, getLocationName, getRoomName
 if TYPE_CHECKING:
@@ -77,7 +77,7 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
     checkpoint_items = []
     crystal_heart_items = []
     crystal_heart_clear_items = []
-    silver_berry_collect_items = []
+    # silver_berry_collect_items = []
     key_door_items = []
     gem_items = []
     for levelName in levelList:
@@ -98,10 +98,6 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
                     name = getLocationName(levelName, roomName, LocationType.LEVEL_CLEAR_MINI_HEART, location.ID)
                     crystal_heart_clear_items.append(name)
                     id_table[name] = getLocationBasedItemID(ItemType.CRYSTAL_HEART_SJ, level, room, location.ID)
-                elif location.location_type == LocationType.SILVER_BERRY:
-                    name = getLocationName(levelName, roomName, LocationType.SILVER_BERRY, location.ID)
-                    silver_berry_collect_items.append(name)
-                    id_table[name] = getLocationBasedItemID(ItemType.SILVER_BERRY, level, room, location.ID)
                 elif location.location_type == LocationType.GEM:
                     name = getLocationName(levelName, roomName, LocationType.GEM, location.ID)
                     gem_items.append(name)
@@ -127,7 +123,6 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
         **{checkpoint: ItemType.CHECKPOINT for checkpoint in checkpoint_items},
         **{heart: ItemType.CRYSTAL_HEART_VANILLA for heart in crystal_heart_items},
         **{heart: ItemType.CRYSTAL_HEART_SJ for heart in crystal_heart_clear_items},
-        **{silver: ItemType.SILVER_BERRY for silver in silver_berry_collect_items},
         **{key: ItemType.KEY_DOOR for key in key_door_items},
         **{item.value: ItemType.MOON_BERRY for item in moon_berry},
         **{gem: ItemType.GEM for gem in gem_items},
@@ -158,9 +153,6 @@ def generate_location_dict() -> tuple[dict[str, LocationType], dict[str, int]]:
                 location_dict[location_name] = location.location_type
                 id_table[location_name] = getLocationBasedLocationID(location.location_type, level, room, location.ID)
     
-    for rainbow_berry in RAINBOW_BERRIES:
-        location_dict[rainbow_berry] = LocationType.RAINBOW_BERRY
-    id_table.update({name: id for id, name in enumerate(RAINBOW_BERRIES, start=Constants.base_id + Constants.location_id_offset[LocationType.RAINBOW_BERRY])})
     return location_dict, id_table
 
 
@@ -208,54 +200,13 @@ def parse_regions(world: "CelesteModdedWorld"):
                 destination_room_name = getRoomName(levelName, transition.destination_room)
                 room_region.add_exits({destination_room_name}, {destination_room_name: ruleFromList(transition.access_rule, world)})
             for location in room.locations:
-                if location.location_type == LocationType.GOLDEN_BERRY:
-                    if not world.options.include_a_sides_goldens and level.level_category == LevelCategory.A_SIDE:
-                        continue
-                    if not world.options.include_b_sides_goldens and level.level_category == LevelCategory.B_SIDE:
-                        continue
-                    if not world.options.include_c_sides_goldens and level.level_category == LevelCategory.C_SIDE:
-                        continue
-                    if not world.options.include_farewell_golden and level.level_category == LevelCategory.FAREWELL:
-                        continue
-                    if not world.options.include_beginner_silvers and level.level_category == LevelCategory.BEGINNER_HEARTSIDE:
-                        continue
-                    if not world.options.include_intermediate_silvers and level.level_category == LevelCategory.INTERMEDIATE_HEARTSIDE:
-                        continue
-                    if not world.options.include_advanced_silvers and level.level_category == LevelCategory.ADVANCED_HEARTSIDE:
-                        continue
-                    # Expert and GM heartsides have goldens permanently disabled, as those challenges are out of scope of an archipelago world
-                    if level.level_category == LevelCategory.EXPERT_HEARTSIDE:
-                        continue
-                    if level.level_category == LevelCategory.GRANDMASTER_HEARTSIDE:
-                        continue
-                
-                if location.location_type == LocationType.SILVER_BERRY:
-                    if not world.options.include_beginner_silvers and level.level_category == LevelCategory.BEGINNER:
-                        continue
-                    if not world.options.include_intermediate_silvers and level.level_category == LevelCategory.INTERMEDIATE:
-                        continue
-                    if not world.options.include_advanced_silvers and level.level_category == LevelCategory.ADVANCED:
-                        continue
-                    if not world.options.include_expert_silvers and level.level_category == LevelCategory.EXPERT:
-                        continue
-                    if not world.options.include_grandmaster_silvers and level.level_category == LevelCategory.GRANDMASTER:
-                        continue
-                    if not world.options.include_cracked_grandmaster_silvers and level.level_category == LevelCategory.CRACKED_GRANDMASTER:
-                        continue
-                
-                if world.options.include_beginner_silvers:
-                    add_location(root_region, BEGINNER_RAINBOW_BERRY, world)
-                if world.options.include_intermediate_silvers:
-                    add_location(root_region, INTERMEDIATE_RAINBOW_BERRY, world)
-                if world.options.include_advanced_silvers:
-                    add_location(root_region, ADVANCED_RAINBOW_BERRY, world)
-                if world.options.include_expert_silvers:
-                    add_location(root_region, EXPERT_RAINBOW_BERRY, world)
-                if world.options.include_grandmaster_silvers and world.options.include_cracked_grandmaster_silvers:
-                    add_location(root_region, GRANDMASTER_RAINBOW_BERRY, world)    
-                    
+                if location.location_type in {LocationType.GOLDEN_BERRY, LocationType.SILVER_BERRY} and not deathlessEnabled(level.level_category, world):
+                    continue
+                if location.location_type == LocationType.WINGED_GOLDEN and not world.options.include_winged_golden:
+                    continue
                 loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
                 add_location_with_rule(room_region, loc_name, world, location.access_rule)
+                
             
     
 def create_items(world: "CelesteModdedWorld"):
@@ -280,7 +231,6 @@ def create_items(world: "CelesteModdedWorld"):
                         LocationType.GEM,
                         LocationType.CRYSTAL_HEART,
                         LocationType.LEVEL_CLEAR_MINI_HEART,
-                        LocationType.SILVER_BERRY
                     }:
                        add_item(getLocationName(levelName, roomName, location.location_type, location.ID), world)
                 for key_door in room.key_door_ids:
@@ -339,6 +289,42 @@ def setWinCondition(world: "CelesteModdedWorld"):
         (not world.options.require_moon_berry or state.has(ItemName.MOON_BERRY.value, world.player)) and
         state.has(ItemName.LEVEL_VICTORY.value, world.player)
     )
+
+def deathlessEnabled(levelCategory: LevelCategory, world: "CelesteModdedWorld"):
+    match levelCategory:
+        case LevelCategory.BEGINNER:
+            return world.options.include_beginner_silvers
+        case LevelCategory.INTERMEDIATE:
+            return world.options.include_intermediate_silvers
+        case LevelCategory.ADVANCED:
+            return world.options.include_advanced_silvers
+        case LevelCategory.EXPERT:
+            return world.options.include_expert_silvers
+        case LevelCategory.GRANDMASTER:
+            return world.options.include_grandmaster_silvers
+        case LevelCategory.CRACKED_GRANDMASTER:
+            return world.options.include_cracked_grandmaster_silvers
+        case LevelCategory.A_SIDE:
+            return world.options.include_a_sides_goldens
+        case LevelCategory.B_SIDE:
+            return world.options.include_b_sides_goldens
+        case LevelCategory.C_SIDE:
+            return world.options.include_c_sides_goldens
+        case LevelCategory.FAREWELL:
+            return world.options.include_farewell_golden
+        case LevelCategory.BEGINNER_HEARTSIDE:
+            return world.options.include_beginner_silvers and world.options.include_heart_side_golden
+        case LevelCategory.INTERMEDIATE_HEARTSIDE:
+            return world.options.include_intermediate_silvers and world.options.include_heart_side_golden
+        case LevelCategory.ADVANCED_HEARTSIDE:
+            return world.options.include_advanced_silvers and world.options.include_heart_side_golden
+        case LevelCategory.EXPERT_HEARTSIDE:
+            return False
+        case LevelCategory.GRANDMASTER_HEARTSIDE:
+            return False
+        case _:
+            return False
+
 
 def countStrawberries(world: "CelesteModdedWorld") -> int:
     count = 0

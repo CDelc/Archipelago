@@ -75,11 +75,24 @@ farewell: str = ("intro-01-future, >intro-02-launch, ?intro-03-space, >a-00*Chec
 
 prologue: str = "01, &-1, &0b, 1, 2, 3"
 
-levelSummary: str = prologue
+loopylagoon: str = "c-01, >c-02, >c-03, >c-04, >c-05, >c-06, >c-07, >c-08, &c-08b$2428, >c-09, >c-10, >c-1$1037, >c-12, >c-13$2140, &c-13b, >c-14, >c-15, >c-16, >c-17"
+forestpath: str = "a-01, >a-02, >a-03$3, >a-04, >a-05, >a-06, >a-07, >a-08, >a-09, >a-10, >a-11$1244, >a-12, >a-13, &>a-16, >a-14, &>a-17$1634, >a-15, >a-18, >a-19$523, >a-20"
+driveway: str = "00- intro, >01- Crusher, >02- Btain N' Switch, &>02B- a strwawbewwy??$682, >03- Uberjump, >04- Head Trauma, >05- Boing, >06- Bubbles, >07- Falling Cannon, &>07B- OwO whats this??$1459, >08- U Turn, >09- Fin"
+azure_cavern: str = "01, >02, &02b$289, >03, >04, &04b$313, >05, >06, >07, >08"
+cassettecliffs: str = "1, >2, >3, &>4, >6, >7, &8, &9, >10, >11-c, >12, @, ber4, 5"
+soap: str = "01, >02, >03, >04, &04b$3286, >05, &05b$1447, >06, >07, &07b$2593, >08, >09, >10, &10b$2898, >11, &11b, >heart"
+over_the_city: str = "01, >02, &Berry1$821, >03, >04, >05, &06, >07, >08, >09, >10, >11, >12, &Berry2$783, >13, >14, >15, >16, >17, @, RouteB-1$823, &RouteB-2, &RouteB-3, &RouteB-4, RouteA-2, &RouteA-1, &RouteA-3"
+troposphere: str = "a_01, >a_02, >a_03, >b_01, >b_02, >b_03, >b_04, >b_05, >c_01, >c_02$101, >c_03_end"
+coresaken: str = "a_01, >a_02, >a_03, >a_04, >a_05, >a_06, &b-01$112, >a_07, >a_08, &b-02$71, >a_09, >b-03, >b-04$458"
+squeeze: str = "1, >2, >3, >4, >5, >6"
+
+seeing: str = "a_01, >a_02, >a_03, >a_04, >a_05, &#a_10, >a_06, >a_07, >a_08, >a_09, >a_11$312, >#a_12"
+
+levelSummary: str = seeing
 
 
 def extractRoomName(name: str):
-    return name.replace(" ", "").split("*")[0].split("$")[0].replace("&", "").replace(">", "").replace("#", "")
+    return name.strip().split("*")[0].split("$")[0].replace("&", "").replace(">", "").replace("#", "")
 
 
 
@@ -95,8 +108,8 @@ python_room_output = []
 csharp_output = []
 
 while index < len(rooms):
-    room_name = rooms[index].replace(" ", "")
-    if not room_name.replace(" ", "") == "@":
+    room_name = rooms[index].strip()
+    if not room_name.strip() == "@":
         room_args = []
 
         branch = room_name.startswith("&")
@@ -110,7 +123,7 @@ while index < len(rooms):
             prev_room = ""
         
         j = index + 1
-        while j < len(rooms) and rooms[j].replace(" ", "").startswith("&"):
+        while j < len(rooms) and rooms[j].strip().startswith("&"):
             branch_rooms.append(rooms[j])
             j = j + 1
             
@@ -118,7 +131,7 @@ while index < len(rooms):
         next_room = ""
         
         if next_room_index < len(rooms):
-            next_room = rooms[next_room_index]
+            next_room = rooms[next_room_index].strip()
             
         if next_room == "@":
             end_reached = True

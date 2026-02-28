@@ -89,7 +89,6 @@ def validate():
                 if loc_type == LocationType.SILVER_BERRY:
                     assert location.ID > 0, f"Strawberry without ID assigned in {levelName}:{roomName}"
                     assert level.level_category in {LevelCategory.BEGINNER, LevelCategory.INTERMEDIATE, LevelCategory.ADVANCED, LevelCategory.EXPERT, LevelCategory.GRANDMASTER, LevelCategory.CRACKED_GRANDMASTER}, f"Silver berries should only exist in collab non-heartside levels ({levelName}:{roomName})"
-                assert not loc_type == LocationType.RAINBOW_BERRY, f"Rainbow berries should only exist in the root region, and should not be used in levels ({levelName})"
                 if loc_type == LocationType.LEVEL_CLEAR:
                     assert level.level_category in {LevelCategory.A_SIDE, LevelCategory.FAREWELL}, f"Level clear should only be used in prologues, farewell, and A-Sides. All other levels are either crystal hearts or mini crystal hearts ({levelName}:{roomName})"
                 if loc_type == LocationType.GEM:

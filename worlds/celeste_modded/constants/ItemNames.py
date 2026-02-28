@@ -13,14 +13,14 @@ from worlds.celeste_modded.constants.LevelNames import LevelCategory
 
 class ItemName(StrEnum):
     
-    DASH_CRYSTALS = "Dash Crystals"
+    DASH_CRYSTALS = "Single Dash Crystals"
     TRAFFIC_BLOCKS = "Traffic Blocks"
     SPRINGS = "Springs"
     BLUE_CASSETTE = "Blue Cassette Blocks"
     PINK_CASSETTE = "Pink Cassette Blocks"
     CRUMBLING_PLATFORM = "Crumbling Platform",
     TOUCH_SWITCH = "Touch Switches",
-    DREAM_BLOCK = "Dream Blocks",
+    DREAM_BLOCK = "Normal Dream Blocks",
     BADELINE_ORB = "Badeline Orbs",
     SINKING_PLATFORM = "Sinking Platforms",
     GREEN_BUBBLES = "Blue Bubbles",
@@ -46,8 +46,19 @@ class ItemName(StrEnum):
     PUFFER_FISH = "Puffer fish",
     DOUBLE_DASH_CRYSTALS = "Double Dash Crystals",
     YELLOW_CASSETTE = "Yellow Cassette Blocks",
-    GREEN_CASSETTE = "Green Cassette Blocks"
-    
+    GREEN_CASSETTE = "Green Cassette Blocks",
+    LOOP_BLOCK = "Loopy Blocks"
+    DREAM_DASH_CRYSTAL = "Dream Dash Crystals",
+    INTRO_CRUSHER = "Falling/Moving Ice Blocks",
+    DASH_TRAFFIC_BLOCK = "Dash-Activated Traffic Blocks",
+    BLUE_TRAFFIC_CASSETTE = "Blue Cassette Traffic Blocks",
+    PINK_TRAFFIC_CASSETTE = "Pink Cassette Traffic Blocks",
+    YELLOW_TRAFFIC_CASSETTE = "Yellow Cassette Traffic Blocks",
+    SOAP_BUBBLE = "Soap Bubbles",
+    DASHLESS_SPRING = "Dashless Blue Springs",
+    SINGLE_JUMP_REFILL = "Single Jump Refills",
+    TRIPLE_JUMP_REFILL = "Triple Jump Refills",
+    DOUBLE_DASH_DREAM_BLOCK = "Double Dash Dream Blocks"
             
     STRAWBERRY = "Strawberry"
     
@@ -107,7 +118,19 @@ mechanic = {
     ItemName.PUFFER_FISH: 30,
     ItemName.DOUBLE_DASH_CRYSTALS: 31,
     ItemName.YELLOW_CASSETTE: 32,
-    ItemName.GREEN_CASSETTE: 33
+    ItemName.GREEN_CASSETTE: 33,
+    ItemName.LOOP_BLOCK: 34,
+    ItemName.DREAM_DASH_CRYSTAL: 35,
+    ItemName.INTRO_CRUSHER: 36,
+    ItemName.DASH_TRAFFIC_BLOCK: 37,
+    ItemName.BLUE_TRAFFIC_CASSETTE: 38,
+    ItemName.PINK_TRAFFIC_CASSETTE: 39,
+    ItemName.YELLOW_TRAFFIC_CASSETTE: 40,
+    ItemName.SOAP_BUBBLE: 41,
+    ItemName.DASHLESS_SPRING: 42,
+    ItemName.SINGLE_JUMP_REFILL: 43,
+    ItemName.TRIPLE_JUMP_REFILL: 44,
+    ItemName.DOUBLE_DASH_DREAM_BLOCK: 45
 }
 
 mechanic_categories = {
@@ -144,5 +167,17 @@ mechanic_categories = {
     ItemName.PUFFER_FISH: [LevelCategory.FAREWELL],
     ItemName.DOUBLE_DASH_CRYSTALS: [LevelCategory.FAREWELL],
     ItemName.YELLOW_CASSETTE: [LevelCategory.FAREWELL],
-    ItemName.GREEN_CASSETTE: [LevelCategory.FAREWELL]
+    ItemName.GREEN_CASSETTE: [LevelCategory.FAREWELL],
+    ItemName.LOOP_BLOCK: [LevelCategory.BEGINNER],
+    ItemName.DREAM_DASH_CRYSTAL: [LevelCategory.BEGINNER],
+    ItemName.INTRO_CRUSHER: [],
+    ItemName.DASH_TRAFFIC_BLOCK: [LevelCategory.BEGINNER],
+    ItemName.BLUE_TRAFFIC_CASSETTE: [LevelCategory.BEGINNER],
+    ItemName.PINK_TRAFFIC_CASSETTE: [LevelCategory.BEGINNER],
+    ItemName.YELLOW_TRAFFIC_CASSETTE: [LevelCategory.BEGINNER],
+    ItemName.SOAP_BUBBLE: [LevelCategory.BEGINNER],
+    ItemName.DASHLESS_SPRING: [LevelCategory.BEGINNER],
+    ItemName.SINGLE_JUMP_REFILL: [LevelCategory.BEGINNER],
+    ItemName.TRIPLE_JUMP_REFILL: [LevelCategory.BEGINNER],
+    ItemName.DOUBLE_DASH_DREAM_BLOCK: [LevelCategory.BEGINNER]
 }

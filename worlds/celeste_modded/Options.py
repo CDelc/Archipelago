@@ -255,6 +255,7 @@ class CelesteModdedOptions(PerGameCommonOptions):
     include_b_sides_goldens: IncludeBSideGoldens
     include_c_sides_goldens: IncludeCSideGoldens
     include_farewell_golden: IncludeFarewellGolden
+    include_winged_golden: IncludeWingedGolden
     
     win_condition_level: WinConditionLevel
     protect_victory_level_checkpoints: ProtectVictoryLevelCheckpoints
