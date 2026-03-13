@@ -162,10 +162,14 @@ fortress: str = "00-intro, >00-intro-cutscene, >01, >03, >05-hub, >06-crossroad,
 coreproblem: str = "a-01, >a-02, >a-03, >a-04, &a-04b$980, >a-05, >a-06, &a-06b$1664, >a-07, >a-08, >a-09, &a-09b$2912, >a-10, >a-11"
 psycho: str = "a-start, &#s-Path of Plane, >a-00, >a-01, >a-02, &#s-Flushed Down, >a-03, &a-03x$570, >a-04, >a-05, >a-06, &#s-Swamp Ascent, >a-07, >a-08, &a-08x$1876, >a-09, >a-10, &a-10x$2917, >a-end, >#a-end2, >#s-True Ending, >s-Graveyard, @, #s-Water Splash, #s-Shrek Swamp"
 khutara: str = "DanTKO_Intro, &#DanTKO_Monolith_1, &#DanTKO_Plane, >DanTKO_01, >DanTKO_02, >DanTKO_blueTutorial_2, >DanTKO_03, >DanTKO_04, >DanTKO_05, >DanTKO_06, >DanTKO_06b, &DanTKO_Berry01$2078, >DanTKO_07, >DanTKO_08, >DanTKO_09, &DanTKO_Berry02$331, >DanTKO_Outro, @, Aperture_Mountain Relic, >&Aperture_Mountain Relic_EXIT"
-
 linn: str = "a-00-start, &a-00a, >a-01, &a-01_berry$1575, >a-02, >a-03, >a-04, >a-05, >a-06, >a-07, &a-07_berry$2751, >a-08, &a-08_berry$3479, >a-09, >a-10-end, >a-10_berry$3513, >#a-10a, @, #a-00c, &#a-00b, &#a-00y"
+clock: str = "a-00, >a-01, >a-02, >a-03, >a-04, >a-05, &a-05b$2707, >a-06, >a-07, &a-07b$2134, &#secret, >a-08, >a-09, &a-09b$13047"
+plasma: str = "a1, >a2, >a3, >a4, >a5, >a6, >a7, >a8, &>a9, b1$2100, bones_room"
+hollow: str = "1, >2, >3, >4, >5, >6$334, &berry, >7, >8, >9, >10"
 
-levelSummary: str = linn
+hydro: str = "a01, &#a02, >a04, >a05, >a06, >a07$181, >a08, >a09, >a10, &a10b$1187, >a12, &a12b$129, >a14, >a15, @,#a03"
+
+levelSummary: str = hydro
 
 
 def extractRoomName(name: str):

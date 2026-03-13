@@ -154,7 +154,8 @@ class ItemName(StrEnum):
     WHITE_DREAM_BLOCK = "White Dream Blocks",
     RED_SPEED_MOSS = "Red Speed Moss",
     BLUE_BOUNCE_MOSS = "Blue Bounce Moss",
-    TAN_LINKED_TRAFFIC_BLOCK = "Tan Linked Traffic Blocks"
+    TAN_LINKED_TRAFFIC_BLOCK = "Tan Linked Traffic Blocks",
+    SQUARE_BUMPER = "Square Bumpers"
             
     STRAWBERRY = "Strawberry"
     
@@ -322,5 +323,6 @@ mechanic = {
     ItemName.WHITE_DREAM_BLOCK: 138,
     ItemName.RED_SPEED_MOSS: 139,
     ItemName.BLUE_BOUNCE_MOSS: 140,
-    ItemName.TAN_LINKED_TRAFFIC_BLOCK: 141
+    ItemName.TAN_LINKED_TRAFFIC_BLOCK: 141,
+    ItemName.SQUARE_BUMPER: 142
 }

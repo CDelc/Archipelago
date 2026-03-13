@@ -187,5 +187,76 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-00b": Room(19, [Transition("a-00c")], easter_egg_difficult=True),
             "a-00y": Room(20, [Transition("a-00c")], easter_egg_difficult=True)
         }, LevelCategory.EXPERT, 102
+    ),
+    LevelName.CLOCKWORK:
+    Level(
+        {
+            "a-00": Room(0, [Transition("a-01", [[ItemName.TOUCH_SWITCH]])], start_room=True),
+            "a-01": Room(1, [Transition("a-02", [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM, ItemName.DOUBLE_DASH_CRYSTALS]])], [Location(LocationType.SILVER_BERRY, 12888, [[ItemName.PUFFER_FISH, ItemName.DASH_SWITCH, ItemName.BADELINE_ORB, ItemName.BIRD, ItemName.SPRINGS, ItemName.DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM, ItemName.DOUBLE_DASH_CRYSTALS]])]),
+            "a-02": Room(2, [Transition("a-03", [[ItemName.BADELINE_ORB, ItemName.BIRD]])]),
+            "a-03": Room(3, [Transition("a-04")]),
+            "a-04": Room(4, [Transition("a-05", [[ItemName.DASH_SWITCH]])]),
+            "a-05": Room(5, [Transition("a-06"), Transition("a-05b")]),
+            "a-05b": Room(6, [Transition("a-05")], [Location(LocationType.STRAWBERRY, 2707, [[ItemName.JELLYFISH]])]),
+            "a-06": Room(7, [Transition("a-07", [[ItemName.PUFFER_FISH]])]),
+            "a-07": Room(8, [Transition("a-08"), Transition("a-07b"), Transition("secret")]),
+            "a-07b": Room(9, [Transition("a-07")], [Location(LocationType.STRAWBERRY, 2134)]),
+            "secret": Room(10, [Transition("a-07")], easter_egg=True),
+            "a-08": Room(11, [Transition("a-09")]),
+            "a-09": Room(12, [Transition("a-09b")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
+            "a-09b": Room(13, [Transition("a-09")], [Location(LocationType.STRAWBERRY, 13047)])
+        }, LevelCategory.EXPERT, 103
+    ),
+    LevelName.PLASMA_REACTOR:
+    Level(
+        {
+            "a1": Room(0, [Transition("a2", [[ItemName.TRAFFIC_BLOCKS]])], [Location(LocationType.SILVER_BERRY, 1193, [[ItemName.TRAFFIC_BLOCKS, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_REFILL_WALL, ItemName.DASH_CRYSTALS, ItemName.DASH_REFILL_WALL]])], start_room=True),
+            "a2": Room(1, [Transition("a3", [[ItemName.DASH_CRYSTALS, ItemName.DASH_REFILL_WALL]])]),
+            "a3": Room(2, [Transition("a4")]),
+            "a4": Room(3, [Transition("a5")]),
+            "a5": Room(4, [Transition("a6")]),
+            "a6": Room(5, [Transition("a7", [[ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_REFILL_WALL]])]),
+            "a7": Room(6, [Transition("a8")]),
+            "a8": Room(7, [Transition("b1"), Transition("a9")]),
+            "a9": Room(8, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
+            "b1": Room(9, [Transition("bones_room"), Transition("a8")], [Location(LocationType.STRAWBERRY, 2100)]),
+            "bones_room": Room(10, [Transition("b1")], easter_egg=True)
+        }, LevelCategory.EXPERT, 104
+    ),
+    LevelName.NARROW_HOLLOW:
+    Level(
+        {
+            "1": Room(0, [Transition("2", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.KEVIN]])], [Location(LocationType.SILVER_BERRY, 2340, [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.KEVIN, ItemName.TOUCH_SWITCH, ItemName.DASH_SWITCH, ItemName.SPRINGS]])], start_room=True),
+            "2": Room(1, [Transition("3", [[ItemName.TOUCH_SWITCH]])], [Location(LocationType.STRAWBERRY, 235)]),
+            "3": Room(2, [Transition("4", [[ItemName.DASH_CRYSTALS]])]),
+            "4": Room(3, [Transition("5")]),
+            "5": Room(4, [Transition("6")]),
+            "6": Room(5, [Transition("7"), Transition("berry")], [Location(LocationType.STRAWBERRY, 334, [[getKeyDoorName(LevelName.NARROW_HOLLOW, "6", 333)]])], key_door_ids=[333]),
+            "berry": Room(6, [Transition("6")], [Location(LocationType.KEY, 317)]),
+            "7": Room(7, [Transition("8")]),
+            "8": Room(8, [Transition("9")]),
+            "9": Room(9, [Transition("10", [[ItemName.SPRINGS]])]),
+            "10": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
+        }, LevelCategory.EXPERT, 105
+    ),
+    LevelName.HYDROSHOCK:
+    Level(
+        {
+            "a01": Room(0, [Transition("a04"), Transition("a02", [[ItemName.SQUARE_BUMPER]])], [Location(LocationType.SILVER_BERRY, 2489, [[ItemName.SQUARE_BUMPER, ItemName.TOUCH_SWITCH]])], start_room=True),
+            "a02": Room(1, [Transition("a01"), Transition("a03")], easter_egg=True),
+            "a04": Room(2, [Transition("a05", [[ItemName.SQUARE_BUMPER]])]),
+            "a05": Room(3, [Transition("a06")]),
+            "a06": Room(4, [Transition("a07", [[ItemName.TOUCH_SWITCH]])]),
+            "a07": Room(5, [Transition("a08")], [Location(LocationType.STRAWBERRY, 181)]),
+            "a08": Room(6, [Transition("a09")]),
+            "a09": Room(7, [Transition("a10")]),
+            "a10": Room(8, [Transition("a12"), Transition("a10b")]),
+            "a10b": Room(9, [Transition("a10")], [Location(LocationType.STRAWBERRY, 1187)]),
+            "a12": Room(10, [Transition("a14"), Transition("a12b")]),
+            "a12b": Room(11, [Transition("a12")], [Location(LocationType.STRAWBERRY, 129)]),
+            "a14": Room(12, [Transition("a15")]),
+            "a15": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
+            "a03": Room(15, [], easter_egg_difficult=True)
+        }, LevelCategory.EXPERT, 106
     )
 }

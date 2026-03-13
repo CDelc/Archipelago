@@ -111,6 +111,10 @@ class LevelName(StrEnum):
     PSYCHOKINETIC = "Psychokinetic"
     GARDEN_OF_KHUTARA = "Garden of Khu'tara"
     OVERGROWN_LINN = "Overgrown Linn"
+    CLOCKWORK = "Clockwork"
+    PLASMA_REACTOR = "Plasma Reactor"
+    NARROW_HOLLOW = "Narrow Hollow"
+    HYDROSHOCK = "Hydroshock"
     
 class LevelCategory(StrEnum):
     A_SIDE = "A-Side"
