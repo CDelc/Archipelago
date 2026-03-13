@@ -1,11 +1,12 @@
 from typing import TYPE_CHECKING
 from BaseClasses import CollectionState, Region
 from worlds.celeste_modded.ItemLocationClasses import ModdedCelesteLocation
+from worlds.celeste_modded.ValidateLayout import validate
 from worlds.celeste_modded.constants import Constants
 from worlds.generic.Rules import set_rule
 from .level_logic.LogicalLayout import levelList
 from .level_logic.LogicalObjects import Level, Room
-from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_berry, level_victory, mechanic_categories
+from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_berry, level_victory
 from .constants.LevelNames import LevelName, LevelCategory
 from .constants.LocationTypes import LocationType
 from .constants.ItemTypes import ItemType
@@ -68,7 +69,7 @@ def add_item(name: str, world: "CelesteModdedWorld"):
     
 def calculate_strawberries(world: "CelesteModdedWorld"):
     strawberry_count = countStrawberries(world)
-    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - countCrystalHearts(world), world.options.total_strawberries)
+    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - getLevelCount(world), world.options.total_strawberries)
     world.required_strawberries = round((world.options.strawberries_required_percentage / 100) * world.total_strawberries_generated)
 
 
@@ -189,7 +190,7 @@ def parse_regions(world: "CelesteModdedWorld"):
         for roomName in level.rooms:
             room = level.rooms[roomName]
             room_region = world.multiworld.get_region(getRoomName(levelName, roomName), world.player)
-            if(world.options.room_checks and not room.is_subregion_of and not room.excluded):
+            if(world.options.room_checks and not room.is_subregion_of and not (room.easter_egg or room.easter_egg_difficult)):
                     loc_name = getRoomName(levelName, roomName)
                     add_location(room_region, loc_name, world)
             if(world.options.randomize_checkpoints and room.checkpoint):
@@ -200,6 +201,8 @@ def parse_regions(world: "CelesteModdedWorld"):
                 destination_room_name = getRoomName(levelName, transition.destination_room)
                 room_region.add_exits({destination_room_name}, {destination_room_name: ruleFromList(transition.access_rule, world)})
             for location in room.locations:
+                if room.easter_egg or room.easter_egg_difficult:
+                    continue
                 if location.location_type in {LocationType.GOLDEN_BERRY, LocationType.SILVER_BERRY} and not deathlessEnabled(level.level_category, world):
                     continue
                 if location.location_type == LocationType.WINGED_GOLDEN and not world.options.include_winged_golden:
@@ -226,6 +229,8 @@ def create_items(world: "CelesteModdedWorld"):
                         location.place_locked_item(world.create_item(getCheckpointName(levelName, room.checkpoint)))
                     else: 
                         add_item(getCheckpointName(levelName, room.checkpoint), world)
+                if room.easter_egg or room.easter_egg_difficult:
+                    continue
                 for location in room.locations:
                     if location.location_type in {
                         LocationType.GEM,
@@ -237,13 +242,7 @@ def create_items(world: "CelesteModdedWorld"):
                     add_item(getKeyDoorName(levelName, roomName, key_door), world)
                
     for mechanicItem in mechanic:
-        if not mechanic_categories[mechanicItem]:
-            add_item(mechanicItem, world)
-        else:
-            for levelCategory in mechanic_categories[mechanicItem]:
-                if(levelCategory in world.levels_categories_in_play):
-                    add_item(mechanicItem, world)
-                    break
+        add_item(mechanicItem, world)
     
     #Add strawberries + moonberry
     for i in range(world.total_strawberries_generated - 1):
@@ -338,16 +337,8 @@ def countStrawberries(world: "CelesteModdedWorld") -> int:
                     count += 1
     return count
 
-def countCrystalHearts(world: "CelesteModdedWorld") -> int:
-    count = 0
-    for level in levelList:
-        if levelList[level].level_category not in world.levels_categories_in_play:
-            continue
-        for room in levelList[level].rooms:
-            for location in levelList[level].rooms[room].locations:
-                if location.location_type == LocationType.CRYSTAL_HEART:
-                    count += 1
-    return count
+def getLevelCount(world: "CelesteModdedWorld") -> int:
+    return len(levelList)
     
 def findStartRoom(level: Level) -> Room:
     for room in Level.rooms:
@@ -376,5 +367,6 @@ location_type_dict: dict[str, LocationType]
 item_id_table: dict[str, int]
 location_id_table: dict[str, int]
 
+validate()
 item_type_dict, item_id_table = generate_item_dict()
 location_type_dict, location_id_table = generate_location_dict()

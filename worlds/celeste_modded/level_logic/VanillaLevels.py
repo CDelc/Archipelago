@@ -573,8 +573,8 @@ vanilla_levels : dict[LevelName, Level] = {
             "after-01": Room(58, [Transition("after-02", [[ItemName.BADELINE_ORB]])]),
             "after-02": Room(59, [], [Location(LocationType.LEVEL_CLEAR)]),
             "04c": Room(61, [Transition("04b")], [Location(LocationType.CRYSTAL_HEART)]),
-            "b-00b": Room(62, [Transition("b-00c"), Transition("b-00")], excluded=True),
-            "b-00c": Room(63, [Transition("b-00b")], excluded=True)
+            "b-00b": Room(62, [Transition("b-00c"), Transition("b-00")], easter_egg=True),
+            "b-00c": Room(63, [Transition("b-00b")], easter_egg=True)
         }, LevelCategory.A_SIDE, 16
     ),
     LevelName.REFLECTION_B:

@@ -195,9 +195,9 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "j-17": Room(100, [Transition("j-18")]),
             "j-18": Room(101, [Transition("j-19"), Transition("j-17")]),
             "j-19": Room(102, [], [Location(LocationType.STRAWBERRY, 9)]),
-            "c-alt-00": Room(104, [Transition("c-alt-01", [[ItemName.DOUBLE_DASH_CRYSTALS]])], excluded=True),
-            "c-alt-01": Room(105, [Transition("c-03")], excluded=True),
-            "e-00yb": Room(106, [Transition("e-00y", [[ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.RED_BUBBLES]])], excluded=True),
+            "c-alt-00": Room(104, [Transition("c-alt-01", [[ItemName.DOUBLE_DASH_CRYSTALS]])], easter_egg=True),
+            "c-alt-01": Room(105, [Transition("c-03")], easter_egg=True),
+            "e-00yb": Room(106, [Transition("e-00y", [[ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.RED_BUBBLES]])], easter_egg=True),
             "h-04b": Room(107, [Transition("h-05")])
         }, LevelCategory.FAREWELL, 25
     ),

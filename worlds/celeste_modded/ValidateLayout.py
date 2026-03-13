@@ -10,10 +10,10 @@ RED = "\033[31m"
 COLOR = "\033[35m"
 RESET = "\033[0m"
 
-def validateConnectivity(rooms: dict[str, Room], startRoom: str):
+def validateConnectivity(rooms: dict[str, Room], startRoom: str, levelName: str):
     remainingRooms = set(rooms.keys())
     validateConnectivityHelper(rooms, startRoom, remainingRooms)
-    assert not remainingRooms, f"Some rooms disconnected from start room: {list(remainingRooms)}"
+    assert not remainingRooms, f"Some rooms disconnected from start room in {levelName}: {list(remainingRooms)}"
     
 def validateConnectivityHelper(rooms: dict[str, Room], currentRoom: str, remainingRooms: set[str]):
     assert currentRoom in rooms.keys(), f"Error during connectivity validation, {currentRoom} does not exist"
@@ -25,6 +25,7 @@ def validateConnectivityHelper(rooms: dict[str, Room], currentRoom: str, remaini
 levelList: dict[str, Level]
     
 def validate():
+    total_strawberries = 0
     level_ids: set[int] = set()
     for levelName in levelList:
         room_ids: set[int] = set()
@@ -102,8 +103,10 @@ def validate():
                 
         if not startRoom:
             raise ValueError(f"No start room found in {levelName}")
-        validateConnectivity(level.rooms, startRoom)
+        validateConnectivity(level.rooms, startRoom, levelName)
         for itemName in locationTracker:
             print(f"{itemName.name} : {locationTracker[itemName]}")
         print("---------------------------------------")
+        total_strawberries += locationTracker[LocationType.STRAWBERRY]
     print(f"{RED}No issues{RESET}")
+    print(f"Total Berries: {total_strawberries}")

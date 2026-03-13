@@ -25,7 +25,8 @@ class Room:
     is_subregion_of: str = None
     start_room: bool = False
     checkpoint: str = None
-    excluded: bool = False
+    easter_egg: bool = False
+    easter_egg_difficult: bool = False
     key_door_ids: list[int] = dataclasses.field(default_factory=list)
     
 @dataclass(frozen=True)

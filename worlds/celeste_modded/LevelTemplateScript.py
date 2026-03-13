@@ -85,10 +85,87 @@ over_the_city: str = "01, >02, &Berry1$821, >03, >04, >05, &06, >07, >08, >09, >
 troposphere: str = "a_01, >a_02, >a_03, >b_01, >b_02, >b_03, >b_04, >b_05, >c_01, >c_02$101, >c_03_end"
 coresaken: str = "a_01, >a_02, >a_03, >a_04, >a_05, >a_06, &b-01$112, >a_07, >a_08, &b-02$71, >a_09, >b-03, >b-04$458"
 squeeze: str = "1, >2, >3, >4, >5, >6"
-
 seeing: str = "a_01, >a_02, >a_03, >a_04, >a_05, &#a_10, >a_06, >a_07, >a_08, >a_09, >a_11$312, >#a_12"
+tube_vista: str = "a01, >a02, >a02_b, >a03, &a03_s$253, >a04, >a05, >a06, &a06_s$739, >a07, >a08, >a09, &a09_s$387, &a09_b, &a09_b_s$388, >a10, >a11, >a12, &a12_s$984, >a13, &a13_b, >a14_Outro"
+potential: str = "SS2-0, >SS2-1, >SS2-2, >SS2-3, >SS2-4, >SS2-5b, &SS2-6$754, >SS2-7, >HUB, >FinalChallenge, >ESCAPE, >HEART, @, WZ-0, &>WZ-1, &>WZ-2, &>WZ-3a, &>WZ-4$339, &>WZ-5a, &>WZ-Tele, Lab-0, &>Lab-1, &>Lab-2, &>Lab-3, &>Lab-4, &>Lab-5, &>Lab-6, &>Lab-7, &>Lab-Tele, Lab-5berry$731, #Lab-secret"
+gift_stars: str = "Intro A, >Intro B$99, >Double Vision, >Waiting Room$633, >Timestop Intro, >Timestop Intro Again, >Stepping Stone, >Fork, >Seeded Berry$1072, &#Easter Egg Puzzle, >Staircase, >End, >End Cabin, @, Shuffle$1223, &>Feedback Loop$899"
+skyline: str = "a-01, >a-02, &a-02-b, >a-04, &a-05b, >a-03, >a-05, &#a-05s, >a-06, >a-07, >a-08, &#a-08s"
+strawberry: str = "a-00, >a-01z, >a-02y$822, >a-03y, >a-04z, >a-05z, &a-06z$1737, >a-07z$447, >a-08z, >a-09z, >a-11z, &a-10z$794, >a-12z$431, >a-13z"
+spire: str = "a_00, >a_01$80, >a_02, >a_03$521, >a_04$624, >a_05, >a_06, >a_07$1474"
+paint: str = "intro, >a-00, >a-01, >a-02, >a-03, &#a-03b, &>a-04a, >a-04b, >a-05, &>a-06b, >a-06a, &#a-06c, >a-07a, >a-08, &a-07b, &#gay, >a-09, >a-10, >b-00, &b-berry00$2675, >b-01, >b-02, >b-03, &b-berry1$471, >b-04, &b-berry2$1172, >b-05, &b-berry3$1163, >b-06, &#b-06b, >b-07, >b-08, >b-09, >b-10, >b-11, >bus, >c-intro, >c-00, >c-01, >c-02, >c-03, >c-04, >c-05, >c-06, >end, @, b-tribute"
+dropzle: str = "00 - Overpass, >01 - Lockdown, >02 - Breadth, >03 - Labyrinth, &03a - Portcullis, >04 - Widdershins, &04a - Correlation, >05 - Symmetry, &>06a - Shackle, >06 - Socket, >07 - Ferry, >08 - Daedalus, &08a - Reunion, >09 - Perpendicular, >10 - Downfall, &#secret, @, 04b - Alcove"
+rose: str = "q00, >q01, >q02, >q03, >q04, >q05, >q06, >q07, >q08, >q09"
+treehive: str = "skeleton_00, >skeleton_01, >skeleton_02, &skeleton_02_berry$591, >skeleton_03, >skeleton_04$159, >skeleton_05, >skeleton_outro"
+bhs: str = ("cp1_heartside_intro, >cp1_21_heartside_Bing_Over_Google, >cp1_20_heartside_hyperlife, >cp1_19_heartside_cellularAutomaton, >cp1_18_heartside_Eclipse,"
+            ">cp2_checkpoint*Basin, >cp2-17-heartside_NotYourBadeline, >cp2-16-heartside_snas, >cp2_15_heartside_frozenflygone_a, >cp2_15_heartside_frozenflygone_b, >cp2_15_heartside_frozenflygone_c, >cp2_15_heartside_frozenflygone_d,"
+            ">cp3_checkpoint*Tranquility, >cp3_14_heartside_asterisk, >cp3_13_heartside_skeleton, >cp3_12_heartside_coffe, >cp3_11_heartside_joltik,"
+            ">cp4_checkpoint*Jade, >cp4_10_heartside_Hanky, >cp4_09_heartside_jadeturtle, >cp4_08_heartside_quinnigan,"
+            ">cp5_checkpoint*Overgrowth, >cp5_07_heartside_voliver9, >cp5_06_heartside_CoupCritik1, >cp5_06_heartside_CoupCritik2, >cp5_06_heartside_CoupCritik3, >cp5_05_Flagpole1up_Heartside, >cp5_04_heartside_circumplex,"
+            ">cp6_checkpoint*Harbor, >cp6_03_heartside_awheyaway, >cp6_02_heartside_Ceph, >cp6_03_heartside_Moss_1, >cp6_03_heartside_Moss_2, heartside_outro")
+sleeping_stars: str = "a_01, &a_02, &a_03, &a_04, &a_05, >b_01, >b_02, &b_02b$214, >b_03, >b_04, >b_05"
+square_circle: str = "a_01, >a-02$1386, >a_02.5, >a_03, &b_01$447, >a_04, &b_02$566, >a_05, >a_06, &b_03$1139, >a_07, >a_08, &b_04$594, >a_09, >a_10, >outro, #hmmmm, #uwu"
+frosted: str = "a1, >a1.5v2, >a2v2, >a3v2, >a4v2, >a5_, >a6v2, &r_00v2$4230, >pushupv2, >reboundv2, >a9v2, >a_10v2, &r_01v2, >downmoveblockv2, >end_but_for_real_this_time"
+blue: str = "a_01, >a_02, >a_03$582, >a_04$1107, >a_05$585, >a_06, >a_07, >a_08, >a_09"
+vertigo: str = "Evilleafy-00, >Evilleafy-01, >Evilleafy-02, >Evilleafy-03a, >Evilleafy-04a, >Evilleafy-06, >Evilleafy-07, >Evilleafy-04, >Evilleafy-08b, >Evilleafy-09, >Evilleafy-10"
+EATGIRL: str = "A-01, >A-02, >A-03, >A-04, >A-05, &A-05b$120, >A-06, >A-07, &A-07b$328, >A-08, >A-09"
+honeyzip: str = "startroom, >r1, >r2, >r3, >rhub, &r4, &r5, &r6, &r7, &r8, >r9$500, &r9sb$1242, >endroom, &>#endroomsecret, @, r6sb$141"
+temple: str = "a-01, >a-02, >a-03, >a-04, >b-01, >c-01$3054, >c-02, @, b-05, &b-06$2196, &b-07, b-02, &b-03$3253, &b-04$3261"
+infil: str = "btd-00, >btd-02, &btd-02b$827, &btd-02c$839, >btd-02a, >btd-03, >btd-04, &#btd-04a, >btd-05, &btd-05a$569, >btd-06, >btd-07, >btd-09, >btd-20, &btd-20a$806, >btd-21, >btd-30, >btd-31, >btd-33, >btd-35$755, >btd-42, >gg, @, btd-12, &btd-13, &btd-11"
+nautica: str = "LegS-0, >LegS-1, >LegS-2, >LegS-B1$1313, >LegS-3, &#LegS-Intermediate, >LegS-4, >LegS-B2$795, >LegS-5, >LegS-6, >LegS-7, @, #LegS-CR"
+fifthdim: str = "A00, >A01, >A02, >A03, >A04, >A05, >A06, >A07, >A08, >A09, >A10, >A11, >A12"
+monsoon: str = "Intro, >1, >2, &2b$1285, >3, >4, >5, &5b, >6, >outro, >outrob"
+lowg: str = "1, >2, >3, >4$1837, >5, >5b$3631, >6$2324, >7"
+towerint: str = "lvl00, >lvl01$164, >lvl02$476, >lvl03, >lvl04$574, >lvl05, >lvl06, >lvl07"
+puffer: str = "RG2-0, >RG2-1, >RG2-2, >RG2-3, >RG2-4, &RG2-4-S1, &RG2-4-S2, >RG2-5, &RG2-5-S, >RG2-6, >RG2-7, >RG2-8, >RG2-9, >RG2-End, @, RG2-huh"
+seasoup: str = "soup-1, >soup-2, >soup-3$139, >soup-4, &soup-4b$2022, >soup-5, &soup-5b$879, >soup-6, &soup-6b$878, >soup-7$2312"
+construction: str = "a-001, &a-000$1410, >a-002, >a-003, >a-004, >a-005, >a-006, >a-007, >a-008, >a-009, &a-011$1912, >a-010, >a-012, >a-013, @, a-000S"
+pointlessmachines: str = "01, >02, >03, &03-berry, >04, >05, >06, &06-berry, >07, >08, >09"
+ihs: str = ("cp1-0-intro, >cp1-1-liero, >cp1-2-pixelator, >cp1-3-Evilleafy, >cp1-4-ezel,"
+            ">cp2-0-Cp, >cp2-1-SpoopySoup, >cp2-2-dooshii, >cp2-3-glowwoomii, >cp2-4-ice, >cp2-5-bryse0n,"
+            ">cp3-0-Cp, >cp3-1-Arphimigon, >cp3-2-LegS, >cp3-3-Jems, >cp3-4-vitellary, >cp3-5-RG2,"
+            ">cp4-0-Cp, >cp4-1-Emik, >cp4-2-thebreadstick1, >cp4-3-Luma, >cp4-4-Marlin, >cp4-5-Heart")
+sands: str = "a-00, >a-01, >a-02, >a-03, >a-04-bis, >a-05, >a-06, &a-strawberry$510, >b-01$195, &b-01-view, >b-02, >b-03, >mini-hearth$4028, &b-strawberry"
+jellysanctum: str = "intro, >1, >2, >3, &berry1$92, >reverseTutorial, >4, >5, >outro"
+toggletheory: str = "intro, >a-1, >a-2, &berry0$3160, >a-3, &berry1$623, >a-4, >bhop, >a-5, &berry2$1110, >a-6, >epilogue, >heart, &#outlook"
+slime: str = "a_00-Worldwaker2, >a_01-Gala, >a_02-Gala, >a_03-Oppen_heimer$986, >a_04-Gala, &berry-01-Oppen$2567, >a_05-TiltTheStars, >a_06-TiltTheStars, >a_07-TiltTheStars$2684, >a_08-TiltTheStars, >heart_room"
+superstructure: str = "start, >tutorial-1, >goldian-1, >aiden-2, >goldian-3, >goldian-4, >tutorial-2, >goldian-5, &goldian-berry$2200, >goldian-6, >goldian-7, >end"
+laserlab: str = "a_01, >a_02, >a_03, >a_04, >a_05, >a_06, &a_06b, >a_07"
+starryruin: str = "1, >2, >3, >4, >5, >6, >7, >8, >9, >10"
+towerxvi: str = "1, >2, >3, >4, >5, >6, >7"
+starlightstation: str = "a0, &#a-secret, >a1, >a2, &a-berry$4332, >a3, >b1, >b2, >b3, >b4, &b-berry$7539, >b5, >65, >b7, >brys1, >brys2, >brys3, >brys4, &brys-berry$7540"
+tectonic: str = "a-01, >a-02, >a-03, >a-04$1114, >a-05intro, &transition, >a-05, >a-07, >a-06, @, Berry 1$895"
+goldendawn: str = "A0, >A2, &A2_v2$3574, >A4, >A5, &A5_v2$239, >Brys2-2-2, &A6_v2-flip-2$4103, >A6, >A7"
+duskcity: str = "a-01, &#b-01, >a-02, >a-03, >a-04, >a-05, >a-06, >a-07, >a-08, >a-09, >a-10"
+skateboard: str = "a00, >a01, >a02, >a03, >a04, >a05, >a06, >a07, &a07b, >a08, >a09, >a10, &a10b"
+synapse: str = "intro_fall, >intro_a1, >a1, >a2, >a3, >a4, >a5, >b1, &b1_b$3951, >b2, >b3, >c1"
+undergrowth: str = "01-a, >02-a, >03-a$879, >05-a$2573, >06-a$2886, &#06-s1, &06-b$3377, >07-a, >08-a, @, 04-a, &04-s1$1659"
+lostwoods: str = "oppen_intro, oppen_1a, oppen_berry$647"
+aotc: str = "BR-00, >BR-02, >BR-01, >BR-08, >BR-03, >BR-04, >BR-07, >BR-05, >BR-Outro, &BR-Extra$866"
+lab: str = "start-01-Radley, >start-02-Radley, >start-03-Radley/Worldwaker2, >start-04-Radley, >start-05-TiltTheStars, >hub, >cross-01-Worldwaker2, >cross-02-TiltTheStars, >cross-03-TiltTheStars$86, >evade-01-Quantum, >evade-02b-Quantum$87, >evade-02-TiltTheStars, >evade-03-Worldwaker2, >move-01-TiltTheStars, >move-02-Worldwaker2, >move-02b-Quantum$9, >escape-01-Worldwaker2, >escape-02-Worldwaker2, >escape-03-Worldwaker2, >start-00-Radley, >end_HideInMap"
+belated: str = "1-intro, >1-a, >1-b, >1-c, >1-e, >1-f, &1-d, >1-g, >1-h, >2-a, >2-b, >2-c, >2-d, >2-secret :D"
+thinking: str = "a-01, >a-02, >a-04, >a-05, >a-06$1384, >a-07, >a-08, &a-10$401, >a-09, >a-11, &a-12$723, >a-13"
+bee: str = "intro_v1, >intro_v2, >a-01, >a-02, >a-03, >a-04, >a-05, >a-06, &secret-02, >a-07, >a-08, >badeline_v2, >mini_heart_room, @, secret-02"
+java: str = "0b, >0, >1, >1b, >2, >2b, >3, >3b, >4, >4b, >5, >6, &#6e"
+rightside: str = "intro_SJ$374, >Vamp_2, >Vamp_3, >Vamp_4, >Vamp_5, >Vamp_6$2459$2136, >Vamp_7, >Vamp_8, >Vamp_9, >Vamp_Final"
+callofvoid: str = "viv0, >viv1, >viv2, &viv2b$654, >viv3, >viv3x, >viv4, >viv5, &viv5b$1742, >viv5x, >viv6, >viv7, &viv7b$2006, >viv8$94, >vivEnd, >vivEB$2760, >#vivEB_, >#_Endgame, >#vivBonus"
+raindrops: str = "1, &1B$264, >2, &2B, >3, >4, >5, >6, >7, >8, &9"
+mango: str = ("Start, >heartside_oppen_intro, >heartside_oppen_a, &heartside_oppen_b, &heartside_oppen_c, >heartside_Worldwaker2, >heartside_TiltTheStars, >heartside_Galaksyz, >heartside_mmm,"
+              ">Crest*CheckpointOne, >heartside_MousseMoose, >heartside_Meario, >heartside_YaGrillRobib, >heartside_maladroit, >heartside_pugroy,"
+              ">Ravine*CheckpointTwo, >heartside_astraxel, >heartside_Tortoise, >heartside_Tortoise_B, >heartside_bluexans, >heartside_Vamp, >heartside_Julia,"
+              ">Aquifer*CheckpointThree, >heartside_sp1029, >heartside_hennyburgr, >heartside_Indecx, >heartside_Nic, >heartside_Ian,"
+              ">Landing*CheckpointFour, >heartside_citrea, >heartside_RadleyMcTuneston, >heartside_Goldian, >heartside_jolly, >heartside_Viv, >Fin")
+direction: str = "Ru_and_AV_and_Zucchini_Are_Cool, >Agent_00, >Agent_00a, >Agent_01, >Agent_02, >Agent_03, >Agent_04, &Agent_04b$383, >Agent_05, >Agent_06, >Agent_07"
+battery: str = "a-01, >a-02, >a-03, >a-04, >a-05, >a-06, >a-07, &a-08$2295"
+skyline: str = "INTRO1, >INTRO2, >a01, >a01b, >a02, >a03, >a04, >a05, >a06new, >a07, &a07b, >a08outro"
+chromatic: str = "a-00, >a-01, >a-02, >a-03, >a-04, >a-05, >a-06, >a-07, >a-08, >a-09, >a-10, >a-11, >a-12, >a-13"
+fortress: str = "00-intro, >00-intro-cutscene, >01, >03, >05-hub, >06-crossroad, &06-berry$1635, >07, &07-berry$125, >08, >09, >11, >99-end, @, 07-berry-2$2055"
+coreproblem: str = "a-01, >a-02, >a-03, >a-04, &a-04b$980, >a-05, >a-06, &a-06b$1664, >a-07, >a-08, >a-09, &a-09b$2912, >a-10, >a-11"
+psycho: str = "a-start, &#s-Path of Plane, >a-00, >a-01, >a-02, &#s-Flushed Down, >a-03, &a-03x$570, >a-04, >a-05, >a-06, &#s-Swamp Ascent, >a-07, >a-08, &a-08x$1876, >a-09, >a-10, &a-10x$2917, >a-end, >#a-end2, >#s-True Ending, >s-Graveyard, @, #s-Water Splash, #s-Shrek Swamp"
+khutara: str = "DanTKO_Intro, &#DanTKO_Monolith_1, &#DanTKO_Plane, >DanTKO_01, >DanTKO_02, >DanTKO_blueTutorial_2, >DanTKO_03, >DanTKO_04, >DanTKO_05, >DanTKO_06, >DanTKO_06b, &DanTKO_Berry01$2078, >DanTKO_07, >DanTKO_08, >DanTKO_09, &DanTKO_Berry02$331, >DanTKO_Outro, @, Aperture_Mountain Relic, >&Aperture_Mountain Relic_EXIT"
 
-levelSummary: str = seeing
+linn: str = "a-00-start, &a-00a, >a-01, &a-01_berry$1575, >a-02, >a-03, >a-04, >a-05, >a-06, >a-07, &a-07_berry$2751, >a-08, &a-08_berry$3479, >a-09, >a-10-end, >a-10_berry$3513, >#a-10a, @, #a-00c, &#a-00b, &#a-00y"
+
+levelSummary: str = linn
 
 
 def extractRoomName(name: str):
@@ -166,7 +243,7 @@ while index < len(rooms):
         if checkpoint:
             room_args.append(f"checkpoint=\"{checkpoint}\"")
         if exclude:
-            room_args.append("excluded=True")
+            room_args.append("easter_egg=True")
         python_room_output.append(f"\"{extractRoomName(room_name)}\": Room({", ".join(room_args)})")
         csharp_output.append(f"{{{index}, \"{extractRoomName(room_name)}\"}}")
     else:
