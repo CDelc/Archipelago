@@ -166,10 +166,56 @@ linn: str = "a-00-start, &a-00a, >a-01, &a-01_berry$1575, >a-02, >a-03, >a-04, >
 clock: str = "a-00, >a-01, >a-02, >a-03, >a-04, >a-05, &a-05b$2707, >a-06, >a-07, &a-07b$2134, &#secret, >a-08, >a-09, &a-09b$13047"
 plasma: str = "a1, >a2, >a3, >a4, >a5, >a6, >a7, >a8, &>a9, b1$2100, bones_room"
 hollow: str = "1, >2, >3, >4, >5, >6$334, &berry, >7, >8, >9, >10"
-
 hydro: str = "a01, &#a02, >a04, >a05, >a06, >a07$181, >a08, >a09, >a10, &a10b$1187, >a12, &a12b$129, >a14, >a15, @,#a03"
+floating: str = "a00, &left, &a00s, >a01, >a02, >a03, &a03s, >a03b, >a04, >a05, &a05?, &a05s, >a06, >a06b, >a07, >a08, &a08s, >a09, &end, >a09b, >a10, >trueend"
+storm: str = "a-00, &a-01$1230, >a-02, &a-03$623, >a-04, >a-05, >a-06, >a-07$1308, >a-08, >a-09, >a-10$3226"
+downside: str = "1"
+timetrouble: str = "a-00, >a-01, >a-02, >a-03, >a-04, >a-05, >a-06, >a-07, &a-07-b, >a-08"
+subway: str = "start, &cablog, >tutorial1$2597, >a-01, >a-02, >a-03, >a-04, >a-05, &berry$2061, >a-06, >a-07, >end"
+hypnagogia: str = "a-00, &#balls, >a-01, >a-02, >a-03, &BEWWY$2973, >b-01, &#funny, >b-02, >b-03, >end, &#space ruins"
+meaningless: str = "a-1, >a-2$1994, >a-3, >a-4, >a-5, >a-5-b, &a-5-berry$2883, &#cabob, >a-6, &a-6-berry$6528, >a-7, &Hi Ru, >a-8, #ema-1"
+ethereal: str = "a-000, >a-00, >a-01$3844, >a-02, >a-03, >a-04, &a-04b$4662, >a-05, &a-05b$911, >a-06, >a-08, >a-07, &a-07bb$2773, >a-09, &a-08b$3960"
+vinculum: str = "a-01, &berry1$1148, >a-02, &#secret4, >a-03, &berry2$4951, >a-04, &#secret3, >a-05, >a-06, &a-07, >a-08, &berry3$1696, >a-09, &#secret5, >a-10, &berry4$2892, >a-11, &a-12, >#secret1, >#secret2"
+golden: str = "a_01$3742, >a_02, &a_03$1, >a_04, >a_05, >a_06, &a_07$1443, >b_01, >b_02, >b_03, >b_04, >b_05"
+mosaic: str = "intro$1030, >a-01, &a-01-01$694, >a-02, >a-03, &#secret, &a-03-01$1120, >outro"
+exception: str = "a-0, >a-1, &ldm, >a-2$1545$46, >a-3, >a-4$312, >a-5, >a-6$2093, >a-7, >a-8, &a-b1$1490, >a-end"
+lunar: str = "0$2777, >1-1, >1-2, >2, >2-2, >3-1, >3-2, >5, &5-1$64, >6, >7, &7-1$1425, >8, >end"
+caper: str = "s1, &s2b$1452$1826, &s1a, >s2$144, >s3, >s4, >s5, &s5b$876, >s6, >s7, >s8, &s8b$562, >s9"
+bubble: str = "Vina-00$7208, >Vina-01, >Vina-02, >Vina-03, >Vina-04, >Vina-05, &Vina-05~b$2315, >Vina-06, >Vina-07, >Vina-08, &Vina-08~b$10784, >Vina-09, >Vina-End"
+polaris: str = "a0, >a1$2057, >a2, >a3, >a4, &a4b$4076, >a6, >a7, &a7b$2044, >a8"
+ehs: str = ("a00_intro1, >a00_intro2, >a01_jackal, >a02_skunkynator, >a03_pansear, >a04_agent, >a05_flamecrafter,"
+            ">b00_intro*Expunge, >b01_stotch, >b02_alt_alt, >b02_nyan, >b02_alt, >b03_banana, >b04_powerav, >b05_vina, >b06_transition,"
+            ">c00_intro*Atomize, >c01_redboule, >c02_moladan, >c03_alice, >c04_fonda, >c05_kaerra, >c06_fall,"
+            "d00_intro*Extinguish, &#d000_eeva, >d01_ru, >d02_lethargicdoggo, >d03_appels, >d04_yoshachobi7, >d05_warp,"
+            "e00_intro*Demolish, >e01_linj, >e02_aspar, >e03_spirialis, >e04_scroogle, >e05_itsabrody, >e06_transition,"
+            "f00_intro*Obliterate, >f01_quantumspaceman, >f02_dantko, >f02.5_xolimono, >f03_hivemindsrule, >f04_alt, >f04_archra, >f04_alt_2, >f05_cabob, >f06_cabob, >f07_butcherberries, >f07_xplosives, >f07_legs, >f07_and_you")
+superlum: str = "a-00$36, >a-01, >a-02, &a-03$1517, >a-04a, >b-04b, &b-04c$231, >b-05a, >b-05b, >a-06, &#a-secret, >end"
+beast: str = "a-01, >a-02intro$3518, >a-02, >a-03, >a-04, >a-05, >a-06, >a-07, >a-08"
+abyss: str = "a-intro$494, >big-1, >chill-0, >big-2, >chill-sec, >big-3"
+cmb: str = "0, >1$2350, >2, &5$854, &3$852, &7$853, >68a, >9, >10, @, 6, 4, 8"
+stellar: str = "a-00-start, >a-01$6565, >a-02$405, >a-03, &a-03b, >a-04$1179, &a-04b, >a-05$3959, >a-06, >a-07$9845, @, a-04c$4272"
+sevenfour: str = "Overgrown Footpath$247, &Filler Room$483, >Calling (Bad Reception), >Ventilation Ducts, >Attic, &Elevator Shaft$22, >Nakaniwa Adventure, &Music Appreciation$1642, &Broken Resort, >Sewers, &Kaiten Sushi$1292, >Swimming, >Passenger, >The End of TIMELINE"
+shattersong: str = "Broken Pieces, >First Movement, &Runic Archive, >A1, >A2, &Dissonance$3087, >Second Movement, >B1, >B2, >B3, &Hold$642, >Third Movement, &Welcome Again$2222, >C1, >C2, &Warning, &Fading$929, >Cadenza, >Final Movement, >SHATTER, @, WARPED$552"
+ivory: str = "A Limitless Horizon$1601, >Crowley Scales, >Conspiracy, >Hawthorne, >Ascent, &Chordless$922, >Ultimatum, >Weaver, &#Thieves, &#Vexed, >Whale Stitcher, >Afterthought, >Parasol, >Break My Ivory Tower 1, >Break My Ivory Tower 2, &Break My Ivory Tower 3, >Break My Ivory Tower 4, >Break My Ivory Tower 5"
+summitgm: str = "00, >0000M$115, >0500M, >1000M, >1500M, >2000M, &2000M-Berry$7162, >2500M, >2501M, &2501M-Berry$1599, >3000M-00, >3000M-01, >3000M-02"
+pumber: str = "Insert Coin, >Tutorial, >Ready?$3263, >Helix, >Phase$2462, >Delta, >Symbiosis, &Instability$2816, >Haste, &Rebound$3601, >Recoil, &Extra Ball$2820, >pumber, &Malfunction$5214"
+crimson: str = "cotcs-0B, >cotcs-0$308, &cotcs-0T, >cotcs-1, >cotcs-2$173, &cotcs-2B, >cotcs-3, >cotcs-4, >cotcs-5$1486, >cotcs-6"
+solex: str = "All Aboard, >Crumbling Bastions$12333, &Domicile A, >Untapped, >Alexandria, >Crystal Causeway, &Domicile B, >Miser's Warren, >Shimmering Expanse$21200, &Domicile C, >Drill, >Alleyway, >Speedway, >Away$62, >Pilgrim's Way$18656, >Staging Grounds, >Radiant Obelisk, >Spectacle, >Halcyon Promenade, >Arrogance, >Luxury Suite, >Breathe, >Extraction"
+flipside: str = "Solitude$1861$373, >Reach, >Glare, >Basin, &The Crux$3590, >Arrowhead, >Zenith, >Nostalgia, &The Edge$1729"
+lava: str = "Bill$470, >Carol, >Fred, >Jeremy, >Kathy, >Phil, &Russel$2619, >Susan, &#gameing_room(for_gameing), >Todd$566, @, #oldRussel"
+kevintech: str = "1$1265, >2, >3, >4, &#Q4-pleasantsight, >5, >6, >7"
+nelumbo: str = "Atrium$1762, >Veranda, &Oxbow, >Pier, >Backstreet, >Opulence, >Rat Run$581, >Zigzag, >Lotus"
+dreep: str = "a-00, >a-01$22145, >a-02, >a-03, &berry1$10161$9634, >a-04, >a-05, >a-06, &berry2$2033, >a-07, &berry3$2579, >a-08, &berry4$12924, >a-09, >a-10, >a-11"
+frac: str = "a0$2407, >a1, >a2, >a3, >a4, >a5"
 
-levelSummary: str = hydro
+gmhs: str = ("a0-Start, >a1_18-Xplosives$9004, >a2_17-Todd, >a3_16-Cookie,"
+             ">b0-Humility*CheckpointOne, >b1_15-Alisticious, >b2_14-Ecl1psed, >b3_13-TheDavSmasher,"
+             ">c0-Divinity*CheckpointTwo, >c1_12-RedBatNick, >c2_11-DeathKontrol, >c3_10-fishtank,"
+             ">d0-Purity*CheckpointThree, >d1_09-xlibiza, >d2_08-Aiden, >d3_07-Maya,"
+             ">e0-Clarity*CheckpointFour, >e1_06-tofu, >e2_05-ello, >e3_04-Linj,"
+             ">f0-Icarus, >f1_03-tobyaaa, >f2_02-Soloiini, >f3_01-Hydro, >gg_Heart")
+
+levelSummary: str = gmhs
 
 
 def extractRoomName(name: str):

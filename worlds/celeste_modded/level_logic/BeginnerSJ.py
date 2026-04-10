@@ -519,6 +519,6 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "cp6_03_heartside_Moss_1": Room(31, [Transition("cp6_03_heartside_Moss_2", [[ItemName.BADELINE_ORB, ItemName.BIG_YELLOW_BUTTON]])]),
             "cp6_03_heartside_Moss_2": Room(32, [Transition("heartside_outro")]),
             "heartside_outro": Room(33, [], [Location(LocationType.CRYSTAL_HEART)])
-        }, LevelCategory.BEGINNER_HEARTSIDE, 48, bhs_access
+        }, LevelCategory.BEGINNER, 48, bhs_access, heartside = True
     )
 }

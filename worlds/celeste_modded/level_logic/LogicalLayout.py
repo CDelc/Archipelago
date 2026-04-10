@@ -8,6 +8,8 @@ from worlds.celeste_modded.level_logic.VanillaPostGame import vanilla_post_game_
 from worlds.celeste_modded.level_logic.BeginnerSJ import beginner_levels_sj
 from worlds.celeste_modded.level_logic.IntermediateSJ import intermediate_levels_sj
 from worlds.celeste_modded.level_logic.AdvancedSJ import advanced_levels_sj
+from worlds.celeste_modded.level_logic.ExpertSJ import expert_levels_sj
+from worlds.celeste_modded.level_logic.GrandmasterSJ import gm_levels_sj
 from worlds.celeste_open_world.Levels import Level
 
-levelList: dict[LevelName, Level] = vanilla_levels | vanilla_post_game_levels | beginner_levels_sj | intermediate_levels_sj | advanced_levels_sj
+levelList: dict[LevelName, Level] = vanilla_levels | vanilla_post_game_levels | beginner_levels_sj | intermediate_levels_sj | advanced_levels_sj | expert_levels_sj | gm_levels_sj

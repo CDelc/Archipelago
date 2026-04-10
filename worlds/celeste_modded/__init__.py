@@ -13,6 +13,8 @@ from . import LogicParser
 
 game_name = Constants.game_name
 
+WORLD_VERSION = "0.9.0"
+
 class CelesteModdedWebWorld(WebWorld):
     theme = "partyTime"
     
@@ -61,26 +63,25 @@ class CelesteModdedWorld(World):
     win_condition_level: LevelName
         
     def generate_early(self) -> None:
-        self.levels_categories_in_play.add(LevelCategory.A_SIDE)
         options = self.options
         
         Options.map_options(self)
         
-        match self.options.start_level_set:
-            case 0:
-                self.start_level_set = LevelCategory.A_SIDE
-            case 1:
-                self.start_level_set = LevelCategory.BEGINNER
-            case 2:
-                self.start_level_set = LevelCategory.INTERMEDIATE
-            case 3:
-                self.start_level_set = LevelCategory.ADVANCED
-            case 4:
-                self.start_level_set = LevelCategory.EXPERT
-            case 5:
-                self.start_level_set = LevelCategory.GRANDMASTER
-            case _:
-                self.start_level_set = LevelCategory.A_SIDE
+        # match self.options.start_level_set:
+        #     case 0:
+        #         self.start_level_set = LevelCategory.A_SIDE
+        #     case 1:
+        #         self.start_level_set = LevelCategory.BEGINNER
+        #     case 2:
+        #         self.start_level_set = LevelCategory.INTERMEDIATE
+        #     case 3:
+        #         self.start_level_set = LevelCategory.ADVANCED
+        #     case 4:
+        #         self.start_level_set = LevelCategory.EXPERT
+        #     case 5:
+        #         self.start_level_set = LevelCategory.GRANDMASTER
+        #     case _:
+        #         self.start_level_set = LevelCategory.A_SIDE
                 
         match self.options.win_condition_level:
             case 0:
@@ -102,25 +103,29 @@ class CelesteModdedWorld(World):
             case _:
                 self.win_condition_level = LevelName.SUMMIT_A
         
-        if options.include_beginner or options.start_level_set == LevelCategory.BEGINNER:
+        self.start_level_set = LevelCategory.A_SIDE
+        if options.include_beginner or self.start_level_set == LevelCategory.BEGINNER or self.win_condition_level == LevelName.BLUEBERRY_BAY or LogicParser.deathlessEnabled(LevelCategory.BEGINNER, self):
             self.levels_categories_in_play.add(LevelCategory.BEGINNER)
-        if options.include_intermediate or options.start_level_set == LevelCategory.INTERMEDIATE:
+        if options.include_intermediate or self.start_level_set == LevelCategory.INTERMEDIATE or self.win_condition_level == LevelName.RASPBERRY_ROOTS or LogicParser.deathlessEnabled(LevelCategory.INTERMEDIATE, self):
             self.levels_categories_in_play.add(LevelCategory.INTERMEDIATE)
-        if options.include_advanced or options.start_level_set == LevelCategory.ADVANCED:
+        if options.include_advanced or self.start_level_set == LevelCategory.ADVANCED or self.win_condition_level == LevelName.MANGO_MESA or LogicParser.deathlessEnabled(LevelCategory.ADVANCED, self):
             self.levels_categories_in_play.add(LevelCategory.ADVANCED)
-        if options.include_expert or options.start_level_set == LevelCategory.EXPERT:
+        if options.include_expert or self.start_level_set == LevelCategory.EXPERT or self.win_condition_level == LevelName.STARFRUIT_SUPERNOVA or LogicParser.deathlessEnabled(LevelCategory.EXPERT, self):
             self.levels_categories_in_play.add(LevelCategory.EXPERT)
-        if options.include_grandmaster or options.start_level_set == LevelCategory.GRANDMASTER:
+        if options.include_grandmaster or self.start_level_set == LevelCategory.GRANDMASTER or self.win_condition_level == LevelName.PASSIONFRUIT_PANTHEON or LogicParser.deathlessEnabled(LevelCategory.GRANDMASTER, self):
             self.levels_categories_in_play.add(LevelCategory.GRANDMASTER)
-        if options.include_cracked_grandmaster:
+        if options.include_cracked_grandmaster or self.win_condition_level == LevelName.PASSIONFRUIT_PANTHEON or LogicParser.deathlessEnabled(LevelCategory.CRACKED_GRANDMASTER, self):
             self.levels_categories_in_play.add(LevelCategory.CRACKED_GRANDMASTER)
-        if options.include_b_sides:
+        if options.include_vanilla_levels >= 1 or self.start_level_set == LevelCategory.A_SIDE or self.win_condition_level == LevelName.SUMMIT_A or LogicParser.deathlessEnabled(LevelCategory.A_SIDE, self):
+            self.levels_categories_in_play.add(LevelCategory.A_SIDE)
+        if options.include_vanilla_levels >= 2 or self.win_condition_level == LevelName.SUMMIT_B or LogicParser.deathlessEnabled(LevelCategory.B_SIDE, self):
             self.levels_categories_in_play.add(LevelCategory.B_SIDE)
-        if options.include_c_sides:
+        if options.include_vanilla_levels >= 3 or LogicParser.deathlessEnabled(LevelCategory.C_SIDE, self):
             self.levels_categories_in_play.add(LevelCategory.C_SIDE)
-            self.levels_categories_in_play.add(LevelCategory.B_SIDE)
-        if options.include_farewell:
+        if options.include_farewell or self.win_condition_level == LevelName.FAREWELL or LogicParser.deathlessEnabled(LevelCategory.FAREWELL, self):
             self.levels_categories_in_play.add(LevelCategory.FAREWELL)
+            self.levels_categories_in_play.add(LevelCategory.A_SIDE)
+            self.levels_categories_in_play.add(LevelCategory.B_SIDE)
             
         LogicParser.calculate_strawberries(self)
                  
@@ -143,21 +148,21 @@ class CelesteModdedWorld(World):
         
     def fill_slot_data(self):
         return {
-            "start_level_set": self.options.start_level_set.value,
-            "include_beginner": self.options.include_beginner.value,
-            "include_intermediate": self.options.include_intermediate.value,
-            "include_advanced": self.options.include_advanced.value,
-            "include_expert": self.options.include_expert.value,
-            "include_grandmaster": self.options.include_grandmaster.value,
-            "include_cracked_grandmaster": self.options.include_cracked_grandmaster.value,
-            "include_b_sides": self.options.include_b_sides.value,
-            "include_c_sides": self.options.include_c_sides.value,
-            "include_farewell": self.options.include_farewell.value,
+            "include_beginner": LevelCategory.BEGINNER in self.levels_categories_in_play,
+            "include_intermediate": LevelCategory.INTERMEDIATE in self.levels_categories_in_play,
+            "include_advanced": LevelCategory.ADVANCED in self.levels_categories_in_play,
+            "include_expert": LevelCategory.EXPERT in self.levels_categories_in_play,
+            "include_grandmaster": LevelCategory.GRANDMASTER in self.levels_categories_in_play,
+            "include_cracked_grandmaster": LevelCategory.CRACKED_GRANDMASTER in self.levels_categories_in_play,
+            "include_a_sides": LevelCategory.A_SIDE in self.levels_categories_in_play,
+            "include_b_sides": LevelCategory.B_SIDE in self.levels_categories_in_play,
+            "include_c_sides": LevelCategory.C_SIDE in self.levels_categories_in_play,
+            "include_farewell": LevelCategory.FAREWELL in self.levels_categories_in_play,
             
             "randomize_checkpoints": self.options.randomize_checkpoints.value,
             "room_checks": self.options.room_checks.value,
+            "winged_golden": self.options.winged_golden.value,
             
-            "include_heart_side_golden": self.options.include_heart_side_golden.value,
             "include_beginner_silvers": self.options.include_beginner_silvers.value,
             "include_intermediate_silvers": self.options.include_intermediate_silvers.value,
             "include_advanced_silvers": self.options.include_advanced_silvers.value,
@@ -175,7 +180,8 @@ class CelesteModdedWorld(World):
             "total_strawberries": self.options.total_strawberries.value,
             "require_moon_berry": self.options.require_moon_berry.value,
             
-            "required_strawberries": self.required_strawberries
+            "required_strawberries": self.required_strawberries,
+            "apworld_version": WORLD_VERSION
         }
     
     def get_filler_item_name(self) -> str:

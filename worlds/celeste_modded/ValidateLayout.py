@@ -86,7 +86,6 @@ def validate():
                     assert level.level_category in {LevelCategory.BEGINNER, LevelCategory.INTERMEDIATE, LevelCategory.ADVANCED, LevelCategory.EXPERT, LevelCategory.GRANDMASTER, LevelCategory.CRACKED_GRANDMASTER}, f"Level Clear Mini Heart should only exist in collab non-heartside levels ({levelName}:{roomName})"
                 if loc_type == LocationType.GOLDEN_BERRY:
                     assert location.ID > 0, f"Strawberry without ID assigned in {levelName}:{roomName}"
-                    assert level.level_category not in {LevelCategory.BEGINNER, LevelCategory.INTERMEDIATE, LevelCategory.ADVANCED, LevelCategory.EXPERT, LevelCategory.GRANDMASTER, LevelCategory.CRACKED_GRANDMASTER}, f"Golden Strawberries do not exist in collab non-heartside levels, use silver berry instead ({levelName}:{roomName})"
                 if loc_type == LocationType.SILVER_BERRY:
                     assert location.ID > 0, f"Strawberry without ID assigned in {levelName}:{roomName}"
                     assert level.level_category in {LevelCategory.BEGINNER, LevelCategory.INTERMEDIATE, LevelCategory.ADVANCED, LevelCategory.EXPERT, LevelCategory.GRANDMASTER, LevelCategory.CRACKED_GRANDMASTER}, f"Silver berries should only exist in collab non-heartside levels ({levelName}:{roomName})"

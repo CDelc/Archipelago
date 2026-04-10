@@ -35,6 +35,7 @@ class Level:
     level_category: LevelCategory
     level_id: int
     access_rule: list[list[str]] = dataclasses.field(default_factory=list)
+    heartside: bool = False
     
 def CHearts(n: int):
     return f"#{n}"

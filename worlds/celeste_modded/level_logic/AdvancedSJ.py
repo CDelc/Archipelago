@@ -498,6 +498,6 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "heartside_jolly": Room(32, [Transition("heartside_Viv", [[ItemName.RED_BUBBLES]])]),
             "heartside_Viv": Room(33, [Transition("Fin", [[ItemName.DASH_REFILL_WALL, ItemName.DOUBLE_DASH_REFILL_WALL]])]),
             "Fin": Room(34, [], [Location(LocationType.CRYSTAL_HEART)])
-        }, LevelCategory.ADVANCED_HEARTSIDE, 93, heartside_access
+        }, LevelCategory.ADVANCED, 93, heartside_access, heartside = True
     )
 }

@@ -374,6 +374,6 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "cp4-3-Luma": Room(20, [Transition("cp4-4-Marlin", [[ItemName.CRYSTAL_BOMB, ItemName.RED_BUBBLES]])]),
             "cp4-4-Marlin": Room(21, [Transition("cp4-5-Heart", [[ItemName.PINK_CLOUDS]])]),
             "cp4-5-Heart": Room(22, [], [Location(LocationType.CRYSTAL_HEART)])
-        }, LevelCategory.INTERMEDIATE_HEARTSIDE, 67, ihs_access
+        }, LevelCategory.INTERMEDIATE, 67, ihs_access, heartside = True
     )
 }
