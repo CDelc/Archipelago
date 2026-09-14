@@ -164,12 +164,12 @@ def parse_regions(world: "CelesteModdedWorld"):
     for levelName,level in levelList.items():
         level = levelList[levelName]
         # Skip levels in non-included categories
-        if not levelEnabled(level, world):
+        if not levelEnabled(level, world) and not level.level_id == Constants.permanent_starting_level_id:
             continue
         
         # Create level regions and connect them to Menu
-        level_region = Region(levelName, world.player, world.multiworld)            
-        if world.start_level_set == level.level_category or level.heartside:
+        level_region = Region(levelName, world.player, world.multiworld)
+        if world.start_level_set == level.level_category or level.heartside or level.level_id == Constants.permanent_starting_level_id:
             root_region.connect(level_region, rule=ruleFromList(level.access_rule, world))
         else:
             root_region.connect(level_region, rule=ruleFromListPlusCondition(level.access_rule, levelName, world))
@@ -217,9 +217,9 @@ def create_items(world: "CelesteModdedWorld"):
     #Add items based on available locations
     for levelName,level in levelList.items():
         levelCategory = level.level_category
-        if levelEnabled(level, world):
+        if levelEnabled(level, world) or level.level_id == Constants.permanent_starting_level_id:
 
-            if world.start_level_set != levelCategory and not level.heartside:
+            if world.start_level_set != levelCategory and not level.heartside and not level.level_id == Constants.permanent_starting_level_id:
                 add_item(levelName, world)
 
             for roomName,room in level.rooms.items():
@@ -264,8 +264,8 @@ def create_items(world: "CelesteModdedWorld"):
     location_count = len(world.multiworld.get_unfilled_locations(world.player))
     item_count = len(world.multiworld.itempool)
     assert item_count <= location_count, "Celeste Modded has too many items to place in available locations"
-    item_deficit = location_count - item_count
-    for i in range(item_deficit):
+    item_difference = location_count - item_count
+    for i in range(item_difference):
         add_item(world.get_filler_item_name(), world)
 
 def setWinCondition(world: "CelesteModdedWorld"):
@@ -300,6 +300,8 @@ def setWinCondition(world: "CelesteModdedWorld"):
 def levelEnabled(level: Level, world: "CelesteModdedWorld"):
     if level.level_id == 142: #Passionfruit Pantheon
         return LevelCategory.GRANDMASTER in world.levels_categories_in_play and LevelCategory.CRACKED_GRANDMASTER in world.levels_categories_in_play
+    if level.level_id == Constants.permanent_starting_level_id: #1A
+        return True
     return level.level_category in world.levels_categories_in_play
 
 def deathlessEnabled(levelCategory: LevelCategory, world: "CelesteModdedWorld"):

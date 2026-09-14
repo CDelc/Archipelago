@@ -162,3 +162,4 @@ class LevelCategory(StrEnum):
     EXPERT = "SJ Expert"
     GRANDMASTER = "SJ Grandmaster"
     CRACKED_GRANDMASTER = "SJ Cracked GM"
+    NONE = "None"

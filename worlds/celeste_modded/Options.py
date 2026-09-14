@@ -42,17 +42,18 @@ class IncludeCrackedGrandmaster(DefaultOnToggle):
 
 class IncludeVanillaLevels(Choice):
     """
-    Pick up to which level of Vanilla Chapters 1-8 will be included (At least A-sides are required for sphere 1)
+    Pick up to which level of Vanilla Chapters 1-8 will be included (1A will always be included to ensure the game is completable)
     """
     display_name = "Include Vanilla Levels"
-    default = 1
+    default = 3
+    option_none = 0
     option_a_sides = 1
     option_b_sides = 2
     option_c_sides = 3
     
 class IncludeFarewell(DefaultOnToggle):
     """
-    Include Farewell from the vanilla game, also force enables A and B sides
+    Include Farewell from the vanilla game, also enables A and B sides
     """
     display_name = "Include Farewell"
     
@@ -185,19 +186,20 @@ class RequireMoonBerry(Toggle):
     """
     display_name = "Require Moon Berry"
     
-# class StartLevelSet(Choice):
-#     """
-#     Which set of levels will be available from the start
-#     """
-#     display_name = "Start Level Set"
-#     option_vanilla_a_sides = 0
-#     option_beginner_lobby = 1
-#     option_intermediate_lobby = 2
-#     option_advanced_lobby = 3
-#     option_expert_lobby = 4
-#     option_grandmaster_lobby = 5
+class StartLevelSet(Choice):
+    """
+    Which set of levels will be available from the start
+    """
+    display_name = "Start Level Set"
+    option_vanilla_a_sides = 0
+    option_beginner_lobby = 1
+    option_intermediate_lobby = 2
+    option_advanced_lobby = 3
+    option_expert_lobby = 4
+    option_grandmaster_lobby = 5
+    option_none = 6
     
-#     default = 0
+    default = 0
     
 class IncludeWingedGolden(Toggle):
     """
@@ -206,13 +208,14 @@ class IncludeWingedGolden(Toggle):
     display_name = "Winged Golden Berry"
     
 def map_options(world):
-    # start_level_list = [LevelCategory.A_SIDE,
-    #                         LevelCategory.BEGINNER,
-    #                         LevelCategory.INTERMEDIATE,
-    #                         LevelCategory.ADVANCED,
-    #                         LevelCategory.EXPERT,
-    #                         LevelCategory.GRANDMASTER]
-    # world.start_level_set = start_level_list[world.options.start_level_set.value]
+    start_level_list = [LevelCategory.A_SIDE,
+                            LevelCategory.BEGINNER,
+                            LevelCategory.INTERMEDIATE,
+                            LevelCategory.ADVANCED,
+                            LevelCategory.EXPERT,
+                            LevelCategory.GRANDMASTER,
+                            LevelCategory.NONE]
+    world.start_level_set = start_level_list[world.options.start_level_set.value]
     
     victory_level_list = [LevelName.FORSAKEN_CITY_A,
                                 LevelName.SUMMIT_A,
@@ -226,7 +229,7 @@ def map_options(world):
     world.win_condition_level = victory_level_list[world.options.win_condition_level.value]
 
 groups = [
-    OptionGroup("Levels", [IncludeBeginner, IncludeIntermediate, IncludeAdvanced, IncludeExpert, IncludeGrandmaster, IncludeCrackedGrandmaster, IncludeVanillaLevels, IncludeFarewell]),
+    OptionGroup("Levels", [IncludeBeginner, IncludeIntermediate, IncludeAdvanced, IncludeExpert, IncludeGrandmaster, IncludeCrackedGrandmaster, IncludeVanillaLevels, IncludeFarewell, StartLevelSet]),
     OptionGroup("Checks", [RandomizeCheckpoints, RoomChecks, IncludeWingedGolden, IncludeEasterEggRooms, IncludeEasterEggRoomsDifficult]),
     OptionGroup("Deathless Berries", [IncludeBeginnerSilvers, IncludeIntermediateSilvers, IncludeAdvancedSilvers, IncludeExpertSilvers, IncludeGrandmasterSilvers, IncludeCrackedGrandmasterSilvers, IncludeASideGoldens, IncludeBSideGoldens, IncludeCSideGoldens, IncludeFarewellGolden]),
     OptionGroup("Win Condition", [WinConditionLevel, ProtectVictoryLevelCheckpoints, StrawberriesRequiredPercentage, TotalStrawberries, RequireMoonBerry])
@@ -242,6 +245,7 @@ class CelesteModdedOptions(PerGameCommonOptions):
     include_cracked_grandmaster: IncludeCrackedGrandmaster
     include_vanilla_levels: IncludeVanillaLevels
     include_farewell: IncludeFarewell
+    start_level_set: StartLevelSet
     
     randomize_checkpoints: RandomizeCheckpoints
     room_checks: RoomChecks

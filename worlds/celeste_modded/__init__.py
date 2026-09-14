@@ -10,6 +10,17 @@ from .constants.ItemTypes import ItemType
 from .constants.LocationTypes import LocationType
 from . import LogicParser
 
+# TODO
+# - Add sound effects for specific item collection
+# - Display Room Names in game (maybe with setting to turn off)
+# - Check version comparison for APWorld and Celeste Mod
+# - Soften 1A Logic
+# - Fix SJ checkpoint problem if possible
+# - Mod journal to highlight unlocked levels
+# - Strawberry requirement gate for win condition (Displayed on level card)
+# - Fill tutorial.md
+# - Test with multiple worlds
+# - Test most of/full playthrough with room checks and checkpoints on/off
 
 game_name = Constants.game_name
 
@@ -103,7 +114,6 @@ class CelesteModdedWorld(World):
             case _:
                 self.win_condition_level = LevelName.SUMMIT_A
         
-        self.start_level_set = LevelCategory.A_SIDE
         if options.include_beginner or self.start_level_set == LevelCategory.BEGINNER or self.win_condition_level == LevelName.BLUEBERRY_BAY or LogicParser.deathlessEnabled(LevelCategory.BEGINNER, self):
             self.levels_categories_in_play.add(LevelCategory.BEGINNER)
         if options.include_intermediate or self.start_level_set == LevelCategory.INTERMEDIATE or self.win_condition_level == LevelName.RASPBERRY_ROOTS or LogicParser.deathlessEnabled(LevelCategory.INTERMEDIATE, self):
@@ -158,6 +168,7 @@ class CelesteModdedWorld(World):
             "include_b_sides": LevelCategory.B_SIDE in self.levels_categories_in_play,
             "include_c_sides": LevelCategory.C_SIDE in self.levels_categories_in_play,
             "include_farewell": LevelCategory.FAREWELL in self.levels_categories_in_play,
+            "start_level_set": self.options.start_level_set.value,
             
             "randomize_checkpoints": self.options.randomize_checkpoints.value,
             "room_checks": self.options.room_checks.value,

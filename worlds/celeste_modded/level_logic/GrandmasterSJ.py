@@ -369,6 +369,6 @@ gm_levels_sj : dict[LevelName, Level] = {
             "f2_02-Soloiini": Room(22, [Transition("f3_01-Hydro", [[ItemName.CORE_BLOCK, ItemName.DREAM_BLOCK, ItemName.YELLOW_ROCK, ItemName.DASH_SWITCH]])]),
             "f3_01-Hydro": Room(23, [Transition("gg_Heart", [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.GREEN_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.RED_CASSETTE_BLOCK, ItemName.PURPLE_CASSETTE_BLOCK, ItemName.ORANGE_CASSETTE_BLOCK, ItemName.BADELINE_ORB, ItemName.BIRD, ItemName.FEATHER]])]),
             "gg_Heart": Room(24, [], [Location(LocationType.CRYSTAL_HEART)])
-        }, LevelCategory.CRACKED_GRANDMASTER, 142, heartside = True
+        }, LevelCategory.CRACKED_GRANDMASTER, 142, gmhs_access, heartside = True
     )
 }

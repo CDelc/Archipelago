@@ -4,6 +4,7 @@ from worlds.celeste_modded.constants.LocationTypes import LocationType
 
 game_name = "Celeste Modded"
 base_id = 100000000000
+permanent_starting_level_id = 1 #This level is enabled from the start of every randomizer no matter what.
 
 _group_id_mult_ = 100000000000
 

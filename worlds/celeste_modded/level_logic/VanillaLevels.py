@@ -169,7 +169,7 @@ vanilla_levels : dict[LevelName, Level] = {
             "s0": Room(0, [Transition("s1")], [Location(LocationType.GOLDEN_BERRY, 7, [[ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.SPRINGS, getKeyDoorName(LevelName.CELESTIAL_RESORT_A, "02-a", 9), getKeyDoorName(LevelName.CELESTIAL_RESORT_A, "07-a", 11), getKeyDoorName(LevelName.CELESTIAL_RESORT_A, "09-b", 2), getKeyDoorName(LevelName.CELESTIAL_RESORT_A, "04-c", 17)]])], start_room=True),
             "s1": Room(1, [Transition("s2"), Transition("s0")]),
             "s2": Room(2, [Transition("s3"), Transition("s1")], [Location(LocationType.STRAWBERRY, 6), Location(LocationType.STRAWBERRY, 18)]),
-            "s3": Room(3, [Transition("0x-a"), Transition("s2")], [Location(LocationType.KEY, 15)]),
+            "s3": Room(3, [Transition("0x-a", [[getKeyDoorName(LevelName.CELESTIAL_RESORT_A, "s3", 16)]]), Transition("s2")], [Location(LocationType.KEY, 15)], key_door_ids=[16]),
             "s3-berry": Room(110, [Transition("0x-b")], [Location(LocationType.STRAWBERRY, 2)], is_subregion_of="s3"),
             "0x-a": Room(4, [Transition("00a"), Transition("s3")]),
             "00a": Room(5, [Transition("02-a"), Transition("0x-a")], [Location(LocationType.STRAWBERRY, 5)]),
