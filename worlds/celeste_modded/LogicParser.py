@@ -205,6 +205,9 @@ def parse_regions(world: "CelesteModdedWorld"):
             for location in room.locations:
                 if location.location_type in {LocationType.GOLDEN_BERRY, LocationType.SILVER_BERRY} and not deathlessEnabled(level.level_category, world):
                     continue
+                # Heartside goldens not included in logic
+                if location.location_type == LocationType.GOLDEN_BERRY and isStrawberryJam(level.level_category):
+                    continue
                 if location.location_type == LocationType.WINGED_GOLDEN and not world.options.winged_golden:
                     continue
                 loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
@@ -329,6 +332,8 @@ def deathlessEnabled(levelCategory: LevelCategory, world: "CelesteModdedWorld"):
         case _:
             return False
 
+def isStrawberryJam(levelCategory: LevelCategory):
+    return levelCategory in {LevelCategory.BEGINNER, LevelCategory.INTERMEDIATE, LevelCategory.ADVANCED, LevelCategory.EXPERT, LevelCategory.GRANDMASTER, LevelCategory.CRACKED_GRANDMASTER}
 
 def countStrawberries(world: "CelesteModdedWorld") -> int:
     count = 0

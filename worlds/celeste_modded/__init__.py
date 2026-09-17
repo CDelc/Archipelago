@@ -11,36 +11,17 @@ from .constants.LocationTypes import LocationType
 from . import LogicParser
 
 # TODO
-# - Add sound effects for specific item collection
-# - Display Room Names in game (maybe with setting to turn off)
-# - Check version comparison for APWorld and Celeste Mod
-# - Soften 1A Logic
-# - Fix SJ checkpoint problem if possible
-# - Mod journal to highlight unlocked levels
 # - Strawberry requirement gate for win condition (Displayed on level card)
-# - Fill tutorial.md
 # - Test with multiple worlds
 # - Test most of/full playthrough with room checks and checkpoints on/off
 
 game_name = Constants.game_name
 
-WORLD_VERSION = "0.9.0"
+WORLD_VERSION = "1.0.0"
+MINIMUM_MOD_VERSION = "1.0.0"
 
 class CelesteModdedWebWorld(WebWorld):
     theme = "partyTime"
-    
-    tutorial = Tutorial(
-        tutorial_name="Placeholder Name",
-        description="Placeholder Description",
-        language="English",
-        file_name="tutorial.md",
-        link="",
-        authors=["Carden"]
-    )
-    
-    tutorials = [
-        tutorial
-    ]
     
     option_groups = groups
 
@@ -192,7 +173,8 @@ class CelesteModdedWorld(World):
             "require_moon_berry": self.options.require_moon_berry.value,
             
             "required_strawberries": self.required_strawberries,
-            "apworld_version": WORLD_VERSION
+            "apworld_version": WORLD_VERSION,
+            "minimum_mod_version": MINIMUM_MOD_VERSION
         }
     
     def get_filler_item_name(self) -> str:

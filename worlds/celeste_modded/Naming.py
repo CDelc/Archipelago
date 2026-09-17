@@ -6,7 +6,7 @@ def getCheckpointName(levelName: LevelName, checkpointName: str):
     return f"{levelName}: {checkpointName}"
 
 def getRoomName(levelName: LevelName, roomName: str):
-    return f"{levelName.value}:{roomName}"
+    return f"{levelName.value} | {roomName}"
 
 def getLocationName(levelName: LevelName, roomName: str, location_type: LocationType, location_id: int = 0):
     name = _getLocationNameNoAlias(levelName, roomName, location_type, location_id)
@@ -30,7 +30,7 @@ def _getLocationNameNoAlias(levelName: LevelName, roomName: str, location_type: 
     elif location_type == LocationType.CRYSTAL_HEART:
         name = f"{levelName} Crystal Heart"
     else:
-        name = f"{getRoomName(levelName, roomName)}:{location_type.value}{"" if not location_id else f":{location_id}"}"
+        name = f"{getRoomName(levelName, roomName)} - {location_type.value}{"" if not location_id else f":{location_id}"}"
     return name
 
 def getKeyDoorName(levelName: LevelName, roomName: str, id: int):
@@ -40,7 +40,14 @@ def getKeyDoorName(levelName: LevelName, roomName: str, id: int):
     else:
         return name
 
-_location_alias: dict[str, str] = {}
+_location_alias: dict[str, str] = {
+    "Summit A-Side | a-06 - gem:110": "Summit 0M Gem",
+    "Summit A-Side | b-02d - gem:109": "Summit 500M Gem",
+    "Summit A-Side | c-06c - gem:333": "Summit 1000M Gem",
+    "Summit A-Side | d-05b - gem:449": "Summit 1500M Gem",
+    "Summit A-Side | e-01c - gem:8": "Summit 2000M Gem",
+    "Summit A-Side | f-02b - gem:679": "Summit 2500M Gem"
+}
 
 _item_name_alias: dict[str, str] = {
     "Celestial Resort A-Side:02-a Key Door #9": "Celestial Resort A-Side Hotel Hallway Door",
@@ -103,4 +110,10 @@ _item_name_alias: dict[str, str] = {
     "Ivory (SJ Grandmaster):Break My Ivory Tower 2 Key Door #2089": "Ivory True Ending Door",
     "summit (SJ Grandmaster):2501M-Berry Key Door #1598": "summit (SJ Grandmaster) 2501M Berry Door",
     "Passionfruit Pantheon (SJ Grandmaster Heartside):c2_11-DeathKontrol Key Door #11920": "Passionfruit Pantheon Cycle Madness B-Side Door",
+    "Summit A-Side | a-06 - gem:110": "Summit 0M Gem",
+    "Summit A-Side | b-02d - gem:109": "Summit 500M Gem",
+    "Summit A-Side | c-06c - gem:333": "Summit 1000M Gem",
+    "Summit A-Side | d-05b - gem:449": "Summit 1500M Gem",
+    "Summit A-Side | e-01c - gem:8": "Summit 2000M Gem",
+    "Summit A-Side | f-02b - gem:679": "Summit 2500M Gem"
 }
