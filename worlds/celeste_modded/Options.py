@@ -146,7 +146,7 @@ class WinConditionLevel(Choice):
     The Level that must be completed in order to achieve victory, this will enable whichever levels are in the same category as the win condition
     """
     display_name = "Win Condition Level"
-    default = 0
+    default = 2
     option_summit_a = 0
     option_summit_b = 1
     option_farewell = 2
@@ -169,22 +169,28 @@ class StrawberriesRequiredPercentage(Range):
     display_name = "Strawberry Victory Condition"
     range_start = 0
     range_end = 100
-    default = 80
+    default = 65
     
 class TotalStrawberries(Range):
     """
     Total Strawberries to be placed in the item pool (Actual generated strawberries may be lower depending on availability)
     """
     display_name = "Total Strawberries"
-    range_start = 50
-    range_end = 500
-    default = 300
+    range_start = 0
+    range_end = 3000
+    default = 1000
     
 class RequireMoonBerry(Toggle):
     """
     Require that the moon berry be collected in addition to the required strawberries
     """
     display_name = "Require Moon Berry"
+
+class RequireBerriesForGoalLevelEntry(DefaultOnToggle):
+    """
+    Keep the goal level locked until all required berries are collected
+    """
+    display_name = "Require Berries for Goal Level"
     
 class StartLevelSet(Choice):
     """
@@ -217,8 +223,7 @@ def map_options(world):
                             LevelCategory.NONE]
     world.start_level_set = start_level_list[world.options.start_level_set.value]
     
-    victory_level_list = [LevelName.FORSAKEN_CITY_A,
-                                LevelName.SUMMIT_A,
+    victory_level_list = [LevelName.SUMMIT_A,
                                 LevelName.SUMMIT_B,
                                 LevelName.FAREWELL,
                                 LevelName.BLUEBERRY_BAY,
@@ -232,7 +237,7 @@ groups = [
     OptionGroup("Levels", [IncludeBeginner, IncludeIntermediate, IncludeAdvanced, IncludeExpert, IncludeGrandmaster, IncludeCrackedGrandmaster, IncludeVanillaLevels, IncludeFarewell, StartLevelSet]),
     OptionGroup("Checks", [RandomizeCheckpoints, RoomChecks, IncludeWingedGolden, IncludeEasterEggRooms, IncludeEasterEggRoomsDifficult]),
     OptionGroup("Deathless Berries", [IncludeBeginnerSilvers, IncludeIntermediateSilvers, IncludeAdvancedSilvers, IncludeExpertSilvers, IncludeGrandmasterSilvers, IncludeCrackedGrandmasterSilvers, IncludeASideGoldens, IncludeBSideGoldens, IncludeCSideGoldens, IncludeFarewellGolden]),
-    OptionGroup("Win Condition", [WinConditionLevel, ProtectVictoryLevelCheckpoints, StrawberriesRequiredPercentage, TotalStrawberries, RequireMoonBerry])
+    OptionGroup("Win Condition", [WinConditionLevel, ProtectVictoryLevelCheckpoints, StrawberriesRequiredPercentage, TotalStrawberries, RequireMoonBerry, RequireBerriesForGoalLevelEntry])
 ]
 
 @dataclass
@@ -269,3 +274,4 @@ class CelesteModdedOptions(PerGameCommonOptions):
     strawberries_required_percentage: StrawberriesRequiredPercentage
     total_strawberries: TotalStrawberries
     require_moon_berry: RequireMoonBerry
+    require_berries_for_goal: RequireBerriesForGoalLevelEntry

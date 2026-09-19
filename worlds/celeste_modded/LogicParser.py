@@ -11,9 +11,13 @@ from .constants.LevelNames import LevelName, LevelCategory
 from .constants.LocationTypes import LocationType
 from .constants.ItemTypes import ItemType
 from .Naming import getCheckpointName, getKeyDoorName, getLocationName, getRoomName
-if TYPE_CHECKING:
-    from . import CelesteModdedWorld
+from worlds.celeste_modded.level_logic.LogicalLayout import levelList
+from worlds.celeste_modded.level_logic.LogicalObjects import Level
 
+levelList: dict[LevelName, Level]
+
+def levelUnlock(levelName: LevelName):
+    return f"Level Unlock: {levelName}{f" ({levelList[levelName].level_category})" if levelList[levelName].level_category not in {LevelCategory.A_SIDE, LevelCategory.B_SIDE, LevelCategory.C_SIDE, LevelCategory.FAREWELL} else ""}"
 
 if TYPE_CHECKING:
     from . import CelesteModdedWorld
@@ -54,6 +58,17 @@ def ruleFromListPlusCondition(items: list[list[str]], extraItem: str, world):
     
     return returnRule
 
+def finalLevelEntryBerryRule(access_rule: list[list[str]], levelName: str, world: "CelesteModdedWorld"):
+
+    level_rule = ruleFromList(access_rule, world) if len(levelName) == 0 else ruleFromListPlusCondition(access_rule, levelName, world)
+
+    def returnRule(state: CollectionState):
+        strawberries = state.has(ItemName.STRAWBERRY, world.player, world.required_strawberries)
+        moon_berry = state.has(ItemName.MOON_BERRY, world.player) if world.options.require_moon_berry else True
+        return strawberries and moon_berry and level_rule(state)
+
+    return returnRule
+
 def add_location(region: Region, name: str, world: "CelesteModdedWorld"):
     try:
         region.add_locations({name: world.location_name_to_id[name]}, ModdedCelesteLocation)
@@ -69,7 +84,7 @@ def add_item(name: str, world: "CelesteModdedWorld"):
     
 def calculate_strawberries(world: "CelesteModdedWorld"):
     strawberry_count = countStrawberries(world)
-    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - getLevelCount(world), world.options.total_strawberries)
+    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - getLevelCount(world) + getRoomCheckCount(world), world.options.total_strawberries)
     world.required_strawberries = round((world.options.strawberries_required_percentage / 100) * world.total_strawberries_generated)
 
 
@@ -83,14 +98,14 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
     gem_items = []
     for levelName in levelList:
         level = levelList[levelName]
-        id_table[levelName.value] = level.level_id * Constants.level_id_multiplier + Constants.base_id + Constants.item_id_offset[ItemType.LEVEL]
+        id_table[levelUnlock(levelName)] = level.level_id * Constants.level_id_multiplier + Constants.base_id + Constants.item_id_offset[ItemType.LEVEL]
         for roomName in levelList[levelName].rooms:
             room = levelList[levelName].rooms[roomName]
-            if level.rooms[roomName].checkpoint:
-                name = getCheckpointName(levelName, level.rooms[roomName].checkpoint)
+            if room.checkpoint:
+                name = getCheckpointName(levelName, room.checkpoint)
                 checkpoint_items.append(name)
                 id_table[name] = getLocationBasedItemID(ItemType.CHECKPOINT, level, room)
-            for location in level.rooms[roomName].locations:
+            for location in room.locations:
                 if location.location_type == LocationType.CRYSTAL_HEART:
                     name = getLocationName(levelName, roomName, LocationType.CRYSTAL_HEART, location.ID)
                     crystal_heart_items.append(name)
@@ -120,7 +135,7 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
         **{item.value: ItemType.MECHANIC for item in mechanic},
         **{item.value: ItemType.FILLER for item in filler},
         **{item.value: ItemType.STRAWBERRY for item in strawberry},
-        **{level.value: ItemType.LEVEL for level in levelList.keys()},
+        **{levelUnlock(level): ItemType.LEVEL for level in levelList.keys()},
         **{checkpoint: ItemType.CHECKPOINT for checkpoint in checkpoint_items},
         **{heart: ItemType.CRYSTAL_HEART_VANILLA for heart in crystal_heart_items},
         **{heart: ItemType.CRYSTAL_HEART_SJ for heart in crystal_heart_clear_items},
@@ -170,9 +185,15 @@ def parse_regions(world: "CelesteModdedWorld"):
         # Create level regions and connect them to Menu
         level_region = Region(levelName, world.player, world.multiworld)
         if world.start_level_set == level.level_category or level.heartside or level.level_id == Constants.permanent_starting_level_id:
-            root_region.connect(level_region, rule=ruleFromList(level.access_rule, world))
+            if world.options.require_berries_for_goal and levelName == world.win_condition_level:
+                root_region.connect(level_region, rule=finalLevelEntryBerryRule(level.access_rule, "", world))
+            else:
+                root_region.connect(level_region, rule=ruleFromList(level.access_rule, world))
         else:
-            root_region.connect(level_region, rule=ruleFromListPlusCondition(level.access_rule, levelName, world))
+            if world.options.require_berries_for_goal and levelName == world.win_condition_level:
+                root_region.connect(level_region, rule=finalLevelEntryBerryRule(level.access_rule, levelUnlock(levelName), world))
+            else:
+                root_region.connect(level_region, rule=ruleFromListPlusCondition(level.access_rule, levelUnlock(levelName), world))
         world.multiworld.regions.append(level_region)
 
         #Create room regions and connect the start room and checkpoints to the level region
@@ -223,7 +244,7 @@ def create_items(world: "CelesteModdedWorld"):
         if levelEnabled(level, world) or level.level_id == Constants.permanent_starting_level_id:
 
             if world.start_level_set != levelCategory and not level.heartside and not level.level_id == Constants.permanent_starting_level_id:
-                add_item(levelName, world)
+                add_item(levelUnlock(levelName), world)
 
             for roomName,room in level.rooms.items():
                 if room.checkpoint and world.options.randomize_checkpoints:
@@ -349,6 +370,22 @@ def countStrawberries(world: "CelesteModdedWorld") -> int:
 
 def getLevelCount(world: "CelesteModdedWorld") -> int:
     return len(levelList)
+
+def getRoomCheckCount(world: "CelesteModdedWorld") -> int:
+    count = 0
+    if not world.options.room_checks:
+        return count
+    for _,level in levelList.items():
+        for _,room in level.rooms.items():
+            if room.is_subregion_of:
+                continue
+            if not world.options.easter_egg_rooms and (room.easter_egg or room.easter_egg_difficult):
+                continue
+            if not world.options.easter_egg_rooms_difficult and room.easter_egg_difficult:
+                continue
+            count = count + 1
+    return count
+
     
 def findStartRoom(level: Level) -> Room:
     for room in Level.rooms:
@@ -366,7 +403,7 @@ def getLocationBasedItemID(category: ItemType, level: Level, room: Room, offset:
     return Constants.base_id + Constants.item_id_offset[category] + calculateIDOffset(level, room) + offset
 
 def getLocationBasedLocationID(category: LocationType, level: Level, room: Room, offset: int = 0):
-    if category in {LocationType.CRYSTAL_HEART, LocationType.GOLDEN_BERRY, LocationType.SILVER_BERRY, LocationType.LEVEL_CLEAR, LocationType.LEVEL_CLEAR_MINI_HEART, LocationType.CASSETTE}:
+    if category in {LocationType.CRYSTAL_HEART, LocationType.LEVEL_CLEAR, LocationType.LEVEL_CLEAR_MINI_HEART, LocationType.CASSETTE}:
         return Constants.base_id + Constants.location_id_offset[category] + level.level_id * Constants.level_id_multiplier
     else:
         return Constants.base_id + Constants.location_id_offset[category] + calculateIDOffset(level, room) + offset

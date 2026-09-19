@@ -19,7 +19,7 @@ class ItemName(StrEnum):
     BLUE_CASSETTE = "Plain Blue Cassette Blocks"
     PINK_CASSETTE = "Plain Pink Cassette Blocks"
     CRUMBLING_PLATFORM = "Crumbling Platforms",
-    TOUCH_SWITCH = "Regular Touch Switches",
+    TOUCH_SWITCH = "Vanilla Touch Switches",
     DREAM_BLOCK = "Normal Dream Blocks",
     BADELINE_ORB = "Badeline Orbs",
     SINKING_PLATFORM = "Sinking Platforms",
