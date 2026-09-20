@@ -10,31 +10,31 @@ class IncludeBeginner(DefaultOnToggle):
     """
     display_name = "Include Beginner Levels"
     
-class IncludeIntermediate(DefaultOnToggle):
+class IncludeIntermediate(Toggle):
     """
     Include levels from the intermediate lobby
     """
     display_name = "Include Intermediate Levels"
     
-class IncludeAdvanced(DefaultOnToggle):
+class IncludeAdvanced(Toggle):
     """
     Include levels from the advanced lobby
     """
     display_name = "Include Advanced Levels"
     
-class IncludeExpert(DefaultOnToggle):
+class IncludeExpert(Toggle):
     """
     Include levels from the expert lobby
     """
     display_name = "Include Expert Levels"
     
-class IncludeGrandmaster(DefaultOnToggle):
+class IncludeGrandmaster(Toggle):
     """
     Include non-cracked levels from the grandmaster lobby
     """
     display_name = "Include Grandmaster Levels"
     
-class IncludeCrackedGrandmaster(DefaultOnToggle):
+class IncludeCrackedGrandmaster(Toggle):
     """
     Include cracked levels from the grandmaster lobby
     """
@@ -45,13 +45,13 @@ class IncludeVanillaLevels(Choice):
     Pick up to which level of Vanilla Chapters 1-8 will be included (1A will always be included to ensure the game is completable)
     """
     display_name = "Include Vanilla Levels"
-    default = 3
+    default = 1
     option_none = 0
     option_a_sides = 1
     option_b_sides = 2
     option_c_sides = 3
     
-class IncludeFarewell(DefaultOnToggle):
+class IncludeFarewell(Toggle):
     """
     Include Farewell from the vanilla game, also enables A and B sides
     """
@@ -146,7 +146,7 @@ class WinConditionLevel(Choice):
     The Level that must be completed in order to achieve victory, this will enable whichever levels are in the same category as the win condition
     """
     display_name = "Win Condition Level"
-    default = 2
+    default = 3
     option_summit_a = 0
     option_summit_b = 1
     option_farewell = 2

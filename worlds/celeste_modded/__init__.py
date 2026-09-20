@@ -11,9 +11,9 @@ from .constants.LocationTypes import LocationType
 from . import LogicParser
 
 # TODO
-# - Winged berry needs a better name
-# - Test with multiple worlds
-# - Test most of/full playthrough with room checks and checkpoints on/off
+# - Trying to connect to server after connection failed can get stuck on "Connection Failed" without actually attempting a reconnect. Restarting the game will fix this.
+# - All levels showing as complete in journal
+# - 3C golden berry not appearing (there may be others)
 
 # System.TimeoutException: Timed out retrieving data for key `Celeste_Modded_Rcv_Player1`. This may be due to an attempt to retrieve a value from the DataStorageHelper in a synchronous fashion from within a PacketReceived handler. When using the DataStorageHelper from within code which runs on the websocket thread then use the asynchronous getters. Ex: `DataStorageHelper["Celeste_Modded_Rcv_Player1"].GetAsync().ContinueWith(x => {});`Be aware that DataStorageHelper calls tend to cause packet responses, so making a call from within a PacketReceived handler may cause an infinite loop.
 #    at Archipelago.MultiClient.Net.Helpers.DataStorageHelper.GetValue(String key)
