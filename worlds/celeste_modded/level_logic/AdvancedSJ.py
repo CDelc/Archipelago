@@ -202,7 +202,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
     Level(
         {
             "A0": Room(0, [Transition("A2", [[ItemName.MOVING_BLOCK, ItemName.JELLYFISH, ItemName.TOUCH_SWITCH, ItemName.PUFFER_FISH]])], start_room=True),
-            "A2": Room(1, [Transition("A4", [[ItemName.DASH_CRYSTALS]]), Transition("A2_v2")]),
+            "A2": Room(1, [Transition("A4", [[ItemName.DASH_CRYSTALS]]), Transition("A2_v2", [[ItemName.DASH_CRYSTALS]])]),
             "A2_v2": Room(2, [Transition("A2")], [Location(LocationType.STRAWBERRY, 3574, [[ItemName.SPRINGS]])]),
             "A4": Room(3, [Transition("A5")]),
             "A5": Room(4, [Transition("Brys2-2-2"), Transition("A5_v2")]),

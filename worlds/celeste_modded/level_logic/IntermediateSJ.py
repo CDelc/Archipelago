@@ -175,7 +175,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "btd-00": Room(0, [Transition("btd-02", [[ItemName.DASH_CRYSTALS, ItemName.YELLOW_LINKED_TRAFFIC_BLOCK]])], [Location(LocationType.SILVER_BERRY, 2172, [[getKeyDoorName(LevelName.IN_FILTRATION, "btd-09", 578), ItemName.DASH_CRYSTALS, ItemName.YELLOW_LINKED_TRAFFIC_BLOCK, ItemName.SPRINGS, ItemName.GREEN_LINKED_TRAFFIC_BLOCK, ItemName.TORQUOISE_LINKED_TRAFFIC_BLOCK, ItemName.GREEN_LASER, ItemName.YELLOW_LASER, ItemName.TORQUOISE_LASER, ItemName.TOUCH_SWITCH]])], start_room=True),
             "btd-02": Room(1, [Transition("btd-02a", [[ItemName.SPRINGS]]), Transition("btd-02b", [[ItemName.SPRINGS]]), Transition("btd-02c", [[ItemName.SPRINGS]])]),
             "btd-02b": Room(2, [Transition("btd-02")], [Location(LocationType.STRAWBERRY, 827)]),
-            "btd-02c": Room(3, [Transition("btd-02", [[ItemName.GREEN_LINKED_TRAFFIC_BLOCK]])], [Location(LocationType.STRAWBERRY, 839)]),
+            "btd-02c": Room(3, [Transition("btd-02", [[ItemName.GREEN_LINKED_TRAFFIC_BLOCK]])], [Location(LocationType.STRAWBERRY, 839, [[ItemName.GREEN_LINKED_TRAFFIC_BLOCK]])]),
             "btd-02a": Room(4, [Transition("btd-03")]),
             "btd-03": Room(5, [Transition("btd-04")]),
             "btd-04": Room(6, [Transition("btd-05"), Transition("btd-04a")]),
