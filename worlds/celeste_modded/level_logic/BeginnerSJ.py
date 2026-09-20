@@ -120,7 +120,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "6": Room(4, [Transition("7", [[ItemName.DASH_CRYSTALS]])]),
             "7": Room(5, [Transition("10", [[getKeyDoorName(LevelName.CASSETTE_CLIFFS, "7", 494)]]), Transition("8")], key_door_ids=[494]),
             "8": Room(6, [Transition("10-berry"), Transition("7-middle", [[ItemName.TOUCH_SWITCH]])]),
-            "7-top": Room(102, [Location(LocationType.KEY, 1078)], is_subregion_of="7"),
+            "7-top": Room(102, [], [Location(LocationType.KEY, 1078)], is_subregion_of="7"),
             "7-middle": Room(103, [Transition("9")], is_subregion_of="7"),
             "9": Room(7, [Transition("7-top", [[ItemName.CRUMBLING_PLATFORM]])]),
             "10": Room(8, [Transition("11-c", [[ItemName.DOUBLE_DASH_CRYSTALS]])]),
