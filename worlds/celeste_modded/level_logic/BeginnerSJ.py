@@ -317,7 +317,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "Intro A": Room(0, [Transition("Intro B")], start_room=True),
             "Intro B": Room(1, [Transition("Double Vision", [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 99, [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]]), Location(LocationType.SILVER_BERRY, 278, [[ItemName.MOVING_BLOCK, ItemName.TOUCH_SWITCH, ItemName.BLUE_TIME_CRYSTAL, ItemName.DASH_CRYSTAL_SHARDS, ItemName.DASH_CRYSTALS, ItemName.SPRINGS, getKeyDoorName(LevelName.A_GIFT_FROM_THE_STARS, "Timestop Intro", 237)]])]),
             "Double Vision": Room(2, [Transition("Waiting Room", [[ItemName.DASH_CRYSTAL_SHARDS]])], [Location(LocationType.KEY, 947, [[ItemName.TOUCH_SWITCH]])]),
-            "Waiting Room": Room(3, [Transition("Timestop Intro")], [Location(LocationType.STRAWBERRY, 633, [[ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.A_GIFT_FROM_THE_STARS, "Timestop Intro", 237)]])]),
+            "Waiting Room": Room(3, [Transition("Timestop Intro")], [Location(LocationType.STRAWBERRY, 633, [[ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.A_GIFT_FROM_THE_STARS, "Timestop Intro", 237), ItemName.BLUE_TIME_CRYSTAL]])]),
             "Timestop Intro": Room(4, [Transition("Timestop Intro Again", [[ItemName.BLUE_TIME_CRYSTAL, ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.A_GIFT_FROM_THE_STARS, "Timestop Intro", 237)]]), Transition("Shuffle", [[ItemName.TOUCH_SWITCH]])], key_door_ids=[237]),
             "Timestop Intro Again": Room(5, [Transition("Stepping Stone", [[ItemName.MOVING_BLOCK]])]),
             "Stepping Stone": Room(6, [Transition("Fork")]),
