@@ -48,7 +48,7 @@ from . import LogicParser
 
 game_name = Constants.game_name
 
-WORLD_VERSION = "1.0.0"
+WORLD_VERSION = "1.0.1"
 MINIMUM_MOD_VERSION = "1.0.0"
 
 class CelesteModdedWebWorld(WebWorld):
