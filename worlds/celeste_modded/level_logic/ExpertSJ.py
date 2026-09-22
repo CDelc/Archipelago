@@ -519,7 +519,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "7-1": Room(11, [Transition("7")], [Location(LocationType.STRAWBERRY, 1425)]),
             "8": Room(12, [Transition("end")]),
             "end": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 119
+        }, LevelCategory.EXPERT, 119, puzzle=True
     ),
     LevelName.CAPER_CAVORTION:
     Level(

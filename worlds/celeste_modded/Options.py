@@ -56,6 +56,12 @@ class IncludeFarewell(Toggle):
     Include Farewell from the vanilla game, also enables A and B sides
     """
     display_name = "Include Farewell"
+
+class ExcludePuzzleLevels(Toggle):
+    """
+    Exclude levels that are more about puzzle solving than gameplay. Maps that are difficult to route will not necessarily be included in this category
+    """
+    display_name = "Exclude Puzzle Levels"
     
 class RandomizeCheckpoints(Toggle):
     """
@@ -204,6 +210,7 @@ class StartLevelSet(Choice):
     option_expert_lobby = 4
     option_grandmaster_lobby = 5
     option_none = 6
+    option_all_enabled_levels = 7
     
     default = 0
     
@@ -212,6 +219,18 @@ class IncludeWingedGolden(Toggle):
     Include the Winged Golden Berry check in 1A
     """
     display_name = "Winged Golden Berry"
+
+class HeartsidesStartUnlocked(DefaultOnToggle):
+    """
+    Unlock the heartsides by default, as they are already behind heart gates
+    """
+    display_name = "Heartsides Start Unlocked"
+
+class OpenHeartGates(Toggle):
+    """
+    All heart gates start open
+    """
+    display_name = "Open heart gates"
     
 def map_options(world):
     start_level_list = [LevelCategory.A_SIDE,
@@ -220,7 +239,8 @@ def map_options(world):
                             LevelCategory.ADVANCED,
                             LevelCategory.EXPERT,
                             LevelCategory.GRANDMASTER,
-                            LevelCategory.NONE]
+                            LevelCategory.NONE,
+                            LevelCategory.ALL]
     world.start_level_set = start_level_list[world.options.start_level_set.value]
     
     victory_level_list = [LevelName.SUMMIT_A,
@@ -234,10 +254,10 @@ def map_options(world):
     world.win_condition_level = victory_level_list[world.options.win_condition_level.value]
 
 groups = [
-    OptionGroup("Levels", [IncludeBeginner, IncludeIntermediate, IncludeAdvanced, IncludeExpert, IncludeGrandmaster, IncludeCrackedGrandmaster, IncludeVanillaLevels, IncludeFarewell, StartLevelSet]),
+    OptionGroup("Levels", [IncludeBeginner, IncludeIntermediate, IncludeAdvanced, IncludeExpert, IncludeGrandmaster, IncludeCrackedGrandmaster, IncludeVanillaLevels, IncludeFarewell, StartLevelSet, HeartsidesStartUnlocked, ExcludePuzzleLevels]),
     OptionGroup("Checks", [RandomizeCheckpoints, RoomChecks, IncludeWingedGolden, IncludeEasterEggRooms, IncludeEasterEggRoomsDifficult]),
     OptionGroup("Deathless Berries", [IncludeBeginnerSilvers, IncludeIntermediateSilvers, IncludeAdvancedSilvers, IncludeExpertSilvers, IncludeGrandmasterSilvers, IncludeCrackedGrandmasterSilvers, IncludeASideGoldens, IncludeBSideGoldens, IncludeCSideGoldens, IncludeFarewellGolden]),
-    OptionGroup("Win Condition", [WinConditionLevel, ProtectVictoryLevelCheckpoints, StrawberriesRequiredPercentage, TotalStrawberries, RequireMoonBerry, RequireBerriesForGoalLevelEntry])
+    OptionGroup("Win Condition", [WinConditionLevel, ProtectVictoryLevelCheckpoints, StrawberriesRequiredPercentage, TotalStrawberries, RequireMoonBerry, RequireBerriesForGoalLevelEntry, OpenHeartGates])
 ]
 
 @dataclass
@@ -251,6 +271,8 @@ class CelesteModdedOptions(PerGameCommonOptions):
     include_vanilla_levels: IncludeVanillaLevels
     include_farewell: IncludeFarewell
     start_level_set: StartLevelSet
+    heart_sides_start_unlocked: HeartsidesStartUnlocked
+    exclude_puzzle_levels: ExcludePuzzleLevels
     
     randomize_checkpoints: RandomizeCheckpoints
     room_checks: RoomChecks
@@ -275,3 +297,4 @@ class CelesteModdedOptions(PerGameCommonOptions):
     total_strawberries: TotalStrawberries
     require_moon_berry: RequireMoonBerry
     require_berries_for_goal: RequireBerriesForGoalLevelEntry
+    open_heart_gates: OpenHeartGates

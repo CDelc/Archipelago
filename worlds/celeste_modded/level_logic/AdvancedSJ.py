@@ -288,7 +288,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "oppen_berry": Room(2, [Transition("oppen_1a")], [Location(LocationType.STRAWBERRY, 647)]),
             "oppen_1b": Room(3, [Transition("oppen_1a"), Transition("oppen_1c")], [Location(LocationType.KEY, 1765)]),
             "oppen_1c": Room(4, [Transition("oppen_1a"), Transition("oppen_1b")], [Location(LocationType.KEY, 3647)])
-        }, LevelCategory.ADVANCED, 83
+        }, LevelCategory.ADVANCED, 83, puzzle=True
     ),
     LevelName.ATTACK_OF_THE_CLONE:
     Level(

@@ -11,45 +11,18 @@ from .constants.LocationTypes import LocationType
 from . import LogicParser
 
 # TODO
-# - Trying to connect to server after connection failed can get stuck on "Connection Failed" without actually attempting a reconnect. Restarting the game will fix this.
 # - All levels showing as complete in journal
-# - 3C golden berry not appearing (there may be others)
-
-# System.TimeoutException: Timed out retrieving data for key `Celeste_Modded_Rcv_Player1`. This may be due to an attempt to retrieve a value from the DataStorageHelper in a synchronous fashion from within a PacketReceived handler. When using the DataStorageHelper from within code which runs on the websocket thread then use the asynchronous getters. Ex: `DataStorageHelper["Celeste_Modded_Rcv_Player1"].GetAsync().ContinueWith(x => {});`Be aware that DataStorageHelper calls tend to cause packet responses, so making a call from within a PacketReceived handler may cause an infinite loop.
-#    at Archipelago.MultiClient.Net.Helpers.DataStorageHelper.GetValue(String key)
-#    at Archipelago.MultiClient.Net.Models.DataStorageElement.RetrieveAndReturnBoolValue[T](DataStorageElement e)
-#    at Celeste.Mod.CelesteArchipelago.ArchipelagoData.ArchipelagoManager.GetInt(String key)
-#    at Celeste.Mod.CelesteArchipelago.ArchipelagoData.ArchipelagoManager.GetRemoteItemsRcv()
-#    at Celeste.Mod.CelesteArchipelago.ArchipelagoData.ArchipelagoManager.CheckReceivedItemQueue()
-#    at Celeste.Mod.CelesteArchipelago.ArchipelagoData.ArchipelagoManager.Update(GameTime gameTime)
-
-# System.AggregateException: One or more errors occurred. (Object reference not set to an instance of an object.)
-#    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
-#    at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
-#    at Celeste.Mod.CelesteArchipelago.UI.OuiConnection.Update() in CelesteArchipelago/UI/OuiConnection.cs:line 32
-#    at DMD<DMD<>?20767834::Monocle.EntityList::Update>(EntityList this)
-#    at SyncProxy<System.Void Monocle.EntityList:Update()>(EntityList )
-#    at Monocle.Scene.Update()
-#    at Celeste.Overworld.orig_Update()
-#    at Celeste.Overworld.Update()
-#    at DMD<DMD<>?15371925::Monocle.Engine::Update>(Engine this, GameTime gameTime)
-#    at Celeste.Mod.BounceHelper.BounceHelperModule.modEngineUpdate(orig_Update orig, Engine engine, GameTime gameTime)
-#    at Hook<System.Void Celeste.Mod.BounceHelper.BounceHelperModule::modEngineUpdate(On.Monocle.Engine+orig_Update,Monocle.Engine,Microsoft.Xna.Framework.GameTime)>(Engine , GameTime )
-#    at Hook<System.Void ExtendedVariants.Variants.NoFreezeFrames::onEngineUpdate(On.Monocle.Engine+orig_Update,Monocle.Engine,Microsoft.Xna.Framework.GameTime)>(Engine , GameTime )
-#    at SyncProxy<System.Void Monocle.Engine:Update(Microsoft.Xna.Framework.GameTime)>(Engine , GameTime )
-#    at Celeste.Celeste.Update(GameTime gameTime)
-#    at Microsoft.Xna.Framework.Game.Tick()
-#    at Microsoft.Xna.Framework.Game.RunLoop()
-#    at Microsoft.Xna.Framework.Game.Run()
-#    at Monocle.Engine.RunWithLogging()
-# --------------------------------
-# System.NullReferenceException: Object reference not set to an instance of an object.
-#    at Celeste.Mod.CelesteArchipelago.ArchipelagoData.ArchipelagoManager.Connect() in CelesteArchipelago/ArchipelagoData/ArchipelagoManager.cs:line 205
+# - Cassette and Heart text should show item unlock info
+# - Allow separate A/B/C side enables
+# - More customizable difficulty ceilings
+# - Room checks enabled by level category
+# - Consolidate mechanics / disable mechanic unlocks
+# - Starting inventory instead of 1A opened
 
 game_name = Constants.game_name
 
-WORLD_VERSION = "1.0.1"
-MINIMUM_MOD_VERSION = "1.0.0"
+WORLD_VERSION = "1.1.0"
+MINIMUM_MOD_VERSION = "1.1.0"
 
 class CelesteModdedWebWorld(WebWorld):
     theme = "partyTime"
@@ -155,6 +128,9 @@ class CelesteModdedWorld(World):
         LogicParser.parse_regions(self)
     
     def create_item(self, name: str) -> ModdedCelesteItem:
+        # Normalize ItemName StrEnum members to plain strings before creating AP Items. (Thank you to Littlemuzz5 for this)
+        if isinstance(name, ItemName):
+            name = name.value
         classification = ItemClassification.filler
         try:
             if self.item_type_dict[name] in {ItemType.KEY_DOOR, ItemType.MECHANIC, ItemType.LEVEL}:
@@ -181,6 +157,8 @@ class CelesteModdedWorld(World):
             "include_c_sides": LevelCategory.C_SIDE in self.levels_categories_in_play,
             "include_farewell": LevelCategory.FAREWELL in self.levels_categories_in_play,
             "start_level_set": self.options.start_level_set.value,
+            "heart_sides_start_unlocked": self.options.heart_sides_start_unlocked.value,
+            "exclude_puzzle_levels": self.options.exclude_puzzle_levels.value,
             
             "randomize_checkpoints": self.options.randomize_checkpoints.value,
             "room_checks": self.options.room_checks.value,
@@ -204,6 +182,7 @@ class CelesteModdedWorld(World):
             "require_moon_berry": self.options.require_moon_berry.value,
             "require_berries_for_goal": self.options.require_berries_for_goal.value,
             "required_strawberries": self.required_strawberries,
+            "open_heart_gates": self.options.open_heart_gates.value,
 
             "apworld_version": WORLD_VERSION,
             "minimum_mod_version": MINIMUM_MOD_VERSION

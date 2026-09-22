@@ -316,7 +316,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
         {
             "Intro A": Room(0, [Transition("Intro B")], start_room=True),
             "Intro B": Room(1, [Transition("Double Vision", [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 99, [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]]), Location(LocationType.SILVER_BERRY, 278, [[ItemName.MOVING_BLOCK, ItemName.TOUCH_SWITCH, ItemName.BLUE_TIME_CRYSTAL, ItemName.DASH_CRYSTAL_SHARDS, ItemName.DASH_CRYSTALS, ItemName.SPRINGS, getKeyDoorName(LevelName.A_GIFT_FROM_THE_STARS, "Timestop Intro", 237)]])]),
-            "Double Vision": Room(2, [Transition("Waiting Room", [[ItemName.DASH_CRYSTAL_SHARDS]])], [Location(LocationType.KEY, 947, [[ItemName.TOUCH_SWITCH]])]),
+            "Double Vision": Room(2, [Transition("Waiting Room", [[ItemName.DASH_CRYSTAL_SHARDS, ItemName.DASH_CRYSTALS]])], [Location(LocationType.KEY, 947, [[ItemName.TOUCH_SWITCH]])]),
             "Waiting Room": Room(3, [Transition("Timestop Intro")], [Location(LocationType.STRAWBERRY, 633, [[ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.A_GIFT_FROM_THE_STARS, "Timestop Intro", 237), ItemName.BLUE_TIME_CRYSTAL]])]),
             "Timestop Intro": Room(4, [Transition("Timestop Intro Again", [[ItemName.BLUE_TIME_CRYSTAL, ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.A_GIFT_FROM_THE_STARS, "Timestop Intro", 237)]]), Transition("Shuffle", [[ItemName.TOUCH_SWITCH]])], key_door_ids=[237]),
             "Timestop Intro Again": Room(5, [Transition("Stepping Stone", [[ItemName.MOVING_BLOCK]])]),
@@ -329,7 +329,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "End Cabin": Room(12, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "Shuffle": Room(14, [Transition("Feedback Loop"), Transition("Double Vision")], [Location(LocationType.STRAWBERRY, 1223)]),
             "Feedback Loop": Room(15, [], [Location(LocationType.STRAWBERRY, 899)])
-        }, LevelCategory.BEGINNER, 40
+        }, LevelCategory.BEGINNER, 40, puzzle=True
     ),
     LevelName.COLLAPSING_SKYLINE:
     Level(
@@ -353,17 +353,17 @@ beginner_levels_sj : dict[LevelName, Level] = {
         {
             "a-00": Room(0, [Transition("a-01z", [[ItemName.PIPES, ItemName.STRAWBERRY_JAM]])], [Location(LocationType.SILVER_BERRY, 1045, [[ItemName.PIPES, ItemName.STRAWBERRY_JAM, ItemName.SPRINGS]])], start_room=True),
             "a-01z": Room(1, [Transition("a-02y")]),
-            "a-02y": Room(2, [Transition("a-03y", [[ItemName.SPRINGS]])], [Location(LocationType.STRAWBERRY, 822, [[ItemName.SPRINGS]])]),
+            "a-02y": Room(2, [Transition("a-03y", [[ItemName.SPRINGS]])], [Location(LocationType.STRAWBERRY, 822, [[ItemName.SPRINGS, ItemName.DASH_SWITCH]])]),
             "a-03y": Room(3, [Transition("a-04z")]),
             "a-04z": Room(4, [Transition("a-05z")]),
             "a-05z": Room(5, [Transition("a-07z"), Transition("a-06z")]),
-            "a-06z": Room(6, [Transition("a-05z")], [Location(LocationType.STRAWBERRY, 1737)]),
-            "a-07z": Room(7, [Transition("a-08z")], [Location(LocationType.STRAWBERRY, 447)]),
+            "a-06z": Room(6, [Transition("a-05z")], [Location(LocationType.STRAWBERRY, 1737, [[ItemName.DASH_SWITCH]])]),
+            "a-07z": Room(7, [Transition("a-08z")], [Location(LocationType.STRAWBERRY, 447, [[ItemName.DASH_SWITCH]])]),
             "a-08z": Room(8, [Transition("a-09z")]),
             "a-09z": Room(9, [Transition("a-11z")]),
             "a-11z": Room(10, [Transition("a-12z"), Transition("a-10z")]),
-            "a-10z": Room(11, [Transition("a-11z")], [Location(LocationType.STRAWBERRY, 794)]),
-            "a-12z": Room(12, [Transition("a-13z")], [Location(LocationType.STRAWBERRY, 431)]),
+            "a-10z": Room(11, [Transition("a-11z")], [Location(LocationType.STRAWBERRY, 794, [[ItemName.DASH_SWITCH]])]),
+            "a-12z": Room(12, [Transition("a-13z")], [Location(LocationType.STRAWBERRY, 431, [[ItemName.DASH_SWITCH]])]),
             "a-13z": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
         }, LevelCategory.BEGINNER, 42
     ),
@@ -452,7 +452,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "10 - Downfall": Room(14, [Transition("secret")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "secret": Room(15, [Transition("10 - Downfall")], easter_egg=True),
             "04b - Alcove": Room(17, [Transition("04a - Correlation")], [Location(LocationType.STRAWBERRY, 330)])
-        }, LevelCategory.BEGINNER, 45
+        }, LevelCategory.BEGINNER, 45, puzzle=True
     ),
     LevelName.ROSE_GARDEN:
     Level(

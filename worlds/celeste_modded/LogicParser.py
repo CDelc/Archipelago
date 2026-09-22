@@ -29,7 +29,7 @@ def hasNCrystalHearts(n: int, state: CollectionState, world: "CelesteModdedWorld
     for itemName in state.prog_items[world.player]:
         if item_type_dict[itemName] == ItemType.CRYSTAL_HEART_VANILLA:
             count += 1
-    return count >= n
+    return count >= n or world.options.open_heart_gates
 
 def ruleFromList(items: list[list[str]], world):
     # Capture 'items' in the local scope using a default argument
@@ -86,6 +86,10 @@ def calculate_strawberries(world: "CelesteModdedWorld"):
     strawberry_count = countStrawberries(world)
     world.total_strawberries_generated = min(strawberry_count - len(mechanic) - getLevelCount(world) + getRoomCheckCount(world), world.options.total_strawberries)
     world.required_strawberries = round((world.options.strawberries_required_percentage / 100) * world.total_strawberries_generated)
+
+# Ignore level access rules for heart sides when heart gates are open by default
+def getLevelAccessRule(level: Level, world: "CelesteModdedWorld"):
+    return [[]] if level.heartside and world.options.open_heart_gates else level.access_rule
 
 
 def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
@@ -147,7 +151,6 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
                     
     return item_dict, id_table
         
-        
 
 def generate_location_dict() -> tuple[dict[str, LocationType], dict[str, int]]:
     location_dict: dict[str, LocationType] = dict()
@@ -179,21 +182,21 @@ def parse_regions(world: "CelesteModdedWorld"):
     for levelName,level in levelList.items():
         level = levelList[levelName]
         # Skip levels in non-included categories
-        if not levelEnabled(level, world) and not level.level_id == Constants.permanent_starting_level_id:
+        if not levelEnabled(level, world):
             continue
         
         # Create level regions and connect them to Menu
         level_region = Region(levelName, world.player, world.multiworld)
-        if world.start_level_set == level.level_category or level.heartside or level.level_id == Constants.permanent_starting_level_id:
+        if levelStartUnlocked(level, world):
             if world.options.require_berries_for_goal and levelName == world.win_condition_level:
-                root_region.connect(level_region, rule=finalLevelEntryBerryRule(level.access_rule, "", world))
+                root_region.connect(level_region, rule=finalLevelEntryBerryRule(getLevelAccessRule(level, world), "", world))
             else:
-                root_region.connect(level_region, rule=ruleFromList(level.access_rule, world))
+                root_region.connect(level_region, rule=ruleFromList(getLevelAccessRule(level, world), world))
         else:
             if world.options.require_berries_for_goal and levelName == world.win_condition_level:
-                root_region.connect(level_region, rule=finalLevelEntryBerryRule(level.access_rule, levelUnlock(levelName), world))
+                root_region.connect(level_region, rule=finalLevelEntryBerryRule(getLevelAccessRule(level, world), levelUnlock(levelName), world))
             else:
-                root_region.connect(level_region, rule=ruleFromListPlusCondition(level.access_rule, levelUnlock(levelName), world))
+                root_region.connect(level_region, rule=ruleFromListPlusCondition(getLevelAccessRule(level, world), levelUnlock(levelName), world))
         world.multiworld.regions.append(level_region)
 
         #Create room regions and connect the start room and checkpoints to the level region
@@ -241,9 +244,9 @@ def create_items(world: "CelesteModdedWorld"):
     #Add items based on available locations
     for levelName,level in levelList.items():
         levelCategory = level.level_category
-        if levelEnabled(level, world) or level.level_id == Constants.permanent_starting_level_id:
+        if levelEnabled(level, world):
 
-            if world.start_level_set != levelCategory and not level.heartside and not level.level_id == Constants.permanent_starting_level_id:
+            if not levelStartUnlocked(level, world):
                 add_item(levelUnlock(levelName), world)
 
             for roomName,room in level.rooms.items():
@@ -261,11 +264,12 @@ def create_items(world: "CelesteModdedWorld"):
                         for requirement in reqList:
                             if requirement in mechanic.keys():
                                 mechanics.add(requirement)
-                    if location.location_type in {
-                        LocationType.GEM,
+                    if not world.options.open_heart_gates and location.location_type in {
                         LocationType.CRYSTAL_HEART,
                         LocationType.LEVEL_CLEAR_MINI_HEART,
                     }:
+                        add_item(getLocationName(levelName, roomName, location.location_type, location.ID), world)
+                    if location.location_type == LocationType.GEM:
                        add_item(getLocationName(levelName, roomName, location.location_type, location.ID), world)
                 for transition in room.transitions:
                     for reqList in transition.access_rule:
@@ -286,7 +290,12 @@ def create_items(world: "CelesteModdedWorld"):
     setWinCondition(world)
     
     location_count = len(world.multiworld.get_unfilled_locations(world.player))
-    item_count = len(world.multiworld.itempool)
+
+    # Thank you to Littlemuzz5 for catching a mistake here and fixing it
+    item_count = sum(
+        1 for item in world.multiworld.itempool
+        if item.player == world.player
+    )
     assert item_count <= location_count, "Celeste Modded has too many items to place in available locations"
     item_difference = location_count - item_count
     for i in range(item_difference):
@@ -324,9 +333,14 @@ def setWinCondition(world: "CelesteModdedWorld"):
 def levelEnabled(level: Level, world: "CelesteModdedWorld"):
     if level.level_id == 142: #Passionfruit Pantheon
         return LevelCategory.GRANDMASTER in world.levels_categories_in_play and LevelCategory.CRACKED_GRANDMASTER in world.levels_categories_in_play
+    if level.puzzle and world.options.exclude_puzzle_levels:
+        return False
     if level.level_id == Constants.permanent_starting_level_id: #1A
         return True
     return level.level_category in world.levels_categories_in_play
+
+def levelStartUnlocked(level: Level, world: "CelesteModdedWorld"):
+    return levelEnabled(level, world) and (world.start_level_set == LevelCategory.ALL or level.level_id == Constants.permanent_starting_level_id or (level.heartside and world.options.heart_sides_start_unlocked) or level.level_category == world.start_level_set)
 
 def deathlessEnabled(levelCategory: LevelCategory, world: "CelesteModdedWorld"):
     match levelCategory:
@@ -358,24 +372,26 @@ def isStrawberryJam(levelCategory: LevelCategory):
 
 def countStrawberries(world: "CelesteModdedWorld") -> int:
     count = 0
-    for level in levelList:
+    for levelName,level in levelList.items():
         # Skip levels in non-included categories
-        if levelList[level].level_category not in world.levels_categories_in_play:
+        if not levelEnabled(level, world):
             continue
-        for room in levelList[level].rooms:
-            for location in levelList[level].rooms[room].locations:
+        for room in level.rooms:
+            for location in level.rooms[room].locations:
                 if location.location_type == LocationType.STRAWBERRY:
                     count += 1
     return count
 
 def getLevelCount(world: "CelesteModdedWorld") -> int:
-    return len(levelList)
+    return len([level for _,level in levelList.items() if level.level_category in world.levels_categories_in_play])
 
 def getRoomCheckCount(world: "CelesteModdedWorld") -> int:
     count = 0
     if not world.options.room_checks:
         return count
     for _,level in levelList.items():
+        if not levelEnabled(level, world):
+            continue
         for _,room in level.rooms.items():
             if room.is_subregion_of:
                 continue
