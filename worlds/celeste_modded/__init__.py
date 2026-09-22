@@ -99,25 +99,25 @@ class CelesteModdedWorld(World):
         #     case _:
         #         self.win_condition_level = LevelName.SUMMIT_A
         
-        if options.include_beginner or self.start_level_set == LevelCategory.BEGINNER or self.win_condition_level == LevelName.BLUEBERRY_BAY or LogicParser.deathlessEnabled(LevelCategory.BEGINNER, self):
+        if options.include_beginner.value or self.start_level_set == LevelCategory.BEGINNER or self.win_condition_level == LevelName.BLUEBERRY_BAY or LogicParser.deathlessEnabled(LevelCategory.BEGINNER, self):
             self.levels_categories_in_play.add(LevelCategory.BEGINNER)
-        if options.include_intermediate or self.start_level_set == LevelCategory.INTERMEDIATE or self.win_condition_level == LevelName.RASPBERRY_ROOTS or LogicParser.deathlessEnabled(LevelCategory.INTERMEDIATE, self):
+        if options.include_intermediate.value or self.start_level_set == LevelCategory.INTERMEDIATE or self.win_condition_level == LevelName.RASPBERRY_ROOTS or LogicParser.deathlessEnabled(LevelCategory.INTERMEDIATE, self):
             self.levels_categories_in_play.add(LevelCategory.INTERMEDIATE)
-        if options.include_advanced or self.start_level_set == LevelCategory.ADVANCED or self.win_condition_level == LevelName.MANGO_MESA or LogicParser.deathlessEnabled(LevelCategory.ADVANCED, self):
+        if options.include_advanced.value or self.start_level_set == LevelCategory.ADVANCED or self.win_condition_level == LevelName.MANGO_MESA or LogicParser.deathlessEnabled(LevelCategory.ADVANCED, self):
             self.levels_categories_in_play.add(LevelCategory.ADVANCED)
-        if options.include_expert or self.start_level_set == LevelCategory.EXPERT or self.win_condition_level == LevelName.STARFRUIT_SUPERNOVA or LogicParser.deathlessEnabled(LevelCategory.EXPERT, self):
+        if options.include_expert.value or self.start_level_set == LevelCategory.EXPERT or self.win_condition_level == LevelName.STARFRUIT_SUPERNOVA or LogicParser.deathlessEnabled(LevelCategory.EXPERT, self):
             self.levels_categories_in_play.add(LevelCategory.EXPERT)
-        if options.include_grandmaster or self.start_level_set == LevelCategory.GRANDMASTER or self.win_condition_level == LevelName.PASSIONFRUIT_PANTHEON or LogicParser.deathlessEnabled(LevelCategory.GRANDMASTER, self):
+        if options.include_grandmaster.value or self.start_level_set == LevelCategory.GRANDMASTER or self.win_condition_level == LevelName.PASSIONFRUIT_PANTHEON or LogicParser.deathlessEnabled(LevelCategory.GRANDMASTER, self):
             self.levels_categories_in_play.add(LevelCategory.GRANDMASTER)
-        if options.include_cracked_grandmaster or self.win_condition_level == LevelName.PASSIONFRUIT_PANTHEON or LogicParser.deathlessEnabled(LevelCategory.CRACKED_GRANDMASTER, self):
+        if options.include_cracked_grandmaster.value or self.win_condition_level == LevelName.PASSIONFRUIT_PANTHEON or LogicParser.deathlessEnabled(LevelCategory.CRACKED_GRANDMASTER, self):
             self.levels_categories_in_play.add(LevelCategory.CRACKED_GRANDMASTER)
-        if options.include_vanilla_levels >= 1 or self.start_level_set == LevelCategory.A_SIDE or self.win_condition_level == LevelName.SUMMIT_A or LogicParser.deathlessEnabled(LevelCategory.A_SIDE, self):
+        if options.include_vanilla_levels.value >= 1 or self.start_level_set == LevelCategory.A_SIDE or self.win_condition_level == LevelName.SUMMIT_A or LogicParser.deathlessEnabled(LevelCategory.A_SIDE, self):
             self.levels_categories_in_play.add(LevelCategory.A_SIDE)
-        if options.include_vanilla_levels >= 2 or self.win_condition_level == LevelName.SUMMIT_B or LogicParser.deathlessEnabled(LevelCategory.B_SIDE, self):
+        if options.include_vanilla_levels.value >= 2 or self.win_condition_level == LevelName.SUMMIT_B or LogicParser.deathlessEnabled(LevelCategory.B_SIDE, self):
             self.levels_categories_in_play.add(LevelCategory.B_SIDE)
-        if options.include_vanilla_levels >= 3 or LogicParser.deathlessEnabled(LevelCategory.C_SIDE, self):
+        if options.include_vanilla_levels.value >= 3 or LogicParser.deathlessEnabled(LevelCategory.C_SIDE, self):
             self.levels_categories_in_play.add(LevelCategory.C_SIDE)
-        if options.include_farewell or self.win_condition_level == LevelName.FAREWELL or LogicParser.deathlessEnabled(LevelCategory.FAREWELL, self):
+        if options.include_farewell.value or self.win_condition_level == LevelName.FAREWELL or LogicParser.deathlessEnabled(LevelCategory.FAREWELL, self):
             self.levels_categories_in_play.add(LevelCategory.FAREWELL)
             self.levels_categories_in_play.add(LevelCategory.A_SIDE)
             self.levels_categories_in_play.add(LevelCategory.B_SIDE)

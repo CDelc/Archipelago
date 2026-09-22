@@ -29,7 +29,7 @@ def hasNCrystalHearts(n: int, state: CollectionState, world: "CelesteModdedWorld
     for itemName in state.prog_items[world.player]:
         if item_type_dict[itemName] == ItemType.CRYSTAL_HEART_VANILLA:
             count += 1
-    return count >= n or world.options.open_heart_gates
+    return count >= n or world.options.open_heart_gates.value
 
 def ruleFromList(items: list[list[str]], world):
     # Capture 'items' in the local scope using a default argument
@@ -64,7 +64,7 @@ def finalLevelEntryBerryRule(access_rule: list[list[str]], levelName: str, world
 
     def returnRule(state: CollectionState):
         strawberries = state.has(ItemName.STRAWBERRY, world.player, world.required_strawberries)
-        moon_berry = state.has(ItemName.MOON_BERRY, world.player) if world.options.require_moon_berry else True
+        moon_berry = state.has(ItemName.MOON_BERRY, world.player) if world.options.require_moon_berry.value else True
         return strawberries and moon_berry and level_rule(state)
 
     return returnRule
@@ -84,12 +84,12 @@ def add_item(name: str, world: "CelesteModdedWorld"):
     
 def calculate_strawberries(world: "CelesteModdedWorld"):
     strawberry_count = countStrawberries(world)
-    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - getLevelCount(world) + getRoomCheckCount(world), world.options.total_strawberries)
-    world.required_strawberries = round((world.options.strawberries_required_percentage / 100) * world.total_strawberries_generated)
+    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - getLevelCount(world) + getRoomCheckCount(world), world.options.total_strawberries.value)
+    world.required_strawberries = round((world.options.strawberries_required_percentage.value / 100) * world.total_strawberries_generated)
 
 # Ignore level access rules for heart sides when heart gates are open by default
 def getLevelAccessRule(level: Level, world: "CelesteModdedWorld"):
-    return [[]] if level.heartside and world.options.open_heart_gates else level.access_rule
+    return [[]] if level.heartside and world.options.open_heart_gates.value else level.access_rule
 
 
 def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
@@ -188,12 +188,12 @@ def parse_regions(world: "CelesteModdedWorld"):
         # Create level regions and connect them to Menu
         level_region = Region(levelName, world.player, world.multiworld)
         if levelStartUnlocked(level, world):
-            if world.options.require_berries_for_goal and levelName == world.win_condition_level:
+            if world.options.require_berries_for_goal.value and levelName == world.win_condition_level:
                 root_region.connect(level_region, rule=finalLevelEntryBerryRule(getLevelAccessRule(level, world), "", world))
             else:
                 root_region.connect(level_region, rule=ruleFromList(getLevelAccessRule(level, world), world))
         else:
-            if world.options.require_berries_for_goal and levelName == world.win_condition_level:
+            if world.options.require_berries_for_goal.value and levelName == world.win_condition_level:
                 root_region.connect(level_region, rule=finalLevelEntryBerryRule(getLevelAccessRule(level, world), levelUnlock(levelName), world))
             else:
                 root_region.connect(level_region, rule=ruleFromListPlusCondition(getLevelAccessRule(level, world), levelUnlock(levelName), world))
@@ -213,13 +213,13 @@ def parse_regions(world: "CelesteModdedWorld"):
         #Connect rooms to each other and add locations
         for roomName in level.rooms:
             room = level.rooms[roomName]
-            if (room.easter_egg and not (world.options.easter_egg_rooms or world.options.easter_egg_rooms_difficult)) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult):
+            if (room.easter_egg and not (world.options.easter_egg_rooms.value or world.options.easter_egg_rooms_difficult.value)) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult.value):
                 continue
             room_region = world.multiworld.get_region(getRoomName(levelName, roomName), world.player)
-            if(world.options.room_checks and not room.is_subregion_of):
+            if(world.options.room_checks.value and not room.is_subregion_of):
                     loc_name = getRoomName(levelName, roomName)
                     add_location(room_region, loc_name, world)
-            if(world.options.randomize_checkpoints and room.checkpoint):
+            if(world.options.randomize_checkpoints.value and room.checkpoint):
                     loc_name = getCheckpointName(levelName, room.checkpoint)
                     add_location(room_region, loc_name, world)
             
@@ -232,7 +232,7 @@ def parse_regions(world: "CelesteModdedWorld"):
                 # Heartside goldens not included in logic
                 if location.location_type == LocationType.GOLDEN_BERRY and isStrawberryJam(level.level_category):
                     continue
-                if location.location_type == LocationType.WINGED_GOLDEN and not world.options.winged_golden:
+                if location.location_type == LocationType.WINGED_GOLDEN and not world.options.winged_golden.value:
                     continue
                 loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
                 add_location_with_rule(room_region, loc_name, world, location.access_rule)
@@ -250,21 +250,21 @@ def create_items(world: "CelesteModdedWorld"):
                 add_item(levelUnlock(levelName), world)
 
             for roomName,room in level.rooms.items():
-                if room.checkpoint and world.options.randomize_checkpoints:
+                if room.checkpoint and world.options.randomize_checkpoints.value:
                     #Win condition level checkpoint lock
-                    if levelName == world.win_condition_level and world.options.protect_victory_level_checkpoints:
+                    if levelName == world.win_condition_level and world.options.protect_victory_level_checkpoints.value:
                         location = world.multiworld.get_location(getCheckpointName(levelName, room.checkpoint), world.player)
                         location.place_locked_item(world.create_item(getCheckpointName(levelName, room.checkpoint)))
                     else: 
                         add_item(getCheckpointName(levelName, room.checkpoint), world)
-                if (room.easter_egg and not (world.options.easter_egg_rooms or world.options.easter_egg_rooms_difficult)) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult):
+                if (room.easter_egg and not (world.options.easter_egg_rooms.value or world.options.easter_egg_rooms_difficult.value)) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult.value):
                     continue
                 for location in room.locations:
                     for reqList in location.access_rule:
                         for requirement in reqList:
                             if requirement in mechanic.keys():
                                 mechanics.add(requirement)
-                    if not world.options.open_heart_gates and location.location_type in {
+                    if not world.options.open_heart_gates.value and location.location_type in {
                         LocationType.CRYSTAL_HEART,
                         LocationType.LEVEL_CLEAR_MINI_HEART,
                     }:
@@ -326,44 +326,44 @@ def setWinCondition(world: "CelesteModdedWorld"):
         
     world.multiworld.completion_condition[world.player] = lambda state, req_berries=world.required_strawberries: (
         state.has(ItemName.STRAWBERRY.value, world.player, req_berries) and
-        (not world.options.require_moon_berry or state.has(ItemName.MOON_BERRY.value, world.player)) and
+        (not world.options.require_moon_berry.value or state.has(ItemName.MOON_BERRY.value, world.player)) and
         state.has(ItemName.LEVEL_VICTORY.value, world.player)
     )
 
 def levelEnabled(level: Level, world: "CelesteModdedWorld"):
     if level.level_id == 142: #Passionfruit Pantheon
         return LevelCategory.GRANDMASTER in world.levels_categories_in_play and LevelCategory.CRACKED_GRANDMASTER in world.levels_categories_in_play
-    if level.puzzle and world.options.exclude_puzzle_levels:
+    if level.puzzle and world.options.exclude_puzzle_levels.value:
         return False
     if level.level_id == Constants.permanent_starting_level_id: #1A
         return True
     return level.level_category in world.levels_categories_in_play
 
 def levelStartUnlocked(level: Level, world: "CelesteModdedWorld"):
-    return levelEnabled(level, world) and (world.start_level_set == LevelCategory.ALL or level.level_id == Constants.permanent_starting_level_id or (level.heartside and world.options.heart_sides_start_unlocked) or level.level_category == world.start_level_set)
+    return levelEnabled(level, world) and (world.start_level_set == LevelCategory.ALL or level.level_id == Constants.permanent_starting_level_id or (level.heartside and world.options.heart_sides_start_unlocked.value) or level.level_category == world.start_level_set)
 
 def deathlessEnabled(levelCategory: LevelCategory, world: "CelesteModdedWorld"):
     match levelCategory:
         case LevelCategory.BEGINNER:
-            return world.options.include_beginner_silvers
+            return world.options.include_beginner_silvers.value
         case LevelCategory.INTERMEDIATE:
-            return world.options.include_intermediate_silvers
+            return world.options.include_intermediate_silvers.value
         case LevelCategory.ADVANCED:
-            return world.options.include_advanced_silvers
+            return world.options.include_advanced_silvers.value
         case LevelCategory.EXPERT:
-            return world.options.include_expert_silvers
+            return world.options.include_expert_silvers.value
         case LevelCategory.GRANDMASTER:
-            return world.options.include_grandmaster_silvers
+            return world.options.include_grandmaster_silvers.value
         case LevelCategory.CRACKED_GRANDMASTER:
-            return world.options.include_cracked_grandmaster_silvers
+            return world.options.include_cracked_grandmaster_silvers.value
         case LevelCategory.A_SIDE:
-            return world.options.include_a_sides_goldens
+            return world.options.include_a_sides_goldens.value
         case LevelCategory.B_SIDE:
-            return world.options.include_b_sides_goldens
+            return world.options.include_b_sides_goldens.value
         case LevelCategory.C_SIDE:
-            return world.options.include_c_sides_goldens
+            return world.options.include_c_sides_goldens.value
         case LevelCategory.FAREWELL:
-            return world.options.include_farewell_golden
+            return world.options.include_farewell_golden.value
         case _:
             return False
 
@@ -387,7 +387,7 @@ def getLevelCount(world: "CelesteModdedWorld") -> int:
 
 def getRoomCheckCount(world: "CelesteModdedWorld") -> int:
     count = 0
-    if not world.options.room_checks:
+    if not world.options.room_checks.value:
         return count
     for _,level in levelList.items():
         if not levelEnabled(level, world):
@@ -395,9 +395,9 @@ def getRoomCheckCount(world: "CelesteModdedWorld") -> int:
         for _,room in level.rooms.items():
             if room.is_subregion_of:
                 continue
-            if not world.options.easter_egg_rooms and (room.easter_egg or room.easter_egg_difficult):
+            if not world.options.easter_egg_rooms.value and (room.easter_egg or room.easter_egg_difficult):
                 continue
-            if not world.options.easter_egg_rooms_difficult and room.easter_egg_difficult:
+            if not world.options.easter_egg_rooms_difficult.value and room.easter_egg_difficult:
                 continue
             count = count + 1
     return count
