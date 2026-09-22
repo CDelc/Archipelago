@@ -48,7 +48,7 @@ vanilla_levels : dict[LevelName, Level] = {
             "12": Room(12, [Transition("12a"), Transition("12z")]),
             "12z": Room(37, [Transition("12")], [Location(LocationType.STRAWBERRY, 8, [[ItemName.DASH_CRYSTALS]])]),
             "12a": Room(38, [Transition("12"), Transition("end", [[ItemName.TRAFFIC_BLOCKS], [ItemName.SPRINGS]])]),
-            "end": Room(39, [], [Location(LocationType.LEVEL_CLEAR), Location(LocationType.WINGED_GOLDEN, 4, [[ItemName.TRAFFIC_BLOCKS, ItemName.DASH_CRYSTALS]])])
+            "end": Room(39, [], [Location(LocationType.LEVEL_CLEAR), Location(LocationType.WINGED_GOLDEN, 4, [[ItemName.TRAFFIC_BLOCKS, ItemName.DASH_CRYSTALS, ItemName.SPRINGS, ItemName.CRUMBLING_PLATFORM]])])
         }, LevelCategory.A_SIDE, 1
     ),
     LevelName.FORSAKEN_CITY_B:
@@ -630,7 +630,7 @@ vanilla_levels : dict[LevelName, Level] = {
             "a-04": Room(5, [Transition("a-05"), Transition("a-03"), Transition("a-04b")]),
             "a-04b": Room(6, [Transition("a-04")], [Location(LocationType.STRAWBERRY, 136), Location(LocationType.STRAWBERRY, 85)]),
             "a-05": Room(7, [Transition("a-06"), Transition("a-04")], [Location(LocationType.STRAWBERRY, 54)]),
-            "a-06": Room(8, [Transition("b-00", [[ItemName.BADELINE_ORB]]), Transition("a-05")], [Location(LocationType.GEM, 110)]),
+            "a-06": Room(8, [Transition("b-00", [[ItemName.BADELINE_ORB]]), Transition("a-05")], [Location(LocationType.GEM, 110, [[ItemName.BADELINE_ORB]])]),
             "b-00": Room(9, [Transition("b-01")], checkpoint="500m"),
             "b-01": Room(10, [Transition("b-02", [[ItemName.SPRINGS]])]),
             "b-02": Room(11, [Transition("b-03"), Transition("b-01"), Transition("b-02b", [[ItemName.TRAFFIC_BLOCKS, ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 101)]),

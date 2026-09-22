@@ -44,8 +44,8 @@ intermediate_levels_sj : dict[LevelName, Level] = {
     LevelName.SQUARE_THE_CIRCLE:
     Level(
         {
-            "a_01": Room(0, [Transition("a-02", [[ItemName.RED_BUBBLES, ItemName.GREEN_BUBBLES, ItemName.NEON_BLUE_KEVIN]])], [Location(LocationType.SILVER_BERRY, 16, [[ItemName.NEON_BLUE_KEVIN, ItemName.NEON_PURPLE_KEVIN, ItemName.TOUCH_SWITCH, ItemName.GREEN_BUBBLES, ItemName.RED_BUBBLES]])], start_room=True),
-            "a-02": Room(1, [Transition("a_02.5", [[ItemName.NEON_PURPLE_KEVIN, ItemName.TOUCH_SWITCH]])], [Location(LocationType.STRAWBERRY, 1386)]),
+            "a_01": Room(0, [Transition("a_02", [[ItemName.RED_BUBBLES, ItemName.GREEN_BUBBLES, ItemName.NEON_BLUE_KEVIN]])], [Location(LocationType.SILVER_BERRY, 16, [[ItemName.NEON_BLUE_KEVIN, ItemName.NEON_PURPLE_KEVIN, ItemName.TOUCH_SWITCH, ItemName.GREEN_BUBBLES, ItemName.RED_BUBBLES]])], start_room=True),
+            "a_02": Room(1, [Transition("a_02.5", [[ItemName.NEON_PURPLE_KEVIN, ItemName.TOUCH_SWITCH]])], [Location(LocationType.STRAWBERRY, 1386)]),
             "a_02.5": Room(2, [Transition("a_03")]),
             "a_03": Room(3, [Transition("a_04"), Transition("b_01")]),
             "b_01": Room(4, [Transition("a_03")], [Location(LocationType.STRAWBERRY, 447)]),
@@ -72,7 +72,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "a2v2": Room(2, [Transition("a3v2")]),
             "a3v2": Room(3, [Transition("a4v2", [[ItemName.GREEN_BUBBLES]])]),
             "a4v2": Room(4, [Transition("a5_")]),
-            "a5_": Room(5, [Transition("a6v2")]),
+            "a5_": Room(5, [Transition("a6v2", [[ItemName.MOVING_BLOCK]])]),
             "a6v2": Room(6, [Transition("pushupv2", [[ItemName.MOVING_BLOCK]]), Transition("r_00v2", [[ItemName.MOVING_BLOCK]])]),
             "r_00v2": Room(7, [Transition("a6v2")], [Location(LocationType.STRAWBERRY, 4230, [[ItemName.DASH_CRYSTALS]])]),
             "pushupv2": Room(8, [Transition("reboundv2")]),
@@ -346,7 +346,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "07": Room(8, [Transition("08")]),
             "08": Room(9, [Transition("09")]),
             "09": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])      
-        }, LevelCategory.INTERMEDIATE, 66
+        }, LevelCategory.INTERMEDIATE, 66, puzzle=True
     ),
     LevelName.RASPBERRY_ROOTS:
     Level(

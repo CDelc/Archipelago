@@ -163,3 +163,4 @@ class LevelCategory(StrEnum):
     GRANDMASTER = "SJ Grandmaster"
     CRACKED_GRANDMASTER = "SJ Cracked GM"
     NONE = "None"
+    ALL = "All"

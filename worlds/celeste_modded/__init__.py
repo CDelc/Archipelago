@@ -12,11 +12,17 @@ from . import LogicParser
 
 # TODO
 # - All levels showing as complete in journal
+# - Cassette and Heart text should show item unlock info
+# - Allow separate A/B/C side enables
+# - More customizable difficulty ceilings
+# - Room checks enabled by level category
+# - Consolidate mechanics / disable mechanic unlocks
+# - Starting inventory instead of 1A opened
 
 game_name = Constants.game_name
 
-WORLD_VERSION = "1.0.1"
-MINIMUM_MOD_VERSION = "1.0.0"
+WORLD_VERSION = "1.1.0"
+MINIMUM_MOD_VERSION = "1.1.0"
 
 class CelesteModdedWebWorld(WebWorld):
     theme = "partyTime"
@@ -122,6 +128,9 @@ class CelesteModdedWorld(World):
         LogicParser.parse_regions(self)
     
     def create_item(self, name: str) -> ModdedCelesteItem:
+        # Normalize ItemName StrEnum members to plain strings before creating AP Items. (Thank you to Littlemuzz5 for this)
+        if isinstance(name, ItemName):
+            name = name.value
         classification = ItemClassification.filler
         try:
             if self.item_type_dict[name] in {ItemType.KEY_DOOR, ItemType.MECHANIC, ItemType.LEVEL}:
@@ -148,6 +157,8 @@ class CelesteModdedWorld(World):
             "include_c_sides": LevelCategory.C_SIDE in self.levels_categories_in_play,
             "include_farewell": LevelCategory.FAREWELL in self.levels_categories_in_play,
             "start_level_set": self.options.start_level_set.value,
+            "heart_sides_start_unlocked": self.options.heart_sides_start_unlocked.value,
+            "exclude_puzzle_levels": self.options.exclude_puzzle_levels.value,
             
             "randomize_checkpoints": self.options.randomize_checkpoints.value,
             "room_checks": self.options.room_checks.value,
@@ -171,6 +182,7 @@ class CelesteModdedWorld(World):
             "require_moon_berry": self.options.require_moon_berry.value,
             "require_berries_for_goal": self.options.require_berries_for_goal.value,
             "required_strawberries": self.required_strawberries,
+            "open_heart_gates": self.options.open_heart_gates.value,
 
             "apworld_version": WORLD_VERSION,
             "minimum_mod_version": MINIMUM_MOD_VERSION
