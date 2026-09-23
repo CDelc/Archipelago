@@ -83,9 +83,12 @@ def add_item(name: str, world: "CelesteModdedWorld"):
     world.multiworld.itempool.append(world.create_item(name))
     
 def calculate_strawberries(world: "CelesteModdedWorld"):
-    strawberry_count = countStrawberries(world)
-    world.total_strawberries_generated = min(strawberry_count - len(mechanic) - getLevelCount(world) + getRoomCheckCount(world), world.options.total_strawberries.value)
+    world.total_strawberries_generated = min(calculate_maximum_possible_berries(world), world.options.total_strawberries.value)
     world.required_strawberries = round((world.options.strawberries_required_percentage.value / 100) * world.total_strawberries_generated)
+
+def calculate_maximum_possible_berries(world: "CelesteModdedWorld"):
+    strawberry_count = countStrawberries(world)
+    return strawberry_count - len(mechanic) - getLevelCount(world) + getRoomCheckCount(world) + (getCrystalHeartCount(world) if world.options.open_heart_gates.value else 0)
 
 # Ignore level access rules for heart sides when heart gates are open by default
 def getLevelAccessRule(level: Level, world: "CelesteModdedWorld"):
@@ -383,7 +386,10 @@ def countStrawberries(world: "CelesteModdedWorld") -> int:
     return count
 
 def getLevelCount(world: "CelesteModdedWorld") -> int:
-    return len([level for _,level in levelList.items() if level.level_category in world.levels_categories_in_play])
+    return len([level for _,level in levelList.items() if levelEnabled(level, world)])
+
+def getCrystalHeartCount(world: "CelesteModdedWorld"):
+    return getLevelCount(world) - 1 # Remove 1 for Farewell having no heart
 
 def getRoomCheckCount(world: "CelesteModdedWorld") -> int:
     count = 0

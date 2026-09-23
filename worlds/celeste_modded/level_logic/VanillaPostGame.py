@@ -12,7 +12,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
         {
             "00": Room(0, [Transition("01"), Transition("0x")], start_room=True),
             "0x": Room(1, [Transition("00")]),
-            "01": Room(2, [Transition("02"), Transition("00")]),
+            "01": Room(2, [Transition("02", [[ItemName.DASH_CRYSTALS]]), Transition("00")]),
             "02": Room(3, [Transition("a-00", [[CHearts(4)]]), Transition("01")]),
             "a-00": Room(4, [Transition("a-01", [[ItemName.DASH_CRYSTALS]])], [Location(LocationType.GOLDEN_BERRY, 19, [[ItemName.BUMPER, ItemName.FEATHER, ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.TOUCH_SWITCH, ItemName.CORE_BLOCK, ItemName.CORE_SWITCH, ItemName.LAVA_ICE_BALLS, ItemName.DASH_CRYSTALS]])], checkpoint="Into the Core"),
             "a-01": Room(5, [Transition("a-02")]),

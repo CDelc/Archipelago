@@ -59,7 +59,12 @@ class IncludeFarewell(Toggle):
 
 class ExcludePuzzleLevels(Toggle):
     """
-    Exclude levels that are more about puzzle solving than gameplay. Maps that are difficult to route will not necessarily be included in this category
+    Exclude levels that are more about puzzle solving than gameplay. Puzzle levels include the following:
+    Dropzle (Beginner)
+    A Gift from the Stars (Beginner)
+    Pointless Machines (Intermediate)
+    Lost Woods (Advanced)
+    Lunar Pagoda (Expert)
     """
     display_name = "Exclude Puzzle Levels"
     
@@ -179,12 +184,12 @@ class StrawberriesRequiredPercentage(Range):
     
 class TotalStrawberries(Range):
     """
-    Total Strawberries to be placed in the item pool (Actual generated strawberries may be lower depending on availability)
+    Maximum Strawberries to be placed in the item pool (Actual generated strawberries may be lower depending on availability)
     """
-    display_name = "Total Strawberries"
+    display_name = "Maximum Strawberries"
     range_start = 0
     range_end = 3000
-    default = 1000
+    default = 500
     
 class RequireMoonBerry(Toggle):
     """
