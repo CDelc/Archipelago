@@ -10,7 +10,7 @@ from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_be
 from .constants.LevelNames import LevelName, LevelCategory
 from .constants.LocationTypes import LocationType
 from .constants.ItemTypes import ItemType
-from .Naming import getCheckpointName, getKeyDoorName, getLocationName, getRoomName
+from .Naming import getCheckpointName, getKeyDoorName, getLocationName, getRoomName, getStartLocationName
 from worlds.celeste_modded.level_logic.LogicalLayout import levelList
 from worlds.celeste_modded.level_logic.LogicalObjects import Level
 
@@ -88,12 +88,48 @@ def calculate_strawberries(world: "CelesteModdedWorld"):
 
 def calculate_maximum_possible_berries(world: "CelesteModdedWorld"):
     strawberry_count = countStrawberries(world)
-    return strawberry_count - len(mechanic) - getLevelCount(world) + getRoomCheckCount(world) + (getCrystalHeartCount(world) if world.options.open_heart_gates.value else 0)
+    return max(0, strawberry_count - len(get_filtered_mechanics_list(world)) - getLevelCount(world) + getRoomCheckCount(world) + (getCrystalHeartCount(world) if world.options.open_heart_gates.value else 0))
 
+def calculate_start_items(world: "CelesteModdedWorld"):
+    state = CollectionState(world.multiworld)
+    state.sweep_for_advancements()
+    items_accessible = {
+        loc for loc in world.multiworld.get_locations(world.player) 
+        if loc.can_reach(state)
+    }
+    world.start_items_needed = max(0, Constants.minimum_sphere_one_locations - len(items_accessible))
+    
 # Ignore level access rules for heart sides when heart gates are open by default
 def getLevelAccessRule(level: Level, world: "CelesteModdedWorld"):
     return [[]] if level.heartside and world.options.open_heart_gates.value else level.access_rule
 
+
+def get_filtered_mechanics_list(world: "CelesteModdedWorld") -> set[ItemType]:
+
+    def add_all_mechanics(set, access_rule_list):
+        for item in [item for sublist in access_rule_list for item in sublist]:
+            if item in mechanic:
+                set.add(item)
+
+    mechanics = set()
+    for _,level in levelList.items():
+        if levelEnabled(level, world):
+            add_all_mechanics(mechanics, level.access_rule)
+            for _,room in level.rooms.items():
+                for transition in room.transitions:
+                    add_all_mechanics(mechanics, transition.access_rule)
+                for location in room.locations:
+                    add_all_mechanics(mechanics, location.access_rule)
+
+    return mechanics
+
+def create_start_locations(world: "CelesteModdedWorld"):
+    root_region = world.get_region("Menu")
+    for i in range(world.start_locations_created + 1, world.start_items_needed + 1):
+        add_location(root_region, getStartLocationName(i), world)
+        world.start_locations_created = world.start_locations_created + 1
+        location = world.get_location(getStartLocationName(i))
+        location.item_rule = lambda item: item.player != location.player or item_type_dict[item.name] not in {ItemType.STRAWBERRY, ItemType.MOON_BERRY, ItemType.FILLER}
 
 def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
     id_table: dict[str, int] = dict()
@@ -151,13 +187,17 @@ def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
         **{gem: ItemType.GEM for gem in gem_items},
         **{item.value: ItemType.VICTORY for item in level_victory},
     }
-                    
+
     return item_dict, id_table
         
 
 def generate_location_dict() -> tuple[dict[str, LocationType], dict[str, int]]:
     location_dict: dict[str, LocationType] = dict()
     id_table: dict[str, int] = dict()
+    for i in range(1, Constants.maximum_possible_starting_items + 1):
+        name = getStartLocationName(i)
+        location_dict[name] = LocationType.STARTING_LOCATION
+        id_table[name] = i
     for levelName in levelList:
         level = levelList[levelName]
         for roomName in levelList[levelName].rooms:
@@ -239,11 +279,11 @@ def parse_regions(world: "CelesteModdedWorld"):
                     continue
                 loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
                 add_location_with_rule(room_region, loc_name, world, location.access_rule)
-                
-            
-    
+    calculate_start_items(world)
+    create_start_locations(world)
+
+
 def create_items(world: "CelesteModdedWorld"):
-    mechanics = set()
     #Add items based on available locations
     for levelName,level in levelList.items():
         levelCategory = level.level_category
@@ -263,10 +303,6 @@ def create_items(world: "CelesteModdedWorld"):
                 if (room.easter_egg and not (world.options.easter_egg_rooms.value or world.options.easter_egg_rooms_difficult.value)) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult.value):
                     continue
                 for location in room.locations:
-                    for reqList in location.access_rule:
-                        for requirement in reqList:
-                            if requirement in mechanic.keys():
-                                mechanics.add(requirement)
                     if not world.options.open_heart_gates.value and location.location_type in {
                         LocationType.CRYSTAL_HEART,
                         LocationType.LEVEL_CLEAR_MINI_HEART,
@@ -274,21 +310,24 @@ def create_items(world: "CelesteModdedWorld"):
                         add_item(getLocationName(levelName, roomName, location.location_type, location.ID), world)
                     if location.location_type == LocationType.GEM:
                        add_item(getLocationName(levelName, roomName, location.location_type, location.ID), world)
-                for transition in room.transitions:
-                    for reqList in transition.access_rule:
-                        for requirement in reqList:
-                            if requirement in mechanic.keys():
-                                mechanics.add(requirement)
                 for key_door in room.key_door_ids:
                     add_item(getKeyDoorName(levelName, roomName, key_door), world)
+        # Fix for missing puzzle level hearts breaking logic
+        elif level.puzzle and world.options.exclude_puzzle_levels.value and level.level_category in world.levels_categories_in_play and not world.options.open_heart_gates.value:
+            for roomName,room in level.rooms.items():
+                for location in room.locations:
+                    if location.location_type == LocationType.LEVEL_CLEAR_MINI_HEART:
+                        item_name = getLocationName(levelName, roomName, location.location_type, location.ID)
+                        world.multiworld.push_precollected(world.create_item(item_name))
                
-    for mechanicItem in mechanics:
+    for mechanicItem in get_filtered_mechanics_list(world):
         add_item(mechanicItem, world)
     
     #Add strawberries + moonberry
     for i in range(world.total_strawberries_generated - 1):
         add_item(ItemName.STRAWBERRY.value, world)
-    add_item(ItemName.MOON_BERRY.value, world)
+    if world.total_strawberries_generated > 0 or world.options.require_moon_berry.value:
+        add_item(ItemName.MOON_BERRY.value, world)
     
     setWinCondition(world)
     
@@ -299,10 +338,16 @@ def create_items(world: "CelesteModdedWorld"):
         1 for item in world.multiworld.itempool
         if item.player == world.player
     )
+    if item_count > location_count:
+        world.start_items_needed = world.start_items_needed + (item_count - location_count)
+        create_start_locations(world)
+        location_count = len(world.multiworld.get_unfilled_locations(world.player))
+    
     assert item_count <= location_count, "Celeste Modded has too many items to place in available locations"
     item_difference = location_count - item_count
     for i in range(item_difference):
         add_item(world.get_filler_item_name(), world)
+    i = 0
 
 def setWinCondition(world: "CelesteModdedWorld"):
     location = False
@@ -326,7 +371,7 @@ def setWinCondition(world: "CelesteModdedWorld"):
     
     assert location != False, f"Win condition location was not found, this should not happen"
     location.place_locked_item(world.create_item(ItemName.LEVEL_VICTORY.value))
-        
+
     world.multiworld.completion_condition[world.player] = lambda state, req_berries=world.required_strawberries: (
         state.has(ItemName.STRAWBERRY.value, world.player, req_berries) and
         (not world.options.require_moon_berry.value or state.has(ItemName.MOON_BERRY.value, world.player)) and
@@ -338,12 +383,10 @@ def levelEnabled(level: Level, world: "CelesteModdedWorld"):
         return LevelCategory.GRANDMASTER in world.levels_categories_in_play and LevelCategory.CRACKED_GRANDMASTER in world.levels_categories_in_play
     if level.puzzle and world.options.exclude_puzzle_levels.value:
         return False
-    if level.level_id == Constants.permanent_starting_level_id: #1A
-        return True
     return level.level_category in world.levels_categories_in_play
 
 def levelStartUnlocked(level: Level, world: "CelesteModdedWorld"):
-    return levelEnabled(level, world) and (world.start_level_set == LevelCategory.ALL or level.level_id == Constants.permanent_starting_level_id or (level.heartside and world.options.heart_sides_start_unlocked.value) or level.level_category == world.start_level_set)
+    return levelEnabled(level, world) and (world.start_level_set == LevelCategory.ALL or (level.heartside and world.options.heart_sides_start_unlocked.value) or level.level_category == world.start_level_set)
 
 def deathlessEnabled(levelCategory: LevelCategory, world: "CelesteModdedWorld"):
     match levelCategory:
@@ -389,7 +432,7 @@ def getLevelCount(world: "CelesteModdedWorld") -> int:
     return len([level for _,level in levelList.items() if levelEnabled(level, world)])
 
 def getCrystalHeartCount(world: "CelesteModdedWorld"):
-    return getLevelCount(world) - 1 # Remove 1 for Farewell having no heart
+    return getLevelCount(world) - (1 if levelEnabled(levelList[LevelName.FAREWELL], world) else 0) # Remove 1 for Farewell having no heart
 
 def getRoomCheckCount(world: "CelesteModdedWorld") -> int:
     count = 0
@@ -408,7 +451,7 @@ def getRoomCheckCount(world: "CelesteModdedWorld") -> int:
             count = count + 1
     return count
 
-    
+
 def findStartRoom(level: Level) -> Room:
     for room in Level.rooms:
         if Level.rooms[room].start_room:

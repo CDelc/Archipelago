@@ -4,7 +4,8 @@ from worlds.celeste_modded.constants.LocationTypes import LocationType
 
 game_name = "Celeste Modded"
 base_id = 100000000000
-permanent_starting_level_id = 1 #This level is enabled from the start of every randomizer no matter what.
+minimum_sphere_one_locations = 15
+maximum_possible_starting_items = 100
 
 _group_id_mult_ = 100000000000
 
@@ -23,6 +24,7 @@ _item_id_offset_basic = {
 }
 
 _location_id_offset_basic = {
+    LocationType.STARTING_LOCATION: 0,
     LocationType.STRAWBERRY: 1,
     LocationType.CASSETTE: 2,
     LocationType.LEVEL_CLEAR: 3,

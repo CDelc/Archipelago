@@ -39,6 +39,9 @@ def getKeyDoorName(levelName: LevelName, roomName: str, id: int):
     else:
         return name
 
+def getStartLocationName(index: int):
+    return f"Starting Item #{index}"
+
 _location_alias: dict[str, str] = {
     "Summit A-Side | a-06 - gem:110": "Summit 0M Gem",
     "Summit A-Side | b-02d - gem:109": "Summit 500M Gem",

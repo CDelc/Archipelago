@@ -14,3 +14,4 @@ class LocationType(StrEnum):
     WINGED_GOLDEN = "winged_golden_berry"
     ROOM = "room"
     GEM = "gem"
+    STARTING_LOCATION = "Starting Inventory"

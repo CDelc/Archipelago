@@ -214,8 +214,7 @@ class StartLevelSet(Choice):
     option_advanced_lobby = 3
     option_expert_lobby = 4
     option_grandmaster_lobby = 5
-    option_none = 6
-    option_all_enabled_levels = 7
+    option_all_enabled_levels = 6
     
     default = 0
     
@@ -244,7 +243,6 @@ def map_options(world):
                             LevelCategory.ADVANCED,
                             LevelCategory.EXPERT,
                             LevelCategory.GRANDMASTER,
-                            LevelCategory.NONE,
                             LevelCategory.ALL]
     world.start_level_set = start_level_list[world.options.start_level_set.value]
     

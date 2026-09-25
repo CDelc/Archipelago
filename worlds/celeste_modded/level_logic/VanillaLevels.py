@@ -305,7 +305,7 @@ vanilla_levels : dict[LevelName, Level] = {
             "b-sec": Room(17, [Transition("b-02"), Transition("b-secb")], [Location(LocationType.CRYSTAL_HEART, access_rule=[[ItemName.WHITE_BLOCK]])]),
             "b-05": Room(18, [Transition("b-08b")]),
             "b-05-left": Room(101, [Transition("b-04-berry", [[ItemName.PINK_CLOUDS, ItemName.MOVING_BLOCK]])]),
-            "b-08b": Room(19, [Transition("b-08")]),
+            "b-08b": Room(19, [Transition("b-08", [[ItemName.CLOUDS]])]),
             "b-08": Room(20, [Transition("c-00")], [Location(LocationType.STRAWBERRY, 11)]),
             "c-00": Room(21, [Transition("c-02", [[ItemName.GREEN_BUBBLES]]), Transition("c-01")], [Location(LocationType.STRAWBERRY, 17)], checkpoint="Old Trail"),
             "c-01": Room(22, [Transition("c-00")], [Location(LocationType.STRAWBERRY, 26)]),
