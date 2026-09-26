@@ -518,7 +518,7 @@ vanilla_levels : dict[LevelName, Level] = {
             "02": Room(3, [Transition("03")]),
             "03": Room(4, [Transition("02b")]),
             "02b": Room(5, [Transition("04")]),
-            "04": Room(6, [Transition("05"), Transition("04e", [[ItemName.KEVIN]]), Transition("04b")], checkpoint="Hollows"),
+            "04": Room(6, [Transition("04d"), Transition("05"), Transition("04e", [[ItemName.KEVIN]]), Transition("04b")], checkpoint="Hollows"),
             "04e": Room(7, [Transition("04")], [Location(LocationType.CASSETTE, access_rule=[[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE]])]),
             "04b": Room(8, [Transition("04"), Transition("04c")]),
             "05": Room(9, [Transition("06", [[ItemName.KEVIN]])]),
@@ -574,7 +574,8 @@ vanilla_levels : dict[LevelName, Level] = {
             "after-02": Room(59, [], [Location(LocationType.LEVEL_CLEAR)]),
             "04c": Room(61, [Transition("04b")], [Location(LocationType.CRYSTAL_HEART)]),
             "b-00b": Room(62, [Transition("b-00c"), Transition("b-00")], easter_egg=True),
-            "b-00c": Room(63, [Transition("b-00b")], easter_egg=True)
+            "b-00c": Room(63, [Transition("b-00b")], easter_egg=True),
+            "04d": Room(64, [])
         }, LevelCategory.A_SIDE, 16
     ),
     LevelName.REFLECTION_B:
@@ -624,7 +625,7 @@ vanilla_levels : dict[LevelName, Level] = {
         {
             "a-00": Room(0, [Transition("a-01")], [Location(LocationType.GOLDEN_BERRY, 57, [[ItemName.DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS, ItemName.SPRINGS, ItemName.BADELINE_ORB, ItemName.DREAM_BLOCK, ItemName.TOUCH_SWITCH, ItemName.SINKING_PLATFORM, ItemName.GREEN_BUBBLES, ItemName.RED_BUBBLES, ItemName.MOVING_BLOCK, ItemName.CLOUDS, ItemName.PINK_CLOUDS, ItemName.MOVING_PLATFORM, ItemName.SWAP_BLOCK, ItemName.DASH_SWITCH, ItemName.FEATHER, getKeyDoorName(LevelName.SUMMIT_A, "f-05", 700)]])], start_room=True),
             "a-01": Room(1, [Transition("a-02", [[ItemName.DASH_CRYSTALS]]), Transition("a-00")]),
-            "a-02": Room(2, [Transition("a-03"), Transition("a-01"), Transition("a-02b")]),
+            "a-02": Room(2, [Transition("a-03", [[ItemName.SPRINGS]]), Transition("a-01"), Transition("a-02b")]),
             "a-02b": Room(3, [Transition("a-02")], [Location(LocationType.STRAWBERRY, 61)]),
             "a-03": Room(4, [Transition("a-04", [[ItemName.SPRINGS]]), Transition("a-02")]),
             "a-04": Room(5, [Transition("a-05"), Transition("a-03"), Transition("a-04b")]),
@@ -651,7 +652,7 @@ vanilla_levels : dict[LevelName, Level] = {
             "c-05": Room(26, [Transition("c-04")], [Location(LocationType.STRAWBERRY, 248)]),
             "c-06": Room(27, [Transition("c-04"), Transition("c-07"), Transition("c-06b-strawberry-subroom")]),
             "c-06b": Room(28, [Transition("c-07", [[ItemName.CRUMBLING_PLATFORM]]), Transition("c-04"), Transition("c-06c", [[ItemName.CRUMBLING_PLATFORM]])]),
-            "c-06b-strawberry-subroom": Room(96, [Transition("c-06b")], [Location(LocationType.STRAWBERRY, 218)], is_subregion_of="c-06b"),
+            "c-06b-strawberry-subroom": Room(96, [Transition("c-06b")], [Location(LocationType.STRAWBERRY, 281)], is_subregion_of="c-06b"),
             "c-06c": Room(29, [Transition("c-06b")], [Location(LocationType.GEM, 333, access_rule=[[ItemName.TOUCH_SWITCH]])]),
             "c-07": Room(30, [Transition("c-08"), Transition("c-07b")]),
             "c-07b": Room(31, [Transition("c-07")], [Location(LocationType.STRAWBERRY, 291)]),

@@ -22,7 +22,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
             "b-06": Room(9, [Transition("b-00")], [Location(LocationType.STRAWBERRY, 174, [[ItemName.CORE_SWITCH, ItemName.TOUCH_SWITCH, ItemName.LAVA_ICE_BALLS]])]),
             "b-07b": Room(10, [Transition("b-07")]),
             "b-07": Room(11, [Transition("c-00")]),
-            "c-00": Room(12, [Transition("c-01", [[ItemName.CORE_BLOCK, ItemName.CORE_SWITCH]]), Transition("c-00b")], checkpoint="Hot and Cold"),
+            "c-00": Room(12, [Transition("c-01", [[ItemName.CORE_BLOCK, ItemName.CORE_SWITCH]]), Transition("c-00b", [[ItemName.CORE_BLOCK, ItemName.CORE_SWITCH]])], checkpoint="Hot and Cold"),
             "c-00b": Room(13, [Transition("c-00", [[ItemName.CORE_BLOCK, ItemName.CORE_SWITCH, ItemName.LAVA_ICE_BALLS, ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 211, [[ItemName.BUMPER]])]),
             "c-01": Room(14, [Transition("c-02", [[ItemName.LAVA_ICE_BALLS, ItemName.DASH_CRYSTALS]]), Transition("c-00")]),
             "c-02": Room(15, [Transition("c-03")], [Location(LocationType.STRAWBERRY, 248, [[ItemName.BUMPER]])]),

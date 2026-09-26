@@ -524,10 +524,10 @@ expert_levels_sj : dict[LevelName, Level] = {
     LevelName.CAPER_CAVORTION:
     Level(
         {
-            "s1": Room(0, [Transition("s2", [[ItemName.TRAFFIC_BLOCKS]]), Transition("s2b", [[ItemName.TRAFFIC_BLOCKS]]), Transition("s1a", [[ItemName.TRAFFIC_BLOCKS]])], start_room=True),
+            "s1": Room(0, [Transition("s2", [[ItemName.TRAFFIC_BLOCKS, ItemName.DASH_SPRING]]), Transition("s2b", [[ItemName.TRAFFIC_BLOCKS, ItemName.DASH_SPRING]]), Transition("s1a", [[ItemName.TRAFFIC_BLOCKS, ItemName.DASH_SPRING]])], start_room=True),
             "s2b": Room(1, [Transition("s1")], [Location(LocationType.STRAWBERRY, 1452, [[ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.DASH_SPRING]])]),
             "s2b-right": Room(100, [Transition("s3")], [Location(LocationType.STRAWBERRY, 1826)], is_subregion_of="s2b"),
-            "s1a": Room(2, [Transition("s1")]),
+            "s1a": Room(2, [Transition("s1")], easter_egg=True),
             "s2": Room(3, [Transition("s3", [[ItemName.TRAFFIC_BLOCKS, ItemName.TOUCH_SWITCH, ItemName.DASH_SPRING, ItemName.DASH_CRYSTALS]])], [Location(LocationType.SILVER_BERRY, 144, [[ItemName.TRAFFIC_BLOCKS, ItemName.TOUCH_SWITCH, ItemName.DASH_SPRING, ItemName.DASH_CRYSTALS]])]),
             "s3": Room(4, [Transition("s4"), Transition("s2b-right")]),
             "s4": Room(5, [Transition("s5")]),

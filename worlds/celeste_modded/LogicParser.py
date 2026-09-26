@@ -36,16 +36,22 @@ def ruleFromList(items: list[list[str]], world):
     def returnRule(state: CollectionState, items=items, world=world):
         if not items:
             return True
+        result = True
         for andItems in items:
+            result = True
             for item in andItems:
                 item: str
                 if item.startswith("#"):
                     req_hearts = int(item.replace("#", ""))
                     if not hasNCrystalHearts(req_hearts, state, world):
-                        return False
+                        result = False
                 elif not state.has(item, world.player):
-                    return False
-        return True
+                    result = False
+            if not result:
+                continue
+            else:
+                return True
+        return result
     return returnRule
 
 def ruleFromListPlusCondition(items: list[list[str]], extraItem: str, world):
@@ -88,7 +94,7 @@ def calculate_strawberries(world: "CelesteModdedWorld"):
 
 def calculate_maximum_possible_berries(world: "CelesteModdedWorld"):
     strawberry_count = countStrawberries(world)
-    return max(0, strawberry_count - len(get_filtered_mechanics_list(world)) - getLevelCount(world) + getRoomCheckCount(world) + (getCrystalHeartCount(world) if world.options.open_heart_gates.value else 0))
+    return max(0, strawberry_count - len(get_filtered_mechanics_list(world)) - getLevelCount(world) + getRoomCheckCount(world) + countHeartsides(world) + (getCrystalHeartCount(world) if world.options.open_heart_gates.value else 0))
 
 def calculate_start_items(world: "CelesteModdedWorld"):
     state = CollectionState(world.multiworld)
@@ -129,7 +135,7 @@ def create_start_locations(world: "CelesteModdedWorld"):
         add_location(root_region, getStartLocationName(i), world)
         world.start_locations_created = world.start_locations_created + 1
         location = world.get_location(getStartLocationName(i))
-        location.item_rule = lambda item: item.player != location.player or item_type_dict[item.name] not in {ItemType.STRAWBERRY, ItemType.MOON_BERRY, ItemType.FILLER}
+        # location.item_rule = lambda item: item.player != location.player or item_type_dict[item.name] not in {ItemType.STRAWBERRY, ItemType.MOON_BERRY, ItemType.FILLER}
 
 def generate_item_dict() -> tuple[dict[str, ItemType], dict[str, int]]:
     id_table: dict[str, int] = dict()
@@ -259,7 +265,7 @@ def parse_regions(world: "CelesteModdedWorld"):
             if (room.easter_egg and not (world.options.easter_egg_rooms.value or world.options.easter_egg_rooms_difficult.value)) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult.value):
                 continue
             room_region = world.multiworld.get_region(getRoomName(levelName, roomName), world.player)
-            if(world.options.room_checks.value and not room.is_subregion_of):
+            if(world.options.room_checks.value and not room.is_subregion_of and not room.start_room):
                     loc_name = getRoomName(levelName, roomName)
                     add_location(room_region, loc_name, world)
             if(world.options.randomize_checkpoints.value and room.checkpoint):
@@ -303,7 +309,7 @@ def create_items(world: "CelesteModdedWorld"):
                 if (room.easter_egg and not (world.options.easter_egg_rooms.value or world.options.easter_egg_rooms_difficult.value)) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult.value):
                     continue
                 for location in room.locations:
-                    if not world.options.open_heart_gates.value and location.location_type in {
+                    if not world.options.open_heart_gates.value and not level.heartside and location.location_type in {
                         LocationType.CRYSTAL_HEART,
                         LocationType.LEVEL_CLEAR_MINI_HEART,
                     }:
@@ -432,7 +438,7 @@ def getLevelCount(world: "CelesteModdedWorld") -> int:
     return len([level for _,level in levelList.items() if levelEnabled(level, world)])
 
 def getCrystalHeartCount(world: "CelesteModdedWorld"):
-    return getLevelCount(world) - (1 if levelEnabled(levelList[LevelName.FAREWELL], world) else 0) # Remove 1 for Farewell having no heart
+    return getLevelCount(world) - (1 if levelEnabled(levelList[LevelName.FAREWELL], world) else 0) - countHeartsides(world)
 
 def getRoomCheckCount(world: "CelesteModdedWorld") -> int:
     count = 0
@@ -451,6 +457,12 @@ def getRoomCheckCount(world: "CelesteModdedWorld") -> int:
             count = count + 1
     return count
 
+def countHeartsides(world: "CelesteModdedWorld"):
+    count = 0
+    for _,level in levelList.items():
+        if level.heartside and levelEnabled(level, world):
+            count = count + 1
+    return count
 
 def findStartRoom(level: Level) -> Room:
     for room in Level.rooms:

@@ -17,7 +17,9 @@ from . import LogicParser
 # - More customizable difficulty ceilings
 # - Room checks enabled by level category
 # - Consolidate mechanics / disable mechanic unlocks
-# - Starting inventory instead of 1A opened
+# - Heart gates open except goal level option
+
+# - Find checkpoints where backtracking is possible and include it in logic
 
 game_name = Constants.game_name
 

@@ -393,7 +393,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "0": Room(1, [Transition("1", [[ItemName.GROWTH_POTION]])], [Location(LocationType.SILVER_BERRY, 275, [[ItemName.DASH_CRYSTALS, ItemName.GROWTH_POTION, ItemName.DASH_SWITCH, ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.JAVAS_CRYPT, "3", 35), getKeyDoorName(LevelName.JAVAS_CRYPT, "4", 297), getKeyDoorName(LevelName.JAVAS_CRYPT, "5", 759)]]), Location(LocationType.STRAWBERRY, 674)]),
             "1": Room(2, [Transition("2"), Transition("1b")]),
             "1b": Room(3, [Transition("1")]),
-            "2": Room(4, [Transition("3", [[ItemName.DASH_CRYSTALS, ItemName.DASH_SWITCH]]), Transition("2b")], [Location(LocationType.STRAWBERRY, 100)]),
+            "2": Room(4, [Transition("3", [[ItemName.DASH_CRYSTALS, ItemName.DASH_SWITCH]]), Transition("2b", [[ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 100)]),
             "2b": Room(5, [Transition("2")]),
             "3": Room(6, [Transition("3b", [[ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.JAVAS_CRYPT, "3", 35)]]), Transition("4", [[ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.JAVAS_CRYPT, "3", 35)]])], [Location(LocationType.KEY, 132), Location(LocationType.STRAWBERRY, 276, [[ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.JAVAS_CRYPT, "3", 35)]])], key_door_ids=[35]),
             "3b": Room(7, [Transition("3")], [Location(LocationType.STRAWBERRY, 629)]),
@@ -402,7 +402,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "5": Room(10, [Transition("6", [[getKeyDoorName(LevelName.JAVAS_CRYPT, "5", 759)]])], [Location(LocationType.STRAWBERRY, 670), Location(LocationType.KEY, 838)], key_door_ids=[759]),
             "6": Room(11, [Transition("6e")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "6e": Room(12, [Transition("6")], easter_egg=True)
-        }, LevelCategory.ADVANCED, 89
+        }, LevelCategory.ADVANCED, 89, puzzle = True
     ),
     LevelName.RIGHTSIDE_DOWN_CAVERN:
     Level(

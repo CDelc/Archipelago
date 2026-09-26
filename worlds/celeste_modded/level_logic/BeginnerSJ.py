@@ -222,8 +222,8 @@ beginner_levels_sj : dict[LevelName, Level] = {
     Level(
         {
             "1": Room(0, [Transition("2", [[ItemName.TRAFFIC_BLOCKS]])], [Location(LocationType.SILVER_BERRY, 467, [[ItemName.TRAFFIC_BLOCKS, ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS]])], start_room=True),
-            "2": Room(1, [Transition("3")]),
-            "3": Room(2, [Transition("4", [[ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 415, [[ItemName.TOUCH_SWITCH]])]),
+            "2": Room(1, [Transition("3", [[ItemName.DASH_CRYSTALS]])]),
+            "3": Room(2, [Transition("4", [[ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 415, [[ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS]])]),
             "4": Room(3, [Transition("5", [[ItemName.TOUCH_SWITCH]])], [Location(LocationType.STRAWBERRY, 217)]),
             "5": Room(4, [Transition("6")]),
             "6": Room(5, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])

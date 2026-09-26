@@ -158,7 +158,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "a-02": Room(1, [Transition("a-03", [[ItemName.RED_BUBBLES]])], [Location(LocationType.SILVER_BERRY, 3607, [[ItemName.GREEN_BUBBLES, ItemName.CRUMBLING_PLATFORM, ItemName.RED_BUBBLES, ItemName.CLOUDS, ItemName.PINK_CLOUDS, ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.TRAFFIC_BLOCKS, ItemName.BADELINE_ORB, ItemName.DREAM_BLOCK]])]),
             "a-03": Room(2, [Transition("a-04", [[ItemName.CLOUDS]])]),
             "a-04": Room(3, [Transition("b-01", [[ItemName.DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS]])]),
-            "b-01": Room(4, [Transition("c-01", [[ItemName.PINK_CLOUDS, ItemName.DREAM_BLOCK, ItemName.TOUCH_SWITCH]]), Transition("b-02"), Transition("b-05")]),
+            "b-01": Room(4, [Transition("c-01", [[ItemName.PINK_CLOUDS, ItemName.DREAM_BLOCK, ItemName.TOUCH_SWITCH]]), Transition("b-02", [[ItemName.PINK_CLOUDS, ItemName.GREEN_BUBBLES]]), Transition("b-05")]),
             "c-01": Room(5, [Transition("c-02", [[ItemName.BADELINE_ORB]])], [Location(LocationType.STRAWBERRY, 3054)]),
             "c-02": Room(6, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "b-05": Room(8, [Transition("b-06", [[ItemName.DREAM_BLOCK]]), Transition("b-07", [[ItemName.DREAM_BLOCK]])]),
