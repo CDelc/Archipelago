@@ -20,6 +20,7 @@ from . import LogicParser
 # - Heart gates open except goal level option
 
 # - Find checkpoints where backtracking is possible and include it in logic
+# - Coresaken city checks might not work
 
 game_name = Constants.game_name
 
