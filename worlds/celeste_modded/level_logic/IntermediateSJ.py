@@ -316,7 +316,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
     Level(
         {
             "a-001": Room(0, [Transition("a-002", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.PULL_STATION_BLOCK, ItemName.PUSH_STATION_BLOCK, ItemName.BREAKER_BOX]]), Transition("a-000")], [Location(LocationType.SILVER_BERRY, 895, [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.PULL_STATION_BLOCK, ItemName.PUSH_STATION_BLOCK, ItemName.BREAKER_BOX, ItemName.SINGLE_JUMP_REFILL, ItemName.SPRINGS]])], start_room=True),
-            "a-000": Room(1, [Transition("a-001"), Transition("a-000S")], [Location(LocationType.STRAWBERRY, 1410, [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.SPRINGS, ItemName.BREAKER_BOX, ItemName.PUSH_STATION_BLOCK]])]),
+            "a-000": Room(1, [Transition("a-001"), Transition("a-000S", [[ItemName.DOUBLE_DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 1410, [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.SPRINGS, ItemName.BREAKER_BOX, ItemName.PUSH_STATION_BLOCK]])]),
             "a-002": Room(2, [Transition("a-003", [[ItemName.SINGLE_JUMP_REFILL]])]),
             "a-003": Room(3, [Transition("a-004")]),
             "a-004": Room(4, [Transition("a-005", [[ItemName.SPRINGS]])]),

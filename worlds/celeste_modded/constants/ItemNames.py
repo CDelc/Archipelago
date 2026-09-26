@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-from worlds.celeste_modded.constants.LevelNames import LevelCategory
+from .LevelNames import LevelCategory
 
 # up_dash = "Up Dash"
 # right_dash = "Right Dash"

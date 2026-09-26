@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 import dataclasses
 
-from worlds.celeste_modded.constants.ItemNames import ItemName
-from worlds.celeste_modded.constants.LevelNames import LevelCategory
-from worlds.celeste_modded.constants.LocationTypes import LocationType
+from ..constants.ItemNames import ItemName
+from ..constants.LevelNames import LevelCategory
+from ..constants.LocationTypes import LocationType
 
 
 @dataclass(frozen=True)

@@ -1,15 +1,15 @@
 from dataclasses import dataclass, field
 import dataclasses
-from worlds.celeste_modded.constants.LocationTypes import LocationType
-from worlds.celeste_modded.constants.LevelNames import LevelName, LevelCategory
-from worlds.celeste_modded.constants.ItemNames import ItemName
-from worlds.celeste_modded.level_logic.VanillaLevels import vanilla_levels
-from worlds.celeste_modded.level_logic.VanillaPostGame import vanilla_post_game_levels
-from worlds.celeste_modded.level_logic.BeginnerSJ import beginner_levels_sj
-from worlds.celeste_modded.level_logic.IntermediateSJ import intermediate_levels_sj
-from worlds.celeste_modded.level_logic.AdvancedSJ import advanced_levels_sj
-from worlds.celeste_modded.level_logic.ExpertSJ import expert_levels_sj
-from worlds.celeste_modded.level_logic.GrandmasterSJ import gm_levels_sj
-from worlds.celeste_modded.level_logic.LogicalObjects import Level
+from ..constants.LocationTypes import LocationType
+from ..constants.LevelNames import LevelName, LevelCategory
+from ..constants.ItemNames import ItemName
+from ..level_logic.VanillaLevels import vanilla_levels
+from ..level_logic.VanillaPostGame import vanilla_post_game_levels
+from ..level_logic.BeginnerSJ import beginner_levels_sj
+from ..level_logic.IntermediateSJ import intermediate_levels_sj
+from ..level_logic.AdvancedSJ import advanced_levels_sj
+from ..level_logic.ExpertSJ import expert_levels_sj
+from ..level_logic.GrandmasterSJ import gm_levels_sj
+from ..level_logic.LogicalObjects import Level
 
 levelList: dict[LevelName, Level] = vanilla_levels | vanilla_post_game_levels | beginner_levels_sj | intermediate_levels_sj | advanced_levels_sj | expert_levels_sj | gm_levels_sj

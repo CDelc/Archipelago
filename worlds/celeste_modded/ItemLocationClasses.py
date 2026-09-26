@@ -1,5 +1,5 @@
 from BaseClasses import Item, Location
-from worlds.celeste_modded.constants import Constants
+from .constants import Constants
 
 
 class ModdedCelesteLocation(Location):
