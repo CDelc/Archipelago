@@ -42,7 +42,7 @@ class IncludeCrackedGrandmaster(Toggle):
 
 class IncludeVanillaLevels(Choice):
     """
-    Pick up to which level of Vanilla Chapters 1-8 will be included (1A will always be included to ensure the game is completable)
+    Pick up to which level of Vanilla Chapters 1-8 will be included
     """
     display_name = "Include Vanilla Levels"
     default = 1
