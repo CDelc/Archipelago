@@ -334,7 +334,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
     LevelName.COLLAPSING_SKYLINE:
     Level(
         {
-            "a-01": Room(0, [Transition("a-02", [[ItemName.SWAP_BLOCK]])], [Location(LocationType.SILVER_BERRY, 235, [[ItemName.TOUCH_SWITCH, ItemName.SWAP_BLOCK]])], start_room=True),
+            "a-01": Room(0, [Transition("a-02", [[ItemName.SWAP_BLOCK]])], [Location(LocationType.SILVER_BERRY, 235, [[ItemName.TOUCH_SWITCH, ItemName.SWAP_BLOCK, ItemName.INTRO_CRUSHER]])], start_room=True),
             "a-02": Room(1, [Transition("a-04"), Transition("a-02-b")]),
             "a-02-b": Room(2, [Transition("a-02")], [Location(LocationType.STRAWBERRY, 170)]),
             "a-04": Room(3, [Transition("a-03"), Transition("a-05b")]),
@@ -342,7 +342,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a-03": Room(5, [Transition("a-05")]),
             "a-05": Room(6, [Transition("a-06", [[ItemName.TOUCH_SWITCH]]), Transition("a-05s")]),
             "a-05s": Room(7, [Transition("a-05")], easter_egg=True),
-            "a-06": Room(8, [Transition("a-07")]),
+            "a-06": Room(8, [Transition("a-07", [[ItemName.INTRO_CRUSHER]])]),
             "a-07": Room(9, [Transition("a-08")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART), Location(LocationType.STRAWBERRY, 999)]),
             "a-08": Room(10, [Transition("a-08s")], [Location(LocationType.STRAWBERRY, 862)]),
             "a-08s": Room(11, [Transition("a-08")], easter_egg=True)
@@ -502,11 +502,11 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "cp3_13_heartside_skeleton": Room(14, [Transition("cp3_12_heartside_coffe", [[ItemName.BOUNCE_DREAM_BLOCK, ItemName.ORANGE_LINKED_TRAFFIC_BLOCK, ItemName.TOUCH_SWITCH]])]),
             "cp3_12_heartside_coffe": Room(15, [Transition("cp3_11_heartside_joltik", [[ItemName.LOOP_BLOCK, ItemName.GREEN_BUBBLES]])]),
             "cp3_11_heartside_joltik": Room(16, [Transition("cp4_checkpoint", [[ItemName.PINK_CLOUDS]])]),
-            "cp4_checkpoint": Room(17, [Transition("cp4_10_heartside_Hanky")], checkpoint="Jade"),
+            "cp4_checkpoint": Room(17, [Transition("cp3_11_heartside_joltik"), Transition("cp4_10_heartside_Hanky")], checkpoint="Jade"),
             "cp4_10_heartside_Hanky": Room(18, [Transition("cp4_09_heartside_jadeturtle", [[ItemName.DASH_CRYSTAL_SHARDS, ItemName.MOVING_BLOCK, ItemName.BLUE_TIME_CRYSTAL, ItemName.TOUCH_SWITCH]])]),
             "cp4_09_heartside_jadeturtle": Room(19, [Transition("cp4_08_heartside_quinnigan", [[ItemName.STRAWBERRY_JAM, ItemName.SPRINGS, ItemName.PIPES]])]),
             "cp4_08_heartside_quinnigan": Room(20, [Transition("cp5_checkpoint", [[ItemName.TRIPLE_BOOST_FLOWER, ItemName.DASH_CRYSTALS]])]),
-            "cp5_checkpoint": Room(21, [Transition("cp5_07_heartside_voliver9")], checkpoint="Overgrowth"),
+            "cp5_checkpoint": Room(21, [Transition("cp4_08_heartside_quinnigan"), Transition("cp5_07_heartside_voliver9")], checkpoint="Overgrowth"),
             "cp5_07_heartside_voliver9": Room(22, [Transition("cp5_06_heartside_CoupCritik1", [[ItemName.CORE_BLOCK, ItemName.TRAFFIC_BLOCKS, ItemName.TOUCH_SWITCH]])]),
             "cp5_06_heartside_CoupCritik1": Room(23, [Transition("cp5_06_heartside_CoupCritik2", [[ItemName.SINGLE_JUMP_REFILL]])]),
             "cp5_06_heartside_CoupCritik2": Room(24, [Transition("cp5_06_heartside_CoupCritik3", [[ItemName.TRIPLE_JUMP_REFILL]])]),

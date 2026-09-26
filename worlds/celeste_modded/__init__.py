@@ -18,8 +18,7 @@ from . import LogicParser
 # - Room checks enabled by level category
 # - Consolidate mechanics / disable mechanic unlocks
 # - Heart gates open except goal level option
-
-# - Find checkpoints where backtracking is possible and include it in logic
+# - Remove precollected hearts from in-game display
 
 game_name = Constants.game_name
 
@@ -47,6 +46,7 @@ class CelesteModdedWorld(World):
         self.required_strawberries = 0
         self.start_items_needed = 0
         self.start_locations_created = 0
+        self.precollected_items = 0
         
     
     game = game_name
@@ -152,6 +152,7 @@ class CelesteModdedWorld(World):
             "required_strawberries": self.required_strawberries,
             "open_heart_gates": self.options.open_heart_gates.value,
             "start_items_needed": self.start_items_needed,
+            "precollected_items": self.precollected_items,
 
             "apworld_version": WORLD_VERSION,
             "minimum_mod_version": MINIMUM_MOD_VERSION

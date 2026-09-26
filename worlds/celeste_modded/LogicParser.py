@@ -325,6 +325,7 @@ def create_items(world: "CelesteModdedWorld"):
                     if location.location_type == LocationType.LEVEL_CLEAR_MINI_HEART:
                         item_name = getLocationName(levelName, roomName, location.location_type, location.ID)
                         world.multiworld.push_precollected(world.create_item(item_name))
+                        world.precollected_items = world.precollected_items + 1
                
     for mechanicItem in get_filtered_mechanics_list(world):
         add_item(mechanicItem, world)
