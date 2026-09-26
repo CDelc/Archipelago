@@ -1,5 +1,5 @@
-from worlds.celeste_modded.constants.ItemTypes import ItemType
-from worlds.celeste_modded.constants.LocationTypes import LocationType
+from .ItemTypes import ItemType
+from .LocationTypes import LocationType
 
 
 game_name = "Celeste Modded"

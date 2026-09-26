@@ -272,7 +272,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "Bill": Room(0, [Transition("Carol")], [Location(LocationType.SILVER_BERRY, 470, [[ItemName.DASH_CRYSTALS, ItemName.SPRINGS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH]])], start_room=True),
             "Carol": Room(1, [Transition("Fred", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH]])]),
             "Fred": Room(2, [Transition("Jeremy")]),
-            "Jeremy": Room(3, [Transition("Kathy")]),
+            "Jeremy": Room(3, [Transition("Kathy", [[ItemName.DASH_CRYSTALS]])]),
             "Kathy": Room(4, [Transition("Phil", [[ItemName.DASH_CRYSTALS]])]),
             "Phil": Room(5, [Transition("Susan", [[ItemName.SPRINGS]]), Transition("Russel")]),
             "Russel": Room(6, [Transition("Phil"), Transition("oldRussel")], [Location(LocationType.STRAWBERRY, 2619, [[ItemName.SPRINGS]])]),

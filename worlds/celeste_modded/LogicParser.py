@@ -1,8 +1,8 @@
 from typing import TYPE_CHECKING
 from BaseClasses import CollectionState, Region
-from worlds.celeste_modded.ItemLocationClasses import ModdedCelesteLocation
-from worlds.celeste_modded.ValidateLayout import validate
-from worlds.celeste_modded.constants import Constants
+from .ItemLocationClasses import ModdedCelesteLocation
+from .ValidateLayout import validate
+from .constants import Constants
 from worlds.generic.Rules import set_rule
 from .level_logic.LogicalLayout import levelList
 from .level_logic.LogicalObjects import Level, Room
@@ -11,8 +11,8 @@ from .constants.LevelNames import LevelName, LevelCategory
 from .constants.LocationTypes import LocationType
 from .constants.ItemTypes import ItemType
 from .Naming import getCheckpointName, getKeyDoorName, getLocationName, getRoomName, getStartLocationName
-from worlds.celeste_modded.level_logic.LogicalLayout import levelList
-from worlds.celeste_modded.level_logic.LogicalObjects import Level
+from .level_logic.LogicalLayout import levelList
+from .level_logic.LogicalObjects import Level
 
 levelList: dict[LevelName, Level]
 

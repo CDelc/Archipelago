@@ -203,17 +203,17 @@ beginner_levels_sj : dict[LevelName, Level] = {
     LevelName.CORESAKEN_CITY:
     Level(
         {
-            "a_01": Room(0, [Transition("a_02", [[ItemName.CORE_BLOCK, ItemName.TRAFFIC_BLOCKS]])], [Location(LocationType.SILVER_BERRY, 160, [[ItemName.CORE_BLOCK, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.SPRINGS]])], start_room=True),
-            "a_02": Room(1, [Transition("a_03", [[ItemName.SPRINGS]])]),
-            "a_03": Room(2, [Transition("a_04", [[ItemName.TOUCH_SWITCH]])]),
-            "a_04": Room(3, [Transition("a_05")]),
-            "a_05": Room(4, [Transition("a_06", [[ItemName.DOUBLE_DASH_CRYSTALS]])]),
-            "a_06": Room(5, [Transition("a_07", [[ItemName.DASH_CRYSTALS]]), Transition("b-01")]),
-            "b-01": Room(6, [Transition("a_06")], [Location(LocationType.STRAWBERRY, 112, [[ItemName.DASH_CRYSTALS]])]),
-            "a_07": Room(7, [Transition("a_08")]),
-            "a_08": Room(8, [Transition("a_09"), Transition("b-02")]),
-            "b-02": Room(9, [Transition("a_08")], [Location(LocationType.STRAWBERRY, 71)]),
-            "a_09": Room(10, [Transition("b-03")]),
+            "a-01": Room(0, [Transition("a-02", [[ItemName.CORE_BLOCK, ItemName.TRAFFIC_BLOCKS]])], [Location(LocationType.SILVER_BERRY, 160, [[ItemName.CORE_BLOCK, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.SPRINGS]])], start_room=True),
+            "a-02": Room(1, [Transition("a-03", [[ItemName.SPRINGS]])]),
+            "a-03": Room(2, [Transition("a-04", [[ItemName.TOUCH_SWITCH]])]),
+            "a-04": Room(3, [Transition("a-05")]),
+            "a-05": Room(4, [Transition("a-06", [[ItemName.DOUBLE_DASH_CRYSTALS]])]),
+            "a-06": Room(5, [Transition("a-07", [[ItemName.DASH_CRYSTALS]]), Transition("b-01")]),
+            "b-01": Room(6, [Transition("a-06")], [Location(LocationType.STRAWBERRY, 112, [[ItemName.DASH_CRYSTALS]])]),
+            "a-07": Room(7, [Transition("a-08")]),
+            "a-08": Room(8, [Transition("a-09"), Transition("b-02")]),
+            "b-02": Room(9, [Transition("a-08")], [Location(LocationType.STRAWBERRY, 71)]),
+            "a-09": Room(10, [Transition("b-03")]),
             "b-03": Room(11, [Transition("b-04")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "b-04": Room(12, [], [Location(LocationType.STRAWBERRY, 458)])
         }, LevelCategory.BEGINNER, 35
@@ -224,7 +224,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "1": Room(0, [Transition("2", [[ItemName.TRAFFIC_BLOCKS]])], [Location(LocationType.SILVER_BERRY, 467, [[ItemName.TRAFFIC_BLOCKS, ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS]])], start_room=True),
             "2": Room(1, [Transition("3", [[ItemName.DASH_CRYSTALS]])]),
             "3": Room(2, [Transition("4", [[ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 415, [[ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS]])]),
-            "4": Room(3, [Transition("5", [[ItemName.TOUCH_SWITCH]])], [Location(LocationType.STRAWBERRY, 217)]),
+            "4": Room(3, [Transition("5", [[ItemName.TOUCH_SWITCH]])], [Location(LocationType.STRAWBERRY, 217, [[ItemName.TOUCH_SWITCH]])]),
             "5": Room(4, [Transition("6")]),
             "6": Room(5, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
         }, LevelCategory.BEGINNER, 36
@@ -389,7 +389,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a-02": Room(3, [Transition("a-03")]),
             "a-03": Room(4, [Transition("a-04b"), Transition("a-03b"), Transition("a-04a")]),
             "a-03b": Room(5, [Transition("a-03")], easter_egg=True),
-            "a-04a": Room(6, [Transition("a-05")]),
+            "a-04a": Room(6, [Transition("a-05", [[ItemName.SPRINGS]])]),
             "a-04b": Room(7, [Transition("a-05", [[ItemName.SPRINGS]])]),
             "a-05": Room(8, [Transition("a-06a"), Transition("a-06b")]),
             "a-06b": Room(9, [Transition("a-07b", [[ItemName.CRUMBLING_PLATFORM]])]),
@@ -415,8 +415,8 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "b-06": Room(28, [Transition("b-07"), Transition("b-06b")]),
             "b-06b": Room(29, [Transition("b-06")], easter_egg=True),
             "b-07": Room(30, [Transition("b-08")]),
-            "b-08": Room(31, [Transition("b-09")]),
-            "b-09": Room(32, [Transition("b-10", [[ItemName.SPRINGS]])]),
+            "b-08": Room(31, [Transition("b-09", [[ItemName.SPRINGS]])]),
+            "b-09": Room(32, [Transition("b-10")]),
             "b-10": Room(33, [Transition("b-11", [[ItemName.BADELINE_ORB]])]),
             "b-11": Room(34, [Transition("bus")]),
             "bus": Room(35, [Transition("c-intro")]),

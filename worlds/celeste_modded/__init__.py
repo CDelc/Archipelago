@@ -1,7 +1,7 @@
 from BaseClasses import Item, ItemClassification, Location, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
-from worlds.celeste_modded.ItemLocationClasses import ModdedCelesteItem
-from worlds.celeste_modded.ValidateLayout import validate
+from .ItemLocationClasses import ModdedCelesteItem
+from .ValidateLayout import validate
 from .Options import CelesteModdedOptions, groups
 from .constants.ItemNames import ItemName
 from .constants.LevelNames import LevelName, LevelCategory
@@ -20,7 +20,6 @@ from . import LogicParser
 # - Heart gates open except goal level option
 
 # - Find checkpoints where backtracking is possible and include it in logic
-# - Coresaken city checks might not work
 
 game_name = Constants.game_name
 

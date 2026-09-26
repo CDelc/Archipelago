@@ -402,7 +402,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "5": Room(10, [Transition("6", [[getKeyDoorName(LevelName.JAVAS_CRYPT, "5", 759)]])], [Location(LocationType.STRAWBERRY, 670), Location(LocationType.KEY, 838)], key_door_ids=[759]),
             "6": Room(11, [Transition("6e")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "6e": Room(12, [Transition("6")], easter_egg=True)
-        }, LevelCategory.ADVANCED, 89, puzzle = True
+        }, LevelCategory.ADVANCED, 89, puzzle=True
     ),
     LevelName.RIGHTSIDE_DOWN_CAVERN:
     Level(

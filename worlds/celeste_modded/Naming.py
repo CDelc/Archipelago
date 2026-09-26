@@ -1,5 +1,5 @@
-from worlds.celeste_modded.constants.LevelNames import LevelCategory, LevelName
-from worlds.celeste_modded.constants.LocationTypes import LocationType
+from .constants.LevelNames import LevelCategory, LevelName
+from .constants.LocationTypes import LocationType
 
 def getCheckpointName(levelName: LevelName, checkpointName: str):
     return f"{levelName}: {checkpointName}"

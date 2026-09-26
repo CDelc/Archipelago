@@ -204,10 +204,10 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
     LevelName.PROLOGUE:
     Level(
         {
-            "01": Room(0, [Transition("1"), Transition("-1"), Transition("0b")], start_room=True),
-            "-1": Room(1, [Transition("01")]),
-            "0b": Room(2, [Transition("01")]),
-            "1": Room(3, [Transition("2"), Transition("01")]),
+            "0": Room(0, [Transition("1"), Transition("-1"), Transition("0b", [[ItemName.INTRO_CRUSHER]])], start_room=True),
+            "-1": Room(1, [Transition("0")]),
+            "0b": Room(2, [Transition("0")]),
+            "1": Room(3, [Transition("2"), Transition("0")]),
             "2": Room(4, [Transition("3"), Transition("1")]),
             "3": Room(5, [Transition("2")], [Location(LocationType.LEVEL_CLEAR)])
         }, LevelCategory.A_SIDE, 26
