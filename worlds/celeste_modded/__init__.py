@@ -17,6 +17,13 @@ from . import LogicParser
 # - More customizable difficulty ceilings
 # - Room checks enabled by level category
 # - Consolidate mechanics / disable mechanic unlocks
+
+# - Regular consolidation
+# - Color consolidation (Regular consolidation but add colors as items and require them to unlock colored mechs)
+# - Minimum consolidation (Keep all mechanics but get rid of variants between them)
+# - Vanilla consolidation (Put everything in terms of some vanilla mech)
+# - No mechanic unlocks
+
 # - Heart gates open except goal level option
 # - Remove precollected hearts from in-game display
 

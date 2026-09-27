@@ -389,7 +389,7 @@ vanilla_levels : dict[LevelName, Level] = {
             "b-20": Room(13, [Transition("b-01"), Transition("b-21")], [Location(LocationType.STRAWBERRY, 189), Location(LocationType.STRAWBERRY, 183, [[ItemName.SWAP_BLOCK]])]),
             "b-01c": Room(14, [Transition("b-01")], [Location(LocationType.STRAWBERRY, 85)]),
             "b-01b": Room(15, [Transition("b-02")]),
-            "b-02": Room(16, [Transition("b-06"), Transition("b-03"), Transition("b-05"), Transition("b-04"), Transition("b-10"), Transition("b-11")]),
+            "b-02": Room(16, [Transition("b-06"), Transition("b-03"), Transition("b-05"), Transition("b-04", [[ItemName.RED_BUBBLES]]), Transition("b-10"), Transition("b-11")]),
             "b-03": Room(17, [Transition("b-02")], [Location(LocationType.STRAWBERRY, 24, [[ItemName.RED_BUBBLES]])]),
             "b-05": Room(18, [Transition("b-02")], [Location(LocationType.STRAWBERRY, 23, [[ItemName.RED_BUBBLES, ItemName.DASH_CRYSTALS]])]),
             "b-04": Room(19, [Transition("b-02"), Transition("b-07")]),
