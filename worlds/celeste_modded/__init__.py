@@ -29,8 +29,8 @@ from . import LogicParser
 
 game_name = Constants.game_name
 
-WORLD_VERSION = "1.1.2"
-MINIMUM_MOD_VERSION = "1.1.2"
+WORLD_VERSION = "1.1.3"
+MINIMUM_MOD_VERSION = "1.1.3"
 
 class CelesteModdedWebWorld(WebWorld):
     theme = "partyTime"
