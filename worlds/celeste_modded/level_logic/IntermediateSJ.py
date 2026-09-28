@@ -30,7 +30,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
         {
             "a_01": Room(0, [Transition("b_01", [[getKeyDoorName(LevelName.SLEEPING_UNDER_STARS, "a_01", 1858), getKeyDoorName(LevelName.SLEEPING_UNDER_STARS, "a_01", 1860), getKeyDoorName(LevelName.SLEEPING_UNDER_STARS, "a_01", 1862), getKeyDoorName(LevelName.SLEEPING_UNDER_STARS, "a_01", 1864)]]), Transition("a_02"), Transition("a_03", [[ItemName.DREAM_BLOCK, ItemName.JELLYFISH]]), Transition("a_04"), Transition("a_05")], [Location(LocationType.SILVER_BERRY, 373, [[ItemName.SPRINGS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.JELLYFISH, ItemName.PUFFER_FISH, ItemName.TOUCH_SWITCH, ItemName.DREAM_BLOCK, ItemName.DASH_CRYSTALS, getKeyDoorName(LevelName.SLEEPING_UNDER_STARS, "a_01", 1858), getKeyDoorName(LevelName.SLEEPING_UNDER_STARS, "a_01", 1860), getKeyDoorName(LevelName.SLEEPING_UNDER_STARS, "a_01", 1862), getKeyDoorName(LevelName.SLEEPING_UNDER_STARS, "a_01", 1864)]])], start_room=True, key_door_ids=[1858, 1860, 1862, 1864]),
             "a_02": Room(1, [Transition("a_01")], [Location(LocationType.KEY, 287, [[ItemName.DREAM_BLOCK, ItemName.JELLYFISH, ItemName.DASH_CRYSTALS]])]),
-            "a_03": Room(2, [Transition("a_01")], [Location(LocationType.KEY, 141, [[ItemName.DREAM_BLOCK, ItemName.JELLYFISH, ItemName.SPRINGS]])]),
+            "a_03": Room(2, [Transition("a_01")], [Location(LocationType.KEY, 700, [[ItemName.DREAM_BLOCK, ItemName.JELLYFISH, ItemName.SPRINGS]])]),
             "a_04": Room(3, [Transition("a_01")], [Location(LocationType.KEY, 1823, [[ItemName.TOUCH_SWITCH, ItemName.JELLYFISH, ItemName.DASH_CRYSTALS, ItemName.SPRINGS]])]),
             "a_05": Room(4, [Transition("a_01")], [Location(LocationType.KEY, 1912, [[ItemName.PUFFER_FISH, ItemName.DASH_CRYSTALS, ItemName.JELLYFISH, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS]])]),
             "b_01": Room(5, [Transition("b_02")]),
@@ -176,7 +176,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "btd-02": Room(1, [Transition("btd-02a", [[ItemName.SPRINGS]]), Transition("btd-02b", [[ItemName.SPRINGS]]), Transition("btd-02c", [[ItemName.SPRINGS]])]),
             "btd-02b": Room(2, [Transition("btd-02")], [Location(LocationType.STRAWBERRY, 827)]),
             "btd-02c": Room(3, [Transition("btd-02", [[ItemName.GREEN_LINKED_TRAFFIC_BLOCK]])], [Location(LocationType.STRAWBERRY, 839, [[ItemName.GREEN_LINKED_TRAFFIC_BLOCK]])]),
-            "btd-02a": Room(4, [Transition("btd-03")]),
+            "btd-02a": Room(4, [Transition("btd-03", [[ItemName.GREEN_LINKED_TRAFFIC_BLOCK]])]),
             "btd-03": Room(5, [Transition("btd-04")]),
             "btd-04": Room(6, [Transition("btd-05"), Transition("btd-04a")]),
             "btd-04a": Room(7, [Transition("btd-04")], easter_egg=True),
@@ -316,7 +316,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
     Level(
         {
             "a-001": Room(0, [Transition("a-002", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.PULL_STATION_BLOCK, ItemName.PUSH_STATION_BLOCK, ItemName.BREAKER_BOX]]), Transition("a-000")], [Location(LocationType.SILVER_BERRY, 895, [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.PULL_STATION_BLOCK, ItemName.PUSH_STATION_BLOCK, ItemName.BREAKER_BOX, ItemName.SINGLE_JUMP_REFILL, ItemName.SPRINGS]])], start_room=True),
-            "a-000": Room(1, [Transition("a-001"), Transition("a-000S", [[ItemName.DOUBLE_DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 1410, [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.SPRINGS, ItemName.BREAKER_BOX, ItemName.PUSH_STATION_BLOCK]])]),
+            "a-000": Room(1, [Transition("a-001"), Transition("a-000S", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.PUSH_STATION_BLOCK]])], [Location(LocationType.STRAWBERRY, 1410, [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.SPRINGS, ItemName.BREAKER_BOX, ItemName.PUSH_STATION_BLOCK]])]),
             "a-002": Room(2, [Transition("a-003", [[ItemName.SINGLE_JUMP_REFILL]])]),
             "a-003": Room(3, [Transition("a-004")]),
             "a-004": Room(4, [Transition("a-005", [[ItemName.SPRINGS]])]),

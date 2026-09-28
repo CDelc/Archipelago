@@ -17,7 +17,7 @@ def getLocationName(levelName: LevelName, roomName: str, location_type: Location
 def _getLocationNameNoAlias(levelName: LevelName, roomName: str, location_type: LocationType, location_id: int):
     name = ""
     if location_type == LocationType.LEVEL_CLEAR_MINI_HEART:
-        name = f"Mini Heart: {levelName}"
+        name = f"{levelName} Mini Heart"
     elif location_type == LocationType.LEVEL_CLEAR:
         name = f"{levelName} Level Clear"
     elif location_type == LocationType.GOLDEN_BERRY:
