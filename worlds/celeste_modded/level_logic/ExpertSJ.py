@@ -1,6 +1,6 @@
 from ..Naming import getKeyDoorName, getLocationName
 from ..constants.ItemNames import ItemName
-from ..constants.LevelNames import LevelCategory, LevelName
+from ..constants.LevelNames import LevelCategory, LevelName, LevelDifficulty
 from .LogicalObjects import Level, Room, Transition, Location
 from ..constants.LocationTypes import LocationType
 
@@ -52,7 +52,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "Agent_05": Room(8, [Transition("Agent_06")]),
             "Agent_06": Room(9, [Transition("Agent_07")]),
             "Agent_07": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 94
+        }, LevelCategory.EXPERT, 94, LevelDifficulty.YELLOW
     ),
     LevelName.FLYING_BATTERY:
     Level(
@@ -66,7 +66,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-07": Room(6, [Transition("a-08")]),
             "a-08": Room(7, [Transition("a-07"), Transition("a-08b")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a-08b": Room(8, [Transition("a-08")], [Location(LocationType.STRAWBERRY, 2295)])
-        }, LevelCategory.EXPERT, 95
+        }, LevelCategory.EXPERT, 95, LevelDifficulty.GREEN
     ),
     LevelName.SKYLINE_USURPER:
     Level(
@@ -83,7 +83,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a07": Room(9, [Transition("a08outro"), Transition("a07b")]),
             "a07b": Room(10, [Transition("a07")], [Location(LocationType.STRAWBERRY, 2070)]),
             "a08outro": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 96
+        }, LevelCategory.EXPERT, 96, LevelDifficulty.YELLOW
     ),
     LevelName.CHROMATIC_COMPLEX:
     Level(
@@ -102,7 +102,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-11": Room(11, [Transition("a-12", [[ItemName.DOUBLE_DASH_REFILL_WALL]])]),
             "a-12": Room(12, [Transition("a-13", [[ItemName.DASH_REFILL_WALL]])]),
             "a-13": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART), Location(LocationType.STRAWBERRY, 1052)])
-        }, LevelCategory.EXPERT, 97
+        }, LevelCategory.EXPERT, 97, LevelDifficulty.RED
     ),
     LevelName.FORTRESS_FALL:
     Level(
@@ -122,7 +122,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "11": Room(11, [Transition("99-end")]),
             "99-end": Room(12, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "07-berry-2": Room(14, [Transition("06-crossroad")], [Location(LocationType.STRAWBERRY, 2055)]) 
-        }, LevelCategory.EXPERT, 98
+        }, LevelCategory.EXPERT, 98, LevelDifficulty.RED
     ),
     LevelName.THE_CORE_PROBLEM:
     Level(
@@ -141,7 +141,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-09b": Room(11, [Transition("a-09")], [Location(LocationType.STRAWBERRY, 2912, [[ItemName.CORE_BLOCK]])]),
             "a-10": Room(12, [Transition("a-11")]),
             "a-11": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 99
+        }, LevelCategory.EXPERT, 99, LevelDifficulty.GREEN
     ),
     LevelName.PSYCHOKINETIC:
     Level(
@@ -170,7 +170,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "s-Graveyard": Room(21, [], easter_egg_difficult=True),
             "s-Water Splash": Room(23, [], easter_egg=True),
             "s-Shrek Swamp": Room(24, [], easter_egg_difficult=True)
-        }, LevelCategory.EXPERT, 100
+        }, LevelCategory.EXPERT, 100, LevelDifficulty.RED
     ),
     LevelName.GARDEN_OF_KHUTARA:
     Level(
@@ -194,7 +194,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "DanTKO_Outro": Room(16, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "Aperture_Mountain Relic": Room(18, [Transition("Aperture_Mountain Relic_EXIT")], easter_egg_difficult=True),
             "Aperture_Mountain Relic_EXIT": Room(19, [Transition("DanTKO_Intro")], easter_egg_difficult=True)
-        }, LevelCategory.EXPERT, 101
+        }, LevelCategory.EXPERT, 101, LevelDifficulty.RED
     ),
     LevelName.OVERGROWN_LINN:
     Level(
@@ -219,7 +219,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-00c": Room(18, [Transition("a-00b"), Transition("a-00y")], easter_egg_difficult=True),
             "a-00b": Room(19, [Transition("a-00c")], easter_egg_difficult=True),
             "a-00y": Room(20, [Transition("a-00c")], easter_egg_difficult=True)
-        }, LevelCategory.EXPERT, 102
+        }, LevelCategory.EXPERT, 102, LevelDifficulty.GREEN
     ),
     LevelName.CLOCKWORK:
     Level(
@@ -238,7 +238,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-08": Room(11, [Transition("a-09")]),
             "a-09": Room(12, [Transition("a-09b")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a-09b": Room(13, [Transition("a-09")], [Location(LocationType.STRAWBERRY, 13047)])
-        }, LevelCategory.EXPERT, 103
+        }, LevelCategory.EXPERT, 103, LevelDifficulty.YELLOW
     ),
     LevelName.PLASMA_REACTOR:
     Level(
@@ -254,7 +254,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a9": Room(8, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "b1": Room(9, [Transition("bones_room"), Transition("a8")], [Location(LocationType.STRAWBERRY, 2100)]),
             "bones_room": Room(10, [Transition("b1")], easter_egg=True)
-        }, LevelCategory.EXPERT, 104
+        }, LevelCategory.EXPERT, 104, LevelDifficulty.YELLOW
     ),
     LevelName.NARROW_HOLLOW:
     Level(
@@ -270,7 +270,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "8": Room(8, [Transition("9")]),
             "9": Room(9, [Transition("10", [[ItemName.SPRINGS]])]),
             "10": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 105
+        }, LevelCategory.EXPERT, 105, LevelDifficulty.RED
     ),
     LevelName.HYDROSHOCK:
     Level(
@@ -290,7 +290,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a14": Room(12, [Transition("a15")]),
             "a15": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a03": Room(15, [], easter_egg_difficult=True)
-        }, LevelCategory.EXPERT, 106
+        }, LevelCategory.EXPERT, 106, LevelDifficulty.GREEN
     ),
     LevelName.FLOATING_POINT:
     Level(
@@ -317,7 +317,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a09b": Room(19, [Transition("a10", [[ItemName.PURPLE_FLOATING_FIELDS]]), Transition("a08s")]),
             "a10": Room(20, [Transition("trueend", [[ItemName.PINK_SWITCH_BLOCK, ItemName.PURPLE_SWITCH_BLOCK, ItemName.RED_SWITCH_BLOCK]])], [Location(LocationType.STRAWBERRY, 2260, [[ItemName.PINK_SWITCH_BLOCK, ItemName.PURPLE_SWITCH_BLOCK, ItemName.RED_SWITCH_BLOCK]])]),
             "trueend": Room(21, [])
-        }, LevelCategory.EXPERT, 107
+        }, LevelCategory.EXPERT, 107, LevelDifficulty.YELLOW
     ),
     LevelName.STORM_RUNNER:
     Level(
@@ -333,13 +333,13 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-08": Room(8, [Transition("a-09")]),
             "a-09": Room(9, [Transition("a-10")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a-10": Room(10, [], [Location(LocationType.STRAWBERRY, 3226, [[ItemName.JELLYFISH, ItemName.PINK_CLOUDS]])])
-        }, LevelCategory.EXPERT, 108
+        }, LevelCategory.EXPERT, 108, LevelDifficulty.YELLOW
     ),
     LevelName.SUMMIT_DOWNSIDE:
     Level(
         {
             "1": Room(0, [], [Location(LocationType.SILVER_BERRY, 99, [[ItemName.SPRINGS, ItemName.WHITE_DREAM_BLOCK]]), Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.SPRINGS, ItemName.WHITE_DREAM_BLOCK]]), Location(LocationType.STRAWBERRY, 103, [[ItemName.BADELINE_ORB, ItemName.SPRINGS, ItemName.WHITE_DREAM_BLOCK]])], start_room=True)
-        }, LevelCategory.EXPERT, 109
+        }, LevelCategory.EXPERT, 109, LevelDifficulty.RED
     ),
     LevelName.TIME_TROUBLE:
     Level(
@@ -354,7 +354,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-07": Room(7, [Transition("a-08"), Transition("a-07-b")]),
             "a-07-b": Room(8, [Transition("a-07")], [Location(LocationType.STRAWBERRY, 814)]),
             "a-08": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 110
+        }, LevelCategory.EXPERT, 110, LevelDifficulty.YELLOW
     ),
     LevelName.SUBWAY_NEON:
     Level(
@@ -371,7 +371,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-06": Room(9, [Transition("a-07")]),
             "a-07": Room(10, [Transition("end")]),
             "end": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 111
+        }, LevelCategory.EXPERT, 111, LevelDifficulty.GREEN
     ),
     LevelName.HYPNAGOGIA:
     Level(
@@ -388,7 +388,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "b-03": Room(9, [Transition("end")]),
             "end": Room(10, [Transition("space ruins")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "space ruins": Room(11, [Transition("end")], easter_egg_difficult=True)
-        }, LevelCategory.EXPERT, 112
+        }, LevelCategory.EXPERT, 112, LevelDifficulty.YELLOW
     ),
     LevelName.MEANINGLESS_CONTRAPTIONS:
     Level(
@@ -407,7 +407,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "Hi Ru": Room(11, [Transition("a-7")]),
             "a-8": Room(12, [Transition("ema-1")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "ema-1": Room(13, [Transition("a-8")], easter_egg_difficult=True)
-        }, LevelCategory.EXPERT, 113
+        }, LevelCategory.EXPERT, 113, LevelDifficulty.GREEN
     ),
     LevelName.ETHEREAL_ASCENSION:
     Level(
@@ -427,7 +427,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-07bb": Room(12, [Transition("a-07")], [Location(LocationType.STRAWBERRY, 2773)]),
             "a-09": Room(13, [Transition("a-08b")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a-08b": Room(14, [Transition("a-09")], [Location(LocationType.STRAWBERRY, 3960)])
-        }, LevelCategory.EXPERT, 114
+        }, LevelCategory.EXPERT, 114, LevelDifficulty.YELLOW
     ),
     LevelName.VINCULUM:
     Level(
@@ -453,7 +453,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-12": Room(18, [Transition("a-11")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.BIRD]])]),
             "secret1": Room(19, [Transition("secret2", [[ItemName.BIRD]])], easter_egg=True),
             "secret2": Room(20, [], easter_egg_difficult=True)
-        }, LevelCategory.EXPERT, 115
+        }, LevelCategory.EXPERT, 115, LevelDifficulty.YELLOW
     ),
     LevelName.GOLDEN_ALLEYWAY:
     Level(
@@ -470,7 +470,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "b_03": Room(9, [Transition("b_04")]),
             "b_04": Room(10, [Transition("b_05")]),
             "b_05": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 116
+        }, LevelCategory.EXPERT, 116, LevelDifficulty.GREEN
     ),
     LevelName.MOSAIC_GARDEN:
     Level(
@@ -483,7 +483,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "secret": Room(5, [Transition("a-03")], easter_egg=True),
             "a-03-01": Room(6, [Transition("a-03")], [Location(LocationType.STRAWBERRY, 1120)]),
             "outro": Room(7, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 117
+        }, LevelCategory.EXPERT, 117, LevelDifficulty.YELLOW
     ),
     LevelName.SYSTEM_INVALIDMAPEXCEPTION:
     Level(
@@ -500,7 +500,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-8": Room(9, [Transition("a-end"), Transition("a-b1")]),
             "a-b1": Room(10, [Transition("a-8")], [Location(LocationType.STRAWBERRY, 1490)]),
             "a-end": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 118
+        }, LevelCategory.EXPERT, 118, LevelDifficulty.GREEN
     ),
     LevelName.LUNAR_PAGODA:
     Level(
@@ -519,7 +519,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "7-1": Room(11, [Transition("7")], [Location(LocationType.STRAWBERRY, 1425)]),
             "8": Room(12, [Transition("end")]),
             "end": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 119, puzzle=True
+        }, LevelCategory.EXPERT, 119, LevelDifficulty.YELLOW, puzzle=True
     ),
     LevelName.CAPER_CAVORTION:
     Level(
@@ -538,7 +538,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "s8": Room(10, [Transition("s9"), Transition("s8b")]),
             "s8b": Room(11, [Transition("s8")], [Location(LocationType.STRAWBERRY, 562, [[ItemName.MOMENTUM_SPRING]])]),
             "s9": Room(12, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 120
+        }, LevelCategory.EXPERT, 120, LevelDifficulty.YELLOW
     ),
     LevelName.MADELINE_THE_BUBBLE:
     Level(
@@ -556,7 +556,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "Vina-08~b": Room(10, [Transition("Vina-08")], [Location(LocationType.STRAWBERRY, 10784)]),
             "Vina-09": Room(11, [Transition("Vina-End")]),
             "Vina-End": Room(12, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 121
+        }, LevelCategory.EXPERT, 121, LevelDifficulty.YELLOW
     ),
     LevelName.POLARIS:
     Level(
@@ -571,7 +571,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a7": Room(7, [Transition("a8"), Transition("a7b")]),
             "a7b": Room(8, [Transition("a7")], [Location(LocationType.STRAWBERRY, 2044)]),
             "a8": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.EXPERT, 122
+        }, LevelCategory.EXPERT, 122, LevelDifficulty.RED
     ),
     LevelName.STARFRUIT_SUPERNOVA:
     Level(
@@ -627,6 +627,6 @@ expert_levels_sj : dict[LevelName, Level] = {
             "f07_xplosives": Room(48, [Transition("f07_legs")]),
             "f07_legs": Room(49, [Transition("f07_and_you")]),
             "f07_and_you": Room(50, [], [Location(LocationType.CRYSTAL_HEART)])
-        }, LevelCategory.EXPERT, 123, ehs_access_reqs, heartside = True
+        }, LevelCategory.EXPERT, 123, LevelDifficulty.RED, ehs_access_reqs, heartside = True
     )
 }

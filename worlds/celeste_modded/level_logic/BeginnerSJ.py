@@ -1,6 +1,6 @@
 from ..Naming import getKeyDoorName, getLocationName
 from ..constants.ItemNames import ItemName
-from ..constants.LevelNames import LevelCategory, LevelName
+from ..constants.LevelNames import LevelCategory, LevelName, LevelDifficulty
 from .LogicalObjects import Level, Room, Transition, Location
 from ..constants.LocationTypes import LocationType
 
@@ -50,7 +50,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "c-15": Room(16, [Transition("c-16")]),
             "c-16": Room(17, [Transition("c-17")]),
             "c-17": Room(18, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 27, [[ItemName.GREEN_BUBBLES]]
+        }, LevelCategory.BEGINNER, 27, LevelDifficulty.GREEN, [[ItemName.GREEN_BUBBLES]]
     ),
     LevelName.FOREST_PATH:
     Level(
@@ -75,14 +75,14 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a-18": Room(17, [Transition("a-19")]),
             "a-19": Room(18, [Transition("a-20")], [Location(LocationType.STRAWBERRY, 523)]),
             "a-20": Room(19, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 28
+        }, LevelCategory.BEGINNER, 28, LevelDifficulty.GREEN
     ),
     LevelName.DRIVEWAY_DID_YOU_IN:
     Level(
         {
             "00- intro": Room(0, [Transition("01- Crusher")], [Location(LocationType.SILVER_BERRY, 581, [[ItemName.INTRO_CRUSHER, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS, ItemName.SPRINGS, ItemName.GREEN_BUBBLES]])], start_room=True),
             "01- Crusher": Room(1, [Transition("02- Bait N'Switch", [[ItemName.INTRO_CRUSHER]])]),
-            "02- Bait N'Switch": Room(2, [Transition("03- Uberjump", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS]]), Transition("02B- a strwawbewwy??")]),
+            "02- Bait N'Switch": Room(2, [Transition("03- Uberjump", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS]]), Transition("02B- a strwawbewwy??", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS]])]),
             "02B- a strwawbewwy??": Room(3, [], [Location(LocationType.STRAWBERRY, 682)]),
             "03- Uberjump": Room(4, [Transition("04- Head Trauma")]),
             "04- Head Trauma": Room(5, [Transition("05- Boing")], [Location(LocationType.STRAWBERRY, 717)]),
@@ -92,7 +92,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "07B- OwO whats this??": Room(9, [], [Location(LocationType.STRAWBERRY, 1459)]),
             "08- U Turn": Room(10, [Transition("09- Fin")]),
             "09- Fin": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 29
+        }, LevelCategory.BEGINNER, 29, LevelDifficulty.YELLOW
     ),
     LevelName.AZURE_CAVERNS:
     Level(
@@ -107,7 +107,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "06": Room(7, [Transition("07")]),
             "07": Room(8, [Transition("08")]),
             "08": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 30
+        }, LevelCategory.BEGINNER, 30, LevelDifficulty.GREEN
     ),
     LevelName.CASSETTE_CLIFFS:
     Level(
@@ -129,7 +129,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "12": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "ber4": Room(12, [Transition("4")], [Location(LocationType.STRAWBERRY, 31)]),
             "5": Room(13, [Transition("3-key", [[ItemName.CRUMBLING_PLATFORM]])])
-        }, LevelCategory.BEGINNER, 31
+        }, LevelCategory.BEGINNER, 31, LevelDifficulty.YELLOW
     ),
     LevelName.SOAP:
     Level(
@@ -151,7 +151,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "11": Room(14, [Transition("heart"), Transition("11b")]),
             "11b": Room(15, [Transition("11")], [Location(LocationType.STRAWBERRY, 3857)]),
             "heart": Room(16, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 32
+        }, LevelCategory.BEGINNER, 32, LevelDifficulty.RED
     ),
     LevelName.OVER_THE_CITY:
     Level(
@@ -182,7 +182,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "RouteA-2": Room(24, [Transition("RouteA-1"), Transition("RouteA-3")]),
             "RouteA-1": Room(25, [Transition("RouteA-2"), Transition("16")]),
             "RouteA-3": Room(26, [Transition("RouteA-2")])
-        }, LevelCategory.BEGINNER, 33
+        }, LevelCategory.BEGINNER, 33, LevelDifficulty.YELLOW
     ),
     LevelName.TROPHOSPHERE:
     Level(
@@ -198,7 +198,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "c_01": Room(8, [Transition("c_02")]),
             "c_02": Room(9, [Transition("c_03_end")], [Location(LocationType.STRAWBERRY, 101)]),
             "c_03_end": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 34
+        }, LevelCategory.BEGINNER, 34, LevelDifficulty.YELLOW
     ),
     LevelName.CORESAKEN_CITY:
     Level(
@@ -216,7 +216,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a-09": Room(10, [Transition("b-03")]),
             "b-03": Room(11, [Transition("b-04")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "b-04": Room(12, [], [Location(LocationType.STRAWBERRY, 458)])
-        }, LevelCategory.BEGINNER, 35
+        }, LevelCategory.BEGINNER, 35, LevelDifficulty.RED
     ),
     LevelName.THE_SQUEEZE:
     Level(
@@ -227,7 +227,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "4": Room(3, [Transition("5", [[ItemName.TOUCH_SWITCH]])], [Location(LocationType.STRAWBERRY, 217, [[ItemName.TOUCH_SWITCH]])]),
             "5": Room(4, [Transition("6")]),
             "6": Room(5, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 36
+        }, LevelCategory.BEGINNER, 36, LevelDifficulty.YELLOW
     ),
     LevelName.SEEING_IS_BELIEVING:
     Level(
@@ -244,7 +244,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a_09": Room(9, [Transition("a_11")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a_11": Room(10, [Transition("a_12")], [Location(LocationType.STRAWBERRY, 312)]),
             "a_12": Room(11, [], easter_egg=True)
-        }, LevelCategory.BEGINNER, 37
+        }, LevelCategory.BEGINNER, 37, LevelDifficulty.GREEN
     ),
     LevelName.SWITCHTUBE_VISTA:
     Level(
@@ -274,7 +274,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a13-top": Room(102, [Transition("a13_b")], is_subregion_of="a13"),
             "a13_b": Room(20, [Transition("a13")]),
             "a14_Outro": Room(21, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 38
+        }, LevelCategory.BEGINNER, 38, LevelDifficulty.RED
     ),
     LevelName.POTENTIAL_FOR_ANYTHING:
     Level(
@@ -309,7 +309,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "Lab-Tele": Room(28, [Transition("HUB")]),
             "Lab-5berry": Room(29, [Transition("Lab-3")], [Location(LocationType.STRAWBERRY, 731)]),
             "Lab-secret": Room(30, [Transition("Lab-6")], easter_egg=True)
-        }, LevelCategory.BEGINNER, 39
+        }, LevelCategory.BEGINNER, 39, LevelDifficulty.YELLOW
     ),
     LevelName.A_GIFT_FROM_THE_STARS:
     Level(
@@ -329,7 +329,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "End Cabin": Room(12, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "Shuffle": Room(14, [Transition("Feedback Loop"), Transition("Double Vision")], [Location(LocationType.STRAWBERRY, 1223)]),
             "Feedback Loop": Room(15, [], [Location(LocationType.STRAWBERRY, 899)])
-        }, LevelCategory.BEGINNER, 40, puzzle=True
+        }, LevelCategory.BEGINNER, 40, LevelDifficulty.RED, puzzle=True
     ),
     LevelName.COLLAPSING_SKYLINE:
     Level(
@@ -346,7 +346,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a-07": Room(9, [Transition("a-08")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART), Location(LocationType.STRAWBERRY, 999)]),
             "a-08": Room(10, [Transition("a-08s")], [Location(LocationType.STRAWBERRY, 862)]),
             "a-08s": Room(11, [Transition("a-08")], easter_egg=True)
-        }, LevelCategory.BEGINNER, 41
+        }, LevelCategory.BEGINNER, 41, LevelDifficulty.GREEN
     ),
     LevelName.STRAWBERRY_ORCHARD:
     Level(
@@ -365,7 +365,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a-10z": Room(11, [Transition("a-11z")], [Location(LocationType.STRAWBERRY, 794, [[ItemName.DASH_SWITCH]])]),
             "a-12z": Room(12, [Transition("a-13z")], [Location(LocationType.STRAWBERRY, 431, [[ItemName.DASH_SWITCH]])]),
             "a-13z": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 42
+        }, LevelCategory.BEGINNER, 42, LevelDifficulty.RED
     ),
     LevelName.MIDNIGHT_SPIRE:
     Level(
@@ -378,7 +378,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a_05": Room(5, [Transition("a_06", [[ItemName.PINK_CLOUDS]])]),
             "a_06": Room(6, [Transition("a_07")]),
             "a_07": Room(7, [], [Location(LocationType.STRAWBERRY, 1474), Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 43
+        }, LevelCategory.BEGINNER, 43, LevelDifficulty.YELLOW
     ),
     LevelName.PAINT:
     Level(
@@ -430,7 +430,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "c-06": Room(43, [Transition("end")]),
             "end": Room(44, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "b-tribute": Room(46, [Transition("b-berry1")])
-        }, LevelCategory.BEGINNER, 44
+        }, LevelCategory.BEGINNER, 44, LevelDifficulty.YELLOW
     ),
     LevelName.DROPZLE:
     Level(
@@ -452,7 +452,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "10 - Downfall": Room(14, [Transition("secret")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "secret": Room(15, [Transition("10 - Downfall")], easter_egg=True),
             "04b - Alcove": Room(17, [Transition("04a - Correlation")], [Location(LocationType.STRAWBERRY, 330)])
-        }, LevelCategory.BEGINNER, 45, puzzle=True
+        }, LevelCategory.BEGINNER, 45, LevelDifficulty.RED, puzzle=True
     ),
     LevelName.ROSE_GARDEN:
     Level(
@@ -463,11 +463,11 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "q03": Room(3, [Transition("q07")]),
             "q04": Room(4, [Transition("q05")]),
             "q05": Room(5, [Transition("q03")]),
-            "q06": Room(6, [Transition("q04")]),
+            "q06": Room(6, [Transition("q04", [[ItemName.TOUCH_SWITCH]])]),
             "q07": Room(7, [Transition("q08")]),
             "q08": Room(8, [Transition("q09")]),
             "q09": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 46
+        }, LevelCategory.BEGINNER, 46, LevelDifficulty.YELLOW
     ),
     LevelName.TREEHIVE:
     Level(
@@ -480,7 +480,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "skeleton_04": Room(5, [Transition("skeleton_05", [[ItemName.GREEN_LINKED_TRAFFIC_BLOCK]])], [Location(LocationType.STRAWBERRY, 159)]),
             "skeleton_05": Room(6, [Transition("skeleton_outro")]),
             "skeleton_outro": Room(7, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.BEGINNER, 47
+        }, LevelCategory.BEGINNER, 47, LevelDifficulty.YELLOW
     ),
     LevelName.BLUEBERRY_BAY:
     Level(
@@ -519,6 +519,6 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "cp6_03_heartside_Moss_1": Room(31, [Transition("cp6_03_heartside_Moss_2", [[ItemName.BADELINE_ORB, ItemName.BIG_YELLOW_BUTTON]])]),
             "cp6_03_heartside_Moss_2": Room(32, [Transition("heartside_outro")]),
             "heartside_outro": Room(33, [], [Location(LocationType.CRYSTAL_HEART)])
-        }, LevelCategory.BEGINNER, 48, bhs_access, heartside = True
+        }, LevelCategory.BEGINNER, 48, LevelDifficulty.RED, bhs_access, heartside = True
     )
 }

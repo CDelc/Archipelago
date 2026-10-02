@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import dataclasses
 
 from ..constants.ItemNames import ItemName
-from ..constants.LevelNames import LevelCategory
+from ..constants.LevelNames import LevelCategory, LevelDifficulty
 from ..constants.LocationTypes import LocationType
 
 
@@ -34,6 +34,7 @@ class Level:
     rooms: dict[str, Room]
     level_category: LevelCategory
     level_id: int
+    level_difficulty: LevelDifficulty = LevelDifficulty.NONE
     access_rule: list[list[str]] = dataclasses.field(default_factory=list)
     heartside: bool = False
     puzzle: bool = False

@@ -27,7 +27,7 @@ def _getLocationNameNoAlias(levelName: LevelName, roomName: str, location_type: 
     elif location_type == LocationType.CASSETTE:
         name = f"{levelName} Cassette"
     elif location_type == LocationType.CRYSTAL_HEART:
-        name = f"Crystal Heart: {levelName}"
+        name = f"{levelName} Crystal Heart"
     else:
         name = f"{getRoomName(levelName, roomName)} - {location_type.value}{"" if not location_id else f":{location_id}"}"
     return name

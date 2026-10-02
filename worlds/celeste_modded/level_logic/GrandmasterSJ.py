@@ -1,6 +1,6 @@
 from ..Naming import getKeyDoorName, getLocationName
 from ..constants.ItemNames import ItemName
-from ..constants.LevelNames import LevelCategory, LevelName
+from ..constants.LevelNames import LevelCategory, LevelName, LevelDifficulty
 from .LogicalObjects import Level, Room, Transition, Location
 from ..constants.LocationTypes import LocationType
 
@@ -40,7 +40,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "a-06": Room(9, [Transition("end"), Transition("a-secret")]),
             "a-secret": Room(10, [Transition("a-06")], easter_egg=True),
             "end": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.GRANDMASTER, 124
+        }, LevelCategory.GRANDMASTER, 124, LevelDifficulty.YELLOW
     ),
     LevelName.BELLY_OF_THE_BEAST:
     Level(
@@ -54,7 +54,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "a-06": Room(6, [Transition("a-07")]),
             "a-07": Room(7, [Transition("a-08")]),
             "a-08": Room(8, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.GRANDMASTER, 125
+        }, LevelCategory.GRANDMASTER, 125, LevelDifficulty.YELLOW
     ),
     LevelName.WORLD_ABYSS:
     Level(
@@ -65,7 +65,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "big-2": Room(3, [Transition("chill-sec")]),
             "chill-sec": Room(4, [Transition("big-3")]),
             "big-3": Room(5, [])
-        }, LevelCategory.GRANDMASTER, 126
+        }, LevelCategory.GRANDMASTER, 126, LevelDifficulty.RED
     ),
     LevelName.CYCLE_MADNESS_B_SIDE:
     Level(
@@ -85,7 +85,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "4": Room(11, [Transition("4a", [[ItemName.MOVING_PLATFORM]])]),
             "8": Room(12, [Transition("68a-right")]),
             "4a": Room(13, [Transition("2")])
-        }, LevelCategory.GRANDMASTER, 127
+        }, LevelCategory.GRANDMASTER, 127, LevelDifficulty.YELLOW
     ),
     LevelName.STELLAR_ODYSSEY:
     Level(
@@ -101,7 +101,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "a-06": Room(8, [Transition("a-07", [[ItemName.THEO_CRYSTAL]])]),
             "a-07": Room(9, [], [Location(LocationType.STRAWBERRY, 9845, [[ItemName.DASH_SWITCH]])]),
             "a-04c": Room(11, [Transition("a-04")], [Location(LocationType.STRAWBERRY, 4272), Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.GRANDMASTER, 128
+        }, LevelCategory.GRANDMASTER, 128, LevelDifficulty.RED
     ),
     LevelName.SEVENTY_FOUR:
     Level(
@@ -120,7 +120,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "Swimming": Room(11, [Transition("Passenger", [[ItemName.TOUCH_SWITCH]])]),
             "Passenger": Room(12, [Transition("The End of TIMELINE", [[ItemName.FEATHER]])]),
             "The End of TIMELINE": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.DASH_CRYSTALS]])])
-        }, LevelCategory.GRANDMASTER, 129
+        }, LevelCategory.GRANDMASTER, 129, LevelDifficulty.RED
     ),
     LevelName.SHATTERSONG:
     Level(
@@ -146,7 +146,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "Final Movement": Room(18, [Transition("SHATTER")]),
             "SHATTER": Room(19, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "WARPED": Room(21, [Transition("C2")], [Location(LocationType.STRAWBERRY, 552, [[ItemName.BLUE_PORTAL, ItemName.PURPLE_PORTAL, ItemName.YELLOW_PORTAL, ItemName.GREEN_PORTAL, ItemName.MINI_FAKE_CRYSTAL_HEART]])])
-        }, LevelCategory.GRANDMASTER, 130
+        }, LevelCategory.GRANDMASTER, 130, LevelDifficulty.RED
     ),
     LevelName.IVORY:
     Level(
@@ -169,7 +169,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "Break My Ivory Tower 3": Room(15, [Transition("Break My Ivory Tower 2")], easter_egg_difficult=True),
             "Break My Ivory Tower 4": Room(16, [Transition("Break My Ivory Tower 5", [[ItemName.THEO_CRYSTAL, ItemName.SEEKERS, ItemName.CRUMBLING_PLATFORM]])], easter_egg_difficult=True),
             "Break My Ivory Tower 5": Room(17, [], easter_egg_difficult=True)
-        }, LevelCategory.CRACKED_GRANDMASTER, 131
+        }, LevelCategory.GRANDMASTER, 131, LevelDifficulty.CRACKED
     ),
     LevelName.SUMMIT_GM:
     Level(
@@ -187,7 +187,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "3000M-00": Room(10, [Transition("3000M-01")]),
             "3000M-01": Room(11, [Transition("3000M-02", [[ItemName.FEATHER]])]),
             "3000M-02": Room(12, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.GRANDMASTER, 132
+        }, LevelCategory.GRANDMASTER, 132, LevelDifficulty.RED
     ),
     LevelName.PINBALL_PURGATORY:
     Level(
@@ -207,7 +207,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "Extra Ball": Room(11, [Transition("Recoil")], [Location(LocationType.STRAWBERRY, 2820, [[ItemName.THEO_CRYSTAL]])]),
             "pumber": Room(12, [Transition("Malfunction")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "Malfunction": Room(13, [Transition("pumber")], [Location(LocationType.STRAWBERRY, 5214)])
-        }, LevelCategory.CRACKED_GRANDMASTER, 133
+        }, LevelCategory.GRANDMASTER, 133, LevelDifficulty.CRACKED
     ),
     LevelName.CAVE_OF_THE_CRIMSON_SKY:
     Level(
@@ -222,7 +222,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "cotcs-4": Room(7, [Transition("cotcs-5")]),
             "cotcs-5": Room(8, [Transition("cotcs-6")], [Location(LocationType.STRAWBERRY, 1486)]),
             "cotcs-6": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.GRANDMASTER, 134
+        }, LevelCategory.GRANDMASTER, 134, LevelDifficulty.YELLOW
     ),
     LevelName.THE_SOLAR_EXPRESS:
     Level(
@@ -250,7 +250,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "Luxury Suite": Room(20, [Transition("Breathe")]),
             "Breathe": Room(21, [Transition("Extraction")]),
             "Extraction": Room(22, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.CRACKED_GRANDMASTER, 135
+        }, LevelCategory.GRANDMASTER, 135, LevelDifficulty.CRACKED
     ),
     LevelName.FLIPSIDE_CLIFFSIDE:
     Level(
@@ -264,7 +264,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "Zenith": Room(6, [Transition("Nostalgia")]),
             "Nostalgia": Room(7, [Transition("The Edge")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "The Edge": Room(8, [Transition("Nostalgia")], [Location(LocationType.STRAWBERRY, 1729, [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.DOUBLE_DASH_CRYSTALS]])])
-        }, LevelCategory.GRANDMASTER, 136
+        }, LevelCategory.GRANDMASTER, 136, LevelDifficulty.GREEN
     ),
     LevelName.LAVA_LAYER:
     Level(
@@ -280,7 +280,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "gameing_room(for_gameing)": Room(8, [Transition("Susan")], easter_egg=True),
             "Todd": Room(9, [], [Location(LocationType.STRAWBERRY, 566), Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "oldRussel": Room(11, [], easter_egg=True)
-        }, LevelCategory.GRANDMASTER, 137
+        }, LevelCategory.GRANDMASTER, 137, LevelDifficulty.GREEN
     ),
     LevelName.KEVINTECHSPAM_BIN:
     Level(
@@ -293,7 +293,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "5": Room(5, [Transition("6", [[ItemName.WHITE_LINKED_TRAFFIC_BLOCK]])]),
             "6": Room(6, [Transition("7", [[ItemName.BIRD]])]),
             "7": Room(7, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.BADELINE_ORB]])])
-        }, LevelCategory.GRANDMASTER, 138
+        }, LevelCategory.GRANDMASTER, 138, LevelDifficulty.GREEN
     ),
     LevelName.NELUMBO:
     Level(
@@ -307,7 +307,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "Rat Run": Room(6, [Transition("Zigzag")], [Location(LocationType.STRAWBERRY, 581)]),
             "Zigzag": Room(7, [Transition("Lotus")]),
             "Lotus": Room(8, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.CRACKED_GRANDMASTER, 139
+        }, LevelCategory.GRANDMASTER, 139, LevelDifficulty.CRACKED
     ),
     LevelName.DRIFTING_DEEP:
     Level(
@@ -328,7 +328,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "a-09": Room(13, [Transition("a-10")]),
             "a-10": Room(14, [Transition("a-11")]),
             "a-11": Room(15, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.GRANDMASTER, 140
+        }, LevelCategory.GRANDMASTER, 140, LevelDifficulty.YELLOW
     ),
     LevelName.FRACTURED_IRIDESCENCE:
     Level(
@@ -339,7 +339,7 @@ gm_levels_sj : dict[LevelName, Level] = {
             "a3": Room(3, [Transition("a4", [[ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_REFILL_WALL]])]),
             "a4": Room(4, [Transition("a5")]),
             "a5": Room(5, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.GRANDMASTER, 141
+        }, LevelCategory.GRANDMASTER, 141, LevelDifficulty.GREEN
     ),
     LevelName.PASSIONFRUIT_PANTHEON:
     Level(
@@ -369,6 +369,6 @@ gm_levels_sj : dict[LevelName, Level] = {
             "f2_02-Soloiini": Room(22, [Transition("f3_01-Hydro", [[ItemName.CORE_BLOCK, ItemName.DREAM_BLOCK, ItemName.YELLOW_ROCK, ItemName.DASH_SWITCH]])]),
             "f3_01-Hydro": Room(23, [Transition("gg_Heart", [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.GREEN_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.RED_CASSETTE_BLOCK, ItemName.PURPLE_CASSETTE_BLOCK, ItemName.ORANGE_CASSETTE_BLOCK, ItemName.BADELINE_ORB, ItemName.BIRD, ItemName.FEATHER]])]),
             "gg_Heart": Room(24, [], [Location(LocationType.CRYSTAL_HEART)])
-        }, LevelCategory.CRACKED_GRANDMASTER, 142, gmhs_access, heartside = True
+        }, LevelCategory.GRANDMASTER, 142, LevelDifficulty.CRACKED, gmhs_access, heartside = True
     )
 }

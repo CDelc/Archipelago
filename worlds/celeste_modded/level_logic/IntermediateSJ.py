@@ -1,6 +1,6 @@
 from ..Naming import getKeyDoorName, getLocationName
 from ..constants.ItemNames import ItemName
-from ..constants.LevelNames import LevelCategory, LevelName
+from ..constants.LevelNames import LevelCategory, LevelName, LevelDifficulty
 from .LogicalObjects import Level, Room, Transition, Location
 from ..constants.LocationTypes import LocationType
 
@@ -39,7 +39,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "b_03": Room(8, [Transition("b_04", [[ItemName.SPRINGS, ItemName.DOUBLE_DASH_CRYSTALS]])]),
             "b_04": Room(9, [Transition("b_05")]),
             "b_05": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])        
-        }, LevelCategory.INTERMEDIATE, 49
+        }, LevelCategory.INTERMEDIATE, 49, LevelDifficulty.GREEN
     ),
     LevelName.SQUARE_THE_CIRCLE:
     Level(
@@ -62,7 +62,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "outro": Room(15, [Transition("hmmmm")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "hmmmm": Room(16, [Transition("uwu"), Transition("outro")], easter_egg=True),
             "uwu": Room(17, [Transition("hmmmm")], easter_egg=True)
-        }, LevelCategory.INTERMEDIATE, 50
+        }, LevelCategory.INTERMEDIATE, 50, LevelDifficulty.RED
     ),
     LevelName.FROSTED_FRAGMENTS:
     Level(
@@ -82,7 +82,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "r_01v2": Room(12, [Transition("a_10v2")], [Location(LocationType.STRAWBERRY, 9666)]),
             "downmoveblockv2": Room(13, [Transition("end_but_for_real_this_time")]),
             "end_but_for_real_this_time": Room(14, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.INTERMEDIATE, 51
+        }, LevelCategory.INTERMEDIATE, 51, LevelDifficulty.GREEN
     ),
     LevelName.DEEP_BLUE:
     Level(
@@ -96,7 +96,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "a_07": Room(6, [Transition("a_08")]),
             "a_08": Room(7, [Transition("a_09")]),
             "a_09": Room(8, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.INTERMEDIATE, 52
+        }, LevelCategory.INTERMEDIATE, 52, LevelDifficulty.RED
     ),
     LevelName.VERTIGO:
     Level(
@@ -112,7 +112,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "Evilleafy-08b": Room(8, [Transition("Evilleafy-09")]),
             "Evilleafy-09": Room(9, [Transition("Evilleafy-10")]),
             "Evilleafy-10": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.INTERMEDIATE, 53
+        }, LevelCategory.INTERMEDIATE, 53, LevelDifficulty.YELLOW
     ),
     LevelName.EAT_GIRL:
     Level(
@@ -128,7 +128,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "A-07b": Room(8, [Transition("A-07")], [Location(LocationType.STRAWBERRY, 328)]),
             "A-08": Room(9, [Transition("A-09")]),
             "A-09": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.INTERMEDIATE, 54
+        }, LevelCategory.INTERMEDIATE, 54, LevelDifficulty.YELLOW
     ),
     LevelName.HONEYZIP_INC:
     Level(
@@ -149,7 +149,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "endroom": Room(12, [Transition("endroomsecret")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "endroomsecret": Room(13, [], easter_egg=True, key_door_ids=[1350]),
             "r6sb": Room(15, [Transition("r6-right")], [Location(LocationType.STRAWBERRY, 141, [[ItemName.YELLOW_LINKED_TRAFFIC_BLOCK, ItemName.SPRINGS]])])
-        }, LevelCategory.INTERMEDIATE, 55
+        }, LevelCategory.INTERMEDIATE, 55, LevelDifficulty.YELLOW
     ),
     LevelName.TEMPLE_OF_A_THOUSAND_SKIES:
     Level(
@@ -167,7 +167,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "b-02": Room(11, [Transition("b-03", [[ItemName.DREAM_BLOCK]]), Transition("b-04", [[ItemName.DREAM_BLOCK]])]),
             "b-03": Room(12, [Transition("b-02")], [Location(LocationType.STRAWBERRY, 3253, [[ItemName.PINK_CLOUDS]])]),
             "b-04": Room(13, [Transition("b-02")], [Location(LocationType.STRAWBERRY, 3261)])
-        }, LevelCategory.INTERMEDIATE, 56
+        }, LevelCategory.INTERMEDIATE, 56, LevelDifficulty.RED
     ),
     LevelName.IN_FILTRATION:
     Level(
@@ -198,7 +198,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "btd-13": Room(24, [Transition("btd-12")], [Location(LocationType.KEY, 1556, [[ItemName.TOUCH_SWITCH]])]),
             "btd-11": Room(25, [Transition("btd-12"), Transition("btd-10")]),
             "btd-10": Room(26, [Transition("btd-09"), Transition("btd-11")])
-        }, LevelCategory.INTERMEDIATE, 57
+        }, LevelCategory.INTERMEDIATE, 57, LevelDifficulty.YELLOW
     ),
     LevelName.SUPERNAUTICA:
     Level(
@@ -215,7 +215,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "LegS-6": Room(9, [Transition("LegS-7")]),
             "LegS-7": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "LegS-CR": Room(12, [], easter_egg_difficult=True)
-        }, LevelCategory.INTERMEDIATE, 58
+        }, LevelCategory.INTERMEDIATE, 58, LevelDifficulty.YELLOW
     ),
     LevelName.FIFTH_DIMENSION:
     Level(
@@ -233,7 +233,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "A10": Room(10, [Transition("A11")]),
             "A11": Room(11, [Transition("A12")]),
             "A12": Room(12, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.INTERMEDIATE, 59
+        }, LevelCategory.INTERMEDIATE, 59, LevelDifficulty.GREEN
     ),
     LevelName.MIDNIGHT_MONSOON:
     Level(
@@ -249,7 +249,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "6": Room(8, [Transition("outro")]),
             "outro": Room(9, [Transition("outrob")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "outrob": Room(10, [], [Location(LocationType.STRAWBERRY, 29)])
-        }, LevelCategory.INTERMEDIATE, 60
+        }, LevelCategory.INTERMEDIATE, 60, LevelDifficulty.RED
     ),
     LevelName.LOW_G_BOTANY:
     Level(
@@ -262,7 +262,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "5b": Room(5, [Transition("6")], [Location(LocationType.STRAWBERRY, 3631)]),
             "6": Room(6, [Transition("7")], [Location(LocationType.STRAWBERRY, 2324)]),
             "7": Room(7, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.INTERMEDIATE, 61
+        }, LevelCategory.INTERMEDIATE, 61, LevelDifficulty.GREEN
     ),
     LevelName.THE_TOWER:
     Level(
@@ -275,7 +275,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "lvl05": Room(5, [Transition("lvl06")]),
             "lvl06": Room(6, [Transition("lvl07")]),
             "lvl07": Room(7, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]) 
-        }, LevelCategory.INTERMEDIATE, 62
+        }, LevelCategory.INTERMEDIATE, 62, LevelDifficulty.YELLOW
     ),
     LevelName.PUFFERFISH_TRANSPORTATION_CO:
     Level(
@@ -295,7 +295,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "RG2-9": Room(12, [Transition("RG2-End")]),
             "RG2-End": Room(13, [], [Location(LocationType.STRAWBERRY, 2223, [[ItemName.BOWL_PUFFER]]), Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.BOWL_PUFFER]])]),
             "RG2-huh": Room(15, [Transition("RG2-5-S")])
-        }, LevelCategory.INTERMEDIATE, 63
+        }, LevelCategory.INTERMEDIATE, 63, LevelDifficulty.RED
     ),
     LevelName.SEA_OF_SOUP:
     Level(
@@ -310,7 +310,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "soup-6": Room(7, [Transition("soup-7"), Transition("soup-6b")]),
             "soup-6b": Room(8, [Transition("soup-6")], [Location(LocationType.STRAWBERRY, 878)]),
             "soup-7": Room(9, [], [Location(LocationType.STRAWBERRY, 2312, [[ItemName.SOAP_BUBBLE, ItemName.PURPLE_DASHLESS_BUBBLE, ItemName.BADELINE_ORB]]), Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.INTERMEDIATE, 64
+        }, LevelCategory.INTERMEDIATE, 64, LevelDifficulty.GREEN
     ),
     LevelName.CONSTRUCTION_CONUNDRUM:
     Level(
@@ -330,7 +330,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "a-012": Room(12, [Transition("a-013")]),
             "a-013": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a-000S": Room(15, [Transition("a-001")])  
-        }, LevelCategory.INTERMEDIATE, 65
+        }, LevelCategory.INTERMEDIATE, 65, LevelDifficulty.YELLOW
     ),
     LevelName.POINTLESS_MACHINES:
     Level(
@@ -346,7 +346,7 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "07": Room(8, [Transition("08")]),
             "08": Room(9, [Transition("09")]),
             "09": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])      
-        }, LevelCategory.INTERMEDIATE, 66, puzzle=True
+        }, LevelCategory.INTERMEDIATE, 66, LevelDifficulty.RED, puzzle=True
     ),
     LevelName.RASPBERRY_ROOTS:
     Level(
@@ -374,6 +374,6 @@ intermediate_levels_sj : dict[LevelName, Level] = {
             "cp4-3-Luma": Room(20, [Transition("cp4-4-Marlin", [[ItemName.CRYSTAL_BOMB, ItemName.RED_BUBBLES]])]),
             "cp4-4-Marlin": Room(21, [Transition("cp4-5-Heart", [[ItemName.PINK_CLOUDS]])]),
             "cp4-5-Heart": Room(22, [], [Location(LocationType.CRYSTAL_HEART)])
-        }, LevelCategory.INTERMEDIATE, 67, ihs_access, heartside = True
+        }, LevelCategory.INTERMEDIATE, 67, LevelDifficulty.RED, ihs_access, heartside = True
     )
 }

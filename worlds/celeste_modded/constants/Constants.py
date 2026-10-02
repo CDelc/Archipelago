@@ -4,10 +4,41 @@ from .LocationTypes import LocationType
 
 game_name = "Celeste Modded"
 base_id = 100000000000
-minimum_sphere_one_locations = 15
 maximum_possible_starting_items = 100
 
 _group_id_mult_ = 100000000000
+
+# Depends on consolidation mapping mode
+min_sphere_one_locations_no_room_no_a_side = {
+    0: 9,
+    1: 9,
+    2: 7,
+    3: 15,
+    4: 14,
+    5: 15,
+    6: 1
+}
+
+min_sphere_one_locations_room_no_a_side = {
+    0: 3,
+    1: 3,
+    2: 3,
+    3: 6,
+    4: 6,
+    5: 7,
+    6: 1
+}
+
+min_sphere_one_locations_a_side = {
+    0: 2,
+    1: 2,
+    2: 2,
+    3: 2,
+    4: 2,
+    5: 2,
+    6: 1
+}
+
 
 _item_id_offset_basic = {
     ItemType.VICTORY: 0,

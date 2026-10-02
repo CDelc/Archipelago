@@ -1,6 +1,6 @@
 from ..Naming import getKeyDoorName, getLocationName
 from ..constants.ItemNames import ItemName
-from ..constants.LevelNames import LevelCategory, LevelName
+from ..constants.LevelNames import LevelCategory, LevelName, LevelDifficulty
 from .LogicalObjects import Level, Room, Transition, Location
 from ..constants.LocationTypes import LocationType
 
@@ -12,7 +12,7 @@ heartside_access = [[
     getLocationName(LevelName.SLIME_TIME, "heart_room", LocationType.LEVEL_CLEAR_MINI_HEART),
     getLocationName(LevelName.SUPERSTRUCTURE, "end", LocationType.LEVEL_CLEAR_MINI_HEART),
     getLocationName(LevelName.LETHAL_LASER_LABORATORY, "a_07", LocationType.LEVEL_CLEAR_MINI_HEART),
-    getLocationName(LevelName.STARRY_RUINS, "9", LocationType.LEVEL_CLEAR_MINI_HEART),
+    getLocationName(LevelName.STARRY_RUINS, "10", LocationType.LEVEL_CLEAR_MINI_HEART),
     getLocationName(LevelName.THE_TOWER_XVI, "7", LocationType.LEVEL_CLEAR_MINI_HEART),
     getLocationName(LevelName.STARLIGHT_STATION, "brys4", LocationType.LEVEL_CLEAR_MINI_HEART),
     getLocationName(LevelName.TECTONIC_TRENCHES, "a-06", LocationType.LEVEL_CLEAR_MINI_HEART),
@@ -51,7 +51,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "b-03": Room(11, [Transition("mini-hearth")]),
             "mini-hearth": Room(12, [Transition("b-strawberry")], [Location(LocationType.STRAWBERRY, 4028), Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "b-strawberry": Room(13, [Transition("mini-hearth")])
-        }, LevelCategory.ADVANCED, 68
+        }, LevelCategory.ADVANCED, 68, LevelDifficulty.GREEN
     ),
     LevelName.JELLYFISH_SANCTUM:
     Level(
@@ -65,7 +65,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "4": Room(6, [Transition("5", [[ItemName.DASH_REFILL_WALL, ItemName.DOUBLE_DASH_REFILL_WALL]])]),
             "5": Room(7, [Transition("outro", [[ItemName.CRUMBLING_PLATFORM]])]),
             "outro": Room(8, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 69
+        }, LevelCategory.ADVANCED, 69, LevelDifficulty.YELLOW
     ),
     LevelName.TOGGLE_THEORY:
     Level(
@@ -84,7 +84,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "epilogue": Room(11, [Transition("heart")]),
             "heart": Room(12, [Transition("outlook")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "outlook": Room(13, [Transition("heart")], easter_egg=True)
-        }, LevelCategory.ADVANCED, 70
+        }, LevelCategory.ADVANCED, 70, LevelDifficulty.RED
     ),
     LevelName.SLIME_TIME:
     Level(
@@ -100,7 +100,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "a_07-TiltTheStars": Room(8, [Transition("a_08-TiltTheStars")], [Location(LocationType.STRAWBERRY, 2684)]),
             "a_08-TiltTheStars": Room(9, [Transition("heart_room", [[ItemName.BIRD]])]),
             "heart_room": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 71
+        }, LevelCategory.ADVANCED, 71, LevelDifficulty.GREEN
     ),
     LevelName.SUPERSTRUCTURE:
     Level(
@@ -117,7 +117,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "goldian-6": Room(9, [Transition("goldian-7")]),
             "goldian-7": Room(10, [Transition("end")]),
             "end": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 72
+        }, LevelCategory.ADVANCED, 72, LevelDifficulty.RED
     ),
     LevelName.LETHAL_LASER_LABORATORY:
     Level(
@@ -130,7 +130,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "a_06": Room(5, [Transition("a_07", [[ItemName.DOUBLE_DASH_CRYSTALS]]), Transition("a_06b")]),
             "a_06b": Room(6, [Transition("a_06")], [Location(LocationType.STRAWBERRY, 991)]),
             "a_07": Room(7, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 73
+        }, LevelCategory.ADVANCED, 73, LevelDifficulty.GREEN
     ),
     LevelName.STARRY_RUINS:
     Level(
@@ -145,7 +145,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "8": Room(7, [Transition("9")]),
             "9": Room(8, [Transition("10", [[ItemName.YELLOW_PORTAL]])]),
             "10": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.PURPLE_PORTAL]])])
-        }, LevelCategory.ADVANCED, 74
+        }, LevelCategory.ADVANCED, 74, LevelDifficulty.GREEN
     ),
     LevelName.THE_TOWER_XVI:
     Level(
@@ -157,7 +157,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "5": Room(4, [Transition("6")]),
             "6": Room(5, [Transition("7")]),
             "7": Room(6, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 75
+        }, LevelCategory.ADVANCED, 75, LevelDifficulty.RED
     ),
     LevelName.STARLIGHT_STATION:
     Level(
@@ -181,7 +181,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "brys3": Room(16, [Transition("brys4")]),
             "brys4": Room(17, [Transition("brys-berry")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "brys-berry": Room(18, [Transition("brys4")], [Location(LocationType.STRAWBERRY, 7540)])
-        }, LevelCategory.ADVANCED, 76
+        }, LevelCategory.ADVANCED, 76, LevelDifficulty.RED
     ),
     LevelName.TECTONIC_TRENCHES:
     Level(
@@ -196,7 +196,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "a-07": Room(7, [Transition("a-06")]),
             "a-06": Room(8, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "Berry 1": Room(10, [Transition("transition")], [Location(LocationType.STRAWBERRY, 895)])
-        }, LevelCategory.ADVANCED, 77
+        }, LevelCategory.ADVANCED, 77, LevelDifficulty.YELLOW
     ),
     LevelName.GOLDEN_DAWN:
     Level(
@@ -211,7 +211,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "A6_v2-flip-2": Room(7, [Transition("Brys2-2-2"), Transition("A6")], [Location(LocationType.STRAWBERRY, 4103)]),
             "A6": Room(8, [Transition("A7")]),
             "A7": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 78
+        }, LevelCategory.ADVANCED, 78, LevelDifficulty.YELLOW
     ),
     LevelName.DUSK_CITY:
     Level(
@@ -227,7 +227,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "a-08": Room(8, [Transition("a-09")]),
             "a-09": Room(9, [Transition("a-10")]),
             "a-10": Room(10, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 79
+        }, LevelCategory.ADVANCED, 79, LevelDifficulty.RED
     ),
     LevelName.FOREST_RUSH:
     Level(
@@ -245,7 +245,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "a09": Room(10, [Transition("a10")]),
             "a10": Room(11, [Transition("a10b")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a10b": Room(12, [Transition("a10")], [Location(LocationType.STRAWBERRY, 555)])
-        }, LevelCategory.ADVANCED, 80
+        }, LevelCategory.ADVANCED, 80, LevelDifficulty.YELLOW
     ),
     LevelName.SYNAPSE:
     Level(
@@ -262,7 +262,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "b2": Room(9, [Transition("b3", [[ItemName.GREEN_MOVING_CASSETTE_BLOCK]])]),
             "b3": Room(10, [Transition("c1", [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.RED_CASSETTE_TRAFFIC_BLOCK]])]),
             "c1": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.GREEN_CASSETTE_SWAP_BLOCK, ItemName.YELLOW_CASSETTE_SWAP_BLOCK, ItemName.PINK_MOVING_CASSETTE_BLOCK]])])
-        }, LevelCategory.ADVANCED, 81
+        }, LevelCategory.ADVANCED, 81, LevelDifficulty.RED
     ),
     LevelName.UNDERGROWTH:
     Level(
@@ -278,7 +278,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "08-a": Room(8, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "04-a": Room(10, [Transition("04-s1", [[ItemName.CRUMBLING_PLATFORM, ItemName.DASHLESS_SPRING, ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.UNDERGROWTH, "03-a", 776)]]), Transition("03-a")], [Location(LocationType.KEY, 843)]),
             "04-s1": Room(11, [Transition("04-a")], [Location(LocationType.STRAWBERRY, 1659, [[ItemName.DASHLESS_SPRING]])])
-        }, LevelCategory.ADVANCED, 82
+        }, LevelCategory.ADVANCED, 82, LevelDifficulty.GREEN
     ),
     LevelName.LOST_WOODS:
     Level(
@@ -288,7 +288,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "oppen_berry": Room(2, [Transition("oppen_1a")], [Location(LocationType.STRAWBERRY, 647)]),
             "oppen_1b": Room(3, [Transition("oppen_1a"), Transition("oppen_1c")], [Location(LocationType.KEY, 1765)]),
             "oppen_1c": Room(4, [Transition("oppen_1a"), Transition("oppen_1b")], [Location(LocationType.KEY, 3647)])
-        }, LevelCategory.ADVANCED, 83, puzzle=True
+        }, LevelCategory.ADVANCED, 83, LevelDifficulty.GREEN, puzzle=True
     ),
     LevelName.ATTACK_OF_THE_CLONE:
     Level(
@@ -303,7 +303,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "BR-05": Room(7, [Transition("BR-Outro")]),
             "BR-Outro": Room(8, [Transition("BR-Extra")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "BR-Extra": Room(9, [Transition("BR-Outro")], [Location(LocationType.STRAWBERRY, 866)])
-        }, LevelCategory.ADVANCED, 84
+        }, LevelCategory.ADVANCED, 84, LevelDifficulty.YELLOW
     ),
     LevelName.THE_LAB:
     Level(
@@ -329,7 +329,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "escape-03-Worldwaker2": Room(18, [Transition("start-00-Radley")]),
             "start-00-Radley": Room(19, [Transition("end_HideInMap")]),
             "end_HideInMap": Room(20, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 85
+        }, LevelCategory.ADVANCED, 85, LevelDifficulty.RED
     ),
     LevelName.BELATED_VALENTINES_DAY:
     Level(
@@ -348,7 +348,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "2-c": Room(11, [Transition("2-d")]),
             "2-d": Room(12, [Transition("2-secret :D")]),
             "2-secret :D": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 86
+        }, LevelCategory.ADVANCED, 86, LevelDifficulty.RED
     ),
     LevelName.THINKING_WITH_PORTALS:
     Level(
@@ -365,7 +365,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "a-11": Room(9, [Transition("a-13"), Transition("a-12")]),
             "a-12": Room(10, [Transition("a-11")], [Location(LocationType.STRAWBERRY, 723, [[ItemName.TOUCH_SWITCH]])]),
             "a-13": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.BREAKER_BOX]])])
-        }, LevelCategory.ADVANCED, 87
+        }, LevelCategory.ADVANCED, 87, LevelDifficulty.RED
     ),
     LevelName.BEE_BERSERK:
     Level(
@@ -384,7 +384,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "badeline_v2": Room(11, [Transition("mini_heart_room")]),
             "mini_heart_room": Room(12, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "secret-02": Room(14, [Transition("secret-01")], [Location(LocationType.STRAWBERRY, 1027)])
-        }, LevelCategory.ADVANCED, 88
+        }, LevelCategory.ADVANCED, 88, LevelDifficulty.YELLOW
     ),
     LevelName.JAVAS_CRYPT:
     Level(
@@ -402,7 +402,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "5": Room(10, [Transition("6", [[getKeyDoorName(LevelName.JAVAS_CRYPT, "5", 759)]])], [Location(LocationType.STRAWBERRY, 670), Location(LocationType.KEY, 838)], key_door_ids=[759]),
             "6": Room(11, [Transition("6e")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "6e": Room(12, [Transition("6")], easter_egg=True)
-        }, LevelCategory.ADVANCED, 89, puzzle=True
+        }, LevelCategory.ADVANCED, 89, LevelDifficulty.YELLOW, puzzle=True
     ),
     LevelName.RIGHTSIDE_DOWN_CAVERN:
     Level(
@@ -417,7 +417,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "Vamp_8": Room(7, [Transition("Vamp_9")]),
             "Vamp_9": Room(8, [Transition("Vamp_Final")]),
             "Vamp_Final": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
-        }, LevelCategory.ADVANCED, 90
+        }, LevelCategory.ADVANCED, 90, LevelDifficulty.RED
     ),
     LevelName.CALL_OF_THE_VOID:
     Level(
@@ -441,7 +441,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "vivEB_": Room(16, [Transition("_Endgame")], easter_egg_difficult=True),
             "_Endgame": Room(17, [Transition("vivBonus")], easter_egg_difficult=True),
             "vivBonus": Room(18, [], easter_egg_difficult=True)
-        }, LevelCategory.ADVANCED, 91
+        }, LevelCategory.ADVANCED, 91, LevelDifficulty.RED
     ),
     LevelName.RAINDROPS_ON_ROSES:
     Level(
@@ -458,7 +458,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "7": Room(8, [Transition("8", [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 2971), getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 3342), getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 3352)]])], [Location(LocationType.KEY, 3007), Location(LocationType.KEY, 2513), Location(LocationType.KEY, 3274, [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 2971)]]), Location(LocationType.KEY, 3361, [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 2971)]]), Location(LocationType.KEY, 3336, [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 2971)]])], key_door_ids=[2971, 3342, 3352]),
             "8": Room(9, [Transition("9", [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "8", 2980), getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "8", 3754)]])], [Location(LocationType.STRAWBERRY, 4916), Location(LocationType.LEVEL_CLEAR_MINI_HEART)], key_door_ids=[2980, 3754]),
             "9": Room(10, [Transition("8")])
-        }, LevelCategory.ADVANCED, 92
+        }, LevelCategory.ADVANCED, 92, LevelDifficulty.YELLOW
     ),
     LevelName.MANGO_MESA:
     Level(
@@ -498,6 +498,6 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "heartside_jolly": Room(32, [Transition("heartside_Viv", [[ItemName.RED_BUBBLES]])]),
             "heartside_Viv": Room(33, [Transition("Fin", [[ItemName.DASH_REFILL_WALL, ItemName.DOUBLE_DASH_REFILL_WALL]])]),
             "Fin": Room(34, [], [Location(LocationType.CRYSTAL_HEART)])
-        }, LevelCategory.ADVANCED, 93, heartside_access, heartside = True
+        }, LevelCategory.ADVANCED, 93, LevelDifficulty.RED, heartside_access, heartside = True
     )
 }

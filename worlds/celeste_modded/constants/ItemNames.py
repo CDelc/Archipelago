@@ -443,8 +443,60 @@ mechanic = {
     ItemName.BLUE_FLYING_LANTERN: 174,
     ItemName.RED_FLYING_LANTERN: 175,
     ItemName.SILVER_PORTAL: 176,
-    ItemName.NAVY_PORTAL: 177
+    ItemName.NAVY_PORTAL: 177,
+
+
+    ItemName.CASSETTE_BLOCKS: 1000,
+    ItemName.BUBBLES: 1001,
+    ItemName.HEAVY_THROWABLE: 1002,
+    ItemName.LIGHT_THROWABLE: 1003,
+    ItemName.JUMP_REFILL: 1004,
+    ItemName.SWITCH_BLOCK: 1005,
+    ItemName.GRAVITY_MECHANICS: 1006,
+    ItemName.TIME_MECHANICS: 1007,
+    ItemName.PORTALS: 1008,
+    ItemName.STATION_BLOCKS: 1009,
+    ItemName.LASER: 1010,
+    ItemName.DASH_SPEEDUP_MECHANICS: 1011,
+    ItemName.FLIP_SWITCH: 1012,
+    ItemName.GENERIC_DASH_CRYSTAL: 1013,
+    ItemName.GENERIC_SPRINGS: 1014,
+    ItemName.GENERIC_TRAFFIC_BLOCK: 1015,
+    ItemName.GENERIC_DREAM_BLOCK: 1016,
+    ItemName.GENERIC_TOUCH_SWITCH: 1017,
+    ItemName.GENERIC_SWAP_BLOCK: 1018,
+    ItemName.GENERIC_MOVE_BLOCK: 1019,
+    ItemName.GENERIC_KEVIN: 1020,
+    ItemName.GENERIC_BUMPER: 1021,
+    ItemName.GENERIC_DASH_SWITCH: 1022,
+    ItemName.BLUE: 1023,
+    ItemName.ORANGE: 1024,
+    ItemName.RED: 1025,
+    ItemName.GREEN: 1026,
+    ItemName.YELLOW: 1027,
+    ItemName.PINK: 1028,
+    ItemName.PURPLE: 1029,
+    ItemName.WHITE: 1030,
+    ItemName.GENERIC_SHORT_BUBBLES: 1031,
+    ItemName.GENERIC_LONG_BUBBLES: 1032,
+    ItemName.GENERIC_REBOUND_BUBBLES: 1033,
+    ItemName.GENERIC_TIME_CRYSTAL: 1034,
+    ItemName.GENERIC_REFILL_WALL: 1035,
+    ItemName.GENERIC_MOVE_BLOCK_MODIFIER: 1036,
+    ItemName.PROPELLER_BLOCK: 1037,
+    ItemName.MOVEMENT_MOSS: 1038,
+    ItemName.FLOATING_FIELDS: 1039,
+    ItemName.LUNAR_PAGODA_STOPWATCH: 1040,
+    ItemName.NELUMBO_DRUMS: 1041,
+    ItemName.NELUMBO_LANTERNS: 1042,
+    ItemName.CRYSTAL_PICKUPS: 1043,
+    ItemName.SWITCHES: 1044,
+    ItemName.PLAYER_THROWERS: 1045
 }
+
+no_consolidation = {item: [item] for item in mechanic.keys() if mechanic[item] < 1000}
+
+no_mechanics = {item: [] for item in mechanic.keys() if mechanic[item] < 1000}
 
 consolidated_mechanics = {
     ItemName.DASH_CRYSTALS: [ItemName.GENERIC_DASH_CRYSTAL],

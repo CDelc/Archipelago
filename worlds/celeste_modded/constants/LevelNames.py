@@ -1,4 +1,4 @@
-from enum import StrEnum
+from enum import StrEnum, IntEnum
 
 class LevelName(StrEnum):
     PROLOGUE = "Prologue"
@@ -161,6 +161,12 @@ class LevelCategory(StrEnum):
     ADVANCED = "SJ Advanced"
     EXPERT = "SJ Expert"
     GRANDMASTER = "SJ Grandmaster"
-    CRACKED_GRANDMASTER = "SJ Cracked GM"
     NONE = "None"
     ALL = "All"
+
+class LevelDifficulty(IntEnum):
+    NONE = 0
+    GREEN = 1
+    YELLOW = 2
+    RED = 3
+    CRACKED = 4
