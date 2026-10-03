@@ -14,10 +14,13 @@ from . import LogicParser
 # - All levels showing as complete in journal
 # - Look into making the AP connection UI work a bit better
 # - Heart gates open except goal level option
+# - Heart gate unlocks as a single check
 # - Automatically collect no-gameplay room locations
 # - Hard logic
 # - Disable mini-strawberries
 # - Refactor c# mapping to grab all the data from slot data rather than copying it over manually
+# - Benches should start unlocked
+# - Add Collab UI as a dependency to Archi Mod
 
 game_name = Constants.game_name
 
@@ -148,7 +151,8 @@ class CelesteModdedWorld(World):
             "enabled_level_list": LogicParser.getActiveLevelList(self),
             "start_unlocked_level_list": LogicParser.getStartUnlockedLevelList(self),
             "deathless_level_list": LogicParser.getDeathlessLevelList(self),
-            "roomcheck_level_list": LogicParser.getRoomCheckLevelList(self)
+            "roomcheck_level_list": LogicParser.getRoomCheckLevelList(self),
+            "autocheck_locations": LogicParser.getAutoCheckLocations(self)
         }
     
     def get_filler_item_name(self) -> str:

@@ -123,9 +123,9 @@ def calculate_maximum_possible_berries(world: "CelesteModdedWorld"):
             if not levelStartUnlocked(levelName, level, world):
                 extra_locations -= 1 #Level unlock item
             for roomName,room in level.rooms.items():
-                if (room.easter_egg and not world.options.easter_egg_rooms.value) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult.value): # Skip easter egg rooms if necessary
+                if not roomEnabled(level, room, world): # Skip easter egg rooms if necessary
                     continue
-                if (world.options.room_checks.value or level.level_category in world.room_check_categories) and not room.start_room and not room.is_subregion_of:
+                if roomCheckEnabled(level, room, world):
                     extra_locations += 1 #Room check location
                 for location in room.locations:
                     match location.location_type:
@@ -178,7 +178,7 @@ def calculate_start_items(world: "CelesteModdedWorld"):
     }
 
     start_item_mapping = (Constants.min_sphere_one_locations_a_side if LevelCategory.A_SIDE in world.levels_categories_in_play
-                          else Constants.min_sphere_one_locations_no_room_no_a_side if world.room_check_categories.isdisjoint(world.levels_categories_in_play)
+                          else Constants.min_sphere_one_locations_no_room_no_a_side if world.room_check_categories.isdisjoint(world.levels_categories_in_play - {LevelCategory.C_SIDE})
                           else Constants.min_sphere_one_locations_room_no_a_side)
 
     world.start_items_needed = max(0, start_item_mapping[world.options.item_consolidation_mode.value] - len(items_accessible))
@@ -341,11 +341,11 @@ def parse_regions(world: "CelesteModdedWorld"):
         #Connect rooms to each other and add locations
         for roomName in level.rooms:
             room = level.rooms[roomName]
-            if (room.easter_egg and not (world.options.easter_egg_rooms.value or world.options.easter_egg_rooms_difficult.value)) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult.value):
+            if not roomEnabled(level, room, world):
                 continue
             room_region = world.multiworld.get_region(getRoomName(levelName, roomName), world.player)
 
-            if (world.options.room_checks.value or level.level_category in world.room_check_categories) and not room.start_room and not room.is_subregion_of:
+            if roomCheckEnabled(level, room, world):
                     loc_name = getRoomName(levelName, roomName)
                     add_location(room_region, loc_name, world)
 
@@ -469,6 +469,18 @@ def setWinCondition(world: "CelesteModdedWorld"):
         (not world.options.require_moon_berry.value or state.has(ItemName.MOON_BERRY.value, world.player)) and
         state.has(ItemName.LEVEL_VICTORY.value, world.player)
     )
+
+def roomEnabled(level: Level, room: Room, world: "CelesteModdedWorld"):
+    return ((room.easter_egg and (world.options.easter_egg_rooms.value or world.options.easter_egg_rooms_difficult.value))
+            or (room.easter_egg_difficult and world.options.easter_egg_rooms_difficult.value)
+            or (not room.easter_egg and not room.easter_egg_difficult))
+
+def roomCheckEnabled(level: Level, room: Room, world: "CelesteModdedWorld"):
+    return ((world.options.room_checks.value or level.level_category in world.room_check_categories)
+            and not room.start_room
+            and not room.is_subregion_of
+            and not (world.options.trivial_room_checks.value == 1 and room.trivial_access)
+            and roomEnabled(level, room, world))
 
 def any_levels_enabled(levelNameList: list[str], world: "CelesteModdedWorld"):
     for levelName in levelNameList:
@@ -607,6 +619,32 @@ def getRoomCheckLevelList(world: "CelesteModdedWorld"):
         if level.level_category in world.room_check_categories:
             rValue.append(level.level_id)
     return rValue
+
+# (location ID -> id based access_rule)
+def getAutoCheckLocations(world: "CelesteModdedWorld"):
+    rValue: dict[int, list[list[int]]] = dict()
+    pre_processed_rValue: dict[int, list[list[str]]] = dict()
+    #Start Locations
+    for i in range(1, world.start_items_needed + 1):
+        pre_processed_rValue[i] = []
+    # Trivial Room Access Auto Collect
+    if world.options.trivial_room_checks.value == 3:
+        for levelName,level in levelList.items():
+            if levelEnabled(levelName, level, world):
+                for roomName,room in level.rooms.items():
+                    if room.trivial_access:
+                        full_access_rule = []
+                        level_access_rule = mapItemList(getLevelAccessRule(level, world), world)
+                        if len(level_access_rule) == 0:
+                            level_access_rule = [[]]
+                        if not levelStartUnlocked(levelName, level, world):
+                            full_access_rule = [sublist + [levelUnlock(levelName)] for sublist in level_access_rule]
+                        else:
+                            full_access_rule = level_access_rule
+                        pre_processed_rValue[getLocationBasedLocationID(LocationType.ROOM, level, room)] = full_access_rule
+
+    # Crystal Heart requirements set to negative numbers (0 - number of hearts needed)
+    return {location: [[0 - int(item.replace("#", "")) if item.startswith("#") else world.item_name_to_id[item] for item in sublist] for sublist in access] for location,access in pre_processed_rValue.items()}
 
 item_type_dict: dict[str, ItemType]
 location_type_dict: dict[str, LocationType]

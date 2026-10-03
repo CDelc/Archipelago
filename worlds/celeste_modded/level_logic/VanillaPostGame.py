@@ -11,8 +11,8 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
     Level(
         {
             "00": Room(0, [Transition("01"), Transition("0x")], start_room=True),
-            "0x": Room(1, [Transition("00")]),
-            "01": Room(2, [Transition("02", [[ItemName.DASH_CRYSTALS]]), Transition("00")]),
+            "0x": Room(1, [Transition("00")], trivial_access=True),
+            "01": Room(2, [Transition("02", [[ItemName.DASH_CRYSTALS]]), Transition("00")], trivial_access=True),
             "02": Room(3, [Transition("a-00", [[CHearts(4)]]), Transition("01")]),
             "a-00": Room(4, [Transition("02"), Transition("a-01", [[ItemName.DASH_CRYSTALS]])], [Location(LocationType.GOLDEN_BERRY, 19, [[ItemName.BUMPER, ItemName.FEATHER, ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.TOUCH_SWITCH, ItemName.CORE_BLOCK, ItemName.CORE_SWITCH, ItemName.LAVA_ICE_BALLS, ItemName.DASH_CRYSTALS]])], checkpoint="Into the Core"),
             "a-01": Room(5, [Transition("a-02")]),
@@ -55,7 +55,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
     Level(
         {
             "00": Room(0, [Transition("01")], start_room=True),
-            "01": Room(1, [Transition("a-00", [[CHearts(15)]])]),
+            "01": Room(1, [Transition("a-00", [[CHearts(15)]])], trivial_access=True),
             "a-00": Room(2, [Transition("01"), Transition("a-01", [[ItemName.CRUMBLING_PLATFORM, ItemName.DASH_CRYSTALS]])], [Location(LocationType.GOLDEN_BERRY, 22, [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.CRUMBLING_PLATFORM, ItemName.LAVA_ICE_BALLS, ItemName.BUMPER, ItemName.DASH_CRYSTALS, ItemName.CORE_BLOCK, ItemName.CORE_SWITCH, ItemName.SPRINGS, ItemName.TRAFFIC_BLOCKS, ItemName.DREAM_BLOCK, ItemName.MOVING_PLATFORM, ItemName.CLOUDS, ItemName.SWAP_BLOCK, ItemName.KEVIN, ItemName.BADELINE_ORB]])], checkpoint="Into the Core"),
             "a-01": Room(3, [Transition("a-02", [[ItemName.CORE_BLOCK]])]),
             "a-02": Room(4, [Transition("a-03", [[ItemName.CORE_SWITCH]])]),
@@ -205,11 +205,11 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
     Level(
         {
             "0": Room(0, [Transition("1"), Transition("-1"), Transition("0b", [[ItemName.INTRO_CRUSHER]])], start_room=True),
-            "-1": Room(1, [Transition("0")]),
+            "-1": Room(1, [Transition("0")], trivial_access=True),
             "0b": Room(2, [Transition("0")]),
-            "1": Room(3, [Transition("2"), Transition("0")]),
-            "2": Room(4, [Transition("3"), Transition("1")]),
-            "3": Room(5, [Transition("2")], [Location(LocationType.LEVEL_CLEAR)])
+            "1": Room(3, [Transition("2"), Transition("0")], trivial_access=True),
+            "2": Room(4, [Transition("3"), Transition("1")], trivial_access=True),
+            "3": Room(5, [Transition("2")], [Location(LocationType.LEVEL_CLEAR)], trivial_access=True)
         }, LevelCategory.A_SIDE, 26
     )
 }

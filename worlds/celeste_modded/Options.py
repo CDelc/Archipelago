@@ -129,6 +129,16 @@ class AllRoomChecks(Toggle):
     """
     display_name = "Universal Room Checks"
 
+class TrivialRoomChecks(Choice):
+    """
+    Setting to determine how you want to handle room checks that are trivial to access from the start of a level
+    """
+    display_name = "Trivial Room Check Handling"
+    option_do_nothing = 0
+    option_disable_trivial_room_checks = 1
+    option_auto_collect_trivial_room_checks = 3
+    default = 0
+
 class RoomChecksASide(Toggle):
     """
     Make each room in the A-Sides a check
@@ -502,7 +512,7 @@ groups = [
     OptionGroup("Items", [ItemConsildationMode, OpenHeartGates]),
     OptionGroup("Levels", [StartLevelSet, StrawberryJamMaxDifficulty, IncludeVanillaASides, IncludeVanillaBSides, IncludeVanillaCSides, IncludeFarewell, IncludeBeginner, IncludeIntermediate, IncludeAdvanced, IncludeExpert, IncludeGrandmaster, HeartsidesStartUnlocked, ExcludePuzzleLevels]),
     OptionGroup("Locations", [RandomizeCheckpoints, IncludeWingedGolden, IncludeEasterEggRooms, IncludeEasterEggRoomsDifficult]),
-    OptionGroup("Room Locations", [AllRoomChecks, RoomChecksASide, RoomChecksBSide, RoomChecksCSide, RoomChecksFarewell, RoomChecksBeginnerSJ, RoomChecksIntermediateSJ, RoomChecksAdvancedSJ, RoomChecksExpertSJ, RoomChecksGrandmasterSJ]),
+    OptionGroup("Room Locations", [AllRoomChecks, TrivialRoomChecks, RoomChecksASide, RoomChecksBSide, RoomChecksCSide, RoomChecksFarewell, RoomChecksBeginnerSJ, RoomChecksIntermediateSJ, RoomChecksAdvancedSJ, RoomChecksExpertSJ, RoomChecksGrandmasterSJ]),
     OptionGroup("Win Condition", [WinConditionLevel, ProtectVictoryLevelCheckpoints, StrawberriesRequiredPercentage, TotalStrawberries, RequireMoonBerry, RequireBerriesForGoalLevelEntry]),
     OptionGroup("Deathless Berries", [IncludeASideGoldens, IncludeBSideGoldens, IncludeCSideGoldens, IncludeFarewellGolden, IncludeBeginnerSilvers, IncludeIntermediateSilvers, IncludeAdvancedSilvers, IncludeExpertSilvers, IncludeGrandmasterSilvers])
 ]
@@ -530,6 +540,7 @@ class CelesteModdedOptions(PerGameCommonOptions):
     item_consolidation_mode: ItemConsildationMode
 
     room_checks: AllRoomChecks
+    trivial_room_checks: TrivialRoomChecks
     room_checks_a_side: RoomChecksASide
     room_checks_b_side: RoomChecksBSide
     room_checks_c_side: RoomChecksCSide

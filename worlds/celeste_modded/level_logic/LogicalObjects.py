@@ -11,6 +11,7 @@ class Location:
     location_type: LocationType
     ID: int = 0
     access_rule: list[list[str]] = dataclasses.field(default_factory=list)
+    multi_room_berry: bool = False
 
 @dataclass(frozen=True)
 class Transition:
@@ -28,6 +29,7 @@ class Room:
     easter_egg: bool = False
     easter_egg_difficult: bool = False
     key_door_ids: list[int] = dataclasses.field(default_factory=list)
+    trivial_access: bool = False
     
 @dataclass(frozen=True)
 class Level:
