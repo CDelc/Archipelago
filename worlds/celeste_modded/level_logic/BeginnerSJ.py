@@ -81,8 +81,8 @@ beginner_levels_sj : dict[LevelName, Level] = {
     Level(
         {
             "00- intro": Room(0, [Transition("01- Crusher")], [Location(LocationType.SILVER_BERRY, 581, [[ItemName.INTRO_CRUSHER, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS, ItemName.SPRINGS, ItemName.GREEN_BUBBLES]])], start_room=True),
-            "01- Crusher": Room(1, [Transition("02- Bait N'Switch", [[ItemName.INTRO_CRUSHER]])], trivial_access=True),
-            "02- Bait N'Switch": Room(2, [Transition("03- Uberjump", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS]]), Transition("02B- a strwawbewwy??", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS]])]),
+            "01- Crusher": Room(1, [Transition("02- Bait N' Switch", [[ItemName.INTRO_CRUSHER]])], trivial_access=True),
+            "02- Bait N' Switch": Room(2, [Transition("03- Uberjump", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS]]), Transition("02B- a strwawbewwy??", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS]])]),
             "02B- a strwawbewwy??": Room(3, [], [Location(LocationType.STRAWBERRY, 682)]),
             "03- Uberjump": Room(4, [Transition("04- Head Trauma")]),
             "04- Head Trauma": Room(5, [Transition("05- Boing")], [Location(LocationType.STRAWBERRY, 717)]),
@@ -343,7 +343,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
             "a-05": Room(6, [Transition("a-06", [[ItemName.TOUCH_SWITCH]]), Transition("a-05s")]),
             "a-05s": Room(7, [Transition("a-05")], easter_egg=True),
             "a-06": Room(8, [Transition("a-07", [[ItemName.INTRO_CRUSHER]])]),
-            "a-07": Room(9, [Transition("a-08")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART), Location(LocationType.STRAWBERRY, 999)]),
+            "a-07": Room(9, [Transition("a-08")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART), Location(LocationType.STRAWBERRY, 999, multi_room_berry=True)]),
             "a-08": Room(10, [Transition("a-08s")], [Location(LocationType.STRAWBERRY, 862)]),
             "a-08s": Room(11, [Transition("a-08")], easter_egg=True)
         }, LevelCategory.BEGINNER, 41, LevelDifficulty.GREEN

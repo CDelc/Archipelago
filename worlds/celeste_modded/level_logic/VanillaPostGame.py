@@ -94,7 +94,7 @@ vanilla_post_game_levels : dict[LevelName, Level] = {
         {
             "intro-01-future": Room(0, [Transition("intro-02-launch", [[ItemName.BADELINE_ORB]])], start_room=True),
             "intro-02-launch": Room(1, [Transition("intro-03-space", [[ItemName.CLOUDS]])]),
-            "intro-03-space": Room(2, [Transition("a-00"), Transition("intro-02-launch")]),
+            "intro-03-space": Room(2, [Transition("a-00")]),
             "a-00": Room(3, [Transition("intro-03-space"), Transition("a-01", [[ItemName.DOUBLE_DASH_CRYSTALS]])], [Location(LocationType.GOLDEN_BERRY, 449, [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.GREEN_CASSETTE, ItemName.KEVIN, getKeyDoorName(LevelName.FAREWELL, "d-00", 471), getKeyDoorName(LevelName.FAREWELL, "d-00", 145), getKeyDoorName(LevelName.FAREWELL, "d-00", 144), getKeyDoorName(LevelName.FAREWELL, "d-00", 142), getKeyDoorName(LevelName.FAREWELL, "d-00", 197), ItemName.CLOUDS, ItemName.DASH_SWITCH, ItemName.MOVING_BLOCK, ItemName.CORE_BLOCK, ItemName.LAVA_ICE_BALLS, ItemName.RED_BUBBLES, ItemName.GREEN_BUBBLES, ItemName.SWAP_BLOCK, ItemName.DREAM_BLOCK, ItemName.CRUMBLING_PLATFORM, ItemName.PUFFER_FISH, ItemName.JELLYFISH, ItemName.BADELINE_ORB, ItemName.BIRD, ItemName.SPRINGS, ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.FEATHER, ItemName.BREAKER_BOX]])], checkpoint="Singular"),
             "a-01": Room(4, [Transition("a-02", [[ItemName.DASH_CRYSTALS]])]),
             "a-02": Room(5, [Transition("a-03")]),

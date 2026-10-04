@@ -91,17 +91,26 @@ class IncludeGrandmaster(Choice):
     default = 0
 
 class IncludeVanillaASides(Toggle):
+    """
+    Include A-Side levels from the vanilla game
+    """
     display_name = "Include Vanilla A-Sides"
 
 class IncludeVanillaBSides(Toggle):
+    """
+    Include B-Side levels from the vanilla game
+    """
     display_name = "Include Vanilla B-Sides"
 
 class IncludeVanillaCSides(Toggle):
+    """
+    Include C-Side levels from the vanilla game
+    """
     display_name = "Include Vanilla C-Sides"
     
 class IncludeFarewell(Toggle):
     """
-    Include Farewell from the vanilla game, also enables A and B sides
+    Include Farewell from the vanilla game
     """
     display_name = "Include Farewell"
 
@@ -335,6 +344,12 @@ class IncludeWingedGolden(Toggle):
     """
     display_name = "Winged Golden Berry"
 
+class RemoveMultiRoomStrawberries(Toggle):
+    """
+    Removes multi-room strawberries from the location pool (Those strawberries that require you find several mini-berries around the entire level)
+    """
+    display_name = "Exclude Multi-Room Berries"
+
 class ItemConsildationMode(Choice):
     """
     Select how all of the different mechanics will be consolidated into items that get placed into the item pool. In some cases, mechanics may be considered a combination of multiple unlock items.
@@ -471,11 +486,11 @@ def map_options(world: "CelesteModdedWorld"):
     COLOR_YELLOW = "\033[93m"
     COLOR_RESET = "\033[0m"
     if len(world.room_check_categories - world.levels_categories_in_play) > 0:
-        logging.warning(f"{COLOR_YELLOW}[Celeste Modded] Slot {world.player_name} has selected {[category.value for category in world.room_check_categories - world.levels_categories_in_play]} as level categories for room randomization, but these categories have no levels enabled{COLOR_RESET}")
+        logging.warning(f"{COLOR_YELLOW}[Celeste Modded] Slot {world.player_name} has selected {[category.value for category in world.room_check_categories - world.levels_categories_in_play if not world.options.room_checks.value]} as level categories for room randomization, but these categories have no levels enabled{COLOR_RESET}")
     if len(world.deathless_categories_in_play - world.levels_categories_in_play) > 0:
         logging.warning(f"{COLOR_YELLOW}[Celeste Modded] Slot {world.player_name} has selected {[category.value for category in world.deathless_categories_in_play - world.levels_categories_in_play]} as level categories for deathless berries, but these categories have no levels enabled{COLOR_RESET}")
 
-    if world.start_level_set not in world.levels_categories_in_play:
+    if world.start_level_set not in world.levels_categories_in_play and world.start_level_set != LevelCategory.NONE:
         logging.warning(f"{COLOR_YELLOW}[Celeste Modded] Slot {world.player_name} has selected {world.start_level_set.value} as the start level set, but has no levels enabled in that set. This setting will be overridden: all levels in {world.start_level_set.value} will be turned on.{COLOR_RESET}")
         match world.start_level_set:
             case LevelCategory.BEGINNER:
@@ -538,6 +553,7 @@ class CelesteModdedOptions(PerGameCommonOptions):
     easter_egg_rooms: IncludeEasterEggRooms
     easter_egg_rooms_difficult: IncludeEasterEggRoomsDifficult
     item_consolidation_mode: ItemConsildationMode
+    exclude_multiroom_berries: RemoveMultiRoomStrawberries
 
     room_checks: AllRoomChecks
     trivial_room_checks: TrivialRoomChecks

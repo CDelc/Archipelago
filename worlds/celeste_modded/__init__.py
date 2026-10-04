@@ -15,12 +15,15 @@ from . import LogicParser
 # - Look into making the AP connection UI work a bit better
 # - Heart gates open except goal level option
 # - Heart gate unlocks as a single check
-# - Automatically collect no-gameplay room locations
 # - Hard logic
-# - Disable mini-strawberries
+# - Delete the multi-room berries in the mod when appropriate (And remove the slot from UI)
 # - Refactor c# mapping to grab all the data from slot data rather than copying it over manually
-# - Benches should start unlocked
-# - Add Collab UI as a dependency to Archi Mod
+# - Some bugs with warnings (None start level set giving warning - Enabling all room checks via shortcut creating warnings for disabled levels)
+# - Open save directly to SJ if no vanilla levels start unlocked
+# - Individual Level Disable
+# - Unlocking checkpoints is confusing visually
+# - Dynamically make level sets available depending on whats included (Need to move where start items are collected and maybe get that UI to render in overworld)
+
 
 game_name = Constants.game_name
 
@@ -152,7 +155,8 @@ class CelesteModdedWorld(World):
             "start_unlocked_level_list": LogicParser.getStartUnlockedLevelList(self),
             "deathless_level_list": LogicParser.getDeathlessLevelList(self),
             "roomcheck_level_list": LogicParser.getRoomCheckLevelList(self),
-            "autocheck_locations": LogicParser.getAutoCheckLocations(self)
+            "autocheck_locations": LogicParser.getAutoCheckLocations(self),
+            "all_locations_by_level": LogicParser.getAllLocationsPerLevel(self)
         }
     
     def get_filler_item_name(self) -> str:

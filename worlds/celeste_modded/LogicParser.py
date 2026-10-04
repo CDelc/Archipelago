@@ -5,7 +5,7 @@ from .ValidateLayout import validate
 from .constants import Constants
 from worlds.generic.Rules import set_rule
 from .level_logic.LogicalLayout import levelList
-from .level_logic.LogicalObjects import Level, Room
+from .level_logic.LogicalObjects import Level, Room, Location
 from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_berry, level_victory
 from .constants.LevelNames import LevelName, LevelCategory
 from .constants.LocationTypes import LocationType
@@ -127,43 +127,18 @@ def calculate_maximum_possible_berries(world: "CelesteModdedWorld"):
                     continue
                 if roomCheckEnabled(level, room, world):
                     extra_locations += 1 #Room check location
+                if checkpointEnabled(level, room, world):
+                    extra_locations += 1
+                    extra_locations -= 1
                 for location in room.locations:
-                    match location.location_type:
-                        case LocationType.CRYSTAL_HEART:
-                            extra_locations += 1
-                            if heartNeeded(levelName, level, world):
-                                extra_locations -= 1 #Adding heart item to pool if we need it
-                        case LocationType.LEVEL_CLEAR_MINI_HEART:
-                            extra_locations += 1
-                            if not world.options.open_heart_gates.value:
-                                extra_locations -= 1 #Adding heart item to pool if heart gates are open
-                        case LocationType.LEVEL_CLEAR:
-                            extra_locations += 1
-                        case LocationType.STRAWBERRY:
-                            extra_locations += 1
-                        case LocationType.CASSETTE:
-                            extra_locations += 1
-                        case LocationType.CHECKPOINT:
-                            if world.options.randomize_checkpoints.value:
-                                extra_locations += 1
-                                extra_locations -= 1 #Place checkpoint item into world
-                        case LocationType.GEM:
-                            extra_locations += 1
-                            extra_locations -= 1 #Place gem item into world
-                        case LocationType.KEY:
-                            extra_locations += 1
-                        case LocationType.GOLDEN_BERRY:
-                            if deathlessEnabled(levelName, level, world):
-                                extra_locations += 1
-                        case LocationType.SILVER_BERRY:
-                            if deathlessEnabled(levelName, level, world):
-                                extra_locations += 1
-                        case LocationType.WINGED_GOLDEN:
-                            if world.options.winged_golden.value:
-                                extra_locations += 1
+                    if isEnabledLocation(location, levelName, level, room, world):
+                        extra_locations += 1
+                    if isEnabledItemByLocation(location, levelName, level, room, world):
+                        extra_locations -= 1
+
+                extra_locations -= len(room.key_door_ids) #Need space for locked door items
                 
     extra_locations -= len(get_filtered_mechanics_list(world)) #Need space for mechanic items
-    extra_locations -= len(room.key_door_ids) #Need space for locked door items
     extra_locations -= 1 # One location must contain the win condition item
     return max(0, extra_locations)
 
@@ -349,7 +324,7 @@ def parse_regions(world: "CelesteModdedWorld"):
                     loc_name = getRoomName(levelName, roomName)
                     add_location(room_region, loc_name, world)
 
-            if(world.options.randomize_checkpoints.value and room.checkpoint):
+            if checkpointEnabled(level, room, world):
                     loc_name = getCheckpointName(levelName, room.checkpoint)
                     add_location(room_region, loc_name, world)
             
@@ -357,12 +332,9 @@ def parse_regions(world: "CelesteModdedWorld"):
                 destination_room_name = getRoomName(levelName, transition.destination_room)
                 room_region.add_exits({destination_room_name}, {destination_room_name: ruleFromList(transition.access_rule, world)})
             for location in room.locations:
-                if location.location_type in {LocationType.GOLDEN_BERRY, LocationType.SILVER_BERRY} and not deathlessEnabled(levelName, level, world):
-                    continue
-                if location.location_type == LocationType.WINGED_GOLDEN and not world.options.winged_golden.value:
-                    continue
-                loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
-                add_location_with_rule(room_region, loc_name, world, location.access_rule)
+                if isEnabledLocation(location, levelName, level, room, world):
+                    loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
+                    add_location_with_rule(room_region, loc_name, world, location.access_rule)
     calculate_start_items(world)
     create_start_locations(world)
 
@@ -387,12 +359,7 @@ def create_items(world: "CelesteModdedWorld"):
                 if (room.easter_egg and not (world.options.easter_egg_rooms.value or world.options.easter_egg_rooms_difficult.value)) or (room.easter_egg_difficult and not world.options.easter_egg_rooms_difficult.value):
                     continue
                 for location in room.locations:
-                    if heartNeeded(levelName, level, world) and location.location_type in {
-                        LocationType.CRYSTAL_HEART,
-                        LocationType.LEVEL_CLEAR_MINI_HEART,
-                    }:
-                        add_item(getLocationName(levelName, roomName, location.location_type, location.ID), world)
-                    if location.location_type == LocationType.GEM:
+                    if isEnabledItemByLocation(location, levelName, level, room, world):
                        add_item(getLocationName(levelName, roomName, location.location_type, location.ID), world)
                 for key_door in room.key_door_ids:
                     add_item(getKeyDoorName(levelName, roomName, key_door), world)
@@ -470,6 +437,32 @@ def setWinCondition(world: "CelesteModdedWorld"):
         state.has(ItemName.LEVEL_VICTORY.value, world.player)
     )
 
+def isEnabledLocation(location: Location, levelName: str, level: Level, room: Room, world: "CelesteModdedWorld"):
+    if location.location_type in {LocationType.GOLDEN_BERRY, LocationType.SILVER_BERRY} and not deathlessEnabled(levelName, level, world):
+        return False
+    if location.location_type == LocationType.WINGED_GOLDEN and not world.options.winged_golden.value:
+        return False
+    if location.multi_room_berry and world.options.exclude_multiroom_berries.value:
+        return False
+    if location.location_type == LocationType.ROOM:
+        return roomCheckEnabled(level, room, world)
+    if location.location_type == LocationType.CHECKPOINT:
+        return 
+    return True
+
+def isEnabledItemByLocation (location: Location, levelName: str, level: Level, room: Room, world: "CelesteModdedWorld"):
+    if heartNeeded(levelName, level, world) and location.location_type in {
+        LocationType.CRYSTAL_HEART,
+        LocationType.LEVEL_CLEAR_MINI_HEART,
+    }:
+        return True
+    if location.location_type == LocationType.GEM:
+        return True
+    return False
+
+def checkpointEnabled(level: Level, room: Room, world: "CelesteModdedWorld"):
+    return world.options.randomize_checkpoints.value and room.checkpoint
+
 def roomEnabled(level: Level, room: Room, world: "CelesteModdedWorld"):
     return ((room.easter_egg and (world.options.easter_egg_rooms.value or world.options.easter_egg_rooms_difficult.value))
             or (room.easter_egg_difficult and world.options.easter_egg_rooms_difficult.value)
@@ -505,24 +498,6 @@ def deathlessEnabled(levelName: str, level: Level, world: "CelesteModdedWorld"):
     if level.heartside:
         return False
     return level.level_category in world.deathless_categories_in_play
-
-def countStrawberries(world: "CelesteModdedWorld") -> int:
-    count = 0
-    for levelName,level in levelList.items():
-        # Skip levels in non-included categories
-        if not levelEnabled(levelName, level, world):
-            continue
-        for room in level.rooms:
-            for location in level.rooms[room].locations:
-                if location.location_type == LocationType.STRAWBERRY:
-                    count += 1
-    return count
-
-def findStartRoom(level: Level) -> Room:
-    for room in Level.rooms:
-        if Level.rooms[room].start_room:
-            return Level.rooms[room]
-    raise ValueError("Missing start room")
 
 def calculateIDOffset(level: Level, room: Room):
     real_room = room
@@ -645,6 +620,25 @@ def getAutoCheckLocations(world: "CelesteModdedWorld"):
 
     # Crystal Heart requirements set to negative numbers (0 - number of hearts needed)
     return {location: [[0 - int(item.replace("#", "")) if item.startswith("#") else world.item_name_to_id[item] for item in sublist] for sublist in access] for location,access in pre_processed_rValue.items()}
+
+def getAllLocationsPerLevel(world: "CelesteModdedWorld") -> dict[int, list[int]]:
+    rValue: dict[int, list[int]] = dict()
+    for levelName,level in levelList.items():
+        if not levelEnabled(levelName, level, world):
+            continue
+        rValue[level.level_id] = []
+        for roomName,room in level.rooms.items():
+            if not roomEnabled(level, room, world):
+                continue
+            if roomCheckEnabled(level, room, world):
+                rValue[level.level_id].append(getLocationBasedLocationID(LocationType.ROOM, level, room))
+            if room.checkpoint and world.options.randomize_checkpoints.value:
+                rValue[level.level_id].append(getLocationBasedLocationID(LocationType.CHECKPOINT, level, room))
+            for location in room.locations:
+                if isEnabledLocation(location, levelName, level, room, world):
+                    rValue[level.level_id].append(getLocationBasedLocationID(location.location_type, level, room, location.ID))
+    return rValue
+
 
 item_type_dict: dict[str, ItemType]
 location_type_dict: dict[str, LocationType]

@@ -165,7 +165,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "a0": Room(0, [Transition("a1", [[ItemName.TRAFFIC_BLOCKS]]), Transition("a-secret", [[ItemName.TRAFFIC_BLOCKS]])], [Location(LocationType.SILVER_BERRY, 4872, [[ItemName.SPRINGS, ItemName.TRAFFIC_BLOCKS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.CRUMBLING_PLATFORM, ItemName.RED_BUBBLES]])], start_room=True),
             "a-secret": Room(1, [Transition("a0")], easter_egg=True),
             "a1": Room(2, [Transition("a2", [[ItemName.DOUBLE_DASH_CRYSTALS]])]),
-            "a2": Room(3, [Transition("a3", [[ItemName.TOUCH_SWITCH, ItemName.CRUMBLING_PLATFORM, ItemName.RED_BUBBLES]]), Transition("a-berry")]),
+            "a2": Room(3, [Transition("a3", [[ItemName.TOUCH_SWITCH, ItemName.CRUMBLING_PLATFORM, ItemName.RED_BUBBLES]]), Transition("a-berry", [[ItemName.TOUCH_SWITCH, ItemName.CRUMBLING_PLATFORM, ItemName.RED_BUBBLES]])]),
             "a-berry": Room(4, [Transition("a2")], [Location(LocationType.STRAWBERRY, 4332)]),
             "a3": Room(5, [Transition("b1", [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]])]),
             "b1": Room(6, [Transition("b2")]),
@@ -456,7 +456,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "6": Room(7, [Transition("7")], [Location(LocationType.STRAWBERRY, 102)]),
             "6-bottomleft": Room(100, [Transition("3")], [Location(LocationType.STRAWBERRY, 4266)], is_subregion_of="6"),
             "7": Room(8, [Transition("8", [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 2971), getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 3342), getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 3352)]])], [Location(LocationType.KEY, 3007), Location(LocationType.KEY, 2513), Location(LocationType.KEY, 3274, [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 2971)]]), Location(LocationType.KEY, 3361, [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 2971)]]), Location(LocationType.KEY, 3336, [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "7", 2971)]])], key_door_ids=[2971, 3342, 3352]),
-            "8": Room(9, [Transition("9", [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "8", 2980), getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "8", 3754)]])], [Location(LocationType.STRAWBERRY, 4916), Location(LocationType.LEVEL_CLEAR_MINI_HEART)], key_door_ids=[2980, 3754]),
+            "8": Room(9, [Transition("9", [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "8", 2980), getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "8", 3754)]])], [Location(LocationType.STRAWBERRY, 4916, multi_room_berry=True), Location(LocationType.LEVEL_CLEAR_MINI_HEART)], key_door_ids=[2980, 3754]),
             "9": Room(10, [Transition("8")])
         }, LevelCategory.ADVANCED, 92, LevelDifficulty.YELLOW
     ),
