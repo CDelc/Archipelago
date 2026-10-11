@@ -48,7 +48,7 @@ class ItemName(StrEnum):
     DOUBLE_DASH_CRYSTALS = "Double Dash Crystals",
     YELLOW_CASSETTE = "Plain Yellow Cassette Blocks",
     GREEN_CASSETTE = "Plain Green Cassette Blocks",
-    LOOP_BLOCK = "Loopy Blocks (Loopy Lagoon)"
+    LOOP_BLOCK = "Loopy Blocks"
     DREAM_DASH_CRYSTAL = "Dream Dash Crystals",
     INTRO_CRUSHER = "Falling/Moving Ice Blocks",
     DASH_TRAFFIC_BLOCK = "Dash-Activated Zippers",
@@ -62,7 +62,7 @@ class ItemName(StrEnum):
     DOUBLE_DASH_DREAM_BLOCK = "Double Dash Dream Blocks"
     GREEN_SWITCH_BLOCK = "Green Switch Blocks",
     ORANGE_SWITCH_BLOCK = "Orange Switch Blocks",
-    SWITCH_BLOCK_SWITCH = "Switch Block Switch (Switchtube Vista)",
+    SWITCH_BLOCK_SWITCH = "Switch Block Switch",
     GRAVITY_FIELD = "Gravity Fields",
     BLUE_TIME_CRYSTAL = "Blue Time Crystals",
     DASH_CRYSTAL_SHARDS = "Dash Crystal Shards",

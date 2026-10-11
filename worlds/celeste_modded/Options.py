@@ -168,37 +168,37 @@ class RoomChecksCSide(Toggle):
 
 class RoomChecksFarewell(Toggle):
     """
-    Make each room in Farewell
+    Make each room in Farewell a check
     """
     display_name = "Farewell Room Checks"
 
 class RoomChecksBeginnerSJ(Toggle):
     """
-    Make each room in Farewell
+    Make each room in SJ Beginner Levels a Check
     """
     display_name = "Beginner Room Checks"
 
 class RoomChecksIntermediateSJ(Toggle):
     """
-    Make each room in Farewell
+    Make each room in SJ Intermediate Levels a Check
     """
     display_name = "Intermediate Room Checks"
 
 class RoomChecksAdvancedSJ(Toggle):
     """
-    Make each room in Farewell
+    Make each room in SJ Advanced Levels a Check
     """
     display_name = "Advanced Room Checks"
 
 class RoomChecksExpertSJ(Toggle):
     """
-    Make each room in Farewell
+    Make each room in SJ Expert Levels a Check
     """
     display_name = "Expert Room Checks"
 
 class RoomChecksGrandmasterSJ(Toggle):
     """
-    Make each room in Farewell
+    Make each room in SJ Grandmaster Levels a Check
     """
     display_name = "Grandmaster Room Checks"
 
@@ -362,15 +362,15 @@ class ItemConsildationMode(Choice):
     - No Mechanics - All mechanics start unlocked and mechanic unlocks are not in the item pool
     """
     display_name = "Item Consolidation Mode"
-    option_mild = 0
-    option_balanced = 1
-    option_aggressive = 2
-    option_balanced_colored = 3
-    option_vanilla = 4
-    option_none = 5
+    option_mild = 1
+    option_balanced = 2
+    option_aggressive = 3
+    option_balanced_colored = 4
+    option_vanilla = 5
+    option_none = 0
     option_no_mechanics = 6
 
-    default = 0
+    default = 1
 
 class HeartsidesStartUnlocked(DefaultOnToggle):
     """
@@ -412,12 +412,12 @@ def map_options(world: "CelesteModdedWorld"):
     world.win_condition_level = victory_level_list[world.options.win_condition_level.value]
 
     # Set item consolidation map
-    item_condolidation_list = [consolidated_mechanics_minimal,
+    item_condolidation_list = [no_consolidation,
+                                    consolidated_mechanics_minimal,
                                     consolidated_mechanics,
                                     extreme_consolidation,
                                     consolidated_mechanics_colors,
                                     vanilla_consolidation,
-                                    no_consolidation,
                                     no_mechanics]
     world.consolidation_mapping = item_condolidation_list[world.options.item_consolidation_mode.value]
 

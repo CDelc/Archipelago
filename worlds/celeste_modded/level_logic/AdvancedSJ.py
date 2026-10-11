@@ -109,7 +109,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "tutorial-1": Room(1, [Transition("goldian-1", [[ItemName.SWITCH_CRATE]])], [Location(LocationType.SILVER_BERRY, 1896, [[ItemName.SWITCH_CRATE, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.PUSH_STATION_BLOCK, ItemName.PULL_STATION_BLOCK, ItemName.SPRINGS]])], trivial_access=True),
             "goldian-1": Room(2, [Transition("aiden-2", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS]])]),
             "aiden-2": Room(3, [Transition("goldian-3")]),
-            "goldian-3": Room(4, [Transition("goldian-4", [[ItemName.TOUCH_SWITCH]])]),
+            "goldian-3": Room(4, [Transition("goldian-4", [[ItemName.TOUCH_SWITCH, ItemName.SPRINGS]])]),
             "goldian-4": Room(5, [Transition("tutorial-2")]),
             "tutorial-2": Room(6, [Transition("goldian-5", [[ItemName.PUSH_STATION_BLOCK, ItemName.PULL_STATION_BLOCK]])]),
             "goldian-5": Room(7, [Transition("goldian-6", [[ItemName.SPRINGS]]), Transition("goldian-berry", [[ItemName.SPRINGS]])]),
@@ -346,8 +346,8 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "2-a": Room(9, [Transition("2-b")]),
             "2-b": Room(10, [Transition("2-c")], [Location(LocationType.STRAWBERRY, 1086)]),
             "2-c": Room(11, [Transition("2-d")]),
-            "2-d": Room(12, [Transition("2-secret :D")]),
-            "2-secret :D": Room(13, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
+            "2-d": Room(12, [Transition("2-secret ")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
+            "2-secret ": Room(13, [], easter_egg=True)
         }, LevelCategory.ADVANCED, 86, LevelDifficulty.RED
     ),
     LevelName.THINKING_WITH_PORTALS:

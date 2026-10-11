@@ -201,7 +201,7 @@ expert_levels_sj : dict[LevelName, Level] = {
         {
             "a-00-start": Room(0, [Transition("a-01"), Transition("a-00a")], [Location(LocationType.SILVER_BERRY, 965, [[ItemName.CRUMBLING_PLATFORM, ItemName.DREAM_BLOCK, ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.MOVING_BLOCK]])], start_room=True),
             "a-00a": Room(1, [Transition("a-00-start"), Transition("a-00b")], trivial_access=True),
-            "a-01": Room(2, [Transition("a-02", [[ItemName.CRUMBLING_PLATFORM, ItemName.DREAM_BLOCK]]), Transition("a-01_berry", [[ItemName.CRUMBLING_PLATFORM, ItemName.DREAM_BLOCK]])]),
+            "a-01": Room(2, [Transition("a-02", [[ItemName.CRUMBLING_PLATFORM, ItemName.DREAM_BLOCK]]), Transition("a-01_berry", [[ItemName.CRUMBLING_PLATFORM, ItemName.DREAM_BLOCK]])], trivial_access=True),
             "a-01_berry": Room(3, [Transition("a-01")], [Location(LocationType.STRAWBERRY, 1575, [[ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS]])]),
             "a-02": Room(4, [Transition("a-03", [[ItemName.DASH_CRYSTALS]])]),
             "a-03": Room(5, [Transition("a-04", [[ItemName.DOUBLE_DASH_CRYSTALS]])]),

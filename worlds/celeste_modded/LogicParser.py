@@ -1,11 +1,12 @@
 from typing import TYPE_CHECKING
+from collections import deque
 from BaseClasses import CollectionState, Region
 from .ItemLocationClasses import ModdedCelesteLocation
 from .ValidateLayout import validate
 from .constants import Constants
 from worlds.generic.Rules import set_rule
 from .level_logic.LogicalLayout import levelList
-from .level_logic.LogicalObjects import Level, Room, Location
+from .level_logic.LogicalObjects import Level, Room, Location, Transition
 from .constants.ItemNames import ItemName, filler, mechanic, strawberry, moon_berry, level_victory
 from .constants.LevelNames import LevelName, LevelCategory
 from .constants.LocationTypes import LocationType
@@ -596,30 +597,20 @@ def getRoomCheckLevelList(world: "CelesteModdedWorld"):
     return rValue
 
 # (location ID -> id based access_rule)
-def getAutoCheckLocations(world: "CelesteModdedWorld"):
-    rValue: dict[int, list[list[int]]] = dict()
-    pre_processed_rValue: dict[int, list[list[str]]] = dict()
+def getAutoCheckLocations(world: "CelesteModdedWorld") -> list[int]:
+    location_list = []
     #Start Locations
     for i in range(1, world.start_items_needed + 1):
-        pre_processed_rValue[i] = []
+        location_list.append(i)
     # Trivial Room Access Auto Collect
     if world.options.trivial_room_checks.value == 3:
         for levelName,level in levelList.items():
             if levelEnabled(levelName, level, world):
                 for roomName,room in level.rooms.items():
                     if room.trivial_access:
-                        full_access_rule = []
-                        level_access_rule = mapItemList(getLevelAccessRule(level, world), world)
-                        if len(level_access_rule) == 0:
-                            level_access_rule = [[]]
-                        if not levelStartUnlocked(levelName, level, world):
-                            full_access_rule = [sublist + [levelUnlock(levelName)] for sublist in level_access_rule]
-                        else:
-                            full_access_rule = level_access_rule
-                        pre_processed_rValue[getLocationBasedLocationID(LocationType.ROOM, level, room)] = full_access_rule
+                        location_list.append(getLocationBasedLocationID(LocationType.ROOM, level, room))
 
-    # Crystal Heart requirements set to negative numbers (0 - number of hearts needed)
-    return {location: [[0 - int(item.replace("#", "")) if item.startswith("#") else world.item_name_to_id[item] for item in sublist] for sublist in access] for location,access in pre_processed_rValue.items()}
+    return location_list
 
 def getAllLocationsPerLevel(world: "CelesteModdedWorld") -> dict[int, list[int]]:
     rValue: dict[int, list[int]] = dict()
@@ -639,6 +630,122 @@ def getAllLocationsPerLevel(world: "CelesteModdedWorld") -> dict[int, list[int]]
                     rValue[level.level_id].append(getLocationBasedLocationID(location.location_type, level, room, location.ID))
     return rValue
 
+
+# Below functions all to build an ID-based map of every location and what items you need to reach it from the root.
+# Sent to the mod for some of its tracking functions
+def getLogicalSummary(world: "CelesteModdedWorld") -> dict[int, list[list[int]]]:
+    idBasedMap: dict[int, list[list[int]]] = dict()
+    nameBasedMap: dict[str, list[list[str]]] = dict()
+    for levelName,level in levelList.items():
+        level_full_access_rule = [[]]
+        if not levelEnabled(levelName, level, world):
+            continue
+        if not levelStartUnlocked(levelName, level, world):
+            level_full_access_rule = combineAndNormalizeAccessRulesAND(normalizeRule(level_full_access_rule), [[levelUnlock(levelName)]])
+        level_mapped_access_rule = normalizeRule(mapItemList(getLevelAccessRule(level, world), world))
+        level_full_access_rule = combineAndNormalizeAccessRulesAND(level_full_access_rule, level_mapped_access_rule)
+        
+        room_access_requirements = getAllRoomAccessRequirements(levelName, level, level_full_access_rule, world)
+        for roomName,room in level.rooms.items():
+            if not roomEnabled(level, room, world):
+                continue
+            if roomCheckEnabled(level, room, world):
+                loc_name = getRoomName(levelName, roomName)
+                nameBasedMap[loc_name] = room_access_requirements[roomName]
+            if checkpointEnabled(level, room, world):
+                loc_name = getCheckpointName(levelName, room.checkpoint)
+                nameBasedMap[loc_name] = room_access_requirements[roomName]
+
+            for location in room.locations:
+                if isEnabledLocation(location, levelName, level, room, world):
+                    loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
+                    nameBasedMap[loc_name] = combineAndNormalizeAccessRulesAND(room_access_requirements[roomName], normalizeRule(location.access_rule))
+
+    # Crystal Heart requirements set to negative numbers (0 - number of hearts needed)
+    idBasedMap = {location_id_table[locName]: [[0 - int(item.replace("#", "")) if item.startswith("#") else item_id_table[item] for item in sublist] for sublist in accessRule] for locName,accessRule in nameBasedMap.items()}
+    for i in range(1, world.start_items_needed + 1):
+        idBasedMap[i] = [[]];
+    return idBasedMap
+
+
+
+def getAllRoomAccessRequirements(levelName: str, level: Level, level_entrance_rule: list[list[str]], world: "CelesteModdedWorld"):
+    start_room: Room = None
+    start_room_name: str = None
+    for roomName,room in level.rooms.items():
+        if room.start_room:
+            start_room = room
+            start_room_name = roomName
+            break
+    
+    if start_room == None:
+        raise RuntimeError(f"[Celeste Modded] Level ID {level.level_id} has no start room in logic. This should never happen.")
+    #Store parent room in node
+    room_access_map: dict[str, list[list[str]]] = {}
+    updateAccessMap(level, start_room_name, start_room, normalizeAccessRule(level_entrance_rule), room_access_map, world)
+    if world.options.randomize_checkpoints.value:
+        for roomName,room in level.rooms.items():
+            if room.checkpoint:
+                checkpoint_item = getCheckpointName(levelName, room.checkpoint)
+                checkpoint_entrance_rule = combineAndNormalizeAccessRulesAND([[checkpoint_item]], normalizeAccessRule(level_entrance_rule))
+                updateAccessMap(level, roomName, room, checkpoint_entrance_rule, room_access_map, world)
+    return room_access_map
+
+def updateAccessMap(level: Level, startRoomName: str, start_room: Room, update_rule: list[list[str]], access_map: dict[int, list[list[str]]], world: "CelesteModdedWorld"):
+    current_start_room_rule = access_map.get(startRoomName)
+    if current_start_room_rule == None:
+        access_map[startRoomName] = update_rule
+    else:
+        access_map[startRoomName] = combineAndNormalizeAccessRulesOR(access_map[startRoomName], update_rule)
+
+    queue: deque[tuple[str, Room]] = deque([(startRoomName, start_room)])
+    while queue:
+        roomName,room = queue.popleft()
+        current_room_access = access_map.get(roomName)
+        for transition in room.transitions:
+            next_roomName = transition.destination_room
+            next_room = level.rooms[next_roomName]
+            transition_access = normalizeRule(mapItemList(transition.access_rule, world))
+            new_next_room_access = combineAndNormalizeAccessRulesAND(current_room_access, transition_access)
+
+            existing_next_room_access = access_map.get(next_roomName)
+            if existing_next_room_access is None:
+                access_map[next_roomName] = new_next_room_access
+            else:
+                merged = combineAndNormalizeAccessRulesOR(existing_next_room_access, new_next_room_access)
+                if merged == normalizeAccessRule(existing_next_room_access):
+                    continue
+                access_map[next_roomName] = merged
+            queue.append((next_roomName, next_room))
+                
+
+def normalizeRule(rule: list[list]) -> list[list]:
+    return rule if rule else [[]]
+
+def normalizeAccessRule(rule: list[list[int | str]]):
+    return normalizeRule(combineAndNormalizeAccessRulesAND(rule, rule))
+
+def accessRulesEqual(rule1: list[list[int | str]], rule2: list[list[int | str]]):
+    return normalizeAccessRule(rule1) == normalizeAccessRule(rule2)
+
+def combineAndNormalizeAccessRulesAND(rule1: list[list[int | str]], rule2: list[list[int | str]]):
+
+    raw_combinations = {frozenset(s1 + s2) for s1 in rule1 for s2 in rule2}
+
+    simplified_sets = {
+        current 
+        for current in raw_combinations
+        if not any(other < current for other in raw_combinations)
+    }
+
+    return sorted(
+        [sorted(list(s)) for s in simplified_sets],
+        key=lambda x: (len(x), x)
+    )
+
+def combineAndNormalizeAccessRulesOR(rule1: list[list[int | str]], rule2: list[list[int | str]]):
+    new_rule = rule1 + rule2
+    return normalizeAccessRule(new_rule)
 
 item_type_dict: dict[str, ItemType]
 location_type_dict: dict[str, LocationType]

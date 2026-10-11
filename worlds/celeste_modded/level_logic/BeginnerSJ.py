@@ -97,7 +97,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
     LevelName.AZURE_CAVERNS:
     Level(
         {
-            "01": Room(0, [Transition("02")], [Location(LocationType.SILVER_BERRY, 797)], start_room=True),
+            "01": Room(0, [Transition("02")], [Location(LocationType.SILVER_BERRY, 797, [[ItemName.DASH_TRAFFIC_BLOCK, ItemName.DASH_CRYSTALS]])], start_room=True),
             "02": Room(1, [Transition("03", [[ItemName.DASH_TRAFFIC_BLOCK]]), Transition("02b", [[ItemName.DASH_TRAFFIC_BLOCK]])]),
             "02b": Room(2, [Transition("02")], [Location(LocationType.STRAWBERRY, 289)]),
             "03": Room(3, [Transition("04", [[ItemName.DASH_CRYSTALS]])]),
@@ -233,17 +233,17 @@ beginner_levels_sj : dict[LevelName, Level] = {
     Level(
         {
             "a_01": Room(0, [Transition("a_02")], [Location(LocationType.SILVER_BERRY, 53, [[ItemName.DASH_CRYSTALS]])], start_room=True),
-            "a_02": Room(1, [Transition("a_03")], trivial_access=True),
+            "a_02": Room(1, [Transition("a_03", [[ItemName.SPRINGS]])], trivial_access=True),
             "a_03": Room(2, [Transition("a_04")]),
             "a_04": Room(3, [Transition("a_05"), Transition("a_10")]),
-            "a_05": Room(4, [Transition("a_06")]),
+            "a_05": Room(4, [Transition("a_06", [[ItemName.SINKING_PLATFORM]])]),
             "a_10": Room(5, [Transition("a_04")], easter_egg=True),
             "a_06": Room(6, [Transition("a_07", [[ItemName.DASH_CRYSTALS]])]),
             "a_07": Room(7, [Transition("a_08")]),
             "a_08": Room(8, [Transition("a_09")]),
             "a_09": Room(9, [Transition("a_11")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a_11": Room(10, [Transition("a_12")], [Location(LocationType.STRAWBERRY, 312)]),
-            "a_12": Room(11, [], easter_egg=True)
+            "a_12": Room(11, [], easter_egg_difficult=True)
         }, LevelCategory.BEGINNER, 37, LevelDifficulty.GREEN
     ),
     LevelName.SWITCHTUBE_VISTA:
@@ -383,7 +383,7 @@ beginner_levels_sj : dict[LevelName, Level] = {
     LevelName.PAINT:
     Level(
         {
-            "intro": Room(0, [Transition("a-00", [[ItemName.BIG_YELLOW_BUTTON]])], [Location(LocationType.SILVER_BERRY, 2544, [[ItemName.BIG_YELLOW_BUTTON, ItemName.BADELINE_ORB, ItemName.SPRINGS, ItemName.CRUMBLING_PLATFORM]])], start_room=True),
+            "intro": Room(0, [Transition("a-00", [[ItemName.BIG_YELLOW_BUTTON, ItemName.CRUMBLING_PLATFORM]])], [Location(LocationType.SILVER_BERRY, 2544, [[ItemName.BIG_YELLOW_BUTTON, ItemName.BADELINE_ORB, ItemName.SPRINGS, ItemName.CRUMBLING_PLATFORM]])], start_room=True),
             "a-00": Room(1, [Transition("a-01")]),
             "a-01": Room(2, [Transition("a-02")]),
             "a-02": Room(3, [Transition("a-03")]),

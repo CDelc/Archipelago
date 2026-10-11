@@ -12,17 +12,26 @@ from . import LogicParser
 
 # TODO
 # - All levels showing as complete in journal
-# - Look into making the AP connection UI work a bit better
+# - Hard logic
+# - Refactor c# mapping to grab all the data from slot data rather than copying it over manually
+# - Traps/Deathlink (Traplink?)
+# - Replace text on prologue complete screen
+# - Save data persistence
 # - Heart gates open except goal level option
 # - Heart gate unlocks as a single check
-# - Hard logic
-# - Delete the multi-room berries in the mod when appropriate (And remove the slot from UI)
-# - Refactor c# mapping to grab all the data from slot data rather than copying it over manually
-# - Some bugs with warnings (None start level set giving warning - Enabling all room checks via shortcut creating warnings for disabled levels)
-# - Open save directly to SJ if no vanilla levels start unlocked
 # - Individual Level Disable
-# - Unlocking checkpoints is confusing visually
-# - Dynamically make level sets available depending on whats included (Need to move where start items are collected and maybe get that UI to render in overworld)
+# - Item sound effects
+# - Mini heart hint category
+# - Make logic intended-only
+# - (Maybe color checkpoints that are needed to access a location that is in logic)
+
+# - Delete the multi-room berries in the mod when appropriate (And remove the slot from UI)
+# - Unlocking checkpoints is confusing visually / Make it so you can't view checkpoints without having level unlocked
+# - Extend logic tracking features to the berry UI at the bottom of the pause menu
+# - Add option to turn off waypoints/logic tracking features
+# - Look into reducing delay between switching level sets in overworld
+
+
 
 
 game_name = Constants.game_name
@@ -115,6 +124,7 @@ class CelesteModdedWorld(World):
             "randomize_checkpoints": self.options.randomize_checkpoints.value,
             "winged_golden": self.options.winged_golden.value,
             "item_consolidation_mode": self.options.item_consolidation_mode.value,
+            "exclude_multiroom_berries": self.options.exclude_multiroom_berries.value,
 
             "room_checks": self.options.room_checks.value,
             "room_checks_a_side": self.options.room_checks_a_side.value,
@@ -156,7 +166,8 @@ class CelesteModdedWorld(World):
             "deathless_level_list": LogicParser.getDeathlessLevelList(self),
             "roomcheck_level_list": LogicParser.getRoomCheckLevelList(self),
             "autocheck_locations": LogicParser.getAutoCheckLocations(self),
-            "all_locations_by_level": LogicParser.getAllLocationsPerLevel(self)
+            "all_locations_by_level": LogicParser.getAllLocationsPerLevel(self),
+            "logical_summary": LogicParser.getLogicalSummary(self)
         }
     
     def get_filler_item_name(self) -> str:
