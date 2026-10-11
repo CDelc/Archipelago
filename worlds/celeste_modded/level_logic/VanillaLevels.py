@@ -481,7 +481,7 @@ vanilla_levels : dict[LevelName, Level] = {
             "b-02": Room(7, [Transition("b-08"), Transition("b-05")], key_door_ids=[226]),
             "b-02-key-left": Room(100, [Transition("b-02")], [Location(LocationType.KEY, 221)], is_subregion_of="b-02"),
             "b-02-key-right": Room(101, [Transition("b-02")], [Location(LocationType.KEY, 219)], is_subregion_of="b-02"),
-            "b-05": Room(8, [Transition("b-02"), Transition("b-02-key-left", [[ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH]])]),
+            "b-05": Room(8, [Transition("b-02"), Transition("b-02-key-left", [[ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.SWAP_BLOCK]])]),
             "b-08": Room(9, [Transition("b-09", [[ItemName.SWAP_BLOCK, ItemName.RED_BUBBLES, ItemName.DASH_SWITCH, ItemName.SPRINGS, getKeyDoorName(LevelName.MIRROR_TEMPLE_B, "b-02", 226), getKeyDoorName(LevelName.MIRROR_TEMPLE_B, "b-00", 145)]])]),
             "b-08-right": Room(102, [Transition("b-08", [[ItemName.SWAP_BLOCK, ItemName.SPRINGS]])], is_subregion_of="b-08"),
             "b-09": Room(10, [Transition("c-00", [[ItemName.CRUMBLING_PLATFORM]])]),

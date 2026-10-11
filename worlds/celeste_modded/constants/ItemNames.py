@@ -44,7 +44,7 @@ class ItemName(StrEnum):
     BREAKER_BOX = "Breaker Boxes",
     BIRD = "Bird",
     JELLYFISH = "Jellyfish",
-    PUFFER_FISH = "Puffer fish",
+    PUFFER_FISH = "Pufferfish",
     DOUBLE_DASH_CRYSTALS = "Double Dash Crystals",
     YELLOW_CASSETTE = "Plain Yellow Cassette Blocks",
     GREEN_CASSETTE = "Plain Green Cassette Blocks",

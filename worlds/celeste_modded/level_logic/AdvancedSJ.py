@@ -293,7 +293,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
     LevelName.ATTACK_OF_THE_CLONE:
     Level(
         {
-            "BR-00": Room(0, [Transition("BR-02", [[ItemName.SEEKERS, ItemName.PUFFER_FISH, ItemName.CRYSTAL_BOMB]])], [Location(LocationType.SILVER_BERRY, 929, [[ItemName.DASH_CRYSTALS, ItemName.SPRINGS, ItemName.BLUE_LINKED_TRAFFIC_BLOCK, ItemName.KEVIN, ItemName.SWAP_BLOCK, ItemName.SEEKERS, ItemName.PUFFER_FISH, ItemName.CRYSTAL_BOMB]])], start_room=True),
+            "BR-00": Room(0, [Transition("BR-02", [[ItemName.SEEKERS, ItemName.PUFFER_FISH, ItemName.CRYSTAL_BOMB, ItemName.SPRINGS]])], [Location(LocationType.SILVER_BERRY, 929, [[ItemName.DASH_CRYSTALS, ItemName.SPRINGS, ItemName.BLUE_LINKED_TRAFFIC_BLOCK, ItemName.KEVIN, ItemName.SWAP_BLOCK, ItemName.SEEKERS, ItemName.PUFFER_FISH, ItemName.CRYSTAL_BOMB]])], start_room=True),
             "BR-02": Room(1, [Transition("BR-01", [[ItemName.DASH_CRYSTALS]])]),
             "BR-01": Room(2, [Transition("BR-08")]),
             "BR-08": Room(3, [Transition("BR-03", [[ItemName.BLUE_LINKED_TRAFFIC_BLOCK, ItemName.KEVIN, ItemName.SWAP_BLOCK]])]),
@@ -372,7 +372,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
         {
             "intro_v1": Room(0, [Transition("intro_v2")], start_room=True),
             "intro_v2": Room(1, [Transition("a-01", [[ItemName.PURPLE_REBOUND_BUBBLE, ItemName.CRUMBLING_PLATFORM]])], trivial_access=True),
-            "a-01": Room(2, [Transition("a-02", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.HONEY_BUBBLES]])], [Location(LocationType.SILVER_BERRY, 1035, [[ItemName.MOVING_BLOCK, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.PURPLE_REBOUND_BUBBLE, ItemName.CRUMBLING_PLATFORM]])]),
+            "a-01": Room(2, [Transition("a-02", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.HONEY_BUBBLES, ItemName.SPRINGS]])], [Location(LocationType.SILVER_BERRY, 1035, [[ItemName.MOVING_BLOCK, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.PURPLE_REBOUND_BUBBLE, ItemName.CRUMBLING_PLATFORM, ItemName.SPRINGS]])]),
             "a-02": Room(3, [Transition("a-03", [[ItemName.TOUCH_SWITCH]])]),
             "a-03": Room(4, [Transition("a-04", [[ItemName.MOVING_BLOCK]])]),
             "a-04": Room(5, [Transition("a-05")]),

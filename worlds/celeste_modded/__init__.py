@@ -11,6 +11,7 @@ from .constants.LocationTypes import LocationType
 from . import LogicParser
 
 # TODO
+# --- BACKLOG ---
 # - All levels showing as complete in journal
 # - Hard logic
 # - Refactor c# mapping to grab all the data from slot data rather than copying it over manually
@@ -24,12 +25,15 @@ from . import LogicParser
 # - Mini heart hint category
 # - Make logic intended-only
 # - (Maybe color checkpoints that are needed to access a location that is in logic)
-
-# - Delete the multi-room berries in the mod when appropriate (And remove the slot from UI)
-# - Unlocking checkpoints is confusing visually / Make it so you can't view checkpoints without having level unlocked
+# - More specific customization for number of berries needed for goal
 # - Extend logic tracking features to the berry UI at the bottom of the pause menu
-# - Add option to turn off waypoints/logic tracking features
-# - Look into reducing delay between switching level sets in overworld
+
+
+
+# --- CURRENT RELEASE ---
+
+# --- INCOMING TASKS ---
+
 
 
 
