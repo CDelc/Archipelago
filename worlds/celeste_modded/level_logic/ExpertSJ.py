@@ -175,9 +175,9 @@ expert_levels_sj : dict[LevelName, Level] = {
     LevelName.GARDEN_OF_KHUTARA:
     Level(
         {
-            "DanTKO_Intro": Room(0, [Transition("DanTKO_01"), Transition("DanTKO_Monolith_1"), Transition("DanTKO_Plane")], start_room=True),
+            "DanTKO_Intro": Room(0, [Transition("DanTKO_01"), Transition("DanTKO_Monolith_1"), Transition("DanTKO_Plane", [[ItemName.DASH_CRYSTALS]])], start_room=True),
             "DanTKO_Monolith_1": Room(1, [Transition("DanTKO_Intro"), Transition("Aperture_Mountain Relic")], easter_egg=True),
-            "DanTKO_Plane": Room(2, [Transition("DanTKO_Intro")], easter_egg=True),
+            "DanTKO_Plane": Room(2, [Transition("DanTKO_Intro")], easter_egg_difficult=True),
             "DanTKO_01": Room(3, [Transition("DanTKO_02", [[ItemName.BLUE_BOUNCE_MOSS, ItemName.WHITE_LINKED_TRAFFIC_BLOCK, ItemName.PURPLE_PORTAL]])], trivial_access=True),
             "DanTKO_02": Room(4, [Transition("DanTKO_blueTutorial_2", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.YELLOW_PORTAL, ItemName.DASH_CRYSTALS]])], [Location(LocationType.SILVER_BERRY, 2536, [[ItemName.RED_PORTAL, ItemName.TOUCH_SWITCH, ItemName.RED_SPEED_MOSS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.YELLOW_PORTAL, ItemName.DASH_CRYSTALS]])]),
             "DanTKO_blueTutorial_2": Room(5, [Transition("DanTKO_03")]),

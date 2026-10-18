@@ -18,22 +18,33 @@ from . import LogicParser
 # - Traps/Deathlink (Traplink?)
 # - Replace text on prologue complete screen
 # - Save data persistence
-# - Heart gates open except goal level option
-# - Heart gate unlocks as a single check
-# - Individual Level Disable
 # - Item sound effects
 # - Mini heart hint category
 # - Make logic intended-only
 # - (Maybe color checkpoints that are needed to access a location that is in logic)
 # - More specific customization for number of berries needed for goal
 # - Extend logic tracking features to the berry UI at the bottom of the pause menu
-
-
+# - Heart gates open except goal level option
+# - Heart gate unlocks as a single check
+# - Individual Level Disable
 
 # --- CURRENT RELEASE ---
 
-# --- INCOMING TASKS ---
 
+# --- INCOMING TASKS ---
+# - Logic tracking seems to break when starting with all levels enabled
+# - Generic dream blocks appearing with no item consolidation?
+# - [Celeste Modded] Slot Carter has selected All as the start level set, but has no levels enabled in that set. This setting will be overridden: all levels in All will be turned on.
+# - Pause menu brings up room text
+# - Make item names consistent (Normal vs Vanilla vs Regular, etc)
+# - Include Shattersong secret ending in rando
+# - Fix seekers activating stuff when deactivated
+# - Review item consolidation naming - especially core switches
+# - Check berry count in oui panel. (Cassette cliffs after fresh generation showing 1/2, other examples likely exist)
+# - Seeing is Believing text update for higher difficulties
+# - Check starry ruins progress through room 2 with only blue portals (showing as green)
+# - Send disabled check message if you collect a check that is disabled due to yaml setting
+# - Treehive first dream block broken and skeleton 04
 
 
 

@@ -161,8 +161,17 @@ def calculate_start_items(world: "CelesteModdedWorld"):
     
 # Ignore level access rules for heart sides when heart gates are open by default
 def getLevelAccessRule(level: Level, world: "CelesteModdedWorld"):
-    return [[]] if level.heartside and world.options.open_heart_gates.value else level.access_rule
+    return [[]] if level.heartside and world.options.open_heart_gates.value else getAccessRule(level, world)
 
+def getAccessRule(item: Level | Transition | Location, world: "CelesteModdedWorld"):
+    if world.options.logic_difficulty == 0:
+        return item.access_rule
+    elif world.options.logic_difficulty == 1:
+        return item.access_hard if item.access_hard != None else item.access_rule
+    elif world.options.logic_difficulty == 2:
+        return item.access_insane if item.access_insane != None else item.access_hard if item.access_hard != None else item.access_rule
+    elif world.options.logic_difficulty == 3:
+        return item.access_extreme if item.access_extreme != None else item.access_insane if item.access_insane != None else item.access_hard if item.access_hard != None else item.access_rule
 
 def get_filtered_mechanics_list(world: "CelesteModdedWorld") -> set[ItemType]:
 
@@ -175,12 +184,14 @@ def get_filtered_mechanics_list(world: "CelesteModdedWorld") -> set[ItemType]:
     mechanics = set()
     for levelName,level in levelList.items():
         if levelEnabled(levelName, level, world):
-            add_all_mechanics(mechanics, level.access_rule, world)
+            add_all_mechanics(mechanics, getAccessRule(level, world), world)
             for _,room in level.rooms.items():
                 for transition in room.transitions:
-                    add_all_mechanics(mechanics, transition.access_rule, world)
+                    if not transitionEnabled(transition, world):
+                        continue
+                    add_all_mechanics(mechanics, getAccessRule(transition, world), world)
                 for location in room.locations:
-                    add_all_mechanics(mechanics, location.access_rule, world)
+                    add_all_mechanics(mechanics, getAccessRule(location, world), world)
 
     return mechanics
 
@@ -330,12 +341,14 @@ def parse_regions(world: "CelesteModdedWorld"):
                     add_location(room_region, loc_name, world)
             
             for transition in room.transitions:
+                if not transitionEnabled(transition, world):
+                    continue
                 destination_room_name = getRoomName(levelName, transition.destination_room)
-                room_region.add_exits({destination_room_name}, {destination_room_name: ruleFromList(transition.access_rule, world)})
+                room_region.add_exits({destination_room_name}, {destination_room_name: ruleFromList(getAccessRule(transition, world), world)})
             for location in room.locations:
                 if isEnabledLocation(location, levelName, level, room, world):
                     loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
-                    add_location_with_rule(room_region, loc_name, world, location.access_rule)
+                    add_location_with_rule(room_region, loc_name, world, getAccessRule(location, world))
     calculate_start_items(world)
     create_start_locations(world)
 
@@ -475,6 +488,14 @@ def roomCheckEnabled(level: Level, room: Room, world: "CelesteModdedWorld"):
             and not room.is_subregion_of
             and not (world.options.trivial_room_checks.value == 1 and room.trivial_access)
             and roomEnabled(level, room, world))
+
+def transitionEnabled(transition: Transition, world: "CelesteModdedWorld"):
+    if transition.hard_only and world.options.logic_difficulty < 1:
+        return False
+    elif transition.insane_only and world.options.logic_difficulty < 2:
+        return False
+    else:
+        return True
 
 def any_levels_enabled(levelNameList: list[str], world: "CelesteModdedWorld"):
     for levelName in levelNameList:
@@ -659,7 +680,7 @@ def getLogicalSummary(world: "CelesteModdedWorld") -> dict[int, list[list[int]]]
             for location in room.locations:
                 if isEnabledLocation(location, levelName, level, room, world):
                     loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
-                    nameBasedMap[loc_name] = combineAndNormalizeAccessRulesAND(room_access_requirements[roomName], normalizeRule(location.access_rule))
+                    nameBasedMap[loc_name] = combineAndNormalizeAccessRulesAND(room_access_requirements[roomName], normalizeRule(getAccessRule(location, world)))
 
     # Crystal Heart requirements set to negative numbers (0 - number of hearts needed)
     idBasedMap = {location_id_table[locName]: [[0 - int(item.replace("#", "")) if item.startswith("#") else item_id_table[item] for item in sublist] for sublist in accessRule] for locName,accessRule in nameBasedMap.items()}
@@ -703,9 +724,11 @@ def updateAccessMap(level: Level, startRoomName: str, start_room: Room, update_r
         roomName,room = queue.popleft()
         current_room_access = access_map.get(roomName)
         for transition in room.transitions:
+            if not transitionEnabled(transition, world):
+                continue
             next_roomName = transition.destination_room
             next_room = level.rooms[next_roomName]
-            transition_access = normalizeRule(mapItemList(transition.access_rule, world))
+            transition_access = normalizeRule(mapItemList(getAccessRule(transition, world), world))
             new_next_room_access = combineAndNormalizeAccessRulesAND(current_room_access, transition_access)
 
             existing_next_room_access = access_map.get(next_roomName)

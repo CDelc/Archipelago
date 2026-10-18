@@ -362,12 +362,12 @@ class ItemConsildationMode(Choice):
     - No Mechanics - All mechanics start unlocked and mechanic unlocks are not in the item pool
     """
     display_name = "Item Consolidation Mode"
+    option_none = 0
     option_mild = 1
     option_balanced = 2
     option_aggressive = 3
     option_balanced_colored = 4
     option_vanilla = 5
-    option_none = 0
     option_no_mechanics = 6
 
     default = 1
@@ -383,6 +383,19 @@ class OpenHeartGates(Toggle):
     All heart gates start open
     """
     display_name = "Open heart gates"
+
+class LogicDifficulty(Choice):
+    display_name = "Logic Difficulty"
+    """
+    Easy - Only intended completion requirements
+    Hard - Expected to be proficient with Celeste movement up to around advanced level
+    Insane - If I could find a way to do it, its in
+    """
+    option_easy = 0
+    option_hard = 1
+    option_insane = 2
+    option_extreme = 3
+    default = 0
     
 def map_options(world: "CelesteModdedWorld"):
 
@@ -584,3 +597,4 @@ class CelesteModdedOptions(PerGameCommonOptions):
     require_moon_berry: RequireMoonBerry
     require_berries_for_goal: RequireBerriesForGoalLevelEntry
     open_heart_gates: OpenHeartGates
+    logic_difficulty: LogicDifficulty
