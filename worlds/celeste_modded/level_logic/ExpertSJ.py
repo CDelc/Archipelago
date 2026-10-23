@@ -4,7 +4,7 @@ from ..constants.LevelNames import LevelCategory, LevelName, LevelDifficulty
 from .LogicalObjects import Level, Room, Transition, Location
 from ..constants.LocationTypes import LocationType
 
-ehs_golden_list = [[ItemName.SPEED_MUSHROOM_WALL, ItemName.WHITE_DREAM_BLOCK, ItemName.DREAM_BLOCK, ItemName.SPEED_MUSHROOMS, ItemName.RED_LINKED_TRAFFIC_BLOCK, ItemName.DASH_BOOST_FIELD, ItemName.FORCE_JUMP_CRYSTAL, ItemName.DOUBLE_DASH_REFILL_WALL, ItemName.BREAKER_BOX, ItemName.TRAFFIC_BLOCKS, ItemName.DASH_REFILL_WALL, ItemName.RED_SPEED_MOSS, ItemName.BLUE_BOUNCE_MOSS, ItemName.WHITE_LINKED_TRAFFIC_BLOCK, ItemName.RED_PORTAL, ItemName.YELLOW_PORTAL, ItemName.BLUE_PORTAL, ItemName.GREEN_PORTAL, ItemName.SKY_LANTERN, ItemName.CRUMBLING_PLATFORM, ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.INFINITE_DASH_MOSAIC_CRYSTAL, ItemName.KEVIN, ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS, ItemName.BLUE_STOPWATCH, ItemName.GREEN_STOPWATCH, ItemName.GRAY_STOPWATCH, ItemName.SWAP_BLOCK, ItemName.TRAFFIC_BLOCKS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.NO_STAMINA_DASH_CRYSTAL, ItemName.CRUMBLING_PLATFORM, ItemName.WHITE_DREAM_BLOCK, ItemName.SPRINGS, ItemName.RED_PROPELLER_BLOCK, ItemName.YELLOW_PROPELLER_BLOCK, ItemName.PIPES, ItemName.JELLY_CRYSTAL, ItemName.DASH_REFILL_WALL, ItemName.TOUCH_SWITCH, ItemName.CLOUD_CRYSTAL, ItemName.JELLYFISH, ItemName.DREAM_BLOCK, ItemName.DASH_CRYSTALS, ItemName.DASH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.GREEN_BUBBLES, ItemName.SPRINGS, ItemName.BLUE_FLOATING_FIELDS, ItemName.BLUE_FLIP_SWITCH, ItemName.GREEN_FLIP_SWITCH, ItemName.PURPLE_FLIP_SWITCH, ItemName.BADELINE_ORB, ItemName.BIRD, ItemName.PUFFER_FISH, ItemName.PURPLE_REBOUND_BUBBLE, ItemName.GREEN_BUBBLES, ItemName.BATTERY, ItemName.STOPWATCH_CRYSTAL, ItemName.DASH_CRYSTALS, ItemName.TOGGLE_SWAP_BLOCK, ItemName.SWAP_BLOCK, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.FEATHER, ItemName.CRUMBLING_PLATFORM, ItemName.SPRINGS, ItemName.BUBBLE_EMITTER, ItemName.THEO_CRYSTAL, ItemName.CRUMBLING_PLATFORM, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.BOWL_PUFFER, ItemName.DASH_SWITCH, ItemName.SWAP_BLOCK, ItemName.GREEN_BUBBLES, ItemName.RED_BUBBLES, ItemName.CORE_SWITCH, ItemName.CORE_BLOCK, ItemName.SPRINGS, ItemName.CURVED_TRAFFIC_BLOCK, ItemName.PUFFER_FISH, ItemName.TRAFFIC_BLOCKS, ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.DASH_SPRING, ItemName.MOVE_BLOCK_ACCELERATOR_FIELD, ItemName.MOVE_BLOCK_DECELERATOR_FIELD, ItemName.MOVE_BLOCK_DELETE_FIELD, ItemName.MOVE_BLOCK_REDIRECT_FIELD, ItemName.MOVING_BLOCK, ItemName.DREAM_MOVE_BLOCK, ItemName.SQUARE_BUMPER, ItemName.TOUCH_SWITCH, ItemName.DREAM_BLOCK]]
+ehs_golden_list = [[ItemName.SPEED_MUSHROOM_WALL, ItemName.WHITE_DREAM_BLOCK, ItemName.DREAM_BLOCK, ItemName.SPEED_MUSHROOMS, ItemName.RED_LINKED_TRAFFIC_BLOCK, ItemName.DASH_BOOST_FIELD, ItemName.FORCE_JUMP_CRYSTAL, ItemName.DOUBLE_DASH_REFILL_WALL, ItemName.BREAKER_BOX, ItemName.TRAFFIC_BLOCKS, ItemName.DASH_REFILL_WALL, ItemName.RED_SPEED_MOSS, ItemName.BLUE_BOUNCE_MOSS, ItemName.WHITE_LINKED_TRAFFIC_BLOCK, ItemName.RED_PORTAL, ItemName.YELLOW_PORTAL, ItemName.BLUE_PORTAL, ItemName.GREEN_PORTAL, ItemName.SKY_LANTERN, ItemName.CRUMBLING_PLATFORM, ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.INFINITE_DASH_MOSAIC_CRYSTAL, ItemName.KEVIN, ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS, ItemName.LUNAR_PAGODA_STOPWATCH, ItemName.LUNAR_PAGODA_STOPWATCH, ItemName.LUNAR_PAGODA_STOPWATCH, ItemName.SWAP_BLOCK, ItemName.TRAFFIC_BLOCKS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.NO_STAMINA_DASH_CRYSTAL, ItemName.CRUMBLING_PLATFORM, ItemName.WHITE_DREAM_BLOCK, ItemName.SPRINGS, ItemName.RED_PROPELLER_BLOCK, ItemName.YELLOW_PROPELLER_BLOCK, ItemName.PIPES, ItemName.JELLY_CRYSTAL, ItemName.DASH_REFILL_WALL, ItemName.TOUCH_SWITCH, ItemName.CLOUD_CRYSTAL, ItemName.JELLYFISH, ItemName.DREAM_BLOCK, ItemName.DASH_CRYSTALS, ItemName.DASH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.GREEN_BUBBLES, ItemName.SPRINGS, ItemName.BLUE_FLOATING_FIELDS, ItemName.BLUE_FLIP_SWITCH, ItemName.GREEN_FLIP_SWITCH, ItemName.PURPLE_FLIP_SWITCH, ItemName.BADELINE_ORB, ItemName.BIRD, ItemName.PUFFER_FISH, ItemName.PURPLE_REBOUND_BUBBLE, ItemName.GREEN_BUBBLES, ItemName.BATTERY, ItemName.STOPWATCH_CRYSTAL, ItemName.DASH_CRYSTALS, ItemName.TOGGLE_SWAP_BLOCK, ItemName.SWAP_BLOCK, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.FEATHER, ItemName.CRUMBLING_PLATFORM, ItemName.SPRINGS, ItemName.BUBBLE_EMITTER, ItemName.THEO_CRYSTAL, ItemName.CRUMBLING_PLATFORM, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.BOWL_PUFFER, ItemName.DASH_SWITCH, ItemName.SWAP_BLOCK, ItemName.GREEN_BUBBLES, ItemName.RED_BUBBLES, ItemName.CORE_SWITCH, ItemName.CORE_BLOCK, ItemName.SPRINGS, ItemName.CURVED_TRAFFIC_BLOCK, ItemName.PUFFER_FISH, ItemName.TRAFFIC_BLOCKS, ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.DASH_SPRING, ItemName.MOVE_BLOCK_ACCELERATOR_FIELD, ItemName.MOVE_BLOCK_DECELERATOR_FIELD, ItemName.MOVE_BLOCK_DELETE_FIELD, ItemName.MOVE_BLOCK_REDIRECT_FIELD, ItemName.MOVING_BLOCK, ItemName.DREAM_MOVE_BLOCK, ItemName.SQUARE_BUMPER, ItemName.TOUCH_SWITCH, ItemName.DREAM_BLOCK]]
 ehs_access_reqs = [[
     getLocationName(LevelName.A_CHANGE_IN_DIRECTION, "Agent_07", LocationType.LEVEL_CLEAR_MINI_HEART),
     getLocationName(LevelName.FLYING_BATTERY, "a-08", LocationType.LEVEL_CLEAR_MINI_HEART),
@@ -109,7 +109,7 @@ expert_levels_sj : dict[LevelName, Level] = {
         {
             "00-intro": Room(0, [Transition("00-intro-cutscene", [[ItemName.NO_STAMINA_DASH_CRYSTAL, ItemName.CRUMBLING_PLATFORM]])], start_room=True),
             "00-intro-cutscene": Room(1, [Transition("01")], [Location(LocationType.SILVER_BERRY, 1235, [[ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH]])]),
-            "01": Room(2, [Transition("03", [[ItemName.DASH_CRYSTALS]])]),
+            "01": Room(2, [Transition("03", [[ItemName.DASH_CRYSTALS, ItemName.SPRINGS]])]),
             "03": Room(3, [Transition("05-hub")]),
             "05-hub": Room(4, [Transition("06-crossroad")]),
             "05-hub-right": Room(100, [Transition("07"), Transition("07-berry-2", [[ItemName.TOUCH_SWITCH]])], is_subregion_of="05-hub"),
@@ -314,7 +314,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a08s": Room(16, [Transition("a09")], [Location(LocationType.STRAWBERRY, 1653, [[ItemName.RED_BUBBLES, ItemName.RED_FLIP_SWITCH, ItemName.PINK_FLIP_SWITCH, ItemName.RED_FLOATING_FIELDS]])]),
             "a09": Room(17, [Transition("a09b", [[ItemName.TOUCH_SWITCH, ItemName.RED_BUBBLES, ItemName.RED_FLIP_SWITCH, ItemName.PINK_FLIP_SWITCH, ItemName.RED_FLOATING_FIELDS]]), Transition("end")]),
             "end": Room(18, [Transition("a09")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
-            "a09b": Room(19, [Transition("a10", [[ItemName.PURPLE_FLOATING_FIELDS]]), Transition("a08s")]),
+            "a09b": Room(19, [Transition("a10", [[ItemName.PURPLE_FLOATING_FIELDS, ItemName.WHITE_FLIP_SWITCH]]), Transition("a08s")]),
             "a10": Room(20, [Transition("trueend", [[ItemName.PINK_SWITCH_BLOCK, ItemName.PURPLE_SWITCH_BLOCK, ItemName.RED_SWITCH_BLOCK]])], [Location(LocationType.STRAWBERRY, 2260, [[ItemName.PINK_SWITCH_BLOCK, ItemName.PURPLE_SWITCH_BLOCK, ItemName.RED_SWITCH_BLOCK]])]),
             "trueend": Room(21, [])
         }, LevelCategory.EXPERT, 107, LevelDifficulty.YELLOW
@@ -329,7 +329,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "a-04": Room(4, [Transition("a-05", [[ItemName.DASH_CRYSTALS]])]),
             "a-05": Room(5, [Transition("a-06")]),
             "a-06": Room(6, [Transition("a-07", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM]])]),
-            "a-07": Room(7, [Transition("a-08")], [Location(LocationType.STRAWBERRY, 1308)]),
+            "a-07": Room(7, [Transition("a-08")], [Location(LocationType.STRAWBERRY, 1380)]),
             "a-08": Room(8, [Transition("a-09")]),
             "a-09": Room(9, [Transition("a-10")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
             "a-10": Room(10, [], [Location(LocationType.STRAWBERRY, 3226, [[ItemName.JELLYFISH, ItemName.PINK_CLOUDS]])])
@@ -505,13 +505,13 @@ expert_levels_sj : dict[LevelName, Level] = {
     LevelName.LUNAR_PAGODA:
     Level(
         {
-            "0": Room(0, [Transition("1-1", [[ItemName.BLUE_STOPWATCH]])], [Location(LocationType.SILVER_BERRY, 2777, [[ItemName.BLUE_STOPWATCH]])], start_room=True),
+            "0": Room(0, [Transition("1-1", [[ItemName.LUNAR_PAGODA_STOPWATCH]])], [Location(LocationType.SILVER_BERRY, 2777, [[ItemName.LUNAR_PAGODA_STOPWATCH]])], start_room=True),
             "1-1": Room(1, [Transition("1-2", [[ItemName.MOVING_PLATFORM]])]),
             "1-2": Room(2, [Transition("2", [[ItemName.MOVING_BLOCK, ItemName.KEVIN, ItemName.CRUMBLING_PLATFORM]])]),
-            "2": Room(3, [Transition("2-2", [[ItemName.SWAP_BLOCK, ItemName.GRAY_STOPWATCH]])]),
+            "2": Room(3, [Transition("2-2", [[ItemName.SWAP_BLOCK, ItemName.LUNAR_PAGODA_STOPWATCH]])]),
             "2-2": Room(4, [Transition("3-1", [[ItemName.DASH_CRYSTALS]])]),
             "3-1": Room(5, [Transition("3-2", [[ItemName.TRAFFIC_BLOCKS]])]),
-            "3-2": Room(6, [Transition("5", [[ItemName.TOUCH_SWITCH, ItemName.GREEN_STOPWATCH, ItemName.SPRINGS]])]),
+            "3-2": Room(6, [Transition("5", [[ItemName.TOUCH_SWITCH, ItemName.LUNAR_PAGODA_STOPWATCH, ItemName.SPRINGS]])]),
             "5": Room(7, [Transition("6"), Transition("5-1")]),
             "5-1": Room(8, [Transition("5")], [Location(LocationType.STRAWBERRY, 64)]),
             "6": Room(9, [Transition("7")]),
@@ -589,7 +589,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "b02_nyan": Room(10, [Transition("b02_alt", [[ItemName.CURVED_TRAFFIC_BLOCK, ItemName.PUFFER_FISH]])]),
             "b02_alt": Room(11, [Transition("b03_banana")]),
             "b03_banana": Room(12, [Transition("b04_powerav", [[ItemName.GREEN_BUBBLES, ItemName.RED_BUBBLES, ItemName.CORE_SWITCH, ItemName.CORE_BLOCK, ItemName.SPRINGS]])]),
-            "b04_powerav": Room(13, [Transition("b05_vina", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.BOWL_PUFFER, ItemName.DASH_SWITCH, ItemName.SWAP_BLOCK]])]),
+            "b04_powerav": Room(13, [Transition("b05_vina", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.BOWL_PUFFER, ItemName.DASH_SWITCH, ItemName.SWAP_BLOCK, ItemName.BIRD]])]),
             "b05_vina": Room(14, [Transition("b06_transition", [[ItemName.BUBBLE_EMITTER, ItemName.THEO_CRYSTAL, ItemName.CRUMBLING_PLATFORM]])]),
             "b06_transition": Room(15, [Transition("c00_intro")]),
             "c00_intro": Room(16, [Transition("c01_redboule")], checkpoint="Atomize"),
@@ -609,7 +609,7 @@ expert_levels_sj : dict[LevelName, Level] = {
             "e00_intro": Room(30, [Transition("e01_linj"), Transition("d05_warp")], checkpoint="Demolish"),
             "e01_linj": Room(31, [Transition("e02_aspar", [[ItemName.WHITE_DREAM_BLOCK, ItemName.SPRINGS]])]),
             "e02_aspar": Room(32, [Transition("e03_spirialis", [[ItemName.NO_STAMINA_DASH_CRYSTAL, ItemName.CRUMBLING_PLATFORM]])]),
-            "e03_spirialis": Room(33, [Transition("e04_scroogle", [[ItemName.BLUE_STOPWATCH, ItemName.GREEN_STOPWATCH, ItemName.GRAY_STOPWATCH, ItemName.SWAP_BLOCK, ItemName.TRAFFIC_BLOCKS, ItemName.DOUBLE_DASH_CRYSTALS]])]),
+            "e03_spirialis": Room(33, [Transition("e04_scroogle", [[ItemName.LUNAR_PAGODA_STOPWATCH, ItemName.LUNAR_PAGODA_STOPWATCH, ItemName.LUNAR_PAGODA_STOPWATCH, ItemName.SWAP_BLOCK, ItemName.TRAFFIC_BLOCKS, ItemName.DOUBLE_DASH_CRYSTALS]])]),
             "e04_scroogle": Room(34, [Transition("e05_itsabrody", [[ItemName.INFINITE_DASH_MOSAIC_CRYSTAL, ItemName.KEVIN, ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS]])]),
             "e05_itsabrody": Room(35, [Transition("e06_transition")]),
             "e06_transition": Room(36, [Transition("f00_intro")]),

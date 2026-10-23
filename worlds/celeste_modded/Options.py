@@ -503,7 +503,7 @@ def map_options(world: "CelesteModdedWorld"):
     if len(world.deathless_categories_in_play - world.levels_categories_in_play) > 0:
         logging.warning(f"{COLOR_YELLOW}[Celeste Modded] Slot {world.player_name} has selected {[category.value for category in world.deathless_categories_in_play - world.levels_categories_in_play]} as level categories for deathless berries, but these categories have no levels enabled{COLOR_RESET}")
 
-    if world.start_level_set not in world.levels_categories_in_play and world.start_level_set != LevelCategory.NONE:
+    if world.start_level_set not in world.levels_categories_in_play and world.start_level_set != LevelCategory.NONE and world.start_level_set != LevelCategory.ALL:
         logging.warning(f"{COLOR_YELLOW}[Celeste Modded] Slot {world.player_name} has selected {world.start_level_set.value} as the start level set, but has no levels enabled in that set. This setting will be overridden: all levels in {world.start_level_set.value} will be turned on.{COLOR_RESET}")
         match world.start_level_set:
             case LevelCategory.BEGINNER:

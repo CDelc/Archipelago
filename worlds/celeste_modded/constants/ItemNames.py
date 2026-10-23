@@ -174,9 +174,7 @@ class ItemName(StrEnum):
     CURVED_TRAFFIC_BLOCK = "Curved Traffic Blocks",
     SKY_LANTERN = "Sky Lantern",
     INFINITE_DASH_MOSAIC_CRYSTAL = "Infinite Dash Mosaic Crystals",
-    BLUE_STOPWATCH = "Blue Stopwatches",
-    GREEN_STOPWATCH = "Green Stopwatches",
-    GRAY_STOPWATCH = "Gray Stopwatches",
+    LUNAR_PAGODA_STOPWATCH = "Lunar Pagoda Stopwatches",
     BUBBLE_EMITTER = "Bubble Emitters",
     CANNON_BALL = "Cannon Ball",
     INFINITE_DASH_FIELD = "Infinite Dash Fields",
@@ -191,7 +189,9 @@ class ItemName(StrEnum):
     BLUE_FLYING_LANTERN = "Blue Flying Lanterns",
     RED_FLYING_LANTERN = "Red Flying Lanterns",
     SILVER_PORTAL = "Silver Portals",
-    NAVY_PORTAL = "Navy Portals"
+    NAVY_PORTAL = "Navy Portals",
+    WHITE_LASERS = "White Activation Lasers",
+    WHITE_FLIP_SWITCH = "White Toggle Switches"
             
     STRAWBERRY = "Strawberry"
     
@@ -247,7 +247,7 @@ class ItemName(StrEnum):
     PROPELLER_BLOCK = "Propeller Blocks"
     MOVEMENT_MOSS = "Movement Moss"
     FLOATING_FIELDS = "Floating Fields"
-    LUNAR_PAGODA_STOPWATCH = "Lunar Pagoda Stopwatches"
+    # LUNAR_PAGODA_STOPWATCH = "Lunar Pagoda Stopwatches"
     NELUMBO_DRUMS = "Nelumbo Drums"
     NELUMBO_LANTERNS = "Nelumbo Lanterns"
     CRYSTAL_PICKUPS = "Refill Pickups"
@@ -426,9 +426,9 @@ mechanic = {
     ItemName.CURVED_TRAFFIC_BLOCK: 157,
     ItemName.SKY_LANTERN: 158,
     ItemName.INFINITE_DASH_MOSAIC_CRYSTAL: 159,
-    ItemName.BLUE_STOPWATCH: 160,
-    ItemName.GREEN_STOPWATCH: 161,
-    ItemName.GRAY_STOPWATCH: 162,
+    ItemName.LUNAR_PAGODA_STOPWATCH: 160,
+    # ItemName.GREEN_STOPWATCH: 161,
+    # ItemName.GRAY_STOPWATCH: 162,
     ItemName.BUBBLE_EMITTER: 163,
     ItemName.CANNON_BALL: 164,
     ItemName.INFINITE_DASH_FIELD: 165,
@@ -444,6 +444,8 @@ mechanic = {
     ItemName.RED_FLYING_LANTERN: 175,
     ItemName.SILVER_PORTAL: 176,
     ItemName.NAVY_PORTAL: 177,
+    ItemName.WHITE_LASERS: 178,
+    ItemName.WHITE_FLIP_SWITCH: 179,
 
 
     ItemName.CASSETTE_BLOCKS: 1000,
@@ -486,7 +488,7 @@ mechanic = {
     ItemName.PROPELLER_BLOCK: 1037,
     ItemName.MOVEMENT_MOSS: 1038,
     ItemName.FLOATING_FIELDS: 1039,
-    ItemName.LUNAR_PAGODA_STOPWATCH: 1040,
+    # ItemName.LUNAR_PAGODA_STOPWATCH: 1040,
     ItemName.NELUMBO_DRUMS: 1041,
     ItemName.NELUMBO_LANTERNS: 1042,
     ItemName.CRYSTAL_PICKUPS: 1043,
@@ -659,9 +661,9 @@ consolidated_mechanics = {
     ItemName.CURVED_TRAFFIC_BLOCK: [ItemName.GENERIC_TRAFFIC_BLOCK],
     ItemName.SKY_LANTERN: [ItemName.LIGHT_THROWABLE],
     ItemName.INFINITE_DASH_MOSAIC_CRYSTAL: [ItemName.GENERIC_DASH_CRYSTAL],
-    ItemName.BLUE_STOPWATCH: [ItemName.TIME_MECHANICS],
-    ItemName.GREEN_STOPWATCH: [ItemName.TIME_MECHANICS],
-    ItemName.GRAY_STOPWATCH: [ItemName.TIME_MECHANICS],
+    ItemName.LUNAR_PAGODA_STOPWATCH: [ItemName.TIME_MECHANICS],
+    # ItemName.GREEN_STOPWATCH: [ItemName.TIME_MECHANICS],
+    # ItemName.GRAY_STOPWATCH: [ItemName.TIME_MECHANICS],
     ItemName.BUBBLE_EMITTER: [],
     ItemName.CANNON_BALL: [ItemName.HEAVY_THROWABLE],
     ItemName.INFINITE_DASH_FIELD: [],
@@ -676,7 +678,9 @@ consolidated_mechanics = {
     ItemName.BLUE_FLYING_LANTERN: [ItemName.LIGHT_THROWABLE],
     ItemName.RED_FLYING_LANTERN: [ItemName.LIGHT_THROWABLE],
     ItemName.SILVER_PORTAL: [ItemName.PORTALS],
-    ItemName.NAVY_PORTAL: [ItemName.PORTALS]
+    ItemName.NAVY_PORTAL: [ItemName.PORTALS],
+    ItemName.WHITE_LASERS: [ItemName.LASER],
+    ItemName.WHITE_FLIP_SWITCH: [ItemName.FLIP_SWITCH]
 }
 
 consolidated_mechanics_colors = {
@@ -840,9 +844,9 @@ consolidated_mechanics_colors = {
     ItemName.CURVED_TRAFFIC_BLOCK: [ItemName.GENERIC_TRAFFIC_BLOCK],
     ItemName.SKY_LANTERN: [ItemName.LIGHT_THROWABLE],
     ItemName.INFINITE_DASH_MOSAIC_CRYSTAL: [ItemName.GENERIC_DASH_CRYSTAL],
-    ItemName.BLUE_STOPWATCH: [ItemName.TIME_MECHANICS],
-    ItemName.GREEN_STOPWATCH: [ItemName.TIME_MECHANICS],
-    ItemName.GRAY_STOPWATCH: [ItemName.TIME_MECHANICS],
+    ItemName.LUNAR_PAGODA_STOPWATCH: [ItemName.TIME_MECHANICS],
+    # ItemName.GREEN_STOPWATCH: [ItemName.TIME_MECHANICS],
+    # ItemName.GRAY_STOPWATCH: [ItemName.TIME_MECHANICS],
     ItemName.BUBBLE_EMITTER: [],
     ItemName.CANNON_BALL: [ItemName.HEAVY_THROWABLE],
     ItemName.INFINITE_DASH_FIELD: [],
@@ -857,7 +861,9 @@ consolidated_mechanics_colors = {
     ItemName.BLUE_FLYING_LANTERN: [ItemName.LIGHT_THROWABLE],
     ItemName.RED_FLYING_LANTERN: [ItemName.LIGHT_THROWABLE],
     ItemName.SILVER_PORTAL: [ItemName.PORTALS],
-    ItemName.NAVY_PORTAL: [ItemName.PORTALS, ItemName.BLUE]
+    ItemName.NAVY_PORTAL: [ItemName.PORTALS, ItemName.BLUE],
+    ItemName.WHITE_LASERS: [ItemName.LASER, ItemName.WHITE],
+    ItemName.WHITE_FLIP_SWITCH: [ItemName.FLIP_SWITCH, ItemName.WHITE]
 }
 
 consolidated_mechanics_minimal = {
@@ -920,7 +926,7 @@ consolidated_mechanics_minimal = {
     ItemName.BOUNCE_DREAM_BLOCK: [ItemName.GENERIC_DREAM_BLOCK],
     ItemName.ORANGE_LINKED_TRAFFIC_BLOCK: [ItemName.GENERIC_TRAFFIC_BLOCK],
     ItemName.BLUE_LINKED_TRAFFIC_BLOCK: [ItemName.GENERIC_TRAFFIC_BLOCK],
-    ItemName.TOGGLE_SWAP_BLOCK: [ItemName.SWAP_BLOCK],
+    ItemName.TOGGLE_SWAP_BLOCK: [ItemName.GENERIC_SWAP_BLOCK],
     ItemName.GREEN_LINKED_TRAFFIC_BLOCK: [ItemName.GENERIC_TRAFFIC_BLOCK],
     ItemName.STRAWBERRY_JAM: [ItemName.STRAWBERRY_JAM],
     ItemName.NEON_BLUE_KEVIN: [ItemName.GENERIC_KEVIN],
@@ -1021,9 +1027,9 @@ consolidated_mechanics_minimal = {
     ItemName.CURVED_TRAFFIC_BLOCK: [ItemName.GENERIC_TRAFFIC_BLOCK],
     ItemName.SKY_LANTERN: [ItemName.SKY_LANTERN],
     ItemName.INFINITE_DASH_MOSAIC_CRYSTAL: [ItemName.GENERIC_DASH_CRYSTAL],
-    ItemName.BLUE_STOPWATCH: [ItemName.LUNAR_PAGODA_STOPWATCH],
-    ItemName.GREEN_STOPWATCH: [ItemName.LUNAR_PAGODA_STOPWATCH],
-    ItemName.GRAY_STOPWATCH: [ItemName.LUNAR_PAGODA_STOPWATCH],
+    ItemName.LUNAR_PAGODA_STOPWATCH: [ItemName.LUNAR_PAGODA_STOPWATCH],
+    # ItemName.GREEN_STOPWATCH: [ItemName.LUNAR_PAGODA_STOPWATCH],
+    # ItemName.GRAY_STOPWATCH: [ItemName.LUNAR_PAGODA_STOPWATCH],
     ItemName.BUBBLE_EMITTER: [ItemName.BUBBLE_EMITTER],
     ItemName.CANNON_BALL: [ItemName.CANNON_BALL],
     ItemName.INFINITE_DASH_FIELD: [ItemName.INFINITE_DASH_FIELD],
@@ -1038,7 +1044,9 @@ consolidated_mechanics_minimal = {
     ItemName.BLUE_FLYING_LANTERN: [ItemName.NELUMBO_LANTERNS],
     ItemName.RED_FLYING_LANTERN: [ItemName.NELUMBO_LANTERNS],
     ItemName.SILVER_PORTAL: [ItemName.PORTALS],
-    ItemName.NAVY_PORTAL: [ItemName.PORTALS]
+    ItemName.NAVY_PORTAL: [ItemName.PORTALS],
+    ItemName.WHITE_LASERS: [ItemName.LASER],
+    ItemName.WHITE_FLIP_SWITCH: [ItemName.FLIP_SWITCH]
 }
 
 extreme_consolidation = {
@@ -1202,9 +1210,9 @@ extreme_consolidation = {
     ItemName.CURVED_TRAFFIC_BLOCK: [ItemName.GENERIC_TRAFFIC_BLOCK],
     ItemName.SKY_LANTERN: [],
     ItemName.INFINITE_DASH_MOSAIC_CRYSTAL: [ItemName.CRYSTAL_PICKUPS],
-    ItemName.BLUE_STOPWATCH: [ItemName.CRYSTAL_PICKUPS],
-    ItemName.GREEN_STOPWATCH: [ItemName.CRYSTAL_PICKUPS],
-    ItemName.GRAY_STOPWATCH: [ItemName.CRYSTAL_PICKUPS],
+    ItemName.LUNAR_PAGODA_STOPWATCH: [ItemName.CRYSTAL_PICKUPS],
+    # ItemName.GREEN_STOPWATCH: [ItemName.CRYSTAL_PICKUPS],
+    # ItemName.GRAY_STOPWATCH: [ItemName.CRYSTAL_PICKUPS],
     ItemName.BUBBLE_EMITTER: [],
     ItemName.CANNON_BALL: [],
     ItemName.INFINITE_DASH_FIELD: [],
@@ -1219,7 +1227,9 @@ extreme_consolidation = {
     ItemName.BLUE_FLYING_LANTERN: [],
     ItemName.RED_FLYING_LANTERN: [],
     ItemName.SILVER_PORTAL: [ItemName.PORTALS],
-    ItemName.NAVY_PORTAL: [ItemName.PORTALS]
+    ItemName.NAVY_PORTAL: [ItemName.PORTALS],
+    ItemName.WHITE_LASERS: [],
+    ItemName.WHITE_FLIP_SWITCH: []
 }
 
 vanilla_consolidation = {
@@ -1383,9 +1393,9 @@ vanilla_consolidation = {
     ItemName.CURVED_TRAFFIC_BLOCK: [ItemName.GENERIC_TRAFFIC_BLOCK],
     ItemName.SKY_LANTERN: [ItemName.JELLYFISH],
     ItemName.INFINITE_DASH_MOSAIC_CRYSTAL: [ItemName.DASH_CRYSTALS],
-    ItemName.BLUE_STOPWATCH: [ItemName.DASH_CRYSTALS],
-    ItemName.GREEN_STOPWATCH: [ItemName.DASH_CRYSTALS],
-    ItemName.GRAY_STOPWATCH: [ItemName.DASH_CRYSTALS],
+    ItemName.LUNAR_PAGODA_STOPWATCH: [ItemName.DASH_CRYSTALS],
+    # ItemName.GREEN_STOPWATCH: [ItemName.DASH_CRYSTALS],
+    # ItemName.GRAY_STOPWATCH: [ItemName.DASH_CRYSTALS],
     ItemName.BUBBLE_EMITTER: [],
     ItemName.CANNON_BALL: [ItemName.THEO_CRYSTAL],
     ItemName.INFINITE_DASH_FIELD: [],
@@ -1400,5 +1410,7 @@ vanilla_consolidation = {
     ItemName.BLUE_FLYING_LANTERN: [ItemName.JELLYFISH],
     ItemName.RED_FLYING_LANTERN: [ItemName.JELLYFISH],
     ItemName.SILVER_PORTAL: [],
-    ItemName.NAVY_PORTAL: []
+    ItemName.NAVY_PORTAL: [],
+    ItemName.WHITE_LASERS: [],
+    ItemName.WHITE_FLIP_SWITCH: [ItemName.CORE_SWITCH]
 }

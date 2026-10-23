@@ -416,10 +416,10 @@ vanilla_levels : dict[LevelName, Level] = {
             "d-00": Room(39, [Transition("d-01", [[ItemName.RED_BUBBLES]])], checkpoint="Search"),
             "d-01": Room(40, [Transition("d-04"), Transition("d-09"), Transition("e-00-early"), Transition("d-15"), Transition("d-05"), Transition("d-07")], key_door_ids = [310, 301]),
             "d-09": Room(41, [Transition("d-01"), Transition("d-04-berry", [[ItemName.SWAP_BLOCK, ItemName.DASH_CRYSTALS, ItemName.RED_BUBBLES]], access_hard=[[ItemName.RED_BUBBLES, ItemName.SWAP_BLOCK]], access_insane=[[ItemName.DASH_CRYSTALS, ItemName.RED_BUBBLES], [ItemName.SWAP_BLOCK, ItemName.RED_BUBBLES]])]),
-            "d-04": Room(42, [Transition("d-01"), Transition("d-19b-early", [[getKeyDoorName(LevelName.MIRROR_TEMPLE_A, "d-01", 310), getKeyDoorName(LevelName.MIRROR_TEMPLE_A, "d-01", 301)]], access_hard=[[]])], [Location(LocationType.STRAWBERRY, 126, [[ItemName.SWAP_BLOCK, ItemName.RED_BUBBLES]], access_insane=[[]])]),
+            "d-04": Room(42, [Transition("d-01"), Transition("d-19b-early", [[getKeyDoorName(LevelName.MIRROR_TEMPLE_A, "d-01", 310), getKeyDoorName(LevelName.MIRROR_TEMPLE_A, "d-01", 301)]], access_hard=[[]])], [Location(LocationType.STRAWBERRY, 122, [[ItemName.SWAP_BLOCK, ItemName.RED_BUBBLES]], access_insane=[[]])]),
             "d-04-key-left": Room(106, [Transition("d-04")], [Location(LocationType.KEY, 39)], is_subregion_of="d-04"),
             "d-04-key-right": Room(107, [Transition("d-04")], [Location(LocationType.KEY, 14)], is_subregion_of="d-04"),
-            "d-04-berry": Room(108, [Transition("d-04")], [Location(LocationType.STRAWBERRY, 35)], is_subregion_of="d-04"),
+            "d-04-berry": Room(108, [Transition("d-04")], [Location(LocationType.STRAWBERRY, 16)], is_subregion_of="d-04"),
             "d-19": Room(43, [Transition("d-19b", [[ItemName.SWAP_BLOCK]], access_hard=[[]])], [Location(LocationType.STRAWBERRY, 533, [[getKeyDoorName(LevelName.MIRROR_TEMPLE_A, "d-19", 531)]])], key_door_ids = [531]),
             "d-19b": Room(44, [Transition("d-10")]),
             "d-19b-early": Room(109, [Transition("d-19")], is_subregion_of="d-19b"),
@@ -597,8 +597,7 @@ vanilla_levels : dict[LevelName, Level] = {
             "b-05": Room(12, [Transition("b-06")]),
             "b-06": Room(13, [Transition("b-07")]),
             "b-07": Room(14, [Transition("b-08", [[ItemName.FEATHER]])]),
-            "b-08": Room(15, [Transition("b-09")]),
-            "b-09": Room(16, [Transition("b-10")]),
+            "b-08": Room(15, [Transition("b-10")]),
             "b-10": Room(17, [Transition("c-00")]),
             "c-00": Room(18, [Transition("c-01", [[ItemName.SPRINGS]], access_insane=[[]])], checkpoint="Rock Bottom"),
             "c-01": Room(19, [Transition("c-02", [[ItemName.FEATHER, ItemName.DASH_CRYSTALS]])]),
@@ -758,9 +757,9 @@ vanilla_levels : dict[LevelName, Level] = {
     LevelName.SUMMIT_C:
     Level(
         {
-            "00": Room(0, [Transition("01", [[ItemName.DASH_CRYSTALS, ItemName.BADELINE_ORB]])], [Location(LocationType.GOLDEN_BERRY, 334, [[ItemName.DASH_CRYSTALS, ItemName.BADELINE_ORB, ItemName.SPRINGS, ItemName.TOUCH_SWITCH, ItemName.PINK_CLOUDS]])], start_room=True),
-            "01": Room(1, [Transition("02", [[ItemName.SPRINGS, ItemName.TOUCH_SWITCH]], access_extreme=[[ItemName.SPRINGS]])]),
-            "02": Room(2, [], [Location(LocationType.CRYSTAL_HEART, access_rule=[[ItemName.PINK_CLOUDS, ItemName.SPRINGS, ItemName.DASH_CRYSTALS]])])
+            "01": Room(0, [Transition("02", [[ItemName.DASH_CRYSTALS, ItemName.BADELINE_ORB]])], [Location(LocationType.GOLDEN_BERRY, 334, [[ItemName.DASH_CRYSTALS, ItemName.BADELINE_ORB, ItemName.SPRINGS, ItemName.TOUCH_SWITCH, ItemName.PINK_CLOUDS]])], start_room=True),
+            "02": Room(1, [Transition("03", [[ItemName.SPRINGS, ItemName.TOUCH_SWITCH]], access_extreme=[[ItemName.SPRINGS]])]),
+            "03": Room(2, [], [Location(LocationType.CRYSTAL_HEART, access_rule=[[ItemName.PINK_CLOUDS, ItemName.SPRINGS, ItemName.DASH_CRYSTALS]])])
         }, LevelCategory.C_SIDE, 21
     )
 }

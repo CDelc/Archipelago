@@ -27,24 +27,29 @@ from . import LogicParser
 # - Heart gates open except goal level option
 # - Heart gate unlocks as a single check
 # - Individual Level Disable
+# - Much improved difficulty selection with OptionSet (allow ranges, selection of higher difficulties in lobbies without lower ones)
+# - Seeing is Believing text update for higher difficulties
+# - Send disabled check message if you collect a check that is disabled due to yaml setting
+# - Make dream block visuals more consistent
+# - Find a way to get levels with multiple mini hearts to have separate locations
+# - Different difficulties for deathless berry logic
 
-# --- CURRENT RELEASE ---
 
-
-# --- INCOMING TASKS ---
-# - Logic tracking seems to break when starting with all levels enabled
-# - Generic dream blocks appearing with no item consolidation?
-# - [Celeste Modded] Slot Carter has selected All as the start level set, but has no levels enabled in that set. This setting will be overridden: all levels in All will be turned on.
+# --- NEXT RELEASE ---
 # - Pause menu brings up room text
 # - Make item names consistent (Normal vs Vanilla vs Regular, etc)
 # - Include Shattersong secret ending in rando
-# - Fix seekers activating stuff when deactivated
 # - Review item consolidation naming - especially core switches
-# - Check berry count in oui panel. (Cassette cliffs after fresh generation showing 1/2, other examples likely exist)
-# - Seeing is Believing text update for higher difficulties
-# - Check starry ruins progress through room 2 with only blue portals (showing as green)
-# - Send disabled check message if you collect a check that is disabled due to yaml setting
-# - Treehive first dream block broken and skeleton 04
+# - Give level unlock items their own text color
+# - Figure out a way to remove subroom names from item names
+# - One of the mirror temple doors needs name mapping
+
+
+# --- CURRENT RELEASE ---
+# - Fix seekers activating stuff when deactivated
+
+
+# --- INCOMING TASKS ---
 
 
 
@@ -91,7 +96,7 @@ class CelesteModdedWorld(World):
     
     start_level_set: LevelCategory
     win_condition_level: LevelName
-    consolidation_mapping: dict[str, str]
+    consolidation_mapping: dict[str, list[str]]
         
     def generate_early(self) -> None:
         options = self.options
@@ -182,7 +187,9 @@ class CelesteModdedWorld(World):
             "roomcheck_level_list": LogicParser.getRoomCheckLevelList(self),
             "autocheck_locations": LogicParser.getAutoCheckLocations(self),
             "all_locations_by_level": LogicParser.getAllLocationsPerLevel(self),
-            "logical_summary": LogicParser.getLogicalSummary(self)
+            "logical_summary": LogicParser.getLogicalSummary(self),
+            "room_names": LogicParser.getRoomNameMap(),
+            "item_mapping": LogicParser.getConsolidationMap(self)
         }
     
     def get_filler_item_name(self) -> str:

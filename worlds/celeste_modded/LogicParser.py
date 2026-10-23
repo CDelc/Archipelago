@@ -136,6 +136,8 @@ def calculate_maximum_possible_berries(world: "CelesteModdedWorld"):
                         extra_locations += 1
                     if isEnabledItemByLocation(location, levelName, level, room, world):
                         extra_locations -= 1
+                for key_door in room.key_door_ids:
+                    extra_locations -= 1
 
                 extra_locations -= len(room.key_door_ids) #Need space for locked door items
                 
@@ -161,9 +163,9 @@ def calculate_start_items(world: "CelesteModdedWorld"):
     
 # Ignore level access rules for heart sides when heart gates are open by default
 def getLevelAccessRule(level: Level, world: "CelesteModdedWorld"):
-    return [[]] if level.heartside and world.options.open_heart_gates.value else getAccessRule(level, world)
+    return [[]] if level.heartside and world.options.open_heart_gates.value else getUnmappedAccessRule(level, world)
 
-def getAccessRule(item: Level | Transition | Location, world: "CelesteModdedWorld"):
+def getUnmappedAccessRule(item: Level | Transition | Location, world: "CelesteModdedWorld"):
     if world.options.logic_difficulty == 0:
         return item.access_rule
     elif world.options.logic_difficulty == 1:
@@ -184,14 +186,14 @@ def get_filtered_mechanics_list(world: "CelesteModdedWorld") -> set[ItemType]:
     mechanics = set()
     for levelName,level in levelList.items():
         if levelEnabled(levelName, level, world):
-            add_all_mechanics(mechanics, getAccessRule(level, world), world)
+            add_all_mechanics(mechanics, getUnmappedAccessRule(level, world), world)
             for _,room in level.rooms.items():
                 for transition in room.transitions:
                     if not transitionEnabled(transition, world):
                         continue
-                    add_all_mechanics(mechanics, getAccessRule(transition, world), world)
+                    add_all_mechanics(mechanics, getUnmappedAccessRule(transition, world), world)
                 for location in room.locations:
-                    add_all_mechanics(mechanics, getAccessRule(location, world), world)
+                    add_all_mechanics(mechanics, getUnmappedAccessRule(location, world), world)
 
     return mechanics
 
@@ -344,11 +346,11 @@ def parse_regions(world: "CelesteModdedWorld"):
                 if not transitionEnabled(transition, world):
                     continue
                 destination_room_name = getRoomName(levelName, transition.destination_room)
-                room_region.add_exits({destination_room_name}, {destination_room_name: ruleFromList(getAccessRule(transition, world), world)})
+                room_region.add_exits({destination_room_name}, {destination_room_name: ruleFromList(getUnmappedAccessRule(transition, world), world)})
             for location in room.locations:
                 if isEnabledLocation(location, levelName, level, room, world):
                     loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
-                    add_location_with_rule(room_region, loc_name, world, getAccessRule(location, world))
+                    add_location_with_rule(room_region, loc_name, world, getUnmappedAccessRule(location, world))
     calculate_start_items(world)
     create_start_locations(world)
 
@@ -651,6 +653,21 @@ def getAllLocationsPerLevel(world: "CelesteModdedWorld") -> dict[int, list[int]]
                     rValue[level.level_id].append(getLocationBasedLocationID(location.location_type, level, room, location.ID))
     return rValue
 
+def getRoomNameMap() -> dict[int, dict[int, str]]:
+    rValue: dict[int, dict[int, str]] = dict()
+    for levelName,level in levelList.items():
+        levelRoomNames: dict[int, str] = dict()
+        for roomName,room in level.rooms.items():
+            levelRoomNames[room.room_id] = roomName
+        rValue[level.level_id] = levelRoomNames
+    return rValue
+
+def getConsolidationMap(world: "CelesteModdedWorld") -> dict[int, int]:
+    mapping = world.consolidation_mapping
+    mechs_id_map = mechanic
+
+    return {mechanic[item]:[mechanic[item2] for item2 in list] for item,list in mapping.items()}
+
 
 # Below functions all to build an ID-based map of every location and what items you need to reach it from the root.
 # Sent to the mod for some of its tracking functions
@@ -665,6 +682,8 @@ def getLogicalSummary(world: "CelesteModdedWorld") -> dict[int, list[list[int]]]
             level_full_access_rule = combineAndNormalizeAccessRulesAND(normalizeRule(level_full_access_rule), [[levelUnlock(levelName)]])
         level_mapped_access_rule = normalizeRule(mapItemList(getLevelAccessRule(level, world), world))
         level_full_access_rule = combineAndNormalizeAccessRulesAND(level_full_access_rule, level_mapped_access_rule)
+        if world.win_condition_level == levelName and world.options.require_berries_for_goal.value:
+            level_full_access_rule = combineAndNormalizeAccessRulesAND(level_full_access_rule, [["$WIN_CONDITION_BERRIES$"]])
         
         room_access_requirements = getAllRoomAccessRequirements(levelName, level, level_full_access_rule, world)
         for roomName,room in level.rooms.items():
@@ -680,10 +699,10 @@ def getLogicalSummary(world: "CelesteModdedWorld") -> dict[int, list[list[int]]]
             for location in room.locations:
                 if isEnabledLocation(location, levelName, level, room, world):
                     loc_name = getLocationName(levelName, roomName, location.location_type, location.ID)
-                    nameBasedMap[loc_name] = combineAndNormalizeAccessRulesAND(room_access_requirements[roomName], normalizeRule(getAccessRule(location, world)))
+                    nameBasedMap[loc_name] = combineAndNormalizeAccessRulesAND(room_access_requirements[roomName], normalizeRule(mapItemList(getUnmappedAccessRule(location, world), world)))
 
     # Crystal Heart requirements set to negative numbers (0 - number of hearts needed)
-    idBasedMap = {location_id_table[locName]: [[0 - int(item.replace("#", "")) if item.startswith("#") else item_id_table[item] for item in sublist] for sublist in accessRule] for locName,accessRule in nameBasedMap.items()}
+    idBasedMap = {location_id_table[locName]: [[0 - int(item.replace("#", "")) if item.startswith("#") else -1000000 if item.startswith("$WIN_CONDITION_BERRIES$") else item_id_table[item] for item in sublist] for sublist in accessRule] for locName,accessRule in nameBasedMap.items()}
     for i in range(1, world.start_items_needed + 1):
         idBasedMap[i] = [[]];
     return idBasedMap
@@ -728,7 +747,7 @@ def updateAccessMap(level: Level, startRoomName: str, start_room: Room, update_r
                 continue
             next_roomName = transition.destination_room
             next_room = level.rooms[next_roomName]
-            transition_access = normalizeRule(mapItemList(getAccessRule(transition, world), world))
+            transition_access = normalizeRule(mapItemList(getUnmappedAccessRule(transition, world), world))
             new_next_room_access = combineAndNormalizeAccessRulesAND(current_room_access, transition_access)
 
             existing_next_room_access = access_map.get(next_roomName)
