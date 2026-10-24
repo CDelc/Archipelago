@@ -33,6 +33,8 @@ from . import LogicParser
 # - Make dream block visuals more consistent
 # - Find a way to get levels with multiple mini hearts to have separate locations
 # - Different difficulties for deathless berry logic
+# - Pipe locked visuals
+# - Get the tabs on lobby oui panels to show green when there are checks somewhere in the lobby (same as exclamation)
 
 
 # --- NEXT RELEASE ---
@@ -46,7 +48,6 @@ from . import LogicParser
 
 
 # --- CURRENT RELEASE ---
-# - Fix seekers activating stuff when deactivated
 
 
 # --- INCOMING TASKS ---
@@ -56,8 +57,8 @@ from . import LogicParser
 
 game_name = Constants.game_name
 
-WORLD_VERSION = "1.3.0"
-MINIMUM_MOD_VERSION = "1.3.0"
+WORLD_VERSION = "1.3.1"
+MINIMUM_MOD_VERSION = "1.3.1"
 
 class CelesteModdedWebWorld(WebWorld):
     theme = "partyTime"
