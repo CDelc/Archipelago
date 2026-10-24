@@ -389,7 +389,8 @@ class LogicDifficulty(Choice):
     """
     Easy - Only intended completion requirements
     Hard - Expected to be proficient with Celeste movement up to around advanced level
-    Insane - If I could find a way to do it, its in
+    Insane - Most of what is possible is in here, only missing some extreme cases of difficult skips being possible. It may sometimes not be obvious how to reach a check that is in logic.
+    Extreme - Everything I found with very little exception is included here.
     """
     option_easy = 0
     option_hard = 1
