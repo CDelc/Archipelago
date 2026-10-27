@@ -14,7 +14,6 @@ from . import LogicParser
 # --- BACKLOG ---
 # - All levels showing as complete in journal
 # - Hard logic
-# - Refactor c# mapping to grab all the data from slot data rather than copying it over manually
 # - Traps/Deathlink (Traplink?)
 # - Replace text on prologue complete screen
 # - Save data persistence
@@ -34,10 +33,21 @@ from . import LogicParser
 # - Find a way to get levels with multiple mini hearts to have separate locations
 # - Different difficulties for deathless berry logic
 # - Pipe locked visuals
+# - Zipline locked visuals
 # - Get the tabs on lobby oui panels to show green when there are checks somewhere in the lobby (same as exclamation)
+# - Consider lobby logic option
+# - Get green waypoints to render on top of other waypoints (prioritize layering)
+# - Don't shuffle mini-heart option
+# - Get rid of bounce when dashing into deactivated breaker box
+# - Make unlocked lockboxes translucent/fade when close
+# - General overhaul of locked mechanic visuals
+# - Make debug features to turn on/off mechanics in a settings menu
+# - Golden amnesty
 
 
 # --- NEXT RELEASE ---
+
+# --- CURRENT RELEASE ---
 # - Pause menu brings up room text
 # - Make item names consistent (Normal vs Vanilla vs Regular, etc)
 # - Include Shattersong secret ending in rando
@@ -45,10 +55,7 @@ from . import LogicParser
 # - Give level unlock items their own text color
 # - Figure out a way to remove subroom names from item names
 # - One of the mirror temple doors needs name mapping
-
-
-# --- CURRENT RELEASE ---
-
+# - Check key visuals after being collected
 
 # --- INCOMING TASKS ---
 

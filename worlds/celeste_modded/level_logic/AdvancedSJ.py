@@ -37,8 +37,8 @@ advanced_levels_sj : dict[LevelName, Level] = {
     LevelName.SANDS_OF_TIME:
     Level(
         {
-            "a-00": Room(0, [Transition("a-01", [[ItemName.KEVIN, ItemName.GRAY_TIME_CRYSTAL, ItemName.DASH_CRYSTALS]])], [Location(LocationType.SILVER_BERRY, 1141, [[ItemName.BLUE_TIME_CRYSTAL, ItemName.KEVIN, ItemName.GRAY_TIME_CRYSTAL, ItemName.DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS, ItemName.CRUMBLING_PLATFORM, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS]])], start_room=True),
-            "a-01": Room(1, [Transition("a-02", [[ItemName.TRAFFIC_BLOCKS, ItemName.CRUMBLING_PLATFORM, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS]])]),
+            "a-00": Room(0, [Transition("a-01", [[ItemName.KEVIN, ItemName.GRAY_TIME_CRYSTAL, ItemName.DASH_CRYSTALS]], access_hard=[[ItemName.KEVIN, ItemName.DASH_CRYSTALS]])], [Location(LocationType.SILVER_BERRY, 1141, [[ItemName.BLUE_TIME_CRYSTAL, ItemName.KEVIN, ItemName.GRAY_TIME_CRYSTAL, ItemName.DASH_CRYSTALS, ItemName.TRAFFIC_BLOCKS, ItemName.CRUMBLING_PLATFORM, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS]])], start_room=True),
+            "a-01": Room(1, [Transition("a-02", [[ItemName.GRAY_TIME_CRYSTAL, ItemName.TRAFFIC_BLOCKS, ItemName.CRUMBLING_PLATFORM, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS]])]),
             "a-02": Room(2, [Transition("a-03", [[ItemName.BLUE_TIME_CRYSTAL]])]),
             "a-03": Room(3, [Transition("a-04-bis")]),
             "a-04-bis": Room(4, [Transition("a-05")]),
@@ -90,10 +90,10 @@ advanced_levels_sj : dict[LevelName, Level] = {
     Level(
         {
            "a_00-Worldwaker2": Room(0, [Transition("a_01-Gala", [[ItemName.RED_BUBBLES]])], start_room=True),
-            "a_01-Gala": Room(1, [Transition("a_02-Gala", [[ItemName.GREEN_BUBBLES, ItemName.DASH_CRYSTALS, ItemName.SOAP_BUBBLE, ItemName.GRAY_BUBBLES, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM]])], [Location(LocationType.SILVER_BERRY, 778, [[ItemName.BIRD, ItemName.CLOUDS, ItemName.TOUCH_SWITCH, ItemName.RED_BUBBLES, ItemName.GREEN_BUBBLES, ItemName.DASH_CRYSTALS, ItemName.SOAP_BUBBLE, ItemName.GRAY_BUBBLES, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM]])]),
-            "a_02-Gala": Room(2, [Transition("a_03-Oppen_heimer", [[ItemName.CLOUDS, ItemName.TOUCH_SWITCH]])]),
+            "a_01-Gala": Room(1, [Transition("a_02-Gala", [[ItemName.GREEN_BUBBLES, ItemName.DASH_CRYSTALS, ItemName.SOAP_BUBBLE, ItemName.GRAY_BUBBLES, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM]], access_hard=[[ItemName.SOAP_BUBBLE, ItemName.GRAY_BUBBLES, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM]])], [Location(LocationType.SILVER_BERRY, 778, [[ItemName.BIRD, ItemName.CLOUDS, ItemName.TOUCH_SWITCH, ItemName.RED_BUBBLES, ItemName.GREEN_BUBBLES, ItemName.DASH_CRYSTALS, ItemName.SOAP_BUBBLE, ItemName.GRAY_BUBBLES, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM]])]),
+            "a_02-Gala": Room(2, [Transition("a_03-Oppen_heimer", [[ItemName.CLOUDS, ItemName.TOUCH_SWITCH, ItemName.GREEN_BUBBLES]], access_extreme=[[ItemName.CLOUDS, ItemName.GREEN_BUBBLES]])]),
             "a_03-Oppen_heimer": Room(3, [Transition("a_04-Gala")], [Location(LocationType.STRAWBERRY, 986)]),
-            "a_04-Gala": Room(4, [Transition("a_05-TiltTheStars"), Transition("berry-01-Oppen")]),
+            "a_04-Gala": Room(4, [Transition("a_05-TiltTheStars", [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]]), Transition("berry-01-Oppen", [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]])]),
             "berry-01-Oppen": Room(5, [Transition("a_04-Gala")], [Location(LocationType.STRAWBERRY, 2567)]),
             "a_05-TiltTheStars": Room(6, [Transition("a_06-TiltTheStars")]),
             "a_06-TiltTheStars": Room(7, [Transition("a_07-TiltTheStars")]),
@@ -107,8 +107,8 @@ advanced_levels_sj : dict[LevelName, Level] = {
         {
             "start": Room(0, [Transition("tutorial-1")], start_room=True),
             "tutorial-1": Room(1, [Transition("goldian-1", [[ItemName.SWITCH_CRATE]])], [Location(LocationType.SILVER_BERRY, 1896, [[ItemName.SWITCH_CRATE, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.PUSH_STATION_BLOCK, ItemName.PULL_STATION_BLOCK, ItemName.SPRINGS]])], trivial_access=True),
-            "goldian-1": Room(2, [Transition("aiden-2", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS]])]),
-            "aiden-2": Room(3, [Transition("goldian-3")]),
+            "goldian-1": Room(2, [Transition("aiden-2", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS]], access_hard=[[ItemName.DOUBLE_DASH_CRYSTALS]])]),
+            "aiden-2": Room(3, [Transition("goldian-3", [[ItemName.DASH_CRYSTALS]], access_insane=[[]])]),
             "goldian-3": Room(4, [Transition("goldian-4", [[ItemName.TOUCH_SWITCH, ItemName.SPRINGS]])]),
             "goldian-4": Room(5, [Transition("tutorial-2")]),
             "tutorial-2": Room(6, [Transition("goldian-5", [[ItemName.PUSH_STATION_BLOCK, ItemName.PULL_STATION_BLOCK]])]),
@@ -127,7 +127,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "a_03": Room(2, [Transition("a_04", [[ItemName.MOVING_PLATFORM]])]),
             "a_04": Room(3, [Transition("a_05", [[ItemName.SWAP_BLOCK, ItemName.CRUMBLING_PLATFORM]])]),
             "a_05": Room(4, [Transition("a_06", [[ItemName.TOUCH_SWITCH]])]),
-            "a_06": Room(5, [Transition("a_07", [[ItemName.DOUBLE_DASH_CRYSTALS]]), Transition("a_06b")]),
+            "a_06": Room(5, [Transition("a_07", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.SPRINGS]], access_hard=[[ItemName.SPRINGS]]), Transition("a_06b")]),
             "a_06b": Room(6, [Transition("a_06")], [Location(LocationType.STRAWBERRY, 991)]),
             "a_07": Room(7, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
         }, LevelCategory.ADVANCED, 73, LevelDifficulty.GREEN
@@ -138,13 +138,13 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "1": Room(0, [Transition("2", [[ItemName.BLUE_PORTAL]])], [Location(LocationType.SILVER_BERRY, 1643)], start_room=True),
             "2": Room(1, [Transition("3")]),
             "3": Room(2, [Transition("4", [[ItemName.GREEN_PORTAL, ItemName.RED_PORTAL]])]),
-            "4": Room(3, [Transition("5", [[ItemName.DASH_CRYSTALS]])]),
-            "5": Room(4, [Transition("6")]),
-            "6": Room(5, [Transition("7", [[ItemName.RED_LINKED_TRAFFIC_BLOCK]])]),
+            "4": Room(3, [Transition("5", [[ItemName.DASH_CRYSTALS]], access_hard=[[]])]),
+            "5": Room(4, [Transition("6", [[ItemName.DASH_CRYSTALS]], access_hard=[[]])]),
+            "6": Room(5, [Transition("7", [[ItemName.RED_LINKED_TRAFFIC_BLOCK, ItemName.DASH_CRYSTALS]], access_hard=[[ItemName.RED_LINKED_TRAFFIC_BLOCK]])]),
             "7": Room(6, [Transition("8")]),
-            "8": Room(7, [Transition("9")]),
-            "9": Room(8, [Transition("10", [[ItemName.YELLOW_PORTAL]])]),
-            "10": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.PURPLE_PORTAL]])])
+            "8": Room(7, [Transition("9", [[ItemName.DASH_CRYSTALS]], access_hard=[[]])]),
+            "9": Room(8, [Transition("10", [[ItemName.YELLOW_PORTAL, ItemName.DASH_CRYSTALS]], access_insane=[[ItemName.YELLOW_PORTAL]])]),
+            "10": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.PURPLE_PORTAL, ItemName.DASH_CRYSTALS]], access_insane=[[ItemName.PURPLE_PORTAL]])])
         }, LevelCategory.ADVANCED, 74, LevelDifficulty.GREEN
     ),
     LevelName.THE_TOWER_XVI:
@@ -201,15 +201,15 @@ advanced_levels_sj : dict[LevelName, Level] = {
     LevelName.GOLDEN_DAWN:
     Level(
         {
-            "A0": Room(0, [Transition("A2", [[ItemName.MOVING_BLOCK, ItemName.JELLYFISH, ItemName.TOUCH_SWITCH, ItemName.PUFFER_FISH]])], start_room=True),
-            "A2": Room(1, [Transition("A4", [[ItemName.DASH_CRYSTALS]]), Transition("A2_v2", [[ItemName.DASH_CRYSTALS]])]),
+            "A0": Room(0, [Transition("A2", [[ItemName.MOVING_BLOCK, ItemName.JELLYFISH, ItemName.TOUCH_SWITCH, ItemName.PUFFER_FISH, ItemName.SPRINGS]], access_hard=[[ItemName.MOVING_BLOCK, ItemName.JELLYFISH, ItemName.TOUCH_SWITCH, ItemName.PUFFER_FISH]], access_insane=[[ItemName.MOVING_BLOCK, ItemName.JELLYFISH, ItemName.TOUCH_SWITCH]])], start_room=True),
+            "A2": Room(1, [Transition("A4", [[ItemName.DASH_CRYSTALS, ItemName.PUFFER_FISH, ItemName.SPRINGS]], access_hard=[[ItemName.DASH_CRYSTALS, ItemName.PUFFER_FISH]], access_insane=[[ItemName.DASH_CRYSTALS]]), Transition("A2_v2", [[ItemName.DASH_CRYSTALS, ItemName.PUFFER_FISH, ItemName.SPRINGS]], access_hard=[[ItemName.DASH_CRYSTALS, ItemName.PUFFER_FISH]], access_insane=[[ItemName.DASH_CRYSTALS]])]),
             "A2_v2": Room(2, [Transition("A2")], [Location(LocationType.STRAWBERRY, 3574, [[ItemName.SPRINGS]])]),
-            "A4": Room(3, [Transition("A5")]),
+            "A4": Room(3, [Transition("A5", [[ItemName.SPRINGS, ItemName.PUFFER_FISH]])]),
             "A5": Room(4, [Transition("Brys2-2-2"), Transition("A5_v2")]),
             "A5_v2": Room(5, [Transition("A5")], [Location(LocationType.STRAWBERRY, 239, [[ItemName.DOUBLE_DASH_CRYSTALS]])]),
-            "Brys2-2-2": Room(6, [Transition("A6", [[ItemName.SPRINGS]]), Transition("A6_v2-flip-2", [[ItemName.SPRINGS, ItemName.DOUBLE_DASH_CRYSTALS]])]),
+            "Brys2-2-2": Room(6, [Transition("A6", [[ItemName.DOUBLE_DASH_CRYSTALS]])]),
             "A6_v2-flip-2": Room(7, [Transition("Brys2-2-2"), Transition("A6")], [Location(LocationType.STRAWBERRY, 4103)]),
-            "A6": Room(8, [Transition("A7")]),
+            "A6": Room(8, [Transition("A7"), Transition("A6_v2-flip-2")]),
             "A7": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
         }, LevelCategory.ADVANCED, 78, LevelDifficulty.YELLOW
     ),
@@ -221,7 +221,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "a-02": Room(2, [Transition("a-03", [[ItemName.DASH_CRYSTALS]])]),
             "a-03": Room(3, [Transition("a-04")]),
             "a-04": Room(4, [Transition("a-05")]),
-            "a-05": Room(5, [Transition("a-06", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM]])]),
+            "a-05": Room(5, [Transition("a-06", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM]], access_hard=[[ItemName.DOUBLE_DASH_CRYSTALS]])]),
             "a-06": Room(6, [Transition("a-07", [[ItemName.TOUCH_SWITCH]])]),
             "a-07": Room(7, [Transition("a-08")]),
             "a-08": Room(8, [Transition("a-09")]),
@@ -252,14 +252,14 @@ advanced_levels_sj : dict[LevelName, Level] = {
         {
             "intro_fall": Room(0, [Transition("intro_a1")], start_room=True),
             "intro_a1": Room(1, [Transition("a1")], trivial_access=True),
-            "a1": Room(2, [Transition("a2", [[ItemName.RED_CASSETTE_BLOCK, ItemName.ORANGE_CASSETTE_BLOCK]])], [Location(LocationType.SILVER_BERRY, 6159, [[ItemName.GREEN_CASSETTE_SWAP_BLOCK, ItemName.YELLOW_CASSETTE_SWAP_BLOCK, ItemName.PINK_MOVING_CASSETTE_BLOCK, ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.RED_CASSETTE_TRAFFIC_BLOCK, ItemName.GREEN_MOVING_CASSETTE_BLOCK, ItemName.RED_CASSETTE_SWAP_BLOCK, ItemName.ORANGE_MOVING_CASSETTE_BLOCK, ItemName.YELLOW_TRAFFIC_CASSETTE, ItemName.PURPLE_CASSETTE_SWAP_BLOCK, ItemName.PINK_CASSETTE_SWAP_BLOCK, ItemName.PINK_CASSETTE, ItemName.BLUE_MOVING_CASSETTE_BLOCK, ItemName.PURPLE_MOVING_CASSETTE_BLOCK, ItemName.GREEN_CASSETTE_TRAFFIC_BLOCK, ItemName.BLUE_TRAFFIC_CASSETTE, ItemName.DASH_CRYSTALS, ItemName.YELLOW_CASSETTE, ItemName.GREEN_CASSETTE, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.SPRINGS, ItemName.RED_CASSETTE_BLOCK, ItemName.ORANGE_CASSETTE_BLOCK]])], trivial_access=True),
+            "a1": Room(2, [Transition("a2", [[ItemName.RED_CASSETTE_BLOCK, ItemName.ORANGE_CASSETTE_BLOCK, ItemName.YELLOW_CASSETTE]], access_insane=[[ItemName.RED_CASSETTE_BLOCK, ItemName.ORANGE_CASSETTE_BLOCK]])], [Location(LocationType.SILVER_BERRY, 6159, [[ItemName.GREEN_CASSETTE_SWAP_BLOCK, ItemName.YELLOW_CASSETTE_SWAP_BLOCK, ItemName.PINK_MOVING_CASSETTE_BLOCK, ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.RED_CASSETTE_TRAFFIC_BLOCK, ItemName.GREEN_MOVING_CASSETTE_BLOCK, ItemName.RED_CASSETTE_SWAP_BLOCK, ItemName.ORANGE_MOVING_CASSETTE_BLOCK, ItemName.YELLOW_TRAFFIC_CASSETTE, ItemName.PURPLE_CASSETTE_SWAP_BLOCK, ItemName.PINK_CASSETTE_SWAP_BLOCK, ItemName.PINK_CASSETTE, ItemName.BLUE_MOVING_CASSETTE_BLOCK, ItemName.PURPLE_MOVING_CASSETTE_BLOCK, ItemName.GREEN_CASSETTE_TRAFFIC_BLOCK, ItemName.BLUE_TRAFFIC_CASSETTE, ItemName.DASH_CRYSTALS, ItemName.YELLOW_CASSETTE, ItemName.GREEN_CASSETTE, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.SPRINGS, ItemName.RED_CASSETTE_BLOCK, ItemName.ORANGE_CASSETTE_BLOCK]])], trivial_access=True),
             "a2": Room(3, [Transition("a3", [[ItemName.YELLOW_CASSETTE, ItemName.GREEN_CASSETTE, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.SPRINGS]])]),
             "a3": Room(4, [Transition("a4", [[ItemName.GREEN_CASSETTE_TRAFFIC_BLOCK, ItemName.BLUE_TRAFFIC_CASSETTE, ItemName.DASH_CRYSTALS]])]),
             "a4": Room(5, [Transition("a5", [[ItemName.BLUE_MOVING_CASSETTE_BLOCK, ItemName.PURPLE_MOVING_CASSETTE_BLOCK]])]),
             "a5": Room(6, [Transition("b1", [[ItemName.PURPLE_CASSETTE_SWAP_BLOCK, ItemName.PINK_CASSETTE_SWAP_BLOCK, ItemName.PINK_CASSETTE]])]),
-            "b1": Room(7, [Transition("b2", [[ItemName.RED_CASSETTE_SWAP_BLOCK, ItemName.ORANGE_MOVING_CASSETTE_BLOCK, ItemName.YELLOW_TRAFFIC_CASSETTE]]), Transition("b1_b", [[ItemName.RED_CASSETTE_SWAP_BLOCK]])]),
-            "b1_b": Room(8, [Transition("b1")], [Location(LocationType.STRAWBERRY, 3951, [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.YELLOW_CASSETTE, ItemName.RED_CASSETTE_BLOCK, ItemName.GREEN_CASSETTE, ItemName.FEATHER]])]),
-            "b2": Room(9, [Transition("b3", [[ItemName.GREEN_MOVING_CASSETTE_BLOCK]])]),
+            "b1": Room(7, [Transition("b2", [[ItemName.RED_CASSETTE_SWAP_BLOCK, ItemName.ORANGE_MOVING_CASSETTE_BLOCK, ItemName.ORANGE_CASSETTE_TRAFFIC_BLOCK]]), Transition("b1_b", [[ItemName.RED_CASSETTE_SWAP_BLOCK]])]),
+            "b1_b": Room(8, [Transition("b1")], [Location(LocationType.STRAWBERRY, 3951, [[ItemName.FEATHER]])]),
+            "b2": Room(9, [Transition("b3", [[ItemName.GREEN_MOVING_CASSETTE_BLOCK, ItemName.GREEN_CASSETTE_SWAP_BLOCK]])]),
             "b3": Room(10, [Transition("c1", [[ItemName.BLUE_CASSETTE, ItemName.PINK_CASSETTE, ItemName.RED_CASSETTE_TRAFFIC_BLOCK]])]),
             "c1": Room(11, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART, access_rule=[[ItemName.GREEN_CASSETTE_SWAP_BLOCK, ItemName.YELLOW_CASSETTE_SWAP_BLOCK, ItemName.PINK_MOVING_CASSETTE_BLOCK]])])
         }, LevelCategory.ADVANCED, 81, LevelDifficulty.RED
@@ -269,9 +269,9 @@ advanced_levels_sj : dict[LevelName, Level] = {
         {
             "01-a": Room(0, [Transition("02-a", [[ItemName.DASH_CRYSTALS]])], [Location(LocationType.SILVER_BERRY, 4190, [[ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASHLESS_SPRING, ItemName.CRUMBLING_PLATFORM]])], start_room=True),
             "02-a": Room(1, [Transition("03-a", [[ItemName.DOUBLE_DASH_CRYSTALS]])]),
-            "03-a": Room(2, [Transition("05-a", [[getKeyDoorName(LevelName.UNDERGROWTH, "03-a", 776)]]), Transition("04-a")], [Location(LocationType.STRAWBERRY, 879, [[ItemName.CRUMBLING_PLATFORM]])], key_door_ids=[776]),
+            "03-a": Room(2, [Transition("05-a", [[getKeyDoorName(LevelName.UNDERGROWTH, "03-a", 776)]]), Transition("04-a")], [Location(LocationType.STRAWBERRY, 879)], key_door_ids=[776]),
             "05-a": Room(3, [Transition("06-a")], [Location(LocationType.STRAWBERRY, 2573)]),
-            "06-a": Room(4, [Transition("07-a", [[ItemName.DASHLESS_SPRING, ItemName.CRUMBLING_PLATFORM, getKeyDoorName(LevelName.UNDERGROWTH, "06-a", 2912)]]), Transition("06-s1", [[ItemName.DASHLESS_SPRING, ItemName.CRUMBLING_PLATFORM]]), Transition("06-b", [[ItemName.DASHLESS_SPRING, ItemName.CRUMBLING_PLATFORM]])], [Location(LocationType.STRAWBERRY, 2886, [[ItemName.DASHLESS_SPRING, ItemName.CRUMBLING_PLATFORM]])], key_door_ids=[2912]),
+            "06-a": Room(4, [Transition("07-a", [[ItemName.DASHLESS_SPRING, ItemName.CRUMBLING_PLATFORM, getKeyDoorName(LevelName.UNDERGROWTH, "06-a", 2912)]], access_hard=[[ItemName.DASHLESS_SPRING, getKeyDoorName(LevelName.UNDERGROWTH, "06-a", 2912)]], access_insane=[[]]), Transition("06-s1", [[ItemName.DASHLESS_SPRING]], access_insane=[[]]), Transition("06-b", [[ItemName.DASHLESS_SPRING, ItemName.CRUMBLING_PLATFORM]], access_hard=[[ItemName.DASHLESS_SPRING]], access_insane=[[]])], [Location(LocationType.STRAWBERRY, 2886, [[ItemName.DASHLESS_SPRING]], access_insane=[[]])], key_door_ids=[2912]),
             "06-s1": Room(5, [Transition("06-a")], easter_egg=True),
             "06-b": Room(6, [Transition("06-a")], [Location(LocationType.STRAWBERRY, 3377), Location(LocationType.KEY, 134)]),
             "07-a": Room(7, [Transition("08-a")]),
@@ -298,7 +298,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "BR-01": Room(2, [Transition("BR-08")]),
             "BR-08": Room(3, [Transition("BR-03", [[ItemName.BLUE_LINKED_TRAFFIC_BLOCK, ItemName.KEVIN, ItemName.SWAP_BLOCK]])]),
             "BR-03": Room(4, [Transition("BR-04")]),
-            "BR-04": Room(5, [Transition("BR-07", [[ItemName.SPRINGS]])]),
+            "BR-04": Room(5, [Transition("BR-07")]),
             "BR-07": Room(6, [Transition("BR-05")]),
             "BR-05": Room(7, [Transition("BR-Outro")]),
             "BR-Outro": Room(8, [Transition("BR-Extra")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
@@ -308,26 +308,27 @@ advanced_levels_sj : dict[LevelName, Level] = {
     LevelName.THE_LAB:
     Level(
         {
-            "start-01-Radley": Room(0, [Transition("start-02-Radley", [[ItemName.WORMHOLE_BUBBLE]])], start_room=True),
+            "start-01-Radley": Room(0, [Transition("start-02-Radley", [[ItemName.WORMHOLE_BUBBLE]]), Transition("start-00-Radley-early")], start_room=True),
             "start-02-Radley": Room(1, [Transition("start-03-Radley/Worldwaker2")]),
             "start-03-Radley/Worldwaker2": Room(2, [Transition("start-04-Radley")], [Location(LocationType.SILVER_BERRY, 986, [[ItemName.SPRINGS, ItemName.CRUMBLING_PLATFORM, ItemName.DASH_SWITCH, ItemName.MOVING_BLOCK, ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.TRAFFIC_BLOCKS, ItemName.WORMHOLE_BUBBLE, getKeyDoorName(LevelName.THE_LAB, "hub", 487), getKeyDoorName(LevelName.THE_LAB, "hub", 488), getKeyDoorName(LevelName.THE_LAB, "hub", 489)]])]),
-            "start-04-Radley": Room(3, [Transition("start-05-TiltTheStars", [[ItemName.TRAFFIC_BLOCKS]])]),
-            "start-05-TiltTheStars": Room(4, [Transition("hub", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH]])]),
+            "start-04-Radley": Room(3, [Transition("start-05-TiltTheStars", [[ItemName.TRAFFIC_BLOCKS]], access_insane=[[]])]),
+            "start-05-TiltTheStars": Room(4, [Transition("hub", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.TOUCH_SWITCH, ItemName.TRAFFIC_BLOCKS]])]),
             "hub": Room(5, [Transition("cross-01-Worldwaker2"), Transition("evade-01-Quantum"), Transition("move-01-TiltTheStars"), Transition("escape-01-Worldwaker2", [[getKeyDoorName(LevelName.THE_LAB, "hub", 487), getKeyDoorName(LevelName.THE_LAB, "hub", 488), getKeyDoorName(LevelName.THE_LAB, "hub", 489)]])], key_door_ids=[487, 488, 489]),
-            "cross-01-Worldwaker2": Room(6, [Transition("cross-02-TiltTheStars", [[ItemName.CRUMBLING_PLATFORM, ItemName.SPRINGS, ItemName.DASH_CRYSTALS]])]),
-            "cross-02-TiltTheStars": Room(7, [Transition("cross-03-TiltTheStars")], [Location(LocationType.KEY, 962)]),
+            "cross-01-Worldwaker2": Room(6, [Transition("cross-02-TiltTheStars", [[ItemName.CRUMBLING_PLATFORM, ItemName.SPRINGS, ItemName.DASH_CRYSTALS]], access_hard=[[ItemName.CRUMBLING_PLATFORM, ItemName.DASH_CRYSTALS]])]),
+            "cross-02-TiltTheStars": Room(7, [Transition("cross-03-TiltTheStars", [[ItemName.CRUMBLING_PLATFORM, ItemName.DASH_CRYSTALS, ItemName.SPRINGS]])], [Location(LocationType.KEY, 962, [[ItemName.CRUMBLING_PLATFORM, ItemName.DASH_CRYSTALS, ItemName.SPRINGS]])]),
             "cross-03-TiltTheStars": Room(8, [Transition("hub")], [Location(LocationType.STRAWBERRY, 86, [[ItemName.DASH_SWITCH]])]),
-            "evade-01-Quantum": Room(9, [Transition("evade-02b-Quantum")]),
+            "evade-01-Quantum": Room(9, [Transition("evade-02-TiltTheStars")]),
             "evade-02b-Quantum": Room(10, [Transition("evade-02-TiltTheStars")], [Location(LocationType.STRAWBERRY, 87)]),
-            "evade-02-TiltTheStars": Room(11, [Transition("evade-03-Worldwaker2", [[ItemName.SPRINGS]])], [Location(LocationType.KEY, 1326, [[ItemName.SPRINGS]])]),
+            "evade-02-TiltTheStars": Room(11, [Transition("evade-03-Worldwaker2", [[ItemName.SPRINGS]]), Transition("evade-02b-Quantum")], [Location(LocationType.KEY, 1326, [[ItemName.SPRINGS]])]),
             "evade-03-Worldwaker2": Room(12, [Transition("hub")]),
-            "move-01-TiltTheStars": Room(13, [Transition("move-02-Worldwaker2", [[ItemName.SPRINGS, ItemName.MOVING_BLOCK, ItemName.DASH_SWITCH, ItemName.CRUMBLING_PLATFORM]])]),
-            "move-02-Worldwaker2": Room(14, [Transition("move-02b-Quantum"), Transition("hub", [[ItemName.DASH_CRYSTALS]])], [Location(LocationType.KEY, 629)]),
-            "move-02b-Quantum": Room(15, [Transition("move-02-Worldwaker2")], [Location(LocationType.STRAWBERRY, 90, [[ItemName.DASH_CRYSTALS]])]),
-            "escape-01-Worldwaker2": Room(16, [Transition("escape-02-Worldwaker2", [[ItemName.SPRINGS, ItemName.CRUMBLING_PLATFORM, ItemName.DASH_SWITCH, ItemName.MOVING_BLOCK, ItemName.DASH_CRYSTALS]])]),
+            "move-01-TiltTheStars": Room(13, [Transition("move-02-Worldwaker2", [[ItemName.SPRINGS, ItemName.MOVING_BLOCK, ItemName.DASH_SWITCH, ItemName.CRUMBLING_PLATFORM]], access_insane=[[ItemName.MOVING_BLOCK, ItemName.DASH_SWITCH, ItemName.CRUMBLING_PLATFORM]])]),
+            "move-02-Worldwaker2": Room(14, [Transition("move-02b-Quantum", [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]], access_insane=[[]]), Transition("hub", [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]], access_insane=[[]])], [Location(LocationType.KEY, 629, [[ItemName.SPRINGS, ItemName.DASH_CRYSTALS]], access_insane=[[]])]),
+            "move-02b-Quantum": Room(15, [Transition("move-02-Worldwaker2")], [Location(LocationType.STRAWBERRY, 90, [[ItemName.DASH_CRYSTALS, ItemName.SPRINGS]], access_hard=[[ItemName.SPRINGS]], access_insane=[[ItemName.DASH_CRYSTALS], [ItemName.SPRINGS]])]),
+            "escape-01-Worldwaker2": Room(16, [Transition("escape-02-Worldwaker2", [[ItemName.SPRINGS, ItemName.CRUMBLING_PLATFORM, ItemName.DASH_SWITCH, ItemName.MOVING_BLOCK, ItemName.DASH_CRYSTALS]], access_hard=[[ItemName.SPRINGS, ItemName.DASH_SWITCH, ItemName.MOVING_BLOCK, ItemName.DASH_CRYSTALS]])]),
             "escape-02-Worldwaker2": Room(17, [Transition("escape-03-Worldwaker2")]),
-            "escape-03-Worldwaker2": Room(18, [Transition("start-00-Radley")]),
+            "escape-03-Worldwaker2": Room(18, [Transition("start-00-Radley", [[ItemName.CRUMBLING_PLATFORM]])]),
             "start-00-Radley": Room(19, [Transition("end_HideInMap")]),
+            "start-00-Radley-early": Room(100, [], is_subregion_of="start-00-Radley"),
             "end_HideInMap": Room(20, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
         }, LevelCategory.ADVANCED, 85, LevelDifficulty.RED
     ),
@@ -354,7 +355,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
     Level(
         {
             "a-01": Room(0, [Transition("a-02", [[ItemName.DASH_SWITCH, ItemName.THROW_BOX, ItemName.PURPLE_PORTAL, ItemName.BLUE_PORTAL]])], [Location(LocationType.SILVER_BERRY, 41, [[ItemName.BREAKER_BOX, ItemName.RED_PORTAL, ItemName.CRUMBLING_PLATFORM, ItemName.YELLOW_PORTAL, ItemName.GREEN_PORTAL, ItemName.DASH_CRYSTALS, ItemName.DASH_SWITCH, ItemName.THROW_BOX, ItemName.PURPLE_PORTAL, ItemName.BLUE_PORTAL]])], start_room=True),
-            "a-02": Room(1, [Transition("a-04", [[ItemName.YELLOW_PORTAL, ItemName.GREEN_PORTAL, ItemName.DASH_CRYSTALS]])]),
+            "a-02": Room(1, [Transition("a-04", [[ItemName.YELLOW_PORTAL, ItemName.GREEN_PORTAL, ItemName.DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM]], access_hard=[[ItemName.YELLOW_PORTAL, ItemName.GREEN_PORTAL, ItemName.DASH_CRYSTALS]])]),
             "a-04": Room(2, [Transition("a-05", [[ItemName.CRUMBLING_PLATFORM]])]),
             "a-05": Room(3, [Transition("a-06", [[ItemName.RED_PORTAL]])]),
             "a-06": Room(4, [Transition("a-07")], [Location(LocationType.STRAWBERRY, 1384)]),
@@ -371,9 +372,9 @@ advanced_levels_sj : dict[LevelName, Level] = {
     Level(
         {
             "intro_v1": Room(0, [Transition("intro_v2")], start_room=True),
-            "intro_v2": Room(1, [Transition("a-01", [[ItemName.PURPLE_REBOUND_BUBBLE, ItemName.CRUMBLING_PLATFORM]])], trivial_access=True),
-            "a-01": Room(2, [Transition("a-02", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.HONEY_BUBBLES, ItemName.SPRINGS]])], [Location(LocationType.SILVER_BERRY, 1035, [[ItemName.MOVING_BLOCK, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.PURPLE_REBOUND_BUBBLE, ItemName.CRUMBLING_PLATFORM, ItemName.SPRINGS]])]),
-            "a-02": Room(3, [Transition("a-03", [[ItemName.TOUCH_SWITCH]])]),
+            "intro_v2": Room(1, [Transition("a-01", [[ItemName.PURPLE_REBOUND_BUBBLE, ItemName.CRUMBLING_PLATFORM]], access_insane=[[ItemName.CRUMBLING_PLATFORM]])], trivial_access=True),
+            "a-01": Room(2, [Transition("a-02", [[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.HONEY_BUBBLES, ItemName.SPRINGS, ItemName.PURPLE_REBOUND_BUBBLE]], access_insane=[[ItemName.DOUBLE_DASH_CRYSTALS, ItemName.HONEY_BUBBLES, ItemName.SPRINGS, ItemName.PURPLE_REBOUND_BUBBLE]])], [Location(LocationType.SILVER_BERRY, 1035, [[ItemName.MOVING_BLOCK, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.PURPLE_REBOUND_BUBBLE, ItemName.CRUMBLING_PLATFORM, ItemName.SPRINGS]])]),
+            "a-02": Room(3, [Transition("a-03", [[ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS]])]),
             "a-03": Room(4, [Transition("a-04", [[ItemName.MOVING_BLOCK]])]),
             "a-04": Room(5, [Transition("a-05")]),
             "a-05": Room(6, [Transition("a-06")]),
@@ -398,7 +399,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "2b": Room(5, [Transition("2")]),
             "3": Room(6, [Transition("3b", [[ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.JAVAS_CRYPT, "3", 35)]]), Transition("4", [[ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.JAVAS_CRYPT, "3", 35)]])], [Location(LocationType.KEY, 132), Location(LocationType.STRAWBERRY, 276, [[ItemName.TOUCH_SWITCH, getKeyDoorName(LevelName.JAVAS_CRYPT, "3", 35)]])], key_door_ids=[35]),
             "3b": Room(7, [Transition("3")], [Location(LocationType.STRAWBERRY, 629)]),
-            "4": Room(8, [Transition("4b"), Transition("5", [[getKeyDoorName(LevelName.JAVAS_CRYPT, "4", 297)]])], [Location(LocationType.KEY, 226)], key_door_ids=[297]),
+            "4": Room(8, [Transition("4b"), Transition("5", [[getKeyDoorName(LevelName.JAVAS_CRYPT, "4", 297), ItemName.DASH_CRYSTALS]])], [Location(LocationType.KEY, 226, [[ItemName.DASH_CRYSTALS]])], key_door_ids=[297]),
             "4b": Room(9, [Transition("4")]),
             "5": Room(10, [Transition("6", [[getKeyDoorName(LevelName.JAVAS_CRYPT, "5", 759)]])], [Location(LocationType.STRAWBERRY, 670), Location(LocationType.KEY, 838)], key_door_ids=[759]),
             "6": Room(11, [Transition("6e")], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)]),
@@ -408,14 +409,14 @@ advanced_levels_sj : dict[LevelName, Level] = {
     LevelName.RIGHTSIDE_DOWN_CAVERN:
     Level(
         {
-            "intro_SJ": Room(0, [Transition("Vamp_2", [[ItemName.GRAVITY_FIELD, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.BLUE_GRAVITY_SPRING]])], [Location(LocationType.STRAWBERRY, 374, [[ItemName.GRAVITY_FIELD]]), Location(LocationType.SILVER_BERRY, 2482, [[ItemName.SPRINGS, ItemName.GRAVITY_FIELD, ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.RED_GRAVITY_SPRING, ItemName.BLUE_GRAVITY_SPRING, ItemName.PURPLE_GRAVITY_SPRING]])], start_room=True),
-            "Vamp_2": Room(1, [Transition("Vamp_3", [[ItemName.DASH_CRYSTALS]])]),
-            "Vamp_3": Room(2, [Transition("Vamp_4")]),
+            "intro_SJ": Room(0, [Transition("Vamp_2", [[ItemName.GRAVITY_FIELD, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.BLUE_GRAVITY_SPRING]], access_hard=[[ItemName.GRAVITY_FIELD, ItemName.DOUBLE_DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 374, [[ItemName.GRAVITY_FIELD]]), Location(LocationType.SILVER_BERRY, 2482, [[ItemName.SPRINGS, ItemName.GRAVITY_FIELD, ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.RED_GRAVITY_SPRING, ItemName.BLUE_GRAVITY_SPRING, ItemName.PURPLE_GRAVITY_SPRING]])], start_room=True),
+            "Vamp_2": Room(1, [Transition("Vamp_3", [[ItemName.DASH_CRYSTALS]], access_insane=[[]])]),
+            "Vamp_3": Room(2, [Transition("Vamp_4", [[ItemName.DASH_CRYSTALS]], access_insane=[[]])]),
             "Vamp_4": Room(3, [Transition("Vamp_5", [[ItemName.SPRINGS, ItemName.RED_GRAVITY_SPRING]])]),
             "Vamp_5": Room(4, [Transition("Vamp_6")]),
-            "Vamp_6": Room(5, [Transition("Vamp_7", [[ItemName.PURPLE_GRAVITY_SPRING]])], [Location(LocationType.STRAWBERRY, 2459, [[ItemName.PURPLE_GRAVITY_SPRING]]), Location(LocationType.STRAWBERRY, 2136, [[ItemName.PURPLE_GRAVITY_SPRING]])]),
-            "Vamp_7": Room(6, [Transition("Vamp_8")]),
-            "Vamp_8": Room(7, [Transition("Vamp_9")]),
+            "Vamp_6": Room(5, [Transition("Vamp_7", [[ItemName.PURPLE_GRAVITY_SPRING, ItemName.DASH_CRYSTALS]], access_insane=[[ItemName.PURPLE_GRAVITY_SPRING], [ItemName.DASH_CRYSTALS]])], [Location(LocationType.STRAWBERRY, 2459, [[ItemName.PURPLE_GRAVITY_SPRING, ItemName.DASH_CRYSTALS]], access_insane=[[ItemName.PURPLE_GRAVITY_SPRING]]), Location(LocationType.STRAWBERRY, 2136, [[ItemName.PURPLE_GRAVITY_SPRING, ItemName.DASH_CRYSTALS]], access_insane=[[ItemName.PURPLE_GRAVITY_SPRING], [ItemName.DASH_CRYSTALS]])]),
+            "Vamp_7": Room(6, [Transition("Vamp_8", [[ItemName.DASH_CRYSTALS]])]),
+            "Vamp_8": Room(7, [Transition("Vamp_9", [[ItemName.PURPLE_GRAVITY_SPRING]])]),
             "Vamp_9": Room(8, [Transition("Vamp_Final")]),
             "Vamp_Final": Room(9, [], [Location(LocationType.LEVEL_CLEAR_MINI_HEART)])
         }, LevelCategory.ADVANCED, 90, LevelDifficulty.RED
@@ -449,9 +450,9 @@ advanced_levels_sj : dict[LevelName, Level] = {
         {
             "1": Room(0, [Transition("2"), Transition("1B")], [Location(LocationType.SILVER_BERRY, 1922)], start_room=True),
             "1B": Room(1, [Transition("1")], [Location(LocationType.STRAWBERRY, 264, [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "1B", 261), ItemName.TOUCH_SWITCH]]), Location(LocationType.KEY, 265, [[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "1B", 261)]])], key_door_ids=[261], trivial_access=True),
-            "2": Room(2, [Transition("3", [[ItemName.DASH_CRYSTALS, getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "2", 1818)]]), Transition("2B", [[ItemName.DASH_CRYSTALS]])], [Location(LocationType.KEY, 1986, [[ItemName.DASH_CRYSTALS]])], key_door_ids=[1818], trivial_access=True),
+            "2": Room(2, [Transition("3", [[ItemName.DASH_CRYSTALS, getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "2", 1818)]], access_hard=[[getKeyDoorName(LevelName.RAINDROPS_ON_ROSES, "2", 1818)]]), Transition("2B", [[ItemName.DASH_CRYSTALS]], access_hard=[[]])], [Location(LocationType.KEY, 1986, [[ItemName.DASH_CRYSTALS]], access_hard=[[]])], key_door_ids=[1818], trivial_access=True),
             "2B": Room(3, [Transition("2")]),
-            "3": Room(4, [Transition("4", [[ItemName.TOUCH_SWITCH]]), Transition("6-bottomleft", [[ItemName.TOUCH_SWITCH]])]),
+            "3": Room(4, [Transition("4", [[ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS]]), Transition("6-bottomleft", [[ItemName.TOUCH_SWITCH, ItemName.DASH_CRYSTALS]])]),
             "4": Room(5, [Transition("5")]),
             "5": Room(6, [Transition("6")]),
             "6": Room(7, [Transition("7")], [Location(LocationType.STRAWBERRY, 102)]),
@@ -466,15 +467,15 @@ advanced_levels_sj : dict[LevelName, Level] = {
         {
             "Start": Room(0, [Transition("heartside_oppen_intro")], start_room=True),
             "heartside_oppen_intro": Room(1, [Transition("heartside_oppen_a")], trivial_access=True),
-            "heartside_oppen_a": Room(2, [Transition("heartside_Worldwaker2", [[ItemName.CRUMBLING_PLATFORM]]), Transition("heartside_oppen_b", [[ItemName.CRUMBLING_PLATFORM]]), Transition("heartside_oppen_c", [[ItemName.CRUMBLING_PLATFORM]])], [Location(LocationType.GOLDEN_BERRY, 18, heartside_golden)], trivial_access=True),
+            "heartside_oppen_a": Room(2, [Transition("heartside_Worldwaker2", [[ItemName.CRUMBLING_PLATFORM]]), Transition("heartside_oppen_b"), Transition("heartside_oppen_c")], [Location(LocationType.GOLDEN_BERRY, 18, heartside_golden)], trivial_access=True),
             "heartside_oppen_b": Room(3, [Transition("heartside_oppen_a")], trivial_access=True),
-            "heartside_oppen_c": Room(4, [Transition("heartside_oppen_a")]),
-            "heartside_Worldwaker2": Room(5, [Transition("heartside_TiltTheStars", [[ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH]])]),
-            "heartside_TiltTheStars": Room(6, [Transition("heartside_Galaksyz", [[ItemName.HONEY_BUBBLES, ItemName.PURPLE_REBOUND_BUBBLE, ItemName.DOUBLE_DASH_CRYSTALS]])]),
+            "heartside_oppen_c": Room(4, [Transition("heartside_oppen_a")], trivial_access=True),
+            "heartside_Worldwaker2": Room(5, [Transition("heartside_TiltTheStars", [[ItemName.DASH_CRYSTALS, ItemName.TOUCH_SWITCH]], access_insane=[[ItemName.TOUCH_SWITCH]], access_extreme=[[]])]),
+            "heartside_TiltTheStars": Room(6, [Transition("heartside_Galaksyz", [[ItemName.TOUCH_SWITCH, ItemName.HONEY_BUBBLES, ItemName.PURPLE_REBOUND_BUBBLE, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.CRUMBLING_PLATFORM, ItemName.DASH_CRYSTALS]])]),
             "heartside_Galaksyz": Room(7, [Transition("heartside_mmm", [[ItemName.RED_BUBBLES, ItemName.SOAP_BUBBLE, ItemName.GRAY_BUBBLES, ItemName.SPRINGS, ItemName.GREEN_BUBBLES]])]),
             "heartside_mmm": Room(8, [Transition("Crest", [[ItemName.BOUNCY_SPIKES, ItemName.MOMENTUM_SPRING]])]),
             "Crest": Room(9, [Transition("heartside_mmm"), Transition("heartside_MousseMoose")], checkpoint="Crest"),
-            "heartside_MousseMoose": Room(10, [Transition("heartside_Meario", [[ItemName.SPRINGS, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.RED_CASSETTE_SWAP_BLOCK, ItemName.YELLOW_MOVING_CASSETTE_BLOCK, ItemName.GREEN_CASSETTE, ItemName.ORANGE_CASSETTE_BLOCK, ItemName.BLUE_CASSETTE, ItemName.PINK_TRAFFIC_CASSETTE, ItemName.PURPLE_CASSETTE_BLOCK]])]),
+            "heartside_MousseMoose": Room(10, [Transition("heartside_Meario", [[ItemName.SPRINGS, ItemName.TOUCH_SWITCH, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.DASH_CRYSTALS, ItemName.RED_CASSETTE_SWAP_BLOCK, ItemName.YELLOW_MOVING_CASSETTE_BLOCK, ItemName.GREEN_CASSETTE, ItemName.ORANGE_CASSETTE_BLOCK, ItemName.BLUE_CASSETTE, ItemName.PINK_TRAFFIC_CASSETTE]])]),
             "heartside_Meario": Room(11, [Transition("heartside_YaGrillRobib", [[ItemName.DREAM_TRAFFIC_BLOCK]])]),
             "heartside_YaGrillRobib": Room(12, [Transition("heartside_maladroit", [[ItemName.FAKE_CRYSTAL_HEART, ItemName.CRUMBLING_PLATFORM]])]),
             "heartside_maladroit": Room(13, [Transition("heartside_pugroy", [[ItemName.MOVING_BLOCK, ItemName.PUFFER_FISH, ItemName.JELLYFISH]])]),
@@ -483,7 +484,7 @@ advanced_levels_sj : dict[LevelName, Level] = {
             "heartside_astraxel": Room(16, [Transition("heartside_Tortoise", [[ItemName.DASH_CRYSTALS, ItemName.DOUBLE_DASH_CRYSTALS, ItemName.BLUE_TIME_CRYSTAL, ItemName.TOUCH_SWITCH, ItemName.KEVIN, ItemName.GRAY_TIME_CRYSTAL]])]),
             "heartside_Tortoise": Room(17, [Transition("heartside_Tortoise_B", [[ItemName.MOVING_PLATFORM, ItemName.GROWTH_POTION, ItemName.DASH_SWITCH]])]),
             "heartside_Tortoise_B": Room(18, [Transition("heartside_bluexans")]),
-            "heartside_bluexans": Room(19, [Transition("heartside_Vamp", [[ItemName.PURPLE_JELLYFISH, ItemName.SPRINGS, ItemName.DASH_REFILL_WALL, ItemName.DOUBLE_DASH_REFILL_WALL, ItemName.CRUMBLING_PLATFORM]])]),
+            "heartside_bluexans": Room(19, [Transition("heartside_Vamp", [[ItemName.PURPLE_JELLYFISH, ItemName.SPRINGS, ItemName.DASH_REFILL_WALL, ItemName.DOUBLE_DASH_REFILL_WALL, ItemName.CRUMBLING_PLATFORM, ItemName.JELLYFISH]])]),
             "heartside_Vamp": Room(20, [Transition("heartside_Julia", [[ItemName.GRAVITY_FIELD]])]),
             "heartside_Julia": Room(21, [Transition("Aquifer", [[ItemName.JELLYFISH, ItemName.MOVING_TOUCH_SWITCH, ItemName.CORE_BLOCK, ItemName.DREAM_BLOCK, ItemName.PUFFER_FISH]])]),
             "Aquifer": Room(22, [Transition("heartside_Julia"), Transition("heartside_sp1029")], checkpoint="Aquifer"),

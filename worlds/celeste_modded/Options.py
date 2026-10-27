@@ -538,6 +538,7 @@ def map_options(world: "CelesteModdedWorld"):
                 return False
 
 groups = [
+    OptionGroup("Difficulty", [LogicDifficulty]),
     OptionGroup("Items", [ItemConsildationMode, OpenHeartGates]),
     OptionGroup("Levels", [StartLevelSet, StrawberryJamMaxDifficulty, IncludeVanillaASides, IncludeVanillaBSides, IncludeVanillaCSides, IncludeFarewell, IncludeBeginner, IncludeIntermediate, IncludeAdvanced, IncludeExpert, IncludeGrandmaster, HeartsidesStartUnlocked, ExcludePuzzleLevels]),
     OptionGroup("Locations", [RandomizeCheckpoints, IncludeWingedGolden, IncludeEasterEggRooms, IncludeEasterEggRoomsDifficult]),
